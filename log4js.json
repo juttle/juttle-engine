@@ -5,10 +5,6 @@
     "appenders": [
         {
             "type": "console"
-        },
-        {
-            "type": "file",
-            "filename": "log/demo.log"
         }
     ]
 }
