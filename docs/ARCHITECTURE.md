@@ -2,7 +2,7 @@
 
 ## Components
 
-![Outrigger Architecture](docs/outrigger_arch.png "Outrigger Architecture")
+![Outrigger Architecture](./outrigger_arch.png "Outrigger Architecture")
 
 Use of outrigger involves an editor, the outrigger daemon, the outrigger client program, and a web browser. The editor and daemon share a file system that contains one or more juttle programs. The browser connects to the daemon to view the output of a juttle program, change input controls, and re-run programs.
 
@@ -14,7 +14,7 @@ Edit juttle programs in your favorite editor. There are modes for [emacs](https:
 
 ### Outrigger Daemon
 
-Outrigger is responsible for running and managing juttle programs. It provides an [API](docs/jobs-api.md) to bundle programs (i.e. load programs and associated modules), run programs, and stream the results of programs to browsers over a [websocket protocol](docs/jsdp-api.md).
+Outrigger is responsible for running and managing juttle programs. It provides an [API](./jobs-api.md) to bundle programs (i.e. load programs and associated modules), run programs, and stream the results of programs to browsers over a [websocket protocol](./jsdp-api.md).
 
 Outriggerd also serves a web application that allows you to view the output of juttle programs and re-run the program with different input control values.
 
@@ -40,4 +40,3 @@ Outrigger brings together several standalone juttle packages into a single devel
 * It depends on the [Juttle](https://github.com/juttle/juttle) package, which provides the juttle compiler and runtime.
 * It depends on the [Juttle-viz](https://github.com/juttle/juttle-viz) package, which provides the reference set of client view sinks.
 * It can utilize Juttle adapters for various backends including [Elastic Search](https://github.com/juttle/juttle-elastic-adapter), [MySQL](https://github.com/juttle/juttle-mysql-backend), [Twitter](https://github.com/juttle/twitter-backend), [Gmail](https://github.com/juttle/gmail-backend), etc.
-
