@@ -1,0 +1,3 @@
+import '/subdir/subdir-module.juttle' as m1;
+
+emit -limit 30 | put bar=m1.bar | view logger;

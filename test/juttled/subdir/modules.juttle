@@ -1,0 +1,3 @@
+import 'test-module.juttle' as m1;
+
+emit -limit 30 | put foo=m1.foo | view logger;

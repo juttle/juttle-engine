@@ -1,0 +1,19 @@
+.DS_Store
+/node_modules
+
+# IntelliJ specific files/directories
+.idea
+*.ipr
+*.iws
+*.iml
+
+*~
+.*.swp
+
+grunt.log
+
+# auto-generated files
+/build
+/log
+/dist
+

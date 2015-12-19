@@ -1,0 +1,347 @@
+#!/usr/bin/env node
+
+var _ = require('underscore');
+var WebSocket = require('ws');
+var minimist = require('minimist');
+var rp = require('request-promise');
+var path = require('path');
+var cli_errors = require('juttle/lib/cli/errors');
+var rp_errors = require('request-promise/errors');
+var open = require('open');
+var JuttleBundler = require('../lib/bundler');
+var fs = require('fs');
+var crypto = require('crypto');
+
+var defaults = {
+    'outriggerd': 'localhost:8080'
+};
+
+var opts = minimist(process.argv.slice(2));
+
+function usage() {
+    console.log('usage: [--outriggerd <hostname:port>] [--help] [COMMAND] [OPTIONS]');
+    console.log('   [COMMAND]: one of the following, with the following options:');
+    console.log('         subscribe (--job <job-id>|--observer <observer-id>)');
+    console.log('         list_jobs [--job <job-id>]');
+    console.log('         list_observers');
+    console.log('         push --path <path> --topic <rendezvous-topic>');
+    console.log('         watch --path <path> --topic <rendezvous-topic>');
+    console.log('         run --path <path> [--observer <observer-id>]');
+    console.log('         delete --job <job-id>');
+    console.log('         get_inputs --path <path> --input name=val [--input name=val ...]');
+    console.log('         browser --path <path>');
+    console.log('   [OPTIONS]: one of the following:');
+    console.log('       --path <path-to-juttle-file>:          Path to file relative to configured root directory.');
+    console.log('                                              Used by "run", "get_inputs", "push", "watch".');
+    console.log('       --input name=val:                      One or more input values.');
+    console.log('                                              Used by "get_inputs".');
+    console.log('       --job <job-id>:                        Job id.');
+    console.log('                                              Used by "subscribe", "list_jobs", "delete".');
+    console.log('       --observer <observer-id>:              Observer id.');
+    console.log('                                              Used by "subscribe", "run"');
+    console.log('       --topic <rendezvous-topic>:            Rendezvous topic');
+    console.log('                                              Used by "push", "watch".');
+    console.log('       --outriggerd <hostname:port>:    Hostname/port of outrigger juttle server');
+    console.log('       --help:                                Print this help and exit');
+    process.exit(1);
+}
+
+function handle_error(err, filename) {
+
+    // The error returned when the request-promise module rejects a
+    // promise due to a non-200 status contains an error property that
+    // contains the body of the response. (Other errors may not
+    // contain this property). If this exists and is JSON, parse it
+    // and look for a location. Otherwise, just print the error
+    // message.
+
+    var err_obj;
+    try {
+        err_obj = JSON.parse(err.error);
+    } catch (e) {
+        // err did not contain a error property or it was not
+        // json.
+        console.error("ERROR", err.message);
+        return;
+    }
+
+    // If it's a juttle error containing a program
+    // location, print the error in context.
+    if (err_obj.code === 'JS-JUTTLE-ERROR') {
+        console.error(cli_errors.show_in_context({err: err_obj.info.err,
+                                                  program: err_obj.info.bundle.program,
+                                                  modules: err_obj.info.bundle.modules,
+                                                  filename: filename}));
+    } else {
+        console.error("ERROR", err.message);
+    }
+}
+
+function read_inputs(input_args) {
+
+    var inputs = {};
+    if (opts.input !== undefined) {
+        if (! _.isArray(opts.input)) {
+            opts.input = [opts.input];
+        }
+        _.each(opts.input, function(x) {
+            var L = x.split('=');
+            if (L.length !== 2) {
+                console.error('error: invalid input', x);
+                usage();
+            }
+            var num = +L[1];
+            inputs[L[0]] = isNaN(num) ? L[1] : num;
+        });
+    }
+
+    return inputs;
+}
+
+function push_file(filename, topic) {
+
+    console.log("Bundling program " + filename + " and pushing to rendezvous topic " + topic + "...");
+    // Open a websocket connection over the rendezvous channel
+    var ws = new WebSocket(juttled_noapi_ws_url + '/rendezvous/' + topic);
+    ws.on('open', function() {
+        // Bundle the program locally and push the bundle over the websocket.
+        var bundler = new JuttleBundler();
+        bundler.bundle(filename)
+            .then(function(bundle) {
+                ws.send(JSON.stringify(bundle));
+            })
+            .catch(function(err) {
+                // If it's a juttle error containing a program
+                // location, print the error in context.
+                if (err.code === 'JS-JUTTLE-ERROR') {
+                    console.error(cli_errors.show_in_context({err: err.info.err,
+                                                              program: err.info.bundle.program,
+                                                              modules: err.info.bundle.modules,
+                                                              filename: filename}));
+                } else {
+                    console.error("ERROR", err.message);
+                }
+            })
+            .finally(function() {
+                ws.close();
+            });
+    });
+}
+
+_.defaults(opts, defaults);
+
+if (opts.help ||
+    opts._.length !== 1) {
+    usage();
+}
+
+opts.outriggerd = opts['outriggerd'];
+
+var API_PREFIX = '/api/v0';
+
+var juttled_ws_url = "ws://" + opts.outriggerd + API_PREFIX;
+var juttled_noapi_ws_url = "ws://" + opts.outriggerd;
+var juttled_http_url = "http://" + opts.outriggerd + API_PREFIX;
+
+var command = opts._[0];
+
+switch (command) {
+    case "list_jobs":
+        var job_id = opts.job || '';
+
+        rp(juttled_http_url + '/jobs/' + job_id)
+            .then(function(body) {
+                console.log(JSON.stringify(JSON.parse(body), null, 2));
+            }).error(function(e) {
+                console.error("ERROR", e.message);
+            });
+
+        break;
+
+    case "list_observers":
+
+        rp(juttled_http_url + '/observers/')
+            .then(function(body) {
+                console.log(JSON.stringify(JSON.parse(body), null, 2));
+            }).error(function(e) {
+                console.error("ERROR", e.message);
+            });
+
+        break;
+
+    case "subscribe":
+
+        if (opts.observer !== undefined) {
+            console.log("Subscribing to all jobs associated with observer:", opts.observer);
+            var ws = new WebSocket(juttled_ws_url + '/observers/' + opts.observer);
+            ws.on('message', function(message) {
+                console.log('received: %s', message);
+                var msg = JSON.parse(message);
+                if (msg.type === "ping") {
+                    ws.send(JSON.stringify({type: "pong"}));
+                }
+            });
+            ws.on('close', function(message) {
+                console.log("Web socket connection closed, exiting");
+                process.exit(0);
+            });
+        } else if (opts.job !== undefined) {
+            console.log("Subscribing to job:", opts.job);
+            var ws = new WebSocket(juttled_ws_url + '/jobs/' + opts.job);
+            ws.on('message', function(message) {
+                console.log('received: %s', message);
+                var msg = JSON.parse(message);
+                if (msg.type === "ping") {
+                    ws.send(JSON.stringify({type: "pong"}));
+                }
+            });
+
+            ws.on('close', function(message) {
+                console.log("Web socket connection closed, exiting");
+                process.exit(0);
+            });
+        } else {
+            usage();
+        }
+
+        break;
+
+    case "delete":
+        if (opts.job !== undefined) {
+            rp({method: 'DELETE', uri: juttled_http_url + '/jobs/' + opts.job})
+                .then(function(body) {
+                    console.log(JSON.stringify(JSON.parse(body), null, 2));
+                }).error(function(e) {
+                    console.error("ERROR", e.message);
+                });
+        } else {
+            usage();
+        }
+
+        break;
+
+    case "run":
+        if (opts.path !== undefined) {
+
+            var inputs = read_inputs(opts.inputs);
+
+            rp(juttled_http_url + '/paths/' + opts.path)
+                .then(function(body) {
+                    body = JSON.parse(body);
+                    return body.bundle;
+                }).then(function(bundle) {
+                    var body = {
+                        bundle: bundle,
+                        inputs: inputs
+                    };
+                    if (opts.observer) {
+                        body.observer = opts.observer;
+                    }
+                    var post_opts = {
+                        method: 'POST',
+                        uri: juttled_http_url + '/jobs',
+                        headers: {
+                            'Content-type': 'application/json'
+                        },
+                        body: JSON.stringify(body)
+                    };
+                    return rp(post_opts)
+                        .then(function(body) {
+                            console.log("Started job", body);
+                        });
+                }).catch(rp_errors.RequestError, function (e) {
+                    console.error("ERROR", e.message);
+                }).error(function(e) {
+                    handle_error(e, opts.path);
+                });
+        } else {
+            usage();
+        }
+
+        break;
+
+    case "push":
+
+        if (opts.path !== undefined && opts.topic !== undefined) {
+            push_file(opts.path, opts.topic);
+        } else {
+            usage();
+        }
+
+        break;
+
+    case "watch":
+
+        if (opts.path !== undefined && opts.topic !== undefined) {
+            var last_hash;
+
+            push_file(opts.path, opts.topic);
+            console.log("Watching file " + opts.path + " for changes:");
+            fs.watch(opts.path, function(event) {
+
+                if (event === "change") {
+                    // Only actually push the file if the content changed.
+                    var shasum = crypto.createHash('sha256');
+
+                    var s = fs.ReadStream(opts.path);
+                    s.on('data', function(d) { shasum.update(d); });
+                    s.on('end', function() {
+                        var hash = shasum.digest('hex');
+                        if (hash !== last_hash) {
+                            push_file(opts.path, opts.topic);
+                        }
+                        last_hash = hash;
+                    });
+                }
+            });
+        } else {
+            usage();
+        }
+
+        break;
+
+    case "get_inputs":
+        var inputs = read_inputs(opts.inputs);
+
+        rp(juttled_http_url + '/paths/' + opts.path)
+            .then(function(body) {
+                body = JSON.parse(body);
+                return body.bundle;
+            }).then(function(bundle) {
+                var body = {
+                    bundle: bundle,
+                    inputs: inputs
+                };
+                var post_opts = {
+                    method: 'POST',
+                    uri: juttled_http_url + '/prepare',
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                };
+                return rp(post_opts)
+                    .then(function(body) {
+                        console.log(JSON.stringify(JSON.parse(body), null, 2));
+                    });
+            }).catch(rp_errors.RequestError, function (e) {
+                console.error("ERROR", e.message);
+            }).error(function(e) {
+                handle_error(e, opts.path);
+            });
+
+        break;
+
+    case 'browser':
+        if (opts.path) {
+            var absPath = path.resolve(opts.path);
+            open('http://' + opts['outriggerd'] + '/run?path=' + absPath);
+
+        } else {
+            usage();
+        }
+        break;
+
+    default:
+        usage();
+}

@@ -1,0 +1,14 @@
+{
+    "levels": {
+        "[all]": "info"
+    },
+    "appenders": [
+        {
+            "type": "console"
+        },
+        {
+            "type": "file",
+            "filename": "log/demo.log"
+        }
+    ]
+}

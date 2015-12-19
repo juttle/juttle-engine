@@ -1,0 +1,3 @@
+import "https://gist.githubusercontent.com/go-oleg/8a71831b9fecd4f3250d/raw/1a622943b6e3ac7712942bb4e2cd6f8ec04136ad/main.juttle" as lib;
+
+emit -limit 1 | put v = lib.a | keep v | view logger -display.style "json";

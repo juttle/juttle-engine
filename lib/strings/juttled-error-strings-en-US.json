@@ -1,0 +1,10 @@
+{
+    "error": {
+        "JS-UNKNOWN-ERROR": "Unknown Error",
+        "JS-JUTTLE-ERROR": "Error from juttle compiler or runtime",
+        "JS-BUNDLE-ERROR": "Malformed bundle: {{info.reason}}",
+        "JS-JOB-NOT-FOUND-ERROR": "No such job: {{info.job_id}}",
+        "JS-FILE-NOT-FOUND-ERROR": "No such file: {{info.path}}",
+        "JS-FILE-ACCESS-ERROR": "Can not read file: {{info.path}}"
+    }
+}
