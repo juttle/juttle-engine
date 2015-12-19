@@ -1,14 +1,8 @@
 #!/usr/bin/env node
 
 var _ = require('underscore');
-var path = require('path');
 var logSetup = require('./log-setup');
 var minimist = require('minimist');
-var webpack = require('webpack');
-var webpackDevMiddleware = require('webpack-dev-middleware');
-var webpackConfig = require('../webpack.config');
-var express = require('express');
-var app = new express();
 var JuttledService = require('../lib/service-juttled');
 
 var defaults = {
