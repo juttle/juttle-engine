@@ -41,7 +41,7 @@ function usage() {
     console.log('                                              Used by "subscribe", "run"');
     console.log('       --topic <rendezvous-topic>:            Rendezvous topic');
     console.log('                                              Used by "push", "watch".');
-    console.log('       --outriggerd <hostname:port>:    Hostname/port of outrigger juttle server');
+    console.log('       --outriggerd <hostname:port>:          Hostname/port of outrigger juttle server');
     console.log('       --help:                                Print this help and exit');
     process.exit(1);
 }
