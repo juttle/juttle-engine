@@ -1,0 +1,69 @@
+/*
+ * This program reads cpu/memory/network statistics for
+ * docker containers, as recorded in InfluxDB by cAdvisor,
+ * and visualizes them. Re-run to get an updated view.
+ */
+
+const duration = :10m:;
+const start = :now: - duration;
+const interval = :5s:; // works well with cadvisor stat frequency
+const cpu_ticks_per_second = 10000000;
+
+// reads exclude occasionally appearing ephemeral container with name '/'
+//
+sub read_stat(stat, from) {
+  read influx -from from -db 'cadvisor' -measurements stat
+    NOT container_name ~ /\/.*/  // exclude ephemeral containers
+}
+
+// cAdvisor metrics are incrementing total counters,
+// and we want a gauge = (value_N - value_N-1) / interval
+//
+sub delta_stat(group) {
+  reduce -forget false -every interval value=last(value) by group
+  | put value = delta(value) by group
+    // can get negative delta after container restart, zero them out
+  | put value = (value > 0) ? value : 0 by group
+  | put value = value / Duration.seconds(interval) by group
+}
+
+sub cpu() {
+  read_stat -stat 'cpu_usage_total' -from start
+  | delta_stat -group 'container_name'
+  | put value = value / cpu_ticks_per_second
+  | view timechart -title 'CPU Usage' -display.dataDensity 0;
+}
+
+sub memory() {
+  read_stat -stat 'memory_usage' -from start
+  | keep container_name, time, value
+  | view barchart -title 'Memory Usage';
+}
+
+sub network() {
+  read_stat -stat 'tx_bytes' -from start
+  | delta_stat -group 'container_name'
+  | view timechart -title 'Network TX' -display.dataDensity 0;
+
+  read_stat -stat 'rx_bytes' -from start
+  | delta_stat -group 'container_name'
+  | view timechart -title 'Network RX' -display.dataDensity 0;
+}
+
+sub containers() {
+  read influx -from start -db 'cadvisor' -measurements 'cpu_usage_total'
+  | reduce by container_name
+  | filter NOT container_name ~ /\/.*/  // exclude ephemeral containers
+  |(
+    reduce value = count()
+    | view tile -title 'Container Count' -col 0 -row 0;
+
+    sort container_name
+    | view table -title 'Running Containers' -col 1 -row 0
+  )
+}
+
+containers;
+cpu;
+memory;
+network;

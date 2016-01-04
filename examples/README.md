@@ -112,7 +112,7 @@ below this directory. For example, to extend the base configuration to
 add an elasticsearch backend, run:
 
 ```
-docker-compose -f dc-outrigger.yml elastic-newstracker/dc-elastic.yml up
+docker-compose -f dc-outrigger.yml -f elastic-newstracker/dc-elastic.yml -f cadvisor-influx/dc-cadvisor-influx.yml up
 ```
 
 Not every adapter requires additional containers (for example,

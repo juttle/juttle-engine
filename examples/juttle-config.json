@@ -3,9 +3,14 @@
         "elastic": [
             {
                 "id": "local",
-                "address": "elasticsearch",
+                "address": "examples_elasticsearch_1",
                 "port": 9200
             }
-        ]
+        ],
+        "influx": {
+            "url": "http://examples_influxdb_1:8086",
+            "user": "root",
+            "password": "root"
+        }
     }
 }

@@ -1,0 +1,28 @@
+influxdb:
+  container_name: examples_influxdb_1
+  image: tutum/influxdb:latest
+  ports:
+    - "8083:8083"
+    - "8086:8086"
+  expose:
+    - "8090"
+    - "8099"
+  environment:
+    - PRE_CREATE_DB=cadvisor
+cadvisor:
+  image: google/cadvisor-canary:latest
+  command: -storage_driver=influxdb -storage_driver_db=cadvisor -storage_driver_host=influxdb:8086 -logtostderr=true -v=9 -stderrthreshold=9 -storage_driver_buffer_duration=1m
+  ports:
+    - "8081:8080"
+  volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:rw
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+  links:
+    - influxdb
+outrigger:
+  links:
+    - influxdb
+  external_links:
+    - examples_influxdb_1

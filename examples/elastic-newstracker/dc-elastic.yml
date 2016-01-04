@@ -2,6 +2,7 @@ elastic_news_data:
    image: juttle/elastic_news_data
 
 elasticsearch:
+  container_name: examples_elasticsearch_1
   image: elasticsearch:2.1.1
   volumes_from:
     - elastic_news_data
@@ -11,4 +12,6 @@ elasticsearch:
 outrigger:
   links:
     - elasticsearch
+  external_links:
+    - examples_elasticsearch_1
 

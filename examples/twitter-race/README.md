@@ -10,12 +10,12 @@ None needed.
 
 ## ``juttle-config.json`` configuration
 
-Modify `juttle-config.json` to add a ``juttle-twitter-adapter`` section containing credentials to access twitter via API:
+Modify `juttle-config.json` to add a ``twitter`` section containing credentials to access twitter via API:
 
 ```
 {
     "adapters": {
-        "juttle-twitter-adapter": {
+        "twitter": {
             "consumer_key": "...",
             "consumer_secret": "...",
             "access_token_key": "...",
