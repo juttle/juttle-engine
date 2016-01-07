@@ -16,4 +16,5 @@ grunt.log
 /build
 /log
 /dist
+/coverage
 
