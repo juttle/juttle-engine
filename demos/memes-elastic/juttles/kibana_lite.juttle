@@ -1,0 +1,19 @@
+input search: text -default 'something' -label 'Search';
+
+sub log_count_timechart() {
+  reduce -every :day: value = count()
+  | put name='count'
+  | view timechart -title "Counts" -series [ { name: 'count', geom: 'bars' } ];
+}
+
+sub search_hits_table() {
+  head 1000
+  | keep time, quote, site
+  | view table -title "Logs";
+}
+
+read elastic -from :2009-04-01: -to :2009-05-01: quote != null AND search
+|(
+  log_count_timechart;
+  search_hits_table;
+) 

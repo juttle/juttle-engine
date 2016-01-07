@@ -1,0 +1,10 @@
+// Output a table with clickable links to the actual demo programs, for navigation.
+
+emit -from :0: -points [
+  { link: 'http://docker-local:8080/run?path=/opt/juttles/kibana_lite.juttle' },
+  { link: 'http://docker-local:8080/run?path=/opt/juttles/emotional_temp.juttle' },
+  { link: 'http://docker-local:8080/run?path=/opt/juttles/top_linked_pages.juttle' },
+  { link: 'http://docker-local:8080/run?path=/opt/juttles/top_linked_pages_read_rollup.juttle' }
+]
+| remove time
+| view table -title 'Demo Programs' -markdownFields [ 'link' ]

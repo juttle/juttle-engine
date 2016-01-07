@@ -1,0 +1,4 @@
+read elastic -from :2009-04-01: -to :2009-04-03: tag='rollup_linkout'
+| reduce sum(count) by 'linkout.raw'
+| sort sum -desc
+| head 10

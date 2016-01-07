@@ -1,0 +1,4 @@
+read elastic -from :2009-04-30: -to :2009-05-01: linkout != null 
+| reduce count() by 'linkout.raw' 
+| sort count -desc 
+| head 10
