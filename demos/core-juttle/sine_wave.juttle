@@ -1,0 +1,11 @@
+input period: number -default 50 -label 'Sine Wave period';
+input amplitude: number -default 10 -label 'Sine Wave amplitude';
+
+emit -from :-5m: -limit 10000
+| put value =  amplitude * Math.sin(Math.PI * count() / period)
+| view timechart -title "Sine Wave";
+
+emit -from :-5m: -limit 10000
+| put value=count()
+| put value = value * value
+| view timechart -title "Geometric Growth";

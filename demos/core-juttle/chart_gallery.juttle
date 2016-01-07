@@ -1,0 +1,10 @@
+// Showcase juttle-viz charts
+//
+// XXX add more charts, only tile for now
+
+(
+emit -limit 10 | put value=count() | put name='apples';
+emit -limit 10 | put value=count() | put name='bananas'
+)
+| view tile -facetFields ['name']
+

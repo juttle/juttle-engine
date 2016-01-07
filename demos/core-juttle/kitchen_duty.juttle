@@ -1,0 +1,64 @@
+/* This Juttle program helps us keep the office kitchen clean!
+ * 
+ * It randomly picks two people to serve kitchen duty every day
+ * and sends a notification to our slack channel #food.
+ * We run it as a cron job on an AWS micro instance.
+ */
+
+// Emit the list of potential candidates for kitchen duty
+sub people() {
+  const names = [
+    { "name":"mccanne" },
+    { "name":"stemm" },
+    { "name":"matt" },
+    { "name":"vlad" },
+    { "name":"oleg" },
+    { "name":"dave" },
+    { "name":"demmer" },
+    { "name":"dmehra" },
+    { "name":"rodney" }
+  ];
+
+  emit -points names -from :0:
+  | remove time
+}
+
+// Choose n points at random
+sub pick(n) {
+  put rank = Math.random()
+  | sort rank
+  | head n
+  | remove rank
+}
+
+// Combine the value of the given field from all points in the batch into a
+// single array.
+reducer combine(field) {
+  var names = [];
+  function update() {
+    names[Array.length(names)] = *field;
+  }
+  function result() {
+    return names;
+  }
+}
+
+// Send the incoming points to slack
+sub slack() {
+  // SET CORRECT URL HERE
+  const url = 'https://hooks.slack.com/services/ABC/DEF/GHI';
+
+  put channel="#test-alerts", username="Kitchen Duty", icon_emoji = ":fork_and_knife:"
+  | write http -url url -maxLength 1
+}
+
+// Put it all together
+people
+| pick -n 2
+| reduce names=combine(name)
+| put text = "Today's kitchen duty: ${names[0]} and ${names[1]}"
+| remove names
+|(
+  view table; 
+//  slack    // UNCOMMENT ME
+)
