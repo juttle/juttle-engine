@@ -6,7 +6,7 @@ This demo loads a data set of Internet news snippets from April 2009, collected 
 
 ## Prerequisites
 
-Run docker machine:
+Run [docker machine](https://docs.docker.com/machine/):
 
 ```
 docker-machine start default
@@ -91,11 +91,11 @@ docker exec outrigger outrigger-client run --path /opt/juttles/index.juttle
 
 ### Search the news
 
-First let's run a program that will let us enter a search term, then display daily counts of news snippets containing that term, as a timechart; and additionally display a table of matching meme phrases. This UI, reminiscent of the home page of Kibana, is implemented in a dozen lines of Juttle.
+First let's run a program that will let us enter a search term, then display daily counts of news snippets containing that term, as a timechart; and additionally display a table of matching meme phrases. This UI is implemented in a dozen lines of Juttle.
 
-[kibana_lite.juttle](kibana_lite.juttle)
+[search_ui.juttle](search_ui.juttle)
 
-[Click to run this Juttle](http://docker-local:8080/run?path=/opt/juttles/kibana_lite.juttle)
+[Click to run this Juttle](http://docker-local:8080/run?path=/opt/juttles/search_ui.juttle)
 
 ### Compute daily emotional temperature
 
