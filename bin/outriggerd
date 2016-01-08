@@ -5,6 +5,7 @@ var _ = require('underscore');
 var logSetup = require('./log-setup');
 var minimist = require('minimist');
 var JuttledService = require('../lib/service-juttled');
+var Daemonize = require('daemon');
 
 var defaults = {
     'port': 8080,
@@ -12,10 +13,13 @@ var defaults = {
 };
 
 function usage() {
-    console.log('usage: [--port <port>] [--root <path>] [--c <juttle-config-path>] [--help]');
+    console.log('usage: [--port <port>] [--root <path>] [--c <juttle-config-path>] [-l <log4js-config-path>] [-o <log-file>] [-d] [--help]');
     console.log('       --port <port>:                 Run outriggerd on specified port');
     console.log('       --root <path>:                 Use <path> as the root directory for juttle programs');
     console.log('       --c <juttle-config-path>:      Read juttle config from <juttle-config-path>');
+    console.log('       --d:                           Daemonize outriggerd and log to configured log file');
+    console.log('       --o <logfile>:                 Log to specififed file when daemonized');
+    console.log('       --l <log4js-config-path>:      Configure logging from <log4js-config-path>. Overrides any value of -o');
     console.log('       --help:                        Print this help and exit');
     process.exit(1);
 }
@@ -30,7 +34,11 @@ if (opts.help) {
 
 opts.port = opts['port'];
 
-logSetup.init();
+logSetup.init(opts);
+if (opts.d) {
+    Daemonize();
+}
+
 require('log4js').getLogger('demo').debug('initializing');
 
 var service_opts = {port: opts.port, root_directory: opts.root};
