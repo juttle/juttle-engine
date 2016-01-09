@@ -1,0 +1,34 @@
+// Compare twitter popularity
+
+input A: text -default 'trump' -label "Search Term 1";
+input B: text -default 'clinton' -label "Serch Term 2";
+
+// Read the tweets, with 2-second delay to tolerate arrival jitter, 
+// and merge in empty fake points to keep the charts full of data.
+sub tweets(what) {
+  (
+    read twitter -stream true -delay :2s: what;
+    emit -limit 10000 | put message="FAKE TWEET", fake=true
+  )
+  | put #what=what
+}
+
+
+(
+tweets -what A;
+tweets -what B;
+)
+| (
+  reduce -every :1s: value = (count() - 1) by what
+    | view timechart -title 'Twitter popularity over time' -col 0 -row 0;
+
+  filter fake != true
+    | reduce -every :1s: -reset false value = (count() - 1) by what
+    |(
+       view barchart -title 'Twitter popularity contest' -col 0 -row 1;
+       view tile -facetFields ['what'] -col 1 -row 1
+    );
+
+  filter fake != true
+    | view table -row 2
+  )
