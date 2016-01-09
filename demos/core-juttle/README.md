@@ -8,20 +8,25 @@ either by using our docker container, or directly:
 
 ```
 npm install -g outrigger
-outriggerd &
+outriggerd --daemonize --output outrigger.log
 ```
+
+This will daemonize outrigger and redirect its output to outrigger.log.
 
 Then you can run provided Juttle programs with command:
 
 ```
-outrigger-client run --path FILEPATH.juttle
+outrigger-client browser --path FILEPATH.juttle
 ```
 
-The output will be sent to your browser at the URL of this format:
+This will open a local browser instance and open a URL of this format:
 
 ```
 http://localhost:8080/run?path=FILEPATH.juttle
 ```
+
+If you are running within a vm or on a remote host, you can simply
+open the URLs directly.
 
 ## Juttles
 
@@ -33,7 +38,7 @@ data point with current timestamp and message field with value 'hello world'.
 [hello_world.juttle](hello_world.juttle)
 
 ```
-outrigger-client run --path hello_world.juttle
+outrigger-client browser --path hello_world.juttle
 ```
 
 ### Sine Wave
@@ -45,13 +50,13 @@ set by the user in the input control boxes.
 [sine_wave.juttle](sine_wave.juttle)
 
 ```
-outrigger-client run --path sine_wave.juttle
+outrigger-client browser --path sine_wave.juttle
 ```
 
 For another example of a program with input, see [fizzbuzz.juttle](fizzbuzz.juttle).
 
 ```
-outrigger-client run --path fizzbuzz.juttle
+outrigger-client browser --path fizzbuzz.juttle
 ```
 
 ### Stock Prices
@@ -61,14 +66,14 @@ come standard with the language, including reading from a file, and from http en
 More adapters can be loaded (for example, see [memes-elastic demo](../memes-elastic/README.md)).
 
 This program uses the http adapter to read raw stock price and divident data from
-Yahoo! Finance (for a stock named by the user via a text input box), 
+Yahoo! Finance (for a stock named by the user via a text input box),
 renders a timechart of daily closing prices over a background of daily trading volume,
 and shows dividend payouts (if any) as events overlaid on the same chart.
 
 [stock_prices.juttle](stock_prices.juttle)
 
 ```
-outrigger-client run --path stock_prices.juttle
+outrigger-client browser --path stock_prices.juttle
 ```
 
 ### Kitchen Duty
@@ -100,5 +105,5 @@ This program showcases different charts (XXX/need to finish! Only tile shown rig
 [chart_gallery.juttle](chart_gallery.juttle)
 
 ```
-outrigger-client run --path chart_gallery.juttle
+outrigger-client browser --path chart_gallery.juttle
 ```
