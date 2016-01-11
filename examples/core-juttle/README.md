@@ -1,32 +1,29 @@
-# Core Juttle Demo
+# Examples for core juttle capabilities.
 
 ## Setup
 
-This demo uses only built-in Juttle processors and adapters.
-All you need to run this demo is to install outrigger and run outriggerd,
-either by using our docker container, or directly:
+These examples use only built-in Juttle processors and adapters.  All
+you need to run these examples is to install outrigger and run
+outriggerd. The easiest way to do this is by using the docker
+container image on docker hub, by running:
 
 ```
-npm install -g outrigger
-outriggerd --daemonize --output outrigger.log
+docker run -d -p 8080:8080 --name outrigger juttle/outrigger:latest
 ```
 
-This will daemonize outrigger and redirect its output to outrigger.log.
+This will download an image containing outrigger and a set of example
+juttle programs and run outriggerd configured to serve those example
+programs.
 
-Then you can run provided Juttle programs with command:
-
-```
-outrigger-client browser --path FILEPATH.juttle
-```
-
-This will open a local browser instance and open a URL of this format:
+Then visit the following page, which actually runs a juttle program to
+generate a table containing links to the programs described in this
+document:
 
 ```
-http://localhost:8080/run?path=FILEPATH.juttle
+http://localhost:8080/run?path=/examples/core-juttle/index.juttle
 ```
 
-If you are running within a vm or on a remote host, you can simply
-open the URLs directly.
+To run any program, just visit the link from ``index.juttle``.
 
 ## Juttles
 
@@ -37,10 +34,6 @@ data point with current timestamp and message field with value 'hello world'.
 
 [hello_world.juttle](hello_world.juttle)
 
-```
-outrigger-client browser --path hello_world.juttle
-```
-
 ### Sine Wave
 
 Juttle programs can be parameterized with user inputs, such as this math program
@@ -49,15 +42,7 @@ set by the user in the input control boxes.
 
 [sine_wave.juttle](sine_wave.juttle)
 
-```
-outrigger-client browser --path sine_wave.juttle
-```
-
 For another example of a program with input, see [fizzbuzz.juttle](fizzbuzz.juttle).
-
-```
-outrigger-client browser --path fizzbuzz.juttle
-```
 
 ### Stock Prices
 
@@ -71,10 +56,6 @@ renders a timechart of daily closing prices over a background of daily trading v
 and shows dividend payouts (if any) as events overlaid on the same chart.
 
 [stock_prices.juttle](stock_prices.juttle)
-
-```
-outrigger-client browser --path stock_prices.juttle
-```
 
 ### Kitchen Duty
 
@@ -91,10 +72,6 @@ to produce visual output, so we run it via the juttle CLI and not outrigger-clie
 
 [kitchen_duty.juttle](kitchen_duty.juttle)
 
-```
-juttle kitchen_duty.juttle
-```
-
 ### Chart Gallery
 
 Juttle works with juttle-viz library to produce visualizations, including the
@@ -104,6 +81,4 @@ This program showcases different charts (XXX/need to finish! Only tile shown rig
 
 [chart_gallery.juttle](chart_gallery.juttle)
 
-```
-outrigger-client browser --path chart_gallery.juttle
-```
+

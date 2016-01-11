@@ -1,0 +1,13 @@
+sub add_juttle(name, description) {
+    put program="[" + name + "](/run?path=/examples/core-juttle/" + name + ".juttle)", description=description
+}
+
+emit |
+    ( add_juttle -name "hello_world" -description 'Display one point with the string "hello world"';
+      add_juttle -name "sine_wave" -description 'Show a sine wave with configurable shape';
+      add_juttle -name "fizzbuzz" -description 'Implementation of fizzbuzz algorithm';
+      add_juttle -name "stock_prices" -description 'Show stock prices and events for a stock symbol';
+      add_juttle -name "kitchen_duty" -description 'Find daily kitchen duty \"volunteers\"';
+      add_juttle -name "view_gallery" -description 'Sample of all views')
+    | keep program, description
+    | view table -title "Demo Juttle Programs" -markdownFields ['program']

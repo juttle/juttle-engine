@@ -1,6 +1,6 @@
-// Showcase juttle-viz charts
+// Showcase juttle-viz views
 //
-// XXX add more charts, only tile for now
+// XXX add more views, only tile for now
 
 (
 emit -limit 10 | put value=count() | put name='apples';

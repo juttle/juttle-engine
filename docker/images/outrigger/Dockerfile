@@ -1,21 +1,14 @@
 FROM node:4.2.4-wheezy
 MAINTAINER Rodney Gomes (rodney@jut.io)
 
-RUN npm install juttle outrigger -g
-
-# install adapters
-RUN npm install juttle-gmail-adapter -g
-RUN npm install juttle-graphite-adapter -g
-RUN npm install juttle-influx-adapter -g
-RUN npm install juttle-elastic-adapter -g
-RUN npm install juttle-twitter-adapter -g
-RUN npm install juttle-sqlite-adapter -g
-RUN npm install juttle-mysql-adapter -g
-RUN npm install juttle-postgres-adapter -g
+RUN npm install outrigger -g
 
 RUN mkdir -p /opt/outrigger
 WORKDIR /opt/outrigger
 
+RUN mkdir -p /opt/outrigger/juttles/examples
+COPY example-docker-files /opt/outrigger/juttles/examples/
+
 EXPOSE 8080
 
-CMD outriggerd
+CMD outriggerd --root /opt/outrigger/juttles
