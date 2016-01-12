@@ -46,7 +46,6 @@ _.defaults(opts, defaults);
 
 // Expand any single-letter option to its full-length equalivent.
 _.each(possible_opts, function(opt, short) {
-    var opt = possible_opts[short];
     if (_.has(opts, short)) {
         opts[opt] = opts[short];
         delete opts[short];
