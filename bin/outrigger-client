@@ -2,6 +2,7 @@
 
 /* jslint node:true */
 var _ = require('underscore');
+var Promise = require('bluebird');
 var WebSocket = require('ws');
 var minimist = require('minimist');
 var rp = require('request-promise');
@@ -15,7 +16,8 @@ var fs = require('fs');
 var crypto = require('crypto');
 
 var defaults = {
-    'outriggerd': 'localhost:8080'
+    'outriggerd': 'localhost:8080',
+    'topic': 'default'
 };
 
 var opts = minimist(process.argv.slice(2));
@@ -102,31 +104,37 @@ function read_inputs(input_args) {
 
 function push_file(filename, topic) {
 
-    console.log("Bundling program " + filename + " and pushing to rendezvous topic " + topic + "...");
-    // Open a websocket connection over the rendezvous channel
-    var ws = new WebSocket(juttled_noapi_ws_url + '/rendezvous/' + topic);
-    ws.on('open', function() {
-        // Bundle the program locally and push the bundle over the websocket.
-        var bundler = new JuttleBundler();
-        bundler.bundle(filename)
-            .then(function(bundle) {
-                ws.send(JSON.stringify(bundle));
-            })
-            .catch(function(err) {
-                // If it's a juttle error containing a program
-                // location, print the error in context.
-                if (err.code === 'JS-JUTTLE-ERROR') {
-                    console.error(cli_errors.show_in_context({err: err.info.err,
-                                                              program: err.info.bundle.program,
-                                                              modules: err.info.bundle.modules,
-                                                              filename: filename}));
-                } else {
-                    console.error("ERROR", err.message);
-                }
-            })
-            .finally(function() {
-                ws.close();
-            });
+    return new Promise(function (resolve, reject) {
+
+        console.log("Bundling program " + filename + " and pushing to rendezvous topic " + topic + "...");
+        // Open a websocket connection over the rendezvous channel
+        var ws = new WebSocket(juttled_noapi_ws_url + '/rendezvous/' + topic);
+        ws.on('open', function() {
+            // Bundle the program locally and push the bundle over the websocket.
+            var bundler = new JuttleBundler();
+            bundler.bundle(filename)
+                .then(function(bundle) {
+                    return new Promise(function (resolve, reject) {
+                        ws.send(JSON.stringify(bundle), resolve);
+                    });
+                })
+                .catch(function(err) {
+                    // If it's a juttle error containing a program
+                    // location, print the error in context.
+                    if (err.code === 'JS-JUTTLE-ERROR') {
+                        console.error(cli_errors.show_in_context({err: err.info.err,
+                                                                  program: err.info.bundle.program,
+                                                                  modules: err.info.bundle.modules,
+                                                                  filename: filename}));
+                    } else {
+                        console.error("ERROR", err.message);
+                    }
+                })
+                .finally(function() {
+                    ws.close();
+                    resolve();
+                });
+        });
     });
 }
 
@@ -271,8 +279,11 @@ switch (command) {
 
     case "push":
 
-        if (opts.path !== undefined && opts.topic !== undefined) {
-            push_file(path.resolve(opts.path), opts.topic);
+        if (opts.path !== undefined) {
+            push_file(path.resolve(opts.path), opts.topic)
+            .then(function() {
+                console.log('==> View program at: http://' + opts['outriggerd'] + '/run?rendezvous=' + opts.topic);
+            });
         } else {
             usage();
         }
@@ -281,11 +292,15 @@ switch (command) {
 
     case "watch":
 
-        if (opts.path !== undefined && opts.topic !== undefined) {
+        if (opts.path !== undefined) {
             var absPath = path.resolve(opts.path);
             var last_hash = get_file_hash(absPath);
 
-            push_file(absPath, opts.topic);
+            push_file(absPath, opts.topic)
+            .then(function() {
+                console.log('==> View program at: http://' + opts['outriggerd'] + '/run?rendezvous=' + opts.topic);
+            });
+
             console.log("Watching file " + opts.path + " for changes:");
 
             chokidar.watch(absPath).on('change', function(path) {
