@@ -10,8 +10,7 @@ var cli_errors = require('juttle/lib/cli/errors');
 var rp_errors = require('request-promise/errors');
 var open = require('open');
 var JuttleBundler = require('../lib/bundler');
-var fs = require('fs');
-var crypto = require('crypto');
+var chokidar = require('chokidar');
 
 var defaults = {
     'outriggerd': 'localhost:8080'
@@ -264,7 +263,7 @@ switch (command) {
     case "push":
 
         if (opts.path !== undefined && opts.topic !== undefined) {
-            push_file(opts.path, opts.topic);
+            push_file(path.resolve(opts.path), opts.topic);
         } else {
             usage();
         }
@@ -274,26 +273,13 @@ switch (command) {
     case "watch":
 
         if (opts.path !== undefined && opts.topic !== undefined) {
-            var last_hash;
+            var absPath = path.resolve(opts.path);
 
-            push_file(opts.path, opts.topic);
+            push_file(absPath, opts.topic);
             console.log("Watching file " + opts.path + " for changes:");
-            fs.watch(opts.path, function(event) {
 
-                if (event === "change") {
-                    // Only actually push the file if the content changed.
-                    var shasum = crypto.createHash('sha256');
-
-                    var s = fs.ReadStream(opts.path);
-                    s.on('data', function(d) { shasum.update(d); });
-                    s.on('end', function() {
-                        var hash = shasum.digest('hex');
-                        if (hash !== last_hash) {
-                            push_file(opts.path, opts.topic);
-                        }
-                        last_hash = hash;
-                    });
-                }
+            chokidar.watch(absPath).on('change', function(path) {
+                push_file(absPath, opts.topic);
             });
         } else {
             usage();
