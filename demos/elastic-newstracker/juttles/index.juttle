@@ -1,10 +1,14 @@
 // Output a table with clickable links to the actual demo programs, for navigation.
+sub add_juttle(name, description) {
+    put program="[" + name + "](/run?path=/" + name + ".juttle)", description=description
+}
 
-emit -from :0: -points [
-  { link: 'http://docker-local:8080/run?path=/opt/juttles/kibana_lite.juttle' },
-  { link: 'http://docker-local:8080/run?path=/opt/juttles/emotional_temp.juttle' },
-  { link: 'http://docker-local:8080/run?path=/opt/juttles/top_linked_pages.juttle' },
-  { link: 'http://docker-local:8080/run?path=/opt/juttles/top_linked_pages_read_rollup.juttle' }
-]
-| remove time
-| view table -title 'Demo Programs' -markdownFields [ 'link' ]
+emit |
+    ( add_juttle -name "num_elastic_points" -description "Count the number of points available in elasticsearch";
+      add_juttle -name "search_ui" -description "Show daily counts of articles matching a search term";
+      add_juttle -name "emotional_temp" -description "Show the emotional temperature for key phrases for each day";
+      add_juttle -name "top_linked_pages" -description "Show the 10 most popular (most linked-to) pages";
+      add_juttle -name "top_linked_pages_write_rollup" -description "Find the most popular pages and save results to elasticsearch";
+      add_juttle -name "top_linked_pages_read_rollup" -description "Show the 10 most popular pages using results from elasticsearch")
+    | keep program, description
+    | view table -title 'Demo Juttle Programs for Elasticsearch' -markdownFields [ 'program' ]

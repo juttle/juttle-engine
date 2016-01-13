@@ -3,7 +3,7 @@
         "juttle-elastic-adapter": [
             {
                 "id": "local",
-                "address": "eshost",
+                "address": "elasticsearch",
                 "port": 9200
             }
         ]
