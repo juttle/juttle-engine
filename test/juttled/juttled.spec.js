@@ -10,6 +10,9 @@ var fs_extra = Promise.promisifyAll(require('fs-extra'));
 var juttled_port = 8080;
 var jd = "http://localhost:" + juttled_port + "/api/v0";
 
+var JSDP = require('juttle-jsdp');
+var moment = require('moment');
+
 function run_path(path) {
     var bundle;
     return chakram.get(jd + "/paths/" + path)
@@ -1090,11 +1093,13 @@ describe("Juttled Tests", function() {
                     bundle: {
                         program: 'input a: dropdown -label "My Input" -items [10, 20, 30]; ' +
                             'input b: combobox -label "My Combobox" -items [20, 30, 40] -default 40 -description "Here is a combobox"; ' +
+                            'input c: date -default :2010-01-01T00:00:00.000Z:;' +
+                            'input d: duration -default :2 hours:;' +
                             'emit -limit 1 | put myval=a, someval=b | view table'
                     }
                 });
                 expect(response).to.have.status(200);
-                expect(response).to.have.json([
+                expect(response).to.have.json(JSDP.serialize([
                     {
                         "type": "dropdown",
                         "id": "a",
@@ -1116,7 +1121,26 @@ describe("Juttled Tests", function() {
                             "default": 40,
                             "description": "Here is a combobox"
                         }
-                    }]);
+                    },
+                    {
+                        "type": "date",
+                        "id": "c",
+                        "static": true,
+                        "value": new Date("2010-01-01T00:00:00.000Z"),
+                        "options": {
+                            "default": new Date("2010-01-01T00:00:00.000Z")
+                        }
+                    },
+                    {
+                        "type": "duration",
+                        "id": "d",
+                        "static": true,
+                        "value": moment.duration(2, "hours"),
+                        "options": {
+                            "default": moment.duration(2, "hours")
+                        }
+                    }
+                ], { toObject: true }));
                 return chakram.wait();
 
             });
@@ -1125,25 +1149,49 @@ describe("Juttled Tests", function() {
                 var response = chakram.post(jd + '/prepare', {
                     bundle: {
                         program: 'input a: dropdown -label "My Input" -items [10, 20, 30] -default 10; ' +
+                            'input b: date -default :2010-01-01T00:00:00.000Z:;' +
+                            'input c: duration -default :2 hours:;' +
                             'emit -limit 1 | put myval=a | view table'
                     },
-                    inputs: {
-                        a: 20
-                    }
+                    inputs: JSDP.serialize({
+                        a: 20,
+                        b: new Date("2010-01-02T00:00:00.000Z"),
+                        c: moment.duration(5, 'hours'),
+                    }, { toObject: true })
                 });
 
                 expect(response).to.have.status(200);
-                expect(response).to.have.json([{
-                    "type": "dropdown",
-                    "id": "a",
-                    "static": true,
-                    "value": 20,
-                    "options": {
-                        "label": "My Input",
-                        "items": [10, 20, 30],
-                        default: 10
+                expect(response).to.have.json(JSDP.serialize([
+                    {
+                        "type": "dropdown",
+                        "id": "a",
+                        "static": true,
+                        "value": 20,
+                        "options": {
+                            "label": "My Input",
+                            "items": [10, 20, 30],
+                            default: 10
+                        },
+                    },
+                    {
+                        "type": "date",
+                        "id": "b",
+                        "static": true,
+                        "value": new Date("2010-01-02T00:00:00.000Z"),
+                        "options": {
+                            "default": new Date("2010-01-01T00:00:00.000Z")
+                        }
+                    },
+                    {
+                        "type": "duration",
+                        "id": "c",
+                        "static": true,
+                        "value": moment.duration(5, "hours"),
+                        "options": {
+                            "default": moment.duration(2, "hours")
+                        }
                     }
-                }]);
+                ], { toObject: true }));
                 return chakram.wait();
             });
 
