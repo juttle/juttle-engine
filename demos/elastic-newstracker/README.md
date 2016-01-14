@@ -21,6 +21,16 @@ The news data is contained in the file news_data.zip and is
 automatically loaded into elasticsearch when the containers are
 started.
 
+## (Optional) Get the latest ``juttle/outrigger:latest`` image
+
+If you have run this demo in the past, you might have an old
+juttle/outrigger:latest image. Ensure you have the latest image by
+running:
+
+```
+docker pull juttle/outrigger:latest
+```
+
 ## (Optional) Clean up from a prior session
 
 If you have previously run this demo, you probably want to start from
@@ -79,10 +89,12 @@ value of ``docker-machine ip default``.
 To see the number of elasticsearch items parsed by logstash, run the
 program ``num_elastic_points.juttle`` by clicking on the
 ``num_elastic_points`` link from the table. You should see a non-zero
-increasing count of records while logstash populates elasticsearch
-with the data from news_data.zip. *Note:* it will take several minutes
-to load all the news data into elasticsearch. You can run the other
-programs while elasticsearch is being populated.
+count and percentage of records while logstash populates elasticsearch
+with the data from news_data.zip. Re-run the program with Run button,
+or your browser refresh button, to see updated results. *Note:* it
+will take several minutes to load all the news data into
+elasticsearch. You can run the other programs while elasticsearch is
+being populated.
 
 The population is complete when you see ``1200500``.
 
