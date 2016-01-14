@@ -780,25 +780,23 @@ describe("Juttled Tests", function() {
 
     describe('Juttle Data Websocket Tests', function() {
 
-        describe('Valid Cases', function() {
-            this.timeout(30000);
-            it('Single websocket can get start, points, end messages', function(done) {
-                var ws_client;
+        var run_program_with_initial_timeout = function(initial_delay, done) {
+            var ws_client;
 
-                chakram.post(jd + '/jobs', {
-                    bundle: {program: 'import \"module.juttle\" as mod;' +
-                             'input my_input: dropdown -label "My Input" -items [10, 20, 30];' +
-                             'emit -limit 5 | put val=my_input | batch -every :1s: | view table;' +
-                             'emit -limit 5 | put val2=mod.val | batch -every :1s: | view logger',
-                             modules: {
-                                 'module.juttle': 'export const val=30;'
-                             }
-                            },
-                    inputs: {my_input: 20}
-                })
-                // Add a 2 second delay to force use of the job
-                // manager replay ability for new websockets.
-                .delay(2000)
+            chakram.post(jd + '/jobs', {
+                bundle: {program: 'import \"module.juttle\" as mod;' +
+                         'input my_input: dropdown -label "My Input" -items [10, 20, 30];' +
+                         'emit -limit 5 | put val=my_input | batch -every :1s: | view table;' +
+                         'emit -limit 5 | put val2=mod.val | batch -every :1s: | view logger',
+                         modules: {
+                             'module.juttle': 'export const val=30;'
+                         }
+                        },
+                inputs: {my_input: 20}
+            })
+            // Add an initial delay to force use of the job
+            // manager replay ability for new websockets.
+                .delay(initial_delay)
                 .then(function(response) {
                     var job_id = response.body.job_id;
                     var got_job_start = false;
@@ -884,6 +882,16 @@ describe("Juttled Tests", function() {
                         }
                     });
                 });
+        };
+
+        describe('Valid Cases', function() {
+            this.timeout(30000);
+            it('Single websocket can get start, points, end messages', function(done) {
+                run_program_with_initial_timeout(2000, done);
+            });
+
+            it.only('Late subscriber (after job stops) can still get start, points, end messages', function(done) {
+                run_program_with_initial_timeout(8000, done);
             });
         });
 
