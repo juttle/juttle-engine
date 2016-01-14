@@ -1,4 +1,5 @@
-read elastic -from :2009-04-01: -to :2009-04-03: tag='rollup_linkout'
+read elastic -from :2009-04-01: -to :2009-05-01: tag='rollup_linkout'
 | reduce sum(count) by 'linkout.raw'
 | sort sum -desc
 | head 10
+| view table -title 'Most popular pages in April 2009'
