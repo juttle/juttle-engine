@@ -1,18 +1,18 @@
-# Elastic Demo: Analyzing Internet News
+# Elasticsearch Adapter Example: Analyzing Internet News
 
 # Setup
 
-This demo loads a data set of Internet news snippets from April 2009, collected by Memetracker (see [data source](#data-source)), into ElasticSearch, then uses Juttle with elastic adapter to read this data, search the news, compute aggregations, and visualize in the browser. The demo uses docker containers and maps local Juttle programs to be run inside the `outrigger` container.
+This example loads a data set of Internet news snippets from April 2009, collected by Memetracker (see [data source](#data-source)), into ElasticSearch, then uses Juttle with the elasticsearch adapter to read this data, search the news, compute aggregations, and visualize in the browser.
 
 ## Prerequisites
 
-This demo assumes you have docker and docker-compose installed. You
+These instructions assume you have docker and docker-compose installed. You
 can also use docker-machine to run docker/docker-compose commands
 remotely from a mac.
 
 ## Architecture
 
-This demo uses 3 docker containers:
+This example uses 3 docker containers:
 - elasticsearch, to hold the set of news snippets.
 - logstash, to parse the input file and populate elasticsearch.
 - outrigger, to run juttle programs and view their outputs.
@@ -23,7 +23,7 @@ started.
 
 ## (Optional) Get the latest ``juttle/outrigger:latest`` image
 
-If you have run this demo in the past, you might have an old
+If you have run this example in the past, you might have an old
 juttle/outrigger:latest image. Ensure you have the latest image by
 running:
 
@@ -33,7 +33,7 @@ docker pull juttle/outrigger:latest
 
 ## (Optional) Clean up from a prior session
 
-If you have previously run this demo, you probably want to start from
+If you have previously run this example, you probably want to start from
 scratch including an empty set of elasticsearch data. To do this, run:
 
 ```
@@ -47,7 +47,7 @@ result in inconsistent counts.
 ## Start everything using docker-compose
 
 the ``docker-compose.yml`` contains everything necessary to run all
-the containers for this demo. Assuming you are in the directory where
+the containers for this example. Assuming you are in the directory where
 this README is located, simply run:
 
 ```
