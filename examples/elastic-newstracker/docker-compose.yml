@@ -13,7 +13,6 @@ logstash:
 outrigger:
   image: juttle/outrigger:latest
   volumes:
-    - ${PWD}/juttles:/opt/outrigger/juttles
     - ${PWD}/juttle-config.json:/opt/outrigger/.juttle-config.json
   command: outriggerd --root /opt/outrigger/juttles
   ports:

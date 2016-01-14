@@ -71,13 +71,12 @@ Logstash:
 - ``news_data.zip`` -> ``/incoming/news_data.zip``
 
 Outrigger:
-- The juttle programs in juttles -> ``/opt/outrigger/juttles``
 - ``juttle-config.json`` -> ``/opt/outrigger/.juttle-config.json``
 
 ## Juttles
 
 For easy navigation of the Juttle programs, visit
-``http://localhost:8080/run?path=/index.juttle``, which will output a
+``http://localhost:8080/run?path=/examples/elastic-newstracker/index.juttle``, which will output a
 table with links in your browser. Click the links to run the example
 programs.
 

@@ -38,7 +38,7 @@ docker pull juttle/outrigger:latest
 Then start outrigger via docker:
 
 ```
-docker run --name outrigger -p 8080:8080 -v `pwd`/juttles:/opt/outrigger/juttles -v `pwd`/juttle-config.json:/opt/outrigger/.juttle-config.json juttle/outrigger:latest
+docker run --name outrigger -p 8080:8080 -v `pwd`/juttle-config.json:/opt/outrigger/.juttle-config.json juttle/outrigger:latest
 ```
 
 If you already have another instance of outrigger running, change the
@@ -49,7 +49,7 @@ and change the port mapping to use a different port on the host (say
 ## Juttle
 
 To execute the included Juttle program, visit
-``http://localhost:8080/run?path=/twitter.juttle``. If you're running
+``http://localhost:8080/run?path=/examples/twitter-race/twitter.juttle``. If you're running
 using docker-machine, replace localhost with the value of
 ``docker-machine ip default``.
 
