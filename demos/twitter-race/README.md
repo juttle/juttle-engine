@@ -29,11 +29,22 @@ To obtain these credentials, set up a [Twitter App](https://apps.twitter.com/) u
 
 ### Starting outrigger
 
-Start outrigger via docker:
+Just to make sure you have the latest juttle/outrigger:latest image, run:
+
+```
+docker pull juttle/outrigger:latest
+```
+
+Then start outrigger via docker:
 
 ```
 docker run --name outrigger -p 8080:8080 -v `pwd`/juttles:/opt/outrigger/juttles -v `pwd`/juttle-config.json:/opt/outrigger/.juttle-config.json juttle/outrigger:latest
 ```
+
+If you already have another instance of outrigger running, change the
+``--name`` argument to a different name (say ``--name outrigger1``)
+and change the port mapping to use a different port on the host (say
+``-p 8081:8080``).
 
 ## Juttle
 
