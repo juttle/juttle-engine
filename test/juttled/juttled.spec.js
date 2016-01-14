@@ -885,12 +885,73 @@ describe("Juttled Tests", function() {
         };
 
         describe('Valid Cases', function() {
+            this.timeout(30000);
             it('Single websocket can get start, points, end messages', function(done) {
                 run_program_with_initial_timeout(2000, done);
             });
 
             it('Late subscriber (after job stops) can still get start, points, end messages', function(done) {
                 run_program_with_initial_timeout(8000, done);
+            });
+
+            it('runtime errors', function() {
+                return chakram.post(jd + '/jobs', {
+                    bundle: {
+                        program: 'read file -file "nobody"',
+                    }
+                })
+                .then(function(response) {
+                    var job_id = response.body.job_id;
+                    var ws_client = new WebSocket(jd + '/jobs/' + job_id);
+                    var got_error = false;
+                    return new Promise(function(resolve, reject) {
+                        ws_client.on('message', function(data) {
+                            data = data || '{}';
+                            data = JSON.parse(data);
+                            if (data.type === 'error' && data.error.message.match(/ENOENT/)) {
+                                got_error = true;
+                            }
+
+                            if (data.type === 'job_end') {
+                                if (!got_error) {
+                                    reject(new Error('should have gotten job error message'));
+                                } else {
+                                    resolve();
+                                }
+                            }
+                        });
+                    });
+                });
+            });
+
+            it('runtime warnings', function() {
+                return chakram.post(jd + '/jobs', {
+                    bundle: {
+                        program: 'emit -from :0: -limit 1 | sort nobody',
+                    }
+                })
+                .then(function(response) {
+                    var job_id = response.body.job_id;
+                    var ws_client = new WebSocket(jd + '/jobs/' + job_id);
+                    var got_warning = false;
+                    return new Promise(function(resolve, reject) {
+                        ws_client.on('message', function(data) {
+                            data = data || '{}';
+                            data = JSON.parse(data);
+                            if (data.type === 'warning') {
+                                got_warning = true;
+                            }
+
+                            if (data.type === 'job_end') {
+                                if (!got_warning) {
+                                    reject(new Error('should have gotten job warning message'));
+                                } else {
+                                    resolve();
+                                }
+                            }
+                        });
+                    });
+                });
             });
         });
 
