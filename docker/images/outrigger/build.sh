@@ -9,10 +9,14 @@ SUBDIR=example-docker-files
 rm -rf $SUBDIR
 mkdir $SUBDIR/
 for dir in ../../../examples/*; do
-    echo "Copying example programs from $dir..."
-    mkdir $SUBDIR/`basename $dir`
-    cp $dir/*.juttle $SUBDIR/`basename $dir`
+    if [ -d $dir ]
+    then
+       echo "Copying example programs from $dir..."
+       mkdir $SUBDIR/`basename $dir`
+       cp $dir/*.juttle $SUBDIR/`basename $dir`
+    fi
 done
+cp ../../../examples/index.juttle $SUBDIR
 
 docker build -t juttle/outrigger .
 

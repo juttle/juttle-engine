@@ -1,0 +1,16 @@
+elasticsearch:
+  image: elasticsearch:2.1.1
+
+logstash:
+  image: logstash:2.1.1
+  links:
+    -  elasticsearch
+  volumes:
+    - ${PWD}/elastic-newstracker/news_data.zip:/incoming/news_data.zip
+    - ${PWD}/elastic-newstracker/logstash.conf:/config/logstash.conf
+  command: bash -c 'unzip -c -q /incoming/news_data.zip | logstash -f /config/logstash.conf -w 4'
+
+outrigger:
+  links:
+    - elasticsearch
+
