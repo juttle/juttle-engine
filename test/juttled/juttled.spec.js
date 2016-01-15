@@ -85,8 +85,7 @@ describe("Juttled Tests", function() {
             return start_job_check_job_id();
         });
 
-        it("Start 2 jobs at once, should return both jobs", function(done) {
-            this.timeout(5000);
+        it("Start 2 jobs at once, should return both jobs", function() {
             var job_ids = [];
             var bundle;
             return run_path('forever.juttle')
@@ -116,14 +115,10 @@ describe("Juttled Tests", function() {
                 return chakram.all(_.map(job_ids, function(job_id) {
                     return chakram.delete(jd + "/jobs/" + job_id);
                 }));
-            })
-            .then(function() {
-                done();
             });
         });
 
-        it("Start & stop two jobs. Fetch all job ids, should not return anything", function(done) {
-            this.timeout(5000);
+        it("Start & stop two jobs. Fetch all job ids, should not return anything", function() {
             var job_ids = [];
             return run_path('forever.juttle')
             .then(function(res) {
@@ -155,9 +150,6 @@ describe("Juttled Tests", function() {
                 expect(response).to.have.status(200);
                 expect(response).to.have.json([]);
                 return chakram.wait();
-            })
-            .then(function() {
-                done();
             });
         });
     });
@@ -893,7 +885,6 @@ describe("Juttled Tests", function() {
         };
 
         describe('Valid Cases', function() {
-            this.timeout(30000);
             it('Single websocket can get start, points, end messages', function(done) {
                 run_program_with_initial_timeout(2000, done);
             });
