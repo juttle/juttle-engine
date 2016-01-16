@@ -2,9 +2,33 @@
 
 # Introduction
 
-The README files and juttle programs below this directory show different examples of how you can use Juttle to read from a variety of different data sources, process that data, write back to data sources, and visualize data in the browser.
+The README files and juttle programs below this directory show different examples of how you can use Juttle to read from a variety of data sources (backends), process that data, write back to data sources, and visualize data in the browser.
 
-To make it easy to download and run these programs, the instructions rely on docker and docker compose to create an outrigger instance linked to a variety of dependent backends.
+To make it easy to download and run these programs, the instructions rely on docker and docker compose to create an outrigger instance linked to a variety of dependent backends. The linkage is done via juttle adapters.
+
+# tl;dr
+
+Examples                               | Special instructions
+-------------------------------------- | --------------------
+[core-juttle](core-juttle/README.md)   | No special configuration; examples using http will need network connectivity
+[twitter-race](twitter-race/README.md) | To read from a twitter stream, you need to configure credentials in ``juttle-config.json`` file, see [README](twitter-race/README.md)
+[elastic-newstracker](elastic-newstracker/README.md) | To read from elasticsearch, this example needs to start additional docker containers, supply its yml file to ``docker-compose``
+
+If you wish to run all available examples, this command will start all necessary docker containers:
+
+```
+docker-compose -f dc-outrigger.yml -f elastic-newstracker/dc-elastic.yml up
+```
+
+If that worked correctly, you should be able to visit this URL in your browser (if running via docker-machine, replace ``localhost`` with IP of the machine):
+
+```
+http://localhost:8080/run?path=/examples/index.juttle
+```
+
+Click the links in the rendered table to run juttle programs. The Juttle code is provided in subdirectories in ``*.juttle`` files.
+
+The rest of this README explains the setup in more detail for troubleshooting.
 
 # Setup
 
@@ -44,6 +68,7 @@ If you have previously run this example, you probably want to start from
 scratch including an empty set of elasticsearch data. To do this, run:
 
 ```
+docker-compose -f dc-outrigger.yml [-f additional .yml files, see below] stop
 docker-compose -f dc-outrigger.yml [-f additional .yml files, see below] rm -v
 ```
 
@@ -70,7 +95,7 @@ sudo PWD=$PWD docker-compose -f dc-outrigger.yml up
 
 This starts outrigger with all the example .juttle programs below this
 directory pre-loaded. Start by visiting
-``http://localhost:8080/run?path=/index.juttle``, which will output a
+``http://localhost:8080/run?path=/examples/index.juttle``, which will output a
 table with links in your browser. Click the links to view the various sets
 of example programs.
 
