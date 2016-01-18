@@ -27,28 +27,27 @@ sub fetch(what) {
   | put time = date
 }
 
-function sanitizeValue(value) {
-  if (value == null) {
-    return 0;
-  } else {
-    return Number.fromString(value);
-  }
-}
-
 sub prices() {
   fetch -what 'd'
   | keep time, Close, Volume
   | split
   | reduce -forget false -every :d: value=last(value) by name
-  | put value = sanitizeValue(value)
-  | view timechart 
+  | (
+      filter name = 'Volume'
+      | put value = Number.fromString(value ?? "0");
+
+      filter name = 'Close'
+      | filter value != null
+      | put value = Number.fromString(value);
+    )
+  | view timechart
       -title '${symbol} closing price' -id 'chart'
       -display.dataDensity 0
       -keyField 'name'
       -valueField 'value'
       -series [
-        {name: 'Close', geom: 'line', yScale: 'primary'}, 
-        {name: 'Volume', geom: 'bars', yScale: 'secondary'} 
+        {name: 'Close', geom: 'line', yScale: 'primary'},
+        {name: 'Volume', geom: 'bars', yScale: 'secondary'}
     ];
 }
 
