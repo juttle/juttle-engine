@@ -13,6 +13,7 @@ Examples                               | Special instructions
 [core-juttle](core-juttle/README.md)   | No special configuration; examples using http will need network connectivity
 [twitter-race](twitter-race/README.md) | To read from a twitter stream, you need to configure credentials in ``juttle-config.json`` file, see [README](twitter-race/README.md)
 [elastic-newstracker](elastic-newstracker/README.md) | To read from elasticsearch, this example needs to start additional docker containers, supply its yml file to ``docker-compose``
+[gmail](gmail/README.md) | To read from/write to gmail, you need to configure credentials in ``juttle-config.json`` file, see [README](gmail/README.md)
 
 If you wish to run all available examples, this command will start all necessary docker containers:
 

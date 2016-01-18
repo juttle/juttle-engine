@@ -6,7 +6,8 @@ emit
 |(
     add_subdir_juttle -subdir "core-juttle" -juttle "index" -description "Examples of core juttle features";
     add_subdir_juttle -subdir "twitter-race" -juttle "twitter" -description "Examples using twitter adapter";
-    add_subdir_juttle -subdir "elastic-newstracker" -juttle "index" -description "Examples using elasticsearch adapter"
+    add_subdir_juttle -subdir "elastic-newstracker" -juttle "index" -description "Examples using elasticsearch adapter";
+    add_subdir_juttle -subdir "gmail" -juttle "index" -description "Examples using gmail adapter"
 )
 | keep program, description
 | view table -title 'Example Juttle Programs' -markdownFields [ 'program' ]

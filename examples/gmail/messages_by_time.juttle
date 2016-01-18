@@ -1,0 +1,6 @@
+read gmail -from :12 hours ago: -to :now: to=~ "me"
+    | batch -every :30 minutes:
+    | reduce count()
+    | view timechart -title "When during the day do I get mail?" -yScales.primary.label "Number of Messages"
+
+

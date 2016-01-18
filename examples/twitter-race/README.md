@@ -10,7 +10,7 @@ None needed.
 
 ## ``juttle-config.json`` configuration
 
-Modify `juttle-config.json` to add a ``jutter-twitter-adapter`` section containing credentials to access twitter via API:
+Modify `juttle-config.json` to add a ``juttle-twitter-adapter`` section containing credentials to access twitter via API:
 
 ```
 {
