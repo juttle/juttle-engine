@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-/* jslint node:true */
+/* eslint no-console: 0 */
 var _ = require('underscore');
 var Promise = require('bluebird');
 var WebSocket = require('ws');

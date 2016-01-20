@@ -173,7 +173,7 @@ describe("Juttled Tests", function() {
                     return fs_extra.copyAsync(__dirname + "/forever.juttle", not_readable);
                 })
                 .then(function() {
-                    return fs.chmodAsync(not_readable, 0300);
+                    return fs.chmodAsync(not_readable, '300');
                 })
                 .catch(function(err) {
                     throw err;
@@ -311,7 +311,7 @@ describe("Juttled Tests", function() {
                                     "start": {
                                         "column": 1,
                                         "line": 1,
-                                        "offset": 0,
+                                        "offset": 0
                                     }
                                 },
                                 "module": "no-such-juttle.juttle"
@@ -385,7 +385,7 @@ describe("Juttled Tests", function() {
                     bundle: {
                         program: module_program,
                         modules: {
-                            'test-module.juttle': test_module,
+                            'test-module.juttle': test_module
                         }
                     }
                 });
@@ -585,7 +585,7 @@ describe("Juttled Tests", function() {
                                         line: 1,
                                         offset: 4
                                     }
-                                },
+                                }
                             },
                             message: "Expected \";\", \"|\" or option but \"j\" found."
                         }
@@ -621,7 +621,7 @@ describe("Juttled Tests", function() {
                                         offset: 0
                                     }
                                 },
-                                module: "no-such-module.juttle",
+                                module: "no-such-module.juttle"
                             },
                             message: "Error: could not find module \"no-such-module.juttle\""
                         }
@@ -897,7 +897,7 @@ describe("Juttled Tests", function() {
             it('runtime errors', function() {
                 return chakram.post(jd + '/jobs', {
                     bundle: {
-                        program: 'read file -file "nobody"',
+                        program: 'read file -file "nobody"'
                     }
                 })
                 .then(function(response) {
@@ -927,7 +927,7 @@ describe("Juttled Tests", function() {
             it('runtime warnings', function() {
                 return chakram.post(jd + '/jobs', {
                     bundle: {
-                        program: 'emit -from :0: -limit 1 | sort nobody',
+                        program: 'emit -from :0: -limit 1 | sort nobody'
                     }
                 })
                 .then(function(response) {
