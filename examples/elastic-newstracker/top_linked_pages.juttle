@@ -1,5 +1,5 @@
-read elastic -from :2009-04-01: -to :2009-04-02: linkout != null
+read elastic -from :2009-04-01: -to :2009-05-01: linkout != null tag != 'rollup_linkout'
 | reduce count() by 'linkout.raw'
 | sort count -desc
 | head 10
-| view table -title 'Most popular pages, sample from April 1, 2009'
+| view table -title 'Most popular pages, sample from April 2009'
