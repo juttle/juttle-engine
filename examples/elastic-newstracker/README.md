@@ -8,18 +8,14 @@ This example loads a data set of Internet news snippets from April 2009, collect
 
 [dc-elastic.yml](./dc-elastic.yml) in the current directory adds the following containers:
 
-- elasticsearch, to hold the set of news snippets.
-- logstash, to parse the input file and populate elasticsearch.
+- elastic_news_data, a container containing a pre-loaded elasticsearch data directory containing the news snippets
+- elasticsearch, to manage the set of news snippets
 
-The news data is contained in the file news_data.zip and is
-automatically loaded into elasticsearch when the containers are
-started.
-
-[dc-elastic.yml](./dc-elastic.yml) maps the following local files to the following containers:
-
-Logstash:
-- ``logstash.conf`` -> ``/config/logstash.conf``
-- ``news_data.zip`` -> ``/incoming/news_data.zip``
+If you prefer to start from scratch, there is also an alternate
+docker-compose configuration
+[dc-elastic-loadfromscratch.yml](./dc-elastic-loadfromscratch.yml)
+that loads the raw data into elasticsearch using logstash when the
+docker-compose environment is started.
 
 ## ``juttle-config.json`` configuration
 
@@ -39,12 +35,9 @@ program ``num_elastic_points.juttle`` by clicking on the
 ``num_elastic_points`` link from the table. You should see a non-zero
 count and percentage of records while logstash populates elasticsearch
 with the data from news_data.zip. Re-run the program with Run button,
-or your browser refresh button, to see updated results. *Note:* it
-will take several minutes to load all the news data into
-elasticsearch. You can run the other programs while elasticsearch is
-being populated.
+or your browser refresh button, to see updated results.
 
-The population is complete when you see ``1200500``.
+Loading is complete when you see ``120060``.
 
 ### Search the news
 
@@ -60,7 +53,7 @@ View this program: [emotional_temp.juttle](./emotional_temp.juttle)
 
 ### Top ten popular sites
 
-Let's also get the top 10 linked-to pages for a given day to see which sites were popular. Note that ideally, the day would be a user input, but input control of type 'Date' is [not yet supported](https://github.com/juttle/juttle/issues/50).
+Let's also get the top 10 linked-to pages for the entire dataset to see which sites were popular. Note that ideally, the day would be a user input, but input control of type 'Date' is [not yet supported](https://github.com/juttle/juttle/issues/50).
 
 View this program: [top_linked_pages.juttle](./top_linked_pages.juttle)
 
@@ -95,7 +88,9 @@ https://snap.stanford.edu/data/memetracker9.html
 
 The original source has 96 million news snippets from the Memetracker. Memetracker tracks the quotes and phrases that appear most frequently over time across this entire online news spectrum. This makes it possible to see how different stories compete for news and blog coverage each day, and how certain stories persist while others fade quickly.
 
-We have taken a subset of the data (1.2 mln entries from April 2009) and converted the data from its original format to JSON.
+We have taken a subset of the data (from April 2009) and converted the data from its original format to JSON.
+
+There are two versions available. The version used above contains ~120k documents and is in the file [news_data.zip](./news_data.zip). There is also a larger ~1.2M document set in the file [news_data_full.zip](./news_data_full.zip). Both versions are available on docker hub in the containers [juttle/elastic_news_data:latest](https://hub.docker.com/r/juttle/elastic_news_data/) and [juttle/elastic_new_data_full:latest](https://hub.docker.com/r/juttle/elastic_news_data_full/).
 
 Original Data Format:
 ```
