@@ -1,13 +1,7 @@
 var _ = require('underscore');
 var expect = require('chai').expect;
 var retry = require('bluebird-retry');
-
-function stringifyPoints(points) {
-    return _.map(points, function(point) {
-        point.time = point.time.valueOf();
-        return point;
-    });
-}
+var JSDP = require('juttle-jsdp');
 
 describe('juttle-subprocess', function() {
 
@@ -82,9 +76,9 @@ describe('juttle-subprocess', function() {
         })
         .then(function() {
             var message = findMessage({ type: 'data' });
-            var points = stringifyPoints(message.data.points);
+            var points = JSDP.deserialize(message.data.points);
             expect(points).to.deep.equal([
-                { time: '2014-01-01T00:00:00.000Z' }
+                { time: new Date('2014-01-01T00:00:00.000Z') }
             ]);
         })
         .then(function() {
