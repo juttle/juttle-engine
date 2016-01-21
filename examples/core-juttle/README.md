@@ -64,4 +64,12 @@ This program showcases different charts (XXX/need to finish! Only tile shown rig
 
 View this program: [chart_gallery.juttle](./chart_gallery.juttle)
 
+### NPM Download Counts
+
+This program shows a timechart of [npm](https://www.npmjs.com/)
+download counts for a given npm package. The npm package is
+configurable via an input control.
+
+View this program: [npm_download_counts.juttle](./npm_download_counts.juttle)
+
 
