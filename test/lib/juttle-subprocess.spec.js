@@ -98,7 +98,7 @@ describe('juttle-subprocess', function() {
         return waitForMessage({ type: 'compile_error' })
         .then(function() {
             var message = findMessage({ type: 'compile_error' });
-            expect(message.err.message).to.contain('Error: instantiating waffles -- module not registered');
+            expect(message.err.message).to.contain('Error: adapter waffles not registered');
         });
     });
 
