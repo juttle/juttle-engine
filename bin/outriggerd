@@ -14,14 +14,14 @@ var defaults = {
 };
 
 var possible_opts = {
-    p: "port",
-    r: "root",
-    c: "config",
-    d: "daemonize",
-    o: "output",
-    L: "log-config",
-    l: "log-level",
-    h: "help"
+    p: 'port',
+    r: 'root',
+    c: 'config',
+    d: 'daemonize',
+    o: 'output',
+    L: 'log-config',
+    l: 'log-level',
+    h: 'help'
 };
 
 function usage() {
@@ -60,7 +60,7 @@ if (opts.help) {
 }
 
 if (extra.length > 0) {
-    console.error("Unknown argument(s): " + extra.join(","));
+    console.error('Unknown argument(s): ' + extra.join(','));
     usage();
 }
 

@@ -65,7 +65,7 @@ function handle_error(err, filename) {
     } catch (e) {
         // err did not contain a error property or it was not
         // json.
-        console.error("ERROR", err.message);
+        console.error('ERROR', err.message);
         return;
     }
 
@@ -77,7 +77,7 @@ function handle_error(err, filename) {
                                                   modules: err_obj.info.bundle.modules,
                                                   filename: filename}));
     } else {
-        console.error("ERROR", err.message);
+        console.error('ERROR', err.message);
     }
 }
 
@@ -106,7 +106,7 @@ function push_file(filename, topic) {
 
     return new Promise(function (resolve, reject) {
 
-        console.log("Bundling program " + filename + " and pushing to rendezvous topic " + topic + "...");
+        console.log('Bundling program ' + filename + ' and pushing to rendezvous topic ' + topic + '...');
         // Open a websocket connection over the rendezvous channel
         var ws = new WebSocket(juttled_noapi_ws_url + '/rendezvous/' + topic);
         ws.on('open', function() {
@@ -127,7 +127,7 @@ function push_file(filename, topic) {
                                                                   modules: err.info.bundle.modules,
                                                                   filename: filename}));
                     } else {
-                        console.error("ERROR", err.message);
+                        console.error('ERROR', err.message);
                     }
                 })
                 .finally(function() {
@@ -156,65 +156,67 @@ opts.outriggerd = opts['outriggerd'];
 
 var API_PREFIX = '/api/v0';
 
-var juttled_ws_url = "ws://" + opts.outriggerd + API_PREFIX;
-var juttled_noapi_ws_url = "ws://" + opts.outriggerd;
-var juttled_http_url = "http://" + opts.outriggerd + API_PREFIX;
+var juttled_ws_url = 'ws://' + opts.outriggerd + API_PREFIX;
+var juttled_noapi_ws_url = 'ws://' + opts.outriggerd;
+var juttled_http_url = 'http://' + opts.outriggerd + API_PREFIX;
 
 var command = opts._[0];
 
 switch (command) {
-    case "list_jobs":
+
+    case 'list_jobs':
         var job_id = opts.job || '';
 
         rp(juttled_http_url + '/jobs/' + job_id)
             .then(function(body) {
                 console.log(JSON.stringify(JSON.parse(body), null, 2));
             }).error(function(e) {
-                console.error("ERROR", e.message);
+                console.error('ERROR', e.message);
             });
 
         break;
 
-    case "list_observers":
+    case 'list_observers':
 
         rp(juttled_http_url + '/observers/')
             .then(function(body) {
                 console.log(JSON.stringify(JSON.parse(body), null, 2));
             }).error(function(e) {
-                console.error("ERROR", e.message);
+                console.error('ERROR', e.message);
             });
 
         break;
 
-    case "subscribe":
+    case 'subscribe':
+        var ws;
 
         if (opts.observer !== undefined) {
-            console.log("Subscribing to all jobs associated with observer:", opts.observer);
-            var ws = new WebSocket(juttled_ws_url + '/observers/' + opts.observer);
+            console.log('Subscribing to all jobs associated with observer:', opts.observer);
+            ws = new WebSocket(juttled_ws_url + '/observers/' + opts.observer);
             ws.on('message', function(message) {
                 console.log('received: %s', message);
                 var msg = JSON.parse(message);
-                if (msg.type === "ping") {
-                    ws.send(JSON.stringify({type: "pong"}));
+                if (msg.type === 'ping') {
+                    ws.send(JSON.stringify({type: 'pong'}));
                 }
             });
             ws.on('close', function(message) {
-                console.log("Web socket connection closed, exiting");
+                console.log('Web socket connection closed, exiting');
                 process.exit(0);
             });
         } else if (opts.job !== undefined) {
-            console.log("Subscribing to job:", opts.job);
-            var ws = new WebSocket(juttled_ws_url + '/jobs/' + opts.job);
+            console.log('Subscribing to job:', opts.job);
+            ws = new WebSocket(juttled_ws_url + '/jobs/' + opts.job);
             ws.on('message', function(message) {
                 console.log('received: %s', message);
                 var msg = JSON.parse(message);
-                if (msg.type === "ping") {
-                    ws.send(JSON.stringify({type: "pong"}));
+                if (msg.type === 'ping') {
+                    ws.send(JSON.stringify({type: 'pong'}));
                 }
             });
 
             ws.on('close', function(message) {
-                console.log("Web socket connection closed, exiting");
+                console.log('Web socket connection closed, exiting');
                 process.exit(0);
             });
         } else {
@@ -223,13 +225,13 @@ switch (command) {
 
         break;
 
-    case "delete":
+    case 'delete':
         if (opts.job !== undefined) {
             rp({method: 'DELETE', uri: juttled_http_url + '/jobs/' + opts.job})
                 .then(function(body) {
                     console.log(JSON.stringify(JSON.parse(body), null, 2));
                 }).error(function(e) {
-                    console.error("ERROR", e.message);
+                    console.error('ERROR', e.message);
                 });
         } else {
             usage();
@@ -237,10 +239,10 @@ switch (command) {
 
         break;
 
-    case "run":
+    case 'run':
         if (opts.path !== undefined) {
 
-            var inputs = read_inputs(opts.inputs);
+            var runInputs = read_inputs(opts.inputs);
 
             rp(juttled_http_url + '/paths/' + opts.path)
                 .then(function(body) {
@@ -249,7 +251,7 @@ switch (command) {
                 }).then(function(bundle) {
                     var body = {
                         bundle: bundle,
-                        inputs: inputs
+                        inputs: runInputs
                     };
                     if (opts.observer) {
                         body.observer = opts.observer;
@@ -264,10 +266,10 @@ switch (command) {
                     };
                     return rp(post_opts)
                         .then(function(body) {
-                            console.log("Started job", body);
+                            console.log('Started job', body);
                         });
                 }).catch(rp_errors.RequestError, function (e) {
-                    console.error("ERROR", e.message);
+                    console.error('ERROR', e.message);
                 }).error(function(e) {
                     handle_error(e, opts.path);
                 });
@@ -277,7 +279,7 @@ switch (command) {
 
         break;
 
-    case "push":
+    case 'push':
 
         if (opts.path !== undefined) {
             push_file(path.resolve(opts.path), opts.topic)
@@ -290,24 +292,24 @@ switch (command) {
 
         break;
 
-    case "watch":
+    case 'watch':
 
         if (opts.path !== undefined) {
-            var absPath = path.resolve(opts.path);
-            var last_hash = get_file_hash(absPath);
+            var watchPath = path.resolve(opts.path);
+            var last_hash = get_file_hash(watchPath);
 
-            push_file(absPath, opts.topic)
+            push_file(watchPath, opts.topic)
             .then(function() {
                 console.log('==> View program at: http://' + opts['outriggerd'] + '/run?rendezvous=' + opts.topic);
             });
 
-            console.log("Watching file " + opts.path + " for changes:");
+            console.log('Watching file ' + opts.path + ' for changes:');
 
-            chokidar.watch(absPath).on('change', function(path) {
-                var hash = get_file_hash(absPath);
+            chokidar.watch(watchPath).on('change', function(path) {
+                var hash = get_file_hash(watchPath);
 
                 if (hash !== last_hash) {
-                    push_file(absPath, opts.topic);
+                    push_file(watchPath, opts.topic);
                 }
 
                 last_hash = hash;
@@ -318,8 +320,8 @@ switch (command) {
 
         break;
 
-    case "get_inputs":
-        var inputs = read_inputs(opts.inputs);
+    case 'get_inputs':
+        var getInputs = read_inputs(opts.inputs);
 
         rp(juttled_http_url + '/paths/' + opts.path)
             .then(function(body) {
@@ -328,7 +330,7 @@ switch (command) {
             }).then(function(bundle) {
                 var body = {
                     bundle: bundle,
-                    inputs: inputs
+                    inputs: getInputs
                 };
                 var post_opts = {
                     method: 'POST',
@@ -343,7 +345,7 @@ switch (command) {
                         console.log(JSON.stringify(JSON.parse(body), null, 2));
                     });
             }).catch(rp_errors.RequestError, function (e) {
-                console.error("ERROR", e.message);
+                console.error('ERROR', e.message);
             }).error(function(e) {
                 handle_error(e, opts.path);
             });

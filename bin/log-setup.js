@@ -1,33 +1,32 @@
 var _ = require('underscore');
 var fs = require('fs-extra');
-var path = require('path');
 var log4js = require('log4js');
 
 module.exports.init = function(opts) {
-    if (opts["log-config"]) {
-        log4js.configure(opts["log-config"]);
+    if (opts['log-config']) {
+        log4js.configure(opts['log-config']);
     } else {
         var log4js_opts = {
-            "levels": {
-                "[all]": opts["log-level"]
+            'levels': {
+                '[all]': opts['log-level']
             }
         };
 
         // If daemonizing and if no output file was specified, use a
         // default.
-        if (opts.daemonize && !_.has(opts, "output")) {
+        if (opts.daemonize && !_.has(opts, 'output')) {
             opts.output = '/var/log/outriggerd.log';
         }
 
-        if (_.has(opts, "output")) {
+        if (_.has(opts, 'output')) {
 
             try {
-                var stat = fs.statSync(opts.output);
+                fs.statSync(opts.output);
             } catch (err) {
                 // Try to create it if it doesn't exist. If this
                 // doesn't work, the following accessSync will not
                 // work.
-                var log = fs.createWriteStream(opts.output);
+                fs.createWriteStream(opts.output);
             }
 
             fs.accessSync(opts.output, fs.R_OK | fs.W_OK);

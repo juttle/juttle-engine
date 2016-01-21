@@ -8,18 +8,18 @@ var fs = Promise.promisifyAll(require('fs'));
 var fs_extra = Promise.promisifyAll(require('fs-extra'));
 
 var juttled_port = 8080;
-var jd = "http://localhost:" + juttled_port + "/api/v0";
+var jd = 'http://localhost:' + juttled_port + '/api/v0';
 
 var JSDP = require('juttle-jsdp');
 var moment = require('moment');
 
 function run_path(path) {
     var bundle;
-    return chakram.get(jd + "/paths/" + path)
+    return chakram.get(jd + '/paths/' + path)
         .then(function(bundle_response) {
             expect(bundle_response).to.have.status(200);
             bundle = bundle_response.body;
-            return chakram.post(jd + "/jobs/", bundle);
+            return chakram.post(jd + '/jobs/', bundle);
         })
         .then(function(run_response) {
             expect(run_response).to.have.status(200);
@@ -36,7 +36,7 @@ function run_path(path) {
 //     - juttle program has syntax error
 //     - specifies inputs that don't actually map to anything in the program
 
-describe("Juttled Tests", function() {
+describe('Juttled Tests', function() {
     var juttled;
 
     before(function() {
@@ -49,12 +49,12 @@ describe("Juttled Tests", function() {
 
     describe('Job Info Fetch Tests', function() {
 
-        it("Fetch job id that doesn't exist", function() {
-            var response = chakram.get(jd + "/jobs/no-such-job");
+        it('Fetch job id that doesn\'t exist', function() {
+            var response = chakram.get(jd + '/jobs/no-such-job');
             expect(response).to.have.status(404);
             expect(response).to.have.json({
                 code: 'JS-JOB-NOT-FOUND-ERROR',
-                message: "No such job: no-such-job",
+                message: 'No such job: no-such-job',
                 info: {
                     job_id: 'no-such-job'
                 }
@@ -67,7 +67,7 @@ describe("Juttled Tests", function() {
             return run_path('forever.juttle')
             .then(function(res) {
                 job_id = res.job_id;
-                var response = chakram.get(jd + "/jobs/" + res.job_id);
+                var response = chakram.get(jd + '/jobs/' + res.job_id);
                 expect(response).to.have.status(200);
 
                 var expected = _.extend({}, res.bundle, {
@@ -79,16 +79,16 @@ describe("Juttled Tests", function() {
                 return chakram.wait();
             })
             .then(function() {
-                var response = chakram.delete(jd + "/jobs/" + job_id);
+                var response = chakram.delete(jd + '/jobs/' + job_id);
                 return expect(response).to.have.status(200);
             });
         }
 
-        it("Start first job, should be able to get that job id", function() {
+        it('Start first job, should be able to get that job id', function() {
             return start_job_check_job_id();
         });
 
-        it("Start 2 jobs at once, should return both jobs", function() {
+        it('Start 2 jobs at once, should return both jobs', function() {
             var job_ids = [];
             var bundle;
             return run_path('forever.juttle')
@@ -109,19 +109,19 @@ describe("Juttled Tests", function() {
                         job_id: job_id
                     });
                 });
-                var response = chakram.get(jd + "/jobs");
+                var response = chakram.get(jd + '/jobs');
                 expect(response).to.have.status(200);
                 expect(response).to.have.json(expected);
                 return chakram.wait();
             })
             .then(function() {
                 return chakram.all(_.map(job_ids, function(job_id) {
-                    return chakram.delete(jd + "/jobs/" + job_id);
+                    return chakram.delete(jd + '/jobs/' + job_id);
                 }));
             });
         });
 
-        it("Start & stop two jobs. Fetch all job ids, should not return anything", function() {
+        it('Start & stop two jobs. Fetch all job ids, should not return anything', function() {
             var job_ids = [];
             return run_path('forever.juttle')
             .then(function(res) {
@@ -131,12 +131,12 @@ describe("Juttled Tests", function() {
             .then(function(res) {
                 job_ids.push(res.job_id);
                 return chakram.all(_.map(job_ids, function(job_id) {
-                    return chakram.delete(jd + "/jobs/" + job_id);
+                    return chakram.delete(jd + '/jobs/' + job_id);
                 }));
             })
             .then(function() {
                 return chakram.all(_.map(job_ids, function(job_id) {
-                    return chakram.get(jd + "/jobs/" + job_id);
+                    return chakram.get(jd + '/jobs/' + job_id);
                 }));
             })
             .then(function(responses) {
@@ -149,7 +149,7 @@ describe("Juttled Tests", function() {
                 return chakram.wait();
             })
             .then(function() {
-                var response = chakram.get(jd + "/jobs/");
+                var response = chakram.get(jd + '/jobs/');
                 expect(response).to.have.status(200);
                 expect(response).to.have.json([]);
                 return chakram.wait();
@@ -159,8 +159,8 @@ describe("Juttled Tests", function() {
 
     describe('Bundling Tests', function() {
         describe('Invalid cases', function() {
-            var dangling_symlink = __dirname + "/dangling-symlink.juttle";
-            var not_readable = __dirname + "/not-readable.juttle";
+            var dangling_symlink = __dirname + '/dangling-symlink.juttle';
+            var not_readable = __dirname + '/not-readable.juttle';
 
             before(function() {
                 fs_extra.removeAsync(dangling_symlink)
@@ -169,11 +169,11 @@ describe("Juttled Tests", function() {
                 })
                 .then(function() {
                     // Create a symlink to a file that doesn't exist
-                    return fs.symlinkAsync("no-such-file.juttle", dangling_symlink);
+                    return fs.symlinkAsync('no-such-file.juttle', dangling_symlink);
                 })
                 .then(function() {
                     // Copy forever.juttle to a file and make it not readable.
-                    return fs_extra.copyAsync(__dirname + "/forever.juttle", not_readable);
+                    return fs_extra.copyAsync(__dirname + '/forever.juttle', not_readable);
                 })
                 .then(function() {
                     return fs.chmodAsync(not_readable, '300');
@@ -184,12 +184,12 @@ describe("Juttled Tests", function() {
             });
 
 
-            it("File doesn't exist", function() {
-                var response = chakram.get(jd + "/paths/no-such-path.juttle");
+            it('File doesn\'t exist', function() {
+                var response = chakram.get(jd + '/paths/no-such-path.juttle');
                 expect(response).to.have.status(404);
                 expect(response).to.have.json({
                     code: 'JS-FILE-NOT-FOUND-ERROR',
-                    message: "No such file: no-such-path.juttle",
+                    message: 'No such file: no-such-path.juttle',
                     info: {
                         path: 'no-such-path.juttle'
                     }
@@ -197,12 +197,12 @@ describe("Juttled Tests", function() {
                 return chakram.wait();
             });
 
-            it("Is a directory", function() {
-                var response = chakram.get(jd + "/paths/.");
+            it('Is a directory', function() {
+                var response = chakram.get(jd + '/paths/.');
                 expect(response).to.have.status(404);
                 expect(response).to.have.json({
                     code: 'JS-FILE-NOT-FOUND-ERROR',
-                    message: "No such file: .",
+                    message: 'No such file: .',
                     info: {
                         path: '.'
                     }
@@ -210,12 +210,12 @@ describe("Juttled Tests", function() {
                 return chakram.wait();
             });
 
-            it("Is a dangling symlink", function() {
-                var response = chakram.get(jd + "/paths/dangling-symlink.juttle");
+            it('Is a dangling symlink', function() {
+                var response = chakram.get(jd + '/paths/dangling-symlink.juttle');
                 expect(response).to.have.status(404);
                 expect(response).to.have.json({
                     code: 'JS-FILE-NOT-FOUND-ERROR',
-                    message: "No such file: dangling-symlink.juttle",
+                    message: 'No such file: dangling-symlink.juttle',
                     info: {
                         path: 'dangling-symlink.juttle'
                     }
@@ -223,12 +223,12 @@ describe("Juttled Tests", function() {
                 return chakram.wait();
             });
 
-            it("Is not readable", function() {
-                var response = chakram.get(jd + "/paths/not-readable.juttle");
+            it('Is not readable', function() {
+                var response = chakram.get(jd + '/paths/not-readable.juttle');
                 expect(response).to.have.status(403);
                 expect(response).to.have.json({
                     code: 'JS-FILE-ACCESS-ERROR',
-                    message: "Can not read file: not-readable.juttle",
+                    message: 'Can not read file: not-readable.juttle',
                     info: {
                         path: 'not-readable.juttle'
                     }
@@ -236,8 +236,8 @@ describe("Juttled Tests", function() {
                 return chakram.wait();
             });
 
-            it("Has a syntax error", function() {
-                var response = chakram.get(jd + "/paths/has-syntax-error.juttle");
+            it('Has a syntax error', function() {
+                var response = chakram.get(jd + '/paths/has-syntax-error.juttle');
                 expect(response).to.have.status(400);
                 expect(response).to.have.json({
                     code: 'JS-JUTTLE-ERROR',
@@ -245,37 +245,37 @@ describe("Juttled Tests", function() {
                     info: {
                         bundle: {
                             modules: {},
-                            program: "emit -every :0.33s: -limit 5\n    | batch -every :1s:\n    | batch -every :1s:\n    | puty foo=\"bar\"\n    | view table -display.progressive true\n"
+                            program: 'emit -every :0.33s: -limit 5\n    | batch -every :1s:\n    | batch -every :1s:\n    | puty foo="bar"\n    | view table -display.progressive true\n'
                         },
                         err: {
-                            code: "JUTTLE-SYNTAX-ERROR-WITH-EXPECTED",
+                            code: 'JUTTLE-SYNTAX-ERROR-WITH-EXPECTED',
                             info: {
                                 expected: [
                                     {
-                                        description: "\";\"",
-                                        type: "literal",
-                                        value: ";"
+                                        description: '";"',
+                                        type: 'literal',
+                                        value: ';'
                                     },
                                     {
-                                        description: "\"|\"",
-                                        type: "literal",
-                                        value: "|"
+                                        description: '"|"',
+                                        type: 'literal',
+                                        value: '|'
                                     },
                                     {
-                                        description: "option",
-                                        type: "other"
+                                        description: 'option',
+                                        type: 'other'
                                     }
                                 ],
-                                expectedDescription: "\";\", \"|\" or option",
-                                found: "f",
-                                foundDescription: "\"f\"",
+                                expectedDescription: '";", "|" or option',
+                                found: 'f',
+                                foundDescription: '"f"',
                                 location: {
                                     end: {
                                         column: 13,
                                         line: 4,
                                         offset: 89
                                     },
-                                    filename: "main",
+                                    filename: 'main',
                                     start: {
                                         column: 12,
                                         line: 4,
@@ -283,15 +283,15 @@ describe("Juttled Tests", function() {
                                     }
                                 }
                             },
-                            message: "Expected \";\", \"|\" or option but \"f\" found."
+                            message: 'Expected ";", "|" or option but "f" found.'
                         }
                     }
                 });
                 return chakram.wait();
             });
 
-            it("Refers to a module that doesn't exist", function() {
-                var response = chakram.get(jd + "/paths/missing-module.juttle");
+            it('Refers to a module that doesn\'t exist', function() {
+                var response = chakram.get(jd + '/paths/missing-module.juttle');
                 expect(response).to.have.status(400);
                 expect(response).to.have.json({
                     code: 'JS-JUTTLE-ERROR',
@@ -299,27 +299,27 @@ describe("Juttled Tests", function() {
                     info: {
                         bundle: {
                             modules: {},
-                            program: "import 'no-such-juttle.juttle' as nope;\n\nemit -limit 10 | put x=nope.a | view timechart;\n"
+                            program: 'import \'no-such-juttle.juttle\' as nope;\n\nemit -limit 10 | put x=nope.a | view timechart;\n'
                         },
                         err: {
-                            code: "RT-MODULE-NOT-FOUND",
+                            code: 'RT-MODULE-NOT-FOUND',
                             info: {
                                 location: {
-                                    "end": {
-                                        "column": 40,
-                                        "line": 1,
-                                        "offset": 39
+                                    'end': {
+                                        'column': 40,
+                                        'line': 1,
+                                        'offset': 39
                                     },
-                                    "filename": "main",
-                                    "start": {
-                                        "column": 1,
-                                        "line": 1,
-                                        "offset": 0
+                                    'filename': 'main',
+                                    'start': {
+                                        'column': 1,
+                                        'line': 1,
+                                        'offset': 0
                                     }
                                 },
-                                "module": "no-such-juttle.juttle"
+                                'module': 'no-such-juttle.juttle'
                             },
-                            "message": "Error: could not find module \"no-such-juttle.juttle\""
+                            'message': 'Error: could not find module "no-such-juttle.juttle"'
                         }
                     }
                 });
@@ -348,15 +348,15 @@ describe("Juttled Tests", function() {
             var module_relative_to_program_program;
 
             before(function() {
-                return Promise.all(_.map(["forever.juttle",
-                                          "modules.juttle",
-                                          "test-module.juttle",
-                                          "remote-module.juttle",
-                                          "subdir/subdir-module.juttle",
-                                          "subdir/modules-relative-to-root.juttle",
-                                          "subdir/modules-relative-to-program.juttle"
+                return Promise.all(_.map(['forever.juttle',
+                                          'modules.juttle',
+                                          'test-module.juttle',
+                                          'remote-module.juttle',
+                                          'subdir/subdir-module.juttle',
+                                          'subdir/modules-relative-to-root.juttle',
+                                          'subdir/modules-relative-to-program.juttle'
                                          ], function(filename) {
-                    return fs.readFileAsync(__dirname + "/" + filename, "utf8");
+                    return fs.readFileAsync(__dirname + '/' + filename, 'utf8');
                 }))
                 .then(function(files) {
                     forever_program = files[0];
@@ -369,8 +369,8 @@ describe("Juttled Tests", function() {
                 });
             });
 
-            it("Single .juttle file without modules", function() {
-                var response = chakram.get(jd + "/paths/forever.juttle");
+            it('Single .juttle file without modules', function() {
+                var response = chakram.get(jd + '/paths/forever.juttle');
                 expect(response).to.have.status(200);
                 expect(response).to.have.json({
                     bundle: {
@@ -381,8 +381,8 @@ describe("Juttled Tests", function() {
                 return chakram.wait();
             });
 
-            it("Program with modules", function() {
-                var response = chakram.get(jd + "/paths/modules.juttle");
+            it('Program with modules', function() {
+                var response = chakram.get(jd + '/paths/modules.juttle');
                 expect(response).to.have.status(200);
                 expect(response).to.have.json({
                     bundle: {
@@ -395,9 +395,9 @@ describe("Juttled Tests", function() {
                 return chakram.wait();
             });
 
-            it("Program with remote modules", function() {
+            it('Program with remote modules', function() {
                 this.timeout(30000);
-                var response = chakram.get(jd + "/paths/remote-module.juttle");
+                var response = chakram.get(jd + '/paths/remote-module.juttle');
                 expect(response).to.have.status(200);
                 expect(response).to.have.json({
                     bundle: {
@@ -410,8 +410,8 @@ describe("Juttled Tests", function() {
                 return chakram.wait();
             });
 
-            it("Program with modules specified relative to root directory", function() {
-                var response = chakram.get(jd + "/paths/subdir/modules-relative-to-root.juttle");
+            it('Program with modules specified relative to root directory', function() {
+                var response = chakram.get(jd + '/paths/subdir/modules-relative-to-root.juttle');
                 expect(response).to.have.status(200);
                 expect(response).to.have.json({
                     bundle: {
@@ -424,8 +424,8 @@ describe("Juttled Tests", function() {
                 return chakram.wait();
             });
 
-            it("Program with modules specified relative to program", function() {
-                var response = chakram.get(jd + "/paths/subdir/modules-relative-to-program.juttle");
+            it('Program with modules specified relative to program', function() {
+                var response = chakram.get(jd + '/paths/subdir/modules-relative-to-program.juttle');
                 expect(response).to.have.status(200);
                 expect(response).to.have.json({
                     bundle: {
@@ -448,7 +448,7 @@ describe("Juttled Tests", function() {
                 expect(response).to.have.status(400);
                 expect(response).to.have.json({
                     code: 'JS-BUNDLE-ERROR',
-                    message: "Malformed bundle: invalid json",
+                    message: 'Malformed bundle: invalid json',
                     info: {
                         bundle: '\"\"',
                         reason: 'invalid json'
@@ -462,7 +462,7 @@ describe("Juttled Tests", function() {
                 expect(response).to.have.status(400);
                 expect(response).to.have.json({
                     code: 'JS-BUNDLE-ERROR',
-                    message: "Malformed bundle: invalid json",
+                    message: 'Malformed bundle: invalid json',
                     info: {
                         bundle: '\"not json\"',
                         reason: 'invalid json'
@@ -477,10 +477,10 @@ describe("Juttled Tests", function() {
                 expect(response).to.have.status(400);
                 expect(response).to.have.json({
                     code: 'JS-BUNDLE-ERROR',
-                    message: "Malformed bundle: Bundle does not contain program property",
+                    message: 'Malformed bundle: Bundle does not contain program property',
                     info: {
                         bundle: bundle,
-                        reason: "Bundle does not contain program property"
+                        reason: 'Bundle does not contain program property'
                     }
                 });
                 return chakram.wait();
@@ -497,34 +497,34 @@ describe("Juttled Tests", function() {
                         bundle: bundle,
                         err: {
 
-                            code: "JUTTLE-SYNTAX-ERROR-WITH-EXPECTED",
+                            code: 'JUTTLE-SYNTAX-ERROR-WITH-EXPECTED',
                             info: {
                                 expected: [
                                     {
-                                        description: "\";\"",
-                                        type: "literal",
-                                        value: ";"
+                                        description: '";"',
+                                        type: 'literal',
+                                        value: ';'
                                     },
                                     {
-                                        description: "\"|\"",
-                                        type: "literal",
-                                        value: "|"
+                                        description: '"|"',
+                                        type: 'literal',
+                                        value: '|'
                                     },
                                     {
-                                        description: "option",
-                                        type: "other"
+                                        description: 'option',
+                                        type: 'other'
                                     }
                                 ],
-                                expectedDescription: "\";\", \"|\" or option",
-                                found: "j",
-                                foundDescription: "\"j\"",
+                                expectedDescription: '";", "|" or option',
+                                found: 'j',
+                                foundDescription: '"j"',
                                 location: {
                                     end: {
                                         column: 6,
                                         line: 1,
                                         offset: 5
                                     },
-                                    filename: "main",
+                                    filename: 'main',
                                     start: {
                                         column: 5,
                                         line: 1,
@@ -532,7 +532,7 @@ describe("Juttled Tests", function() {
                                     }
                                 }
                             },
-                            message: "Expected \";\", \"|\" or option but \"j\" found."
+                            message: 'Expected ";", "|" or option but "j" found.'
                         }
                     }
                 });
@@ -543,7 +543,7 @@ describe("Juttled Tests", function() {
                 var bundle = {
                     program: 'import "errors.juttle" as j1; emit -limit 1 | view table',
                     modules: {
-                        'errors.juttle': "not juttle"
+                        'errors.juttle': 'not juttle'
                     }
                 };
                 var response = chakram.post(jd + '/jobs', {bundle: bundle});
@@ -555,34 +555,34 @@ describe("Juttled Tests", function() {
                         bundle: bundle,
                         err: {
 
-                            code: "JUTTLE-SYNTAX-ERROR-WITH-EXPECTED",
+                            code: 'JUTTLE-SYNTAX-ERROR-WITH-EXPECTED',
                             info: {
                                 expected: [
                                     {
-                                        description: "\";\"",
-                                        type: "literal",
-                                        value: ";"
+                                        description: '";"',
+                                        type: 'literal',
+                                        value: ';'
                                     },
                                     {
-                                        description: "\"|\"",
-                                        type: "literal",
-                                        value: "|"
+                                        description: '"|"',
+                                        type: 'literal',
+                                        value: '|'
                                     },
                                     {
-                                        description: "option",
-                                        type: "other"
+                                        description: 'option',
+                                        type: 'other'
                                     }
                                 ],
-                                expectedDescription: "\";\", \"|\" or option",
-                                found: "j",
-                                foundDescription: "\"j\"",
+                                expectedDescription: '";", "|" or option',
+                                found: 'j',
+                                foundDescription: '"j"',
                                 location: {
                                     end: {
                                         column: 6,
                                         line: 1,
                                         offset: 5
                                     },
-                                    filename: "errors.juttle",
+                                    filename: 'errors.juttle',
                                     start: {
                                         column: 5,
                                         line: 1,
@@ -590,7 +590,7 @@ describe("Juttled Tests", function() {
                                     }
                                 }
                             },
-                            message: "Expected \";\", \"|\" or option but \"j\" found."
+                            message: 'Expected ";", "|" or option but "j" found.'
                         }
                     }
                 });
@@ -609,7 +609,7 @@ describe("Juttled Tests", function() {
                     info: {
                         bundle: bundle,
                         err: {
-                            code: "RT-MODULE-NOT-FOUND",
+                            code: 'RT-MODULE-NOT-FOUND',
                             info: {
                                 location: {
                                     end: {
@@ -617,16 +617,16 @@ describe("Juttled Tests", function() {
                                         line: 1,
                                         offset: 37
                                     },
-                                    filename: "main",
+                                    filename: 'main',
                                     start: {
                                         column: 1,
                                         line: 1,
                                         offset: 0
                                     }
                                 },
-                                module: "no-such-module.juttle"
+                                module: 'no-such-module.juttle'
                             },
-                            message: "Error: could not find module \"no-such-module.juttle\""
+                            message: 'Error: could not find module "no-such-module.juttle"'
                         }
                     }
                 });
@@ -646,7 +646,7 @@ describe("Juttled Tests", function() {
                     bundle: {
                         program: 'import \"mod.juttle\" as mod; emit -limit 1 | put key=mod.val | view table',
                         modules: {
-                            'mod.juttle': "export const val=3;"
+                            'mod.juttle': 'export const val=3;'
                         }
                     }
                 });
@@ -690,9 +690,9 @@ describe("Juttled Tests", function() {
                 // the same job_id being started later in the test.
                 observer_a.on('message', function(data) {
                     data = JSON.parse(data);
-                    if (data.type === "job_start") {
+                    if (data.type === 'job_start') {
                         got_start_message = true;
-                    } else if (data.type === "job_end") {
+                    } else if (data.type === 'job_end') {
                         expect(got_start_message).to.be.true;
                         expect(job_id).to.equal(data.job_id);
                         done();
@@ -826,26 +826,26 @@ describe("Juttled Tests", function() {
                             // Change the sink ids to just "sink" to
                             // allow for an exact match of the full
                             // sink description.
-                            data.sinks[0].sink_id = "sink";
-                            data.sinks[1].sink_id = "sink";
+                            data.sinks[0].sink_id = 'sink';
+                            data.sinks[1].sink_id = 'sink';
 
                             expect(data.sinks).to.deep.equal([
                                 {
-                                    type: "table",
-                                    sink_id: "sink",
+                                    type: 'table',
+                                    sink_id: 'sink',
                                     options: {
-                                        "_jut_time_bounds": []
+                                        '_jut_time_bounds': []
                                     }
                                 },
                                 {
-                                    type: "logger",
-                                    sink_id: "sink",
+                                    type: 'logger',
+                                    sink_id: 'sink',
                                     options: {
-                                        "_jut_time_bounds": []
+                                        '_jut_time_bounds': []
                                     }
                                 }
                             ]);
-                        } else if (data.type === "job_end") {
+                        } else if (data.type === 'job_end') {
                             expect(data.job_id === job_id);
 
                             // Now check that we received all the ticks/marks/etc we expected.
@@ -862,19 +862,19 @@ describe("Juttled Tests", function() {
                             expect(num_marks).to.be.equal(12);
                             expect(num_sink_ends).to.equal(2);
                             done();
-                        } else if (data.type === "tick") {
+                        } else if (data.type === 'tick') {
                             num_ticks++;
                             expect(data.sink_id).to.match(/sink\d+/);
                             expect(data.job_id).to.equal(job_id);
-                        } else if (data.type === "mark") {
+                        } else if (data.type === 'mark') {
                             num_marks++;
                             expect(data.sink_id).to.match(/sink\d+/);
                             expect(data.job_id).to.equal(job_id);
-                        } else if (data.type === "sink_end") {
+                        } else if (data.type === 'sink_end') {
                             num_sink_ends++;
                             expect(data.sink_id).to.match(/sink\d+/);
                             expect(data.job_id).to.equal(job_id);
-                        } else if (data.type === "points") {
+                        } else if (data.type === 'points') {
                             num_points++;
                             expect(data.sink_id).to.match(/sink\d+/);
                             expect(data.job_id).to.equal(job_id);
@@ -883,7 +883,7 @@ describe("Juttled Tests", function() {
                             // val properties come from the
                             // input. val2 properties come from the
                             // module.
-                            if (_.has(data.points[0], "fromInput")) {
+                            if (_.has(data.points[0], 'fromInput')) {
                                 expect(data.points[0].val).to.equal(20);
                                 expect(data.points[0].datePlus2s.getTime()).to.equal(new Date(3000).getTime());
                             } else {
@@ -970,7 +970,7 @@ describe("Juttled Tests", function() {
                 var ws_client = new WebSocket(jd + '/jobs/no-such-job');
                 ws_client.on('message', function(data) {
                     data = JSDP.deserialize(data);
-                    expect(data).to.deep.equal({err: "No such job: no-such-job"});
+                    expect(data).to.deep.equal({err: 'No such job: no-such-job'});
                     done();
                 });
             });
@@ -992,14 +992,14 @@ describe("Juttled Tests", function() {
                     var ws_client = new WebSocket(jd + '/jobs/' + job_id);
                     ws_client.on('message', function(data) {
                         data = JSDP.deserialize(data);
-                        expect(data).to.deep.equal({err: "No such job: " + job_id});
+                        expect(data).to.deep.equal({err: 'No such job: ' + job_id});
                         done();
                     });
                 });
             });
 
             // Skipping this test as it takes ~1m. But it does pass.
-            it.skip("Don't respond to pings with pongs. Will be eventually disconnected", function(done) {
+            it.skip('Don\'t respond to pings with pongs. Will be eventually disconnected', function(done) {
                 this.timeout(90000);
 
                 var observer = new WebSocket(jd + '/observers/A');
@@ -1018,7 +1018,7 @@ describe("Juttled Tests", function() {
             expect(response).to.have.status(404);
             expect(response).to.have.json({
                 code: 'JS-JOB-NOT-FOUND-ERROR',
-                message: "No such job: no-such-job",
+                message: 'No such job: no-such-job',
                 info: {
                     job_id: 'no-such-job'
                 }
@@ -1035,11 +1035,11 @@ describe("Juttled Tests", function() {
                 return expect(response).to.have.status(200);
             })
             .then(function() {
-                var response = chakram.get(jd + "/jobs/" + job_id);
+                var response = chakram.get(jd + '/jobs/' + job_id);
                 expect(response).to.have.status(404);
                 expect(response).to.have.json({
                     code: 'JS-JOB-NOT-FOUND-ERROR',
-                    message: "No such job: " + job_id,
+                    message: 'No such job: ' + job_id,
                     info: {
                         job_id: job_id
                     }
@@ -1061,7 +1061,7 @@ describe("Juttled Tests", function() {
                 expect(response).to.have.status(404);
                 expect(response).to.have.json({
                     code: 'JS-JOB-NOT-FOUND-ERROR',
-                    message: "No such job: " + job_id,
+                    message: 'No such job: ' + job_id,
                     info: {
                         job_id: job_id
                     }
@@ -1072,7 +1072,7 @@ describe("Juttled Tests", function() {
     });
 
     describe('Prepare Inputs Tests', function() {
-        describe("Valid Cases", function() {
+        describe('Valid Cases', function() {
             it('Simple program with a single input', function() {
                 var response = chakram.post(jd + '/prepare', {
                     bundle: {
@@ -1083,13 +1083,13 @@ describe("Juttled Tests", function() {
 
                 expect(response).to.have.status(200);
                 expect(response).to.have.json([{
-                    "type": "dropdown",
-                    "id": "a",
-                    "static": true,
-                    "value": null,
-                    "options": {
-                        "label": "My Input",
-                        "items": [10, 20, 30]
+                    'type': 'dropdown',
+                    'id': 'a',
+                    'static': true,
+                    'value': null,
+                    'options': {
+                        'label': 'My Input',
+                        'items': [10, 20, 30]
                     }
                 }]);
                 return chakram.wait();
@@ -1108,43 +1108,43 @@ describe("Juttled Tests", function() {
                 expect(response).to.have.status(200);
                 expect(response).to.have.json(JSDP.serialize([
                     {
-                        "type": "dropdown",
-                        "id": "a",
-                        "static": true,
-                        "value": null,
-                        "options": {
-                            "label": "My Input",
-                            "items": [10, 20, 30]
+                        'type': 'dropdown',
+                        'id': 'a',
+                        'static': true,
+                        'value': null,
+                        'options': {
+                            'label': 'My Input',
+                            'items': [10, 20, 30]
                         }
                     },
                     {
-                        "type": "combobox",
-                        "id": "b",
-                        "static": true,
-                        "value": 40,
-                        "options": {
-                            "label": "My Combobox",
-                            "items": [20, 30, 40],
-                            "default": 40,
-                            "description": "Here is a combobox"
+                        'type': 'combobox',
+                        'id': 'b',
+                        'static': true,
+                        'value': 40,
+                        'options': {
+                            'label': 'My Combobox',
+                            'items': [20, 30, 40],
+                            'default': 40,
+                            'description': 'Here is a combobox'
                         }
                     },
                     {
-                        "type": "date",
-                        "id": "c",
-                        "static": true,
-                        "value": new Date("2010-01-01T00:00:00.000Z"),
-                        "options": {
-                            "default": new Date("2010-01-01T00:00:00.000Z")
+                        'type': 'date',
+                        'id': 'c',
+                        'static': true,
+                        'value': new Date('2010-01-01T00:00:00.000Z'),
+                        'options': {
+                            'default': new Date('2010-01-01T00:00:00.000Z')
                         }
                     },
                     {
-                        "type": "duration",
-                        "id": "d",
-                        "static": true,
-                        "value": moment.duration(2, "hours"),
-                        "options": {
-                            "default": moment.duration(2, "hours")
+                        'type': 'duration',
+                        'id': 'd',
+                        'static': true,
+                        'value': moment.duration(2, 'hours'),
+                        'options': {
+                            'default': moment.duration(2, 'hours')
                         }
                     }
                 ], { toObject: true }));
@@ -1162,7 +1162,7 @@ describe("Juttled Tests", function() {
                     },
                     inputs: JSDP.serialize({
                         a: 20,
-                        b: new Date("2010-01-02T00:00:00.000Z"),
+                        b: new Date('2010-01-02T00:00:00.000Z'),
                         c: moment.duration(5, 'hours')
                     }, { toObject: true })
                 });
@@ -1170,32 +1170,32 @@ describe("Juttled Tests", function() {
                 expect(response).to.have.status(200);
                 expect(response).to.have.json(JSDP.serialize([
                     {
-                        "type": "dropdown",
-                        "id": "a",
-                        "static": true,
-                        "value": 20,
-                        "options": {
-                            "label": "My Input",
-                            "items": [10, 20, 30],
+                        'type': 'dropdown',
+                        'id': 'a',
+                        'static': true,
+                        'value': 20,
+                        'options': {
+                            'label': 'My Input',
+                            'items': [10, 20, 30],
                             default: 10
                         }
                     },
                     {
-                        "type": "date",
-                        "id": "b",
-                        "static": true,
-                        "value": new Date("2010-01-02T00:00:00.000Z"),
-                        "options": {
-                            "default": new Date("2010-01-01T00:00:00.000Z")
+                        'type': 'date',
+                        'id': 'b',
+                        'static': true,
+                        'value': new Date('2010-01-02T00:00:00.000Z'),
+                        'options': {
+                            'default': new Date('2010-01-01T00:00:00.000Z')
                         }
                     },
                     {
-                        "type": "duration",
-                        "id": "c",
-                        "static": true,
-                        "value": moment.duration(5, "hours"),
-                        "options": {
-                            "default": moment.duration(2, "hours")
+                        'type': 'duration',
+                        'id': 'c',
+                        'static': true,
+                        'value': moment.duration(5, 'hours'),
+                        'options': {
+                            'default': moment.duration(2, 'hours')
                         }
                     }
                 ], { toObject: true }));
@@ -1216,25 +1216,25 @@ describe("Juttled Tests", function() {
                 expect(response).to.have.status(200);
                 expect(response).to.have.json([
                     {
-                        "type": "dropdown",
-                        "id": "a",
-                        "static": true,
-                        "value": 10,
-                        "options": {
-                            "label": "My Input",
-                            "items": [10, 20, 30]
+                        'type': 'dropdown',
+                        'id': 'a',
+                        'static': true,
+                        'value': 10,
+                        'options': {
+                            'label': 'My Input',
+                            'items': [10, 20, 30]
                         }
                     },
                     {
-                        "type": "combobox",
-                        "id": "b",
-                        "static": false,
-                        "value": 40,
-                        "options": {
-                            "label": "My Combobox",
-                            "items": [10, 30, 40],
-                            "default": 40,
-                            "description": "Here is a combobox"
+                        'type': 'combobox',
+                        'id': 'b',
+                        'static': false,
+                        'value': 40,
+                        'options': {
+                            'label': 'My Combobox',
+                            'items': [10, 30, 40],
+                            'default': 40,
+                            'description': 'Here is a combobox'
                         }
                     }]);
                 return chakram.wait();
@@ -1250,13 +1250,13 @@ describe("Juttled Tests", function() {
                 expect(response).to.have.status(200);
                 expect(response).to.have.json([
                     {
-                        "type": "dropdown",
-                        "id": "a",
-                        "static": true,
-                        "value": null,
-                        "options": {
-                            "label": "My Input",
-                            "juttle": "emit -limit 10"
+                        'type': 'dropdown',
+                        'id': 'a',
+                        'static': true,
+                        'value': null,
+                        'options': {
+                            'label': 'My Input',
+                            'juttle': 'emit -limit 10'
                         }
                     }]);
                 return chakram.wait();
@@ -1273,29 +1273,29 @@ describe("Juttled Tests", function() {
                 expect(response).to.have.status(200);
                 expect(response).to.have.json([
                     {
-                        "id": "x",
-                        "type": "number",
-                        "options": {},
-                        "static": true,
-                        "value": null
+                        'id': 'x',
+                        'type': 'number',
+                        'options': {},
+                        'static': true,
+                        'value': null
                     },
                     {
-                        "id": "y.x[0]",
-                        "type": "text",
-                        "options": {
-                            "default": "foo"
+                        'id': 'y.x[0]',
+                        'type': 'text',
+                        'options': {
+                            'default': 'foo'
                         },
-                        "static": true,
-                        "value": "foo"
+                        'static': true,
+                        'value': 'foo'
                     },
                     {
-                        "id": "y.y[0]",
-                        "type": "dropdown",
-                        "options": {
-                            "items": [1, 2, 3]
+                        'id': 'y.y[0]',
+                        'type': 'dropdown',
+                        'options': {
+                            'items': [1, 2, 3]
                         },
-                        "static": true,
-                        "value": null
+                        'static': true,
+                        'value': null
                     }]);
                 return chakram.wait();
             });
@@ -1314,35 +1314,35 @@ describe("Juttled Tests", function() {
                 expect(response).to.have.status(200);
                 expect(response).to.have.json([
                     {
-                        "id": "input.juttle/x",
-                        "type": "number",
-                        "options": {},
-                        "static": true,
-                        "value": null
+                        'id': 'input.juttle/x',
+                        'type': 'number',
+                        'options': {},
+                        'static': true,
+                        'value': null
                     },
                     {
-                        "id": "y.x[0]",
-                        "type": "text",
-                        "options": {
-                            "default": "foo"
+                        'id': 'y.x[0]',
+                        'type': 'text',
+                        'options': {
+                            'default': 'foo'
                         },
-                        "static": true,
-                        "value": "foo"
+                        'static': true,
+                        'value': 'foo'
                     },
                     {
-                        "id": "y.y[0]",
-                        "type": "dropdown",
-                        "options": {
-                            "items": [1, 2, 3]
+                        'id': 'y.y[0]',
+                        'type': 'dropdown',
+                        'options': {
+                            'items': [1, 2, 3]
                         },
-                        "static": true,
-                        "value": null
+                        'static': true,
+                        'value': null
                     }]);
                 return chakram.wait();
             });
         });
 
-        describe("Invalid Cases", function() {
+        describe('Invalid Cases', function() {
             it('Empty program', function() {
                 var bundle = {
                     program: ''
@@ -1355,11 +1355,11 @@ describe("Juttled Tests", function() {
                     info: {
                         bundle: bundle,
                         err: {
-                            message: "Error: Cannot run a program without a flowgraph.",
-                            code: "RT-PROGRAM-WITHOUT-FLOWGRAPH",
+                            message: 'Error: Cannot run a program without a flowgraph.',
+                            code: 'RT-PROGRAM-WITHOUT-FLOWGRAPH',
                             info: {
                                 location: {
-                                    filename: "main",
+                                    filename: 'main',
                                     start: {
                                         offset: 0,
                                         line: 1,
@@ -1388,8 +1388,8 @@ describe("Juttled Tests", function() {
                     info: {
                         bundle: bundle,
                         err: {
-                            message: "Expected \";\", \"|\" or option but \"j\" found.",
-                            code: "JUTTLE-SYNTAX-ERROR-WITH-EXPECTED",
+                            message: 'Expected ";", "|" or option but "j" found.',
+                            code: 'JUTTLE-SYNTAX-ERROR-WITH-EXPECTED',
                             info: {
                                 location: {
                                     end: {
@@ -1402,25 +1402,25 @@ describe("Juttled Tests", function() {
                                         line: 1,
                                         offset: 4
                                     },
-                                    filename: "main"
+                                    filename: 'main'
                                 },
-                                foundDescription: "\"j\"",
-                                found: "j",
-                                expectedDescription: "\";\", \"|\" or option",
+                                foundDescription: '"j"',
+                                found: 'j',
+                                expectedDescription: '";", "|" or option',
                                 expected: [
                                     {
-                                        description: "\";\"",
-                                        value: ";",
-                                        type: "literal"
+                                        description: '";"',
+                                        value: ';',
+                                        type: 'literal'
                                     },
                                     {
-                                        description: "\"|\"",
-                                        value: "|",
-                                        type: "literal"
+                                        description: '"|"',
+                                        value: '|',
+                                        type: 'literal'
                                     },
                                     {
-                                        description: "option",
-                                        type: "other"
+                                        description: 'option',
+                                        type: 'other'
                                     }
                                 ]
                             }
