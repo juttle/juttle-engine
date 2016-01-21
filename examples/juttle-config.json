@@ -1,6 +1,6 @@
 {
     "adapters": {
-        "juttle-elastic-adapter": [
+        "elastic": [
             {
                 "id": "local",
                 "address": "elasticsearch",

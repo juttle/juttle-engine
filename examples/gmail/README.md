@@ -10,11 +10,11 @@ None needed.
 
 ## ``juttle-config.json`` configuration
 
-Modify `juttle-config.json` to add a ``juttle-gmail-adapter`` section containing credentials to access messages via the Gmail API:
+Modify `juttle-config.json` to add a ``gmail`` section containing credentials to access messages via the Gmail API:
 
 {
   "adapters": {
-    "juttle-gmail-adapter": {
+    "gmail": {
       "client-credentials": {
         "installed": {
           "client_id": "--your-client-id--",
