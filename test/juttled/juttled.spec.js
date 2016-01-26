@@ -440,6 +440,103 @@ describe('Juttled Tests', function() {
         });
     });
 
+    describe('Get Directory Tests', function() {
+        describe('Valid cases', function() {
+
+            it('list contents of current directory', function() {
+                return chakram.get(jd + '/directory')
+                .then(function(response) {
+                    expect(response).to.have.status(200);
+
+                    var body = response.body;
+                    expect(body.is_root).to.be.true;
+                    expect(body.path).to.equal('/');
+                    expect(body.directories).to.deep.equal(['subdir']);
+                    expect(body.juttles.length).to.be.above(0);
+                })
+            });
+
+            it('list contents of subdir', function() {
+                return chakram.get(jd + '/directory?path=subdir')
+                .then(function(response) {
+                    expect(response).to.have.status(200);
+                    expect(response.body.is_root).to.be.false;
+                    expect(response.body.path).to.equal('/subdir');
+                    expect(response.body.directories.length).to.equal(0);
+                    expect(response.body.juttles.length).to.be.above(0);
+                })
+            });
+
+            it('list root using subdir + ..', function() {
+                return chakram.get(jd + '/directory?path=/subdir/..')
+                .then(function(response) {
+                    expect(response).to.have.status(200);
+
+                    var body = response.body;
+                    expect(body.is_root).to.be.true;
+                    expect(body.path).to.equal('/');
+                    expect(body.directories).to.deep.equal(['subdir']);
+                    expect(body.juttles.length).to.be.above(0);
+                })
+            });
+
+        });
+
+        describe('Invalid cases', function() {
+            it('non existant path 404s', function() {
+                var response = chakram.get(jd + '/directory?path=non-existent')
+                expect(response).to.have.status(404);
+                expect(response).to.have.json({
+                    code: 'JS-DIR-NOT-FOUND-ERROR',
+                    message: 'No such directory: non-existent',
+                    info: {
+                        path: 'non-existent'
+                    }
+                });
+                return chakram.wait();
+            });
+
+            it('don\'t allow \'..\' when not at end of path', function() {
+                var response = chakram.get(jd + '/directory?path=/../..');
+                expect(response).to.have.status(400);
+                expect(response).to.have.json({
+                    code: 'JS-INVALID-PATH-ERROR',
+                    message: '\'..\' only allow at end of path: /../..',
+                    info: {
+                        path: '/../..'
+                    }
+                });
+                return chakram.wait();
+            });
+
+            it('don\'t allow users to navigate behind root', function() {
+                var response = chakram.get(jd + '/directory?path=/..');
+                expect(response).to.have.status(403);
+                expect(response).to.have.json({
+                    code: 'JS-DIR-ACCESS-ERROR',
+                    message: 'Can not read directory: /..',
+                    info: {
+                        path: '/..'
+                    }
+                });
+                return chakram.wait();
+            });
+
+            it('fetching file and not directory throws error', function() {
+                var response = chakram.get(jd + '/directory?path=forever.juttle');
+                expect(response).to.have.status(404);
+                expect(response).to.have.json({
+                    code: 'JS-DIR-NOT-FOUND-ERROR',
+                    message: 'No such directory: forever.juttle',
+                    info: {
+                        path: 'forever.juttle'
+                    }
+                });
+                return chakram.wait();
+            });
+        });
+    });
+
     describe('Run a Program Tests', function() {
 
         describe('Invalid Cases', function() {
