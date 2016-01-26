@@ -14,11 +14,13 @@ Examples                               | Special instructions
 [twitter-race](twitter-race/README.md) | To read from a twitter stream, you need to configure credentials in ``juttle-config.json`` file, see [README](twitter-race/README.md)
 [elastic-newstracker](elastic-newstracker/README.md) | To read from elasticsearch, this example needs to start additional docker containers, supply its yml file to ``docker-compose``
 [gmail](gmail/README.md) | To read from/write to gmail, you need to configure credentials in ``juttle-config.json`` file, see [README](gmail/README.md)
+[postgres-diskstats](postgres-diskstats/README.md) | Supply the yml file to ``docker-compose`` to start additional containers to read from PostgreSQL
+[cadvisor-influx](cadvisor-influx/README.md) | Supply the yml file to ``docker-compose`` to start additional containers to read from InfluxDB
 
 If you wish to run all available examples, this command will start all necessary docker containers:
 
 ```
-docker-compose -f dc-outrigger.yml -f elastic-newstracker/dc-elastic.yml up
+docker-compose -f dc-outrigger.yml -f elastic-newstracker/dc-elastic.yml -f cadvisor-influx/dc-cadvisor-influx.yml -f postgres-diskstats/dc-postgres.yml up
 ```
 
 If that worked correctly, you should be able to visit this URL in your browser (if running via docker-machine, replace ``localhost`` with IP of the machine):
@@ -109,10 +111,10 @@ If you want to run juttle programs that use backends and adapters (for
 example, elasticsearch), you provide additional .yml files on the
 docker-compose command line. These are found in the subdirectories
 below this directory. For example, to extend the base configuration to
-add an elasticsearch backend, run:
+add an elasticsearch, influx and postgres backends, run:
 
 ```
-docker-compose -f dc-outrigger.yml -f elastic-newstracker/dc-elastic.yml -f cadvisor-influx/dc-cadvisor-influx.yml up
+docker-compose -f dc-outrigger.yml -f elastic-newstracker/dc-elastic.yml -f cadvisor-influx/dc-cadvisor-influx.yml -f postgres-diskstats/dc-postgres.yml up
 ```
 
 Not every adapter requires additional containers (for example,

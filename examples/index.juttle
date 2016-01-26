@@ -8,7 +8,8 @@ emit
     add_subdir_juttle -subdir "twitter-race" -juttle "twitter" -description "Examples using twitter adapter";
     add_subdir_juttle -subdir "elastic-newstracker" -juttle "index" -description "Examples using elasticsearch adapter";
     add_subdir_juttle -subdir "gmail" -juttle "index" -description "Examples using gmail adapter";
-    add_subdir_juttle -subdir "cadvisor-influx" -juttle "cadvisor-dashboard" -description "Monitor docker containers using cAdvisor and InfluxDB"
+    add_subdir_juttle -subdir "cadvisor-influx" -juttle "cadvisor-dashboard" -description "Monitor docker containers using cAdvisor and InfluxDB";
+    add_subdir_juttle -subdir "postgres-diskstats" -juttle "throughput" -description "Examples joining data from PostgreSQL and file sources";
 )
 | keep program, description
 | view table -title 'Example Juttle Programs' -markdownFields [ 'program' ]

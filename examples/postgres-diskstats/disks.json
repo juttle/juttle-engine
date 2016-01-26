@@ -1,0 +1,5348 @@
+[
+    {
+        "host": "host91.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host85.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host84.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host47.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Reed-854",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host20.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host26.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "FUJITSU_Redwyne-3147",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host23.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host102.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host71.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host38.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Mormont-600",
+        "cluster": "asha"
+    },
+    {
+        "host": "host72.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host102.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "osha"
+    },
+    {
+        "host": "host1.sandor.jutt.le",
+        "subregion": "bearisland",
+        "pool": "redrain",
+        "region": "westeros",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "sandor"
+    },
+    {
+        "host": "host4.mance.jutt.le",
+        "subregion": "tyrosh",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "mance"
+    },
+    {
+        "host": "host124.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host62.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host8.stannis.jutt.le",
+        "subregion": "vale",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "stannis"
+    },
+    {
+        "host": "host34.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Rayder-205",
+        "cluster": "asha"
+    },
+    {
+        "host": "host36.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "osha"
+    },
+    {
+        "host": "host37.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Rayder-205",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host106.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host18.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "darksister",
+        "region": "sothoryos",
+        "diskcount": 7,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host33.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Mormont-600",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host103.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "osha"
+    },
+    {
+        "host": "host33.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host56.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Tyrell-655",
+        "cluster": "osha"
+    },
+    {
+        "host": "host2.margaery.jutt.le",
+        "subregion": "sunsetsea",
+        "pool": "shortsword",
+        "region": "seas",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "margaery"
+    },
+    {
+        "host": "host3.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host29.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host112.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host11.stannis.jutt.le",
+        "subregion": "vale",
+        "pool": "darksister",
+        "region": "westeros",
+        "diskcount": 4,
+        "diskmodel": "SAMSUNG_Baelish-480",
+        "cluster": "stannis"
+    },
+    {
+        "host": "host46.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host28.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host28.jaime.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "jaime"
+    },
+    {
+        "host": "host21.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host5.mance.jutt.le",
+        "subregion": "tyrosh",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "mance"
+    },
+    {
+        "host": "host2.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host101.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host45.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "asha"
+    },
+    {
+        "host": "host95.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host71.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host23.jaime.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "jaime"
+    },
+    {
+        "host": "host81.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "osha"
+    },
+    {
+        "host": "host4.jonsnow.jutt.le",
+        "subregion": "ironislands",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 7,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "jonsnow"
+    },
+    {
+        "host": "host85.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Rayder-205",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host112.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "osha"
+    },
+    {
+        "host": "host45.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host42.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "daario"
+    },
+    {
+        "host": "host12.jorah.jutt.le",
+        "subregion": "ibben",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "jorah"
+    },
+    {
+        "host": "host31.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "osha"
+    },
+    {
+        "host": "host52.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host119.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host81.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host20.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host102.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host33.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "osha"
+    },
+    {
+        "host": "host31.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "asha"
+    },
+    {
+        "host": "host77.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host106.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "osha"
+    },
+    {
+        "host": "host15.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host32.petyr.jutt.le",
+        "subregion": "lorath",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "petyr"
+    },
+    {
+        "host": "host4.viserys.jutt.le",
+        "subregion": "thegift",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "viserys"
+    },
+    {
+        "host": "host51.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "asha"
+    },
+    {
+        "host": "host35.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Rayder-205",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host94.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "TOSHIBA_Mormont-600",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host28.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Reed-854",
+        "cluster": "osha"
+    },
+    {
+        "host": "host104.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host29.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "asha"
+    },
+    {
+        "host": "host33.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "asha"
+    },
+    {
+        "host": "host108.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host51.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Tyrell-655",
+        "cluster": "daario"
+    },
+    {
+        "host": "host44.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host40.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Mormont-600",
+        "cluster": "asha"
+    },
+    {
+        "host": "host89.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "loras"
+    },
+    {
+        "host": "host72.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host45.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host89.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host100.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host93.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "loras"
+    },
+    {
+        "host": "host31.petyr.jutt.le",
+        "subregion": "lorath",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "petyr"
+    },
+    {
+        "host": "host55.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "asha"
+    },
+    {
+        "host": "host62.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Tyrell-655",
+        "cluster": "osha"
+    },
+    {
+        "host": "host118.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host50.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Tyrell-655",
+        "cluster": "daario"
+    },
+    {
+        "host": "host18.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "FUJITSU_Redwyne-3147",
+        "cluster": "osha"
+    },
+    {
+        "host": "host1.gendry.jutt.le",
+        "subregion": "narrowsea",
+        "pool": "shortsword",
+        "region": "seas",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "gendry"
+    },
+    {
+        "host": "host98.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "osha"
+    },
+    {
+        "host": "host11.jaime.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "jaime"
+    },
+    {
+        "host": "host25.jaime.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "jaime"
+    },
+    {
+        "host": "host59.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host115.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host92.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host119.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host47.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host37.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "loras"
+    },
+    {
+        "host": "host13.viserys.jutt.le",
+        "subregion": "thegift",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "viserys"
+    },
+    {
+        "host": "host8.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "asha"
+    },
+    {
+        "host": "host36.gregor.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "gregor"
+    },
+    {
+        "host": "host37.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host31.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host28.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host33.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host48.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Reed-854",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host42.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host47.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host16.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Reed-854",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host90.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "needle",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "DENEVA_Osgrey-048",
+        "cluster": "daario"
+    },
+    {
+        "host": "host62.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Tyrell-655",
+        "cluster": "asha"
+    },
+    {
+        "host": "host79.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host94.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host91.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "osha"
+    },
+    {
+        "host": "host57.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host37.gregor.jutt.le",
+        "subregion": "lys",
+        "pool": "needle",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "gregor"
+    },
+    {
+        "host": "host10.jorah.jutt.le",
+        "subregion": "ibben",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "jorah"
+    },
+    {
+        "host": "host9.stannis.jutt.le",
+        "subregion": "vale",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "stannis"
+    },
+    {
+        "host": "host15.ygritte.jutt.le",
+        "subregion": "castleblack",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "ygritte"
+    },
+    {
+        "host": "host121.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host35.gregor.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "gregor"
+    },
+    {
+        "host": "host107.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host4.jorah.jutt.le",
+        "subregion": "ibben",
+        "pool": "darksister",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "jorah"
+    },
+    {
+        "host": "host54.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Tyrell-655",
+        "cluster": "osha"
+    },
+    {
+        "host": "host94.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "osha"
+    },
+    {
+        "host": "host21.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 7,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host41.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host40.petyr.jutt.le",
+        "subregion": "lorath",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "petyr"
+    },
+    {
+        "host": "host96.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host32.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Rayder-205",
+        "cluster": "asha"
+    },
+    {
+        "host": "host53.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host3.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Rivers-356",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host48.petyr.jutt.le",
+        "subregion": "lorath",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "petyr"
+    },
+    {
+        "host": "host105.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "loras"
+    },
+    {
+        "host": "host27.jaime.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "jaime"
+    },
+    {
+        "host": "host98.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host41.petyr.jutt.le",
+        "subregion": "lorath",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "petyr"
+    },
+    {
+        "host": "host42.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "asha"
+    },
+    {
+        "host": "host91.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host75.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host108.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "loras"
+    },
+    {
+        "host": "host72.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host55.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host19.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "loras"
+    },
+    {
+        "host": "host43.petyr.jutt.le",
+        "subregion": "lorath",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "petyr"
+    },
+    {
+        "host": "host1.viserys.jutt.le",
+        "subregion": "thegift",
+        "pool": "needle",
+        "region": "thewall",
+        "diskcount": 7,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "viserys"
+    },
+    {
+        "host": "host13.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host35.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host108.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "osha"
+    },
+    {
+        "host": "host97.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "loras"
+    },
+    {
+        "host": "host58.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "asha"
+    },
+    {
+        "host": "host28.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host86.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "osha"
+    },
+    {
+        "host": "host86.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host94.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host88.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host39.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host39.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host73.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host80.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "darksister",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host40.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host1.tyrion.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "tyrion"
+    },
+    {
+        "host": "host17.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host34.gregor.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "gregor"
+    },
+    {
+        "host": "host30.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host2.cersei.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "cersei"
+    },
+    {
+        "host": "host80.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host13.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "daario"
+    },
+    {
+        "host": "host96.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host83.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "osha"
+    },
+    {
+        "host": "host78.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host98.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host37.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host31.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Payne-900",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host29.petyr.jutt.le",
+        "subregion": "lorath",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "petyr"
+    },
+    {
+        "host": "host94.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host93.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host117.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host15.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "loras"
+    },
+    {
+        "host": "host107.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "osha"
+    },
+    {
+        "host": "host29.jaime.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "jaime"
+    },
+    {
+        "host": "host77.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "osha"
+    },
+    {
+        "host": "host18.jaime.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "jaime"
+    },
+    {
+        "host": "host13.hodor.jutt.le",
+        "subregion": "casterlyrock",
+        "pool": "redrain",
+        "region": "westeros",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "hodor"
+    },
+    {
+        "host": "host107.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "loras"
+    },
+    {
+        "host": "host14.jaime.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "jaime"
+    },
+    {
+        "host": "host75.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 6,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host11.sandor.jutt.le",
+        "subregion": "bearisland",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "sandor"
+    },
+    {
+        "host": "host20.ygritte.jutt.le",
+        "subregion": "castleblack",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "ygritte"
+    },
+    {
+        "host": "host56.gregor.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "gregor"
+    },
+    {
+        "host": "host5.jorah.jutt.le",
+        "subregion": "ibben",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "jorah"
+    },
+    {
+        "host": "host54.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host56.aegon.jutt.le",
+        "subregion": "volantis",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Payne-900",
+        "cluster": "aegon"
+    },
+    {
+        "host": "host101.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "loras"
+    },
+    {
+        "host": "host57.aegon.jutt.le",
+        "subregion": "volantis",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Payne-900",
+        "cluster": "aegon"
+    },
+    {
+        "host": "host64.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "FUJITSU_Redwyne-3147",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host34.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host39.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Mormont-600",
+        "cluster": "asha"
+    },
+    {
+        "host": "host2.varys.jutt.le",
+        "subregion": "castleblack",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "varys"
+    },
+    {
+        "host": "host74.gregor.jutt.le",
+        "subregion": "lys",
+        "pool": "needle",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "gregor"
+    },
+    {
+        "host": "host92.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host58.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host117.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "osha"
+    },
+    {
+        "host": "host98.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host43.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host39.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host113.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host5.jonsnow.jutt.le",
+        "subregion": "ironislands",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "jonsnow"
+    },
+    {
+        "host": "host71.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host17.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "loras"
+    },
+    {
+        "host": "host110.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host5.hodor.jutt.le",
+        "subregion": "casterlyrock",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "hodor"
+    },
+    {
+        "host": "host87.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Mormont-600",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host20.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "asha"
+    },
+    {
+        "host": "host91.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host104.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "osha"
+    },
+    {
+        "host": "host39.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "daario"
+    },
+    {
+        "host": "host82.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "osha"
+    },
+    {
+        "host": "host31.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Mormont-600",
+        "cluster": "loras"
+    },
+    {
+        "host": "host9.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host102.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host18.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host77.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "needle",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host92.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host113.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "osha"
+    },
+    {
+        "host": "host70.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Tyrell-655",
+        "cluster": "osha"
+    },
+    {
+        "host": "host80.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host101.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host95.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host6.jorah.jutt.le",
+        "subregion": "ibben",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "jorah"
+    },
+    {
+        "host": "host27.petyr.jutt.le",
+        "subregion": "lorath",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "petyr"
+    },
+    {
+        "host": "host48.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Tyrell-655",
+        "cluster": "daario"
+    },
+    {
+        "host": "host103.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host3.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Payne-900",
+        "cluster": "osha"
+    },
+    {
+        "host": "host107.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host8.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host109.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "osha"
+    },
+    {
+        "host": "host73.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Tyrell-655",
+        "cluster": "osha"
+    },
+    {
+        "host": "host56.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "asha"
+    },
+    {
+        "host": "host19.hodor.jutt.le",
+        "subregion": "casterlyrock",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "hodor"
+    },
+    {
+        "host": "host91.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host16.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host21.hodor.jutt.le",
+        "subregion": "casterlyrock",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "hodor"
+    },
+    {
+        "host": "host35.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host108.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host87.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "osha"
+    },
+    {
+        "host": "host48.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host24.petyr.jutt.le",
+        "subregion": "lorath",
+        "pool": "darksister",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "petyr"
+    },
+    {
+        "host": "host3.melisandre.jutt.le",
+        "subregion": "beyondthewall",
+        "pool": "shortsword",
+        "region": "north",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "melisandre"
+    },
+    {
+        "host": "host41.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Mormont-600",
+        "cluster": "asha"
+    },
+    {
+        "host": "host94.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 11,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "loras"
+    },
+    {
+        "host": "host79.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 7,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host81.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host7.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host47.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "asha"
+    },
+    {
+        "host": "host32.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "loras"
+    },
+    {
+        "host": "host57.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Tyrell-655",
+        "cluster": "osha"
+    },
+    {
+        "host": "host89.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host30.jaime.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Rayder-205",
+        "cluster": "jaime"
+    },
+    {
+        "host": "host7.varys.jutt.le",
+        "subregion": "castleblack",
+        "pool": "darksister",
+        "region": "thewall",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "varys"
+    },
+    {
+        "host": "host26.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Redfort-603",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host55.aegon.jutt.le",
+        "subregion": "volantis",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "aegon"
+    },
+    {
+        "host": "host46.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "daario"
+    },
+    {
+        "host": "host20.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host79.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Mormont-600",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host6.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host75.gregor.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "gregor"
+    },
+    {
+        "host": "host116.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host99.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host95.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host112.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "daario"
+    },
+    {
+        "host": "host122.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host109.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "loras"
+    },
+    {
+        "host": "host8.viserys.jutt.le",
+        "subregion": "thegift",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "viserys"
+    },
+    {
+        "host": "host118.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "osha"
+    },
+    {
+        "host": "host16.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Tyrell-655",
+        "cluster": "asha"
+    },
+    {
+        "host": "host5.cersei.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "cersei"
+    },
+    {
+        "host": "host113.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host14.mance.jutt.le",
+        "subregion": "tyrosh",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "mance"
+    },
+    {
+        "host": "host17.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host97.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host28.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host100.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "osha"
+    },
+    {
+        "host": "host111.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host22.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "asha"
+    },
+    {
+        "host": "host1.jonsnow.jutt.le",
+        "subregion": "ironislands",
+        "pool": "darksister",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "jonsnow"
+    },
+    {
+        "host": "host21.ygritte.jutt.le",
+        "subregion": "castleblack",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "ygritte"
+    },
+    {
+        "host": "host41.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host99.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host20.hodor.jutt.le",
+        "subregion": "casterlyrock",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "hodor"
+    },
+    {
+        "host": "host56.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host13.mance.jutt.le",
+        "subregion": "tyrosh",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "mance"
+    },
+    {
+        "host": "host59.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "asha"
+    },
+    {
+        "host": "host113.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "TOSHIBA_Payne-900",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host86.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host12.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host105.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host16.jorah.jutt.le",
+        "subregion": "ibben",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "jorah"
+    },
+    {
+        "host": "host15.jorah.jutt.le",
+        "subregion": "ibben",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "jorah"
+    },
+    {
+        "host": "host92.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host89.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host54.aegon.jutt.le",
+        "subregion": "volantis",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "aegon"
+    },
+    {
+        "host": "host106.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "loras"
+    },
+    {
+        "host": "host116.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host98.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "darksister",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SAMSUNG_Baelish-480",
+        "cluster": "loras"
+    },
+    {
+        "host": "host3.varys.jutt.le",
+        "subregion": "castleblack",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "varys"
+    },
+    {
+        "host": "host14.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host8.jorah.jutt.le",
+        "subregion": "ibben",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "jorah"
+    },
+    {
+        "host": "host110.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host94.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host32.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host95.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host92.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "loras"
+    },
+    {
+        "host": "host92.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "TOSHIBA_Mormont-600",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host16.ygritte.jutt.le",
+        "subregion": "castleblack",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "ygritte"
+    },
+    {
+        "host": "host10.sandor.jutt.le",
+        "subregion": "bearisland",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "sandor"
+    },
+    {
+        "host": "host78.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host110.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "osha"
+    },
+    {
+        "host": "host3.cersei.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "cersei"
+    },
+    {
+        "host": "host32.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host37.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "daario"
+    },
+    {
+        "host": "host101.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host49.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 7,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host11.viserys.jutt.le",
+        "subregion": "thegift",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "viserys"
+    },
+    {
+        "host": "host32.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Mormont-600",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host17.jorah.jutt.le",
+        "subregion": "ibben",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "jorah"
+    },
+    {
+        "host": "host22.jaime.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "jaime"
+    },
+    {
+        "host": "host59.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host91.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "loras"
+    },
+    {
+        "host": "host1.theon.jutt.le",
+        "subregion": "stormsend",
+        "pool": "needle",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "theon"
+    },
+    {
+        "host": "host19.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 7,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host2.viserys.jutt.le",
+        "subregion": "thegift",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "viserys"
+    },
+    {
+        "host": "host19.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "asha"
+    },
+    {
+        "host": "host50.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Rayder-205",
+        "cluster": "asha"
+    },
+    {
+        "host": "host83.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host13.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "redrain",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host24.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host37.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host33.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host19.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host88.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "osha"
+    },
+    {
+        "host": "host76.gregor.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "gregor"
+    },
+    {
+        "host": "host86.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host34.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host90.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "darksister",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SAMSUNG_Baelish-480",
+        "cluster": "osha"
+    },
+    {
+        "host": "host7.jorah.jutt.le",
+        "subregion": "ibben",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "jorah"
+    },
+    {
+        "host": "host25.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host105.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host71.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host78.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "osha"
+    },
+    {
+        "host": "host24.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host48.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "FUJITSU_Redwyne-3147",
+        "cluster": "osha"
+    },
+    {
+        "host": "host5.viserys.jutt.le",
+        "subregion": "thegift",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "viserys"
+    },
+    {
+        "host": "host23.petyr.jutt.le",
+        "subregion": "lorath",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "petyr"
+    },
+    {
+        "host": "host29.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host45.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host80.gregor.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "gregor"
+    },
+    {
+        "host": "host3.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host33.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "daario"
+    },
+    {
+        "host": "host24.ygritte.jutt.le",
+        "subregion": "castleblack",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "ygritte"
+    },
+    {
+        "host": "host9.sandor.jutt.le",
+        "subregion": "bearisland",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "sandor"
+    },
+    {
+        "host": "host82.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host119.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host107.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host22.ygritte.jutt.le",
+        "subregion": "castleblack",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "ygritte"
+    },
+    {
+        "host": "host79.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "osha"
+    },
+    {
+        "host": "host50.aegon.jutt.le",
+        "subregion": "volantis",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "aegon"
+    },
+    {
+        "host": "host73.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 7,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host24.jaime.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "jaime"
+    },
+    {
+        "host": "host109.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host6.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "redrain",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "asha"
+    },
+    {
+        "host": "host25.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Reed-854",
+        "cluster": "osha"
+    },
+    {
+        "host": "host23.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host103.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "darksister",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SAMSUNG_Baelish-480",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host91.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host15.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host17.hodor.jutt.le",
+        "subregion": "casterlyrock",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "hodor"
+    },
+    {
+        "host": "host36.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "daario"
+    },
+    {
+        "host": "host19.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tarly-6000",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host38.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host114.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host45.petyr.jutt.le",
+        "subregion": "lorath",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Rayder-205",
+        "cluster": "petyr"
+    },
+    {
+        "host": "host34.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host52.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Rayder-205",
+        "cluster": "asha"
+    },
+    {
+        "host": "host11.mance.jutt.le",
+        "subregion": "tyrosh",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "mance"
+    },
+    {
+        "host": "host51.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host12.mance.jutt.le",
+        "subregion": "tyrosh",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "mance"
+    },
+    {
+        "host": "host22.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host51.aegon.jutt.le",
+        "subregion": "volantis",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "aegon"
+    },
+    {
+        "host": "host104.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host13.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Tyrell-655",
+        "cluster": "asha"
+    },
+    {
+        "host": "host119.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "osha"
+    },
+    {
+        "host": "host28.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "FUJITSU_Redwyne-3147",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host12.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Tyrell-655",
+        "cluster": "asha"
+    },
+    {
+        "host": "host98.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host46.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host15.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "osha"
+    },
+    {
+        "host": "host34.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host106.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host72.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "osha"
+    },
+    {
+        "host": "host105.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host93.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "osha"
+    },
+    {
+        "host": "host53.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Reed-854",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host12.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "daario"
+    },
+    {
+        "host": "host44.petyr.jutt.le",
+        "subregion": "lorath",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "petyr"
+    },
+    {
+        "host": "host33.gregor.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "gregor"
+    },
+    {
+        "host": "host26.jaime.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "jaime"
+    },
+    {
+        "host": "host15.jaime.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "jaime"
+    },
+    {
+        "host": "host59.gregor.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "gregor"
+    },
+    {
+        "host": "host17.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "asha"
+    },
+    {
+        "host": "host36.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host13.jaime.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 7,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "jaime"
+    },
+    {
+        "host": "host25.petyr.jutt.le",
+        "subregion": "lorath",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "petyr"
+    },
+    {
+        "host": "host31.jaime.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "jaime"
+    },
+    {
+        "host": "host87.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host32.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host11.hodor.jutt.le",
+        "subregion": "casterlyrock",
+        "pool": "redrain",
+        "region": "westeros",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "hodor"
+    },
+    {
+        "host": "host6.mance.jutt.le",
+        "subregion": "tyrosh",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "mance"
+    },
+    {
+        "host": "host49.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "darksister",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host109.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host81.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host36.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host40.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host87.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "needle",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host2.jonsnow.jutt.le",
+        "subregion": "ironislands",
+        "pool": "darksister",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "jonsnow"
+    },
+    {
+        "host": "host38.gregor.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "gregor"
+    },
+    {
+        "host": "host101.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "osha"
+    },
+    {
+        "host": "host111.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "loras"
+    },
+    {
+        "host": "host36.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host23.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host11.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host117.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host115.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host35.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Mormont-600",
+        "cluster": "daario"
+    },
+    {
+        "host": "host8.sandor.jutt.le",
+        "subregion": "bearisland",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "sandor"
+    },
+    {
+        "host": "host97.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host86.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host89.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "osha"
+    },
+    {
+        "host": "host110.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "loras"
+    },
+    {
+        "host": "host18.hodor.jutt.le",
+        "subregion": "casterlyrock",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "hodor"
+    },
+    {
+        "host": "host23.ygritte.jutt.le",
+        "subregion": "castleblack",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "ygritte"
+    },
+    {
+        "host": "host37.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Mormont-600",
+        "cluster": "asha"
+    },
+    {
+        "host": "host59.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Tyrell-655",
+        "cluster": "osha"
+    },
+    {
+        "host": "host10.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host99.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host74.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host44.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Rayder-205",
+        "cluster": "asha"
+    },
+    {
+        "host": "host1.gilly.jutt.le",
+        "subregion": "highgarden",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "gilly"
+    },
+    {
+        "host": "host18.ygritte.jutt.le",
+        "subregion": "castleblack",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "ygritte"
+    },
+    {
+        "host": "host35.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "osha"
+    },
+    {
+        "host": "host123.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host54.gregor.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 7,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "gregor"
+    },
+    {
+        "host": "host1.margaery.jutt.le",
+        "subregion": "sunsetsea",
+        "pool": "shortsword",
+        "region": "seas",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "margaery"
+    },
+    {
+        "host": "host35.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host6.viserys.jutt.le",
+        "subregion": "thegift",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "viserys"
+    },
+    {
+        "host": "host39.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Bolton-2300",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host27.lysa.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "lysa"
+    },
+    {
+        "host": "host28.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host83.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host33.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host74.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host99.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "loras"
+    },
+    {
+        "host": "host26.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Torrent-656",
+        "cluster": "osha"
+    },
+    {
+        "host": "host96.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host103.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "darksister",
+        "region": "sothoryos",
+        "diskcount": 7,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "loras"
+    },
+    {
+        "host": "host27.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "asha"
+    },
+    {
+        "host": "host97.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "darksister",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SAMSUNG_Baelish-480",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host95.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "darksister",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SAMSUNG_Baelish-480",
+        "cluster": "osha"
+    },
+    {
+        "host": "host10.arya.jutt.le",
+        "subregion": "valyria",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "arya"
+    },
+    {
+        "host": "host17.jaime.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "jaime"
+    },
+    {
+        "host": "host6.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host9.ygritte.jutt.le",
+        "subregion": "castleblack",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "ygritte"
+    },
+    {
+        "host": "host58.gregor.jutt.le",
+        "subregion": "lys",
+        "pool": "needle",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "gregor"
+    },
+    {
+        "host": "host22.petyr.jutt.le",
+        "subregion": "lorath",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "petyr"
+    },
+    {
+        "host": "host34.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "daario"
+    },
+    {
+        "host": "host38.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host53.gregor.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "gregor"
+    },
+    {
+        "host": "host101.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host93.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host110.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host111.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host77.gregor.jutt.le",
+        "subregion": "lys",
+        "pool": "darksister",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "gregor"
+    },
+    {
+        "host": "host5.stannis.jutt.le",
+        "subregion": "vale",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "stannis"
+    },
+    {
+        "host": "host21.jaime.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "jaime"
+    },
+    {
+        "host": "host49.aegon.jutt.le",
+        "subregion": "volantis",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "aegon"
+    },
+    {
+        "host": "host37.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host97.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "osha"
+    },
+    {
+        "host": "host111.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "darksister",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SAMSUNG_Baelish-480",
+        "cluster": "osha"
+    },
+    {
+        "host": "host111.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "needle",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SAMSUNG_Baelish-480",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host87.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host2.mance.jutt.le",
+        "subregion": "tyrosh",
+        "pool": "redrain",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "mance"
+    },
+    {
+        "host": "host43.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "asha"
+    },
+    {
+        "host": "host8.ygritte.jutt.le",
+        "subregion": "castleblack",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "ygritte"
+    },
+    {
+        "host": "host70.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 7,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "asha"
+    },
+    {
+        "host": "host37.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host70.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host36.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host12.viserys.jutt.le",
+        "subregion": "thegift",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "viserys"
+    },
+    {
+        "host": "host12.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "loras"
+    },
+    {
+        "host": "host36.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host84.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host13.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "loras"
+    },
+    {
+        "host": "host14.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Reed-854",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host16.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Mormont-600",
+        "cluster": "loras"
+    },
+    {
+        "host": "host42.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host33.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "loras"
+    },
+    {
+        "host": "host14.jorah.jutt.le",
+        "subregion": "ibben",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jorah"
+    },
+    {
+        "host": "host7.ygritte.jutt.le",
+        "subregion": "castleblack",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "ygritte"
+    },
+    {
+        "host": "host79.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "darksister",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Tyrell-655",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host47.petyr.jutt.le",
+        "subregion": "lorath",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "petyr"
+    },
+    {
+        "host": "host4.cersei.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "cersei"
+    },
+    {
+        "host": "host34.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Mormont-600",
+        "cluster": "loras"
+    },
+    {
+        "host": "host40.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host99.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host96.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "osha"
+    },
+    {
+        "host": "host121.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host14.arya.jutt.le",
+        "subregion": "valyria",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "arya"
+    },
+    {
+        "host": "host100.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "loras"
+    },
+    {
+        "host": "host46.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host114.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host44.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host78.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host36.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "asha"
+    },
+    {
+        "host": "host16.hodor.jutt.le",
+        "subregion": "casterlyrock",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "hodor"
+    },
+    {
+        "host": "host3.mance.jutt.le",
+        "subregion": "tyrosh",
+        "pool": "redrain",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "mance"
+    },
+    {
+        "host": "host36.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Mormont-600",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host39.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host10.stannis.jutt.le",
+        "subregion": "vale",
+        "pool": "darksister",
+        "region": "westeros",
+        "diskcount": 4,
+        "diskmodel": "SAMSUNG_Baelish-480",
+        "cluster": "stannis"
+    },
+    {
+        "host": "host25.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host80.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host93.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host38.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host7.viserys.jutt.le",
+        "subregion": "thegift",
+        "pool": "darksister",
+        "region": "thewall",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "viserys"
+    },
+    {
+        "host": "host46.petyr.jutt.le",
+        "subregion": "lorath",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "petyr"
+    },
+    {
+        "host": "host6.hodor.jutt.le",
+        "subregion": "casterlyrock",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "hodor"
+    },
+    {
+        "host": "host5.ygritte.jutt.le",
+        "subregion": "castleblack",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "ygritte"
+    },
+    {
+        "host": "host45.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "daario"
+    },
+    {
+        "host": "host84.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host4.rickon.jutt.le",
+        "subregion": "ibben",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "rickon"
+    },
+    {
+        "host": "host102.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host64.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "FUJITSU_Redwyne-3147",
+        "cluster": "osha"
+    },
+    {
+        "host": "host1.varys.jutt.le",
+        "subregion": "castleblack",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 7,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "varys"
+    },
+    {
+        "host": "host3.jonsnow.jutt.le",
+        "subregion": "ironislands",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "jonsnow"
+    },
+    {
+        "host": "host35.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Mormont-600",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host19.jaime.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "jaime"
+    },
+    {
+        "host": "host52.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host97.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host82.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host48.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host57.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "asha"
+    },
+    {
+        "host": "host13.arya.jutt.le",
+        "subregion": "valyria",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "arya"
+    },
+    {
+        "host": "host6.jonsnow.jutt.le",
+        "subregion": "ironislands",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "jonsnow"
+    },
+    {
+        "host": "host4.ygritte.jutt.le",
+        "subregion": "castleblack",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "ygritte"
+    },
+    {
+        "host": "host9.mance.jutt.le",
+        "subregion": "tyrosh",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "mance"
+    },
+    {
+        "host": "host115.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 11,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host32.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Mormont-600",
+        "cluster": "osha"
+    },
+    {
+        "host": "host104.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "loras"
+    },
+    {
+        "host": "host12.sandor.jutt.le",
+        "subregion": "bearisland",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "sandor"
+    },
+    {
+        "host": "host3.viserys.jutt.le",
+        "subregion": "thegift",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "viserys"
+    },
+    {
+        "host": "host4.varys.jutt.le",
+        "subregion": "castleblack",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 6,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "varys"
+    },
+    {
+        "host": "host25.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 7,
+        "diskmodel": "WDC_Greyjoy-3000",
+        "cluster": "asha"
+    },
+    {
+        "host": "host115.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "osha"
+    },
+    {
+        "host": "host109.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host35.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Rayder-205",
+        "cluster": "asha"
+    },
+    {
+        "host": "host105.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "osha"
+    },
+    {
+        "host": "host30.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "asha"
+    },
+    {
+        "host": "host3.ygritte.jutt.le",
+        "subregion": "castleblack",
+        "pool": "shortsword",
+        "region": "thewall",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "ygritte"
+    },
+    {
+        "host": "host34.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Frey-2600",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host12.arya.jutt.le",
+        "subregion": "valyria",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "arya"
+    },
+    {
+        "host": "host21.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host112.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host78.gregor.jutt.le",
+        "subregion": "lys",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "gregor"
+    },
+    {
+        "host": "host12.hodor.jutt.le",
+        "subregion": "casterlyrock",
+        "pool": "redrain",
+        "region": "westeros",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Reed-854",
+        "cluster": "hodor"
+    },
+    {
+        "host": "host90.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host28.gregor.jutt.le",
+        "subregion": "lys",
+        "pool": "needle",
+        "region": "essos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Reed-854",
+        "cluster": "gregor"
+    },
+    {
+        "host": "host96.jeyne.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "jeyne"
+    },
+    {
+        "host": "host1.cersei.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "cersei"
+    },
+    {
+        "host": "host96.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "loras"
+    },
+    {
+        "host": "host32.jaime.jutt.le",
+        "subregion": "dome",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "jaime"
+    },
+    {
+        "host": "host20.osha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "redrain",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "FUJITSU_Redwyne-3147",
+        "cluster": "osha"
+    },
+    {
+        "host": "host11.samwell.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "samwell"
+    },
+    {
+        "host": "host1.melisandre.jutt.le",
+        "subregion": "beyondthewall",
+        "pool": "shortsword",
+        "region": "north",
+        "diskcount": 8,
+        "diskmodel": "WDC_Arryn-3000",
+        "cluster": "melisandre"
+    },
+    {
+        "host": "host28.asha.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Rayder-205",
+        "cluster": "asha"
+    },
+    {
+        "host": "host104.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "daario"
+    },
+    {
+        "host": "host6.stannis.jutt.le",
+        "subregion": "vale",
+        "pool": "shortsword",
+        "region": "westeros",
+        "diskcount": 8,
+        "diskmodel": "WDC_Tully-5000",
+        "cluster": "stannis"
+    },
+    {
+        "host": "host11.arya.jutt.le",
+        "subregion": "valyria",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "arya"
+    },
+    {
+        "host": "host48.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "redrain",
+        "region": "essos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host90.loras.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SAMSUNG_Stark-480",
+        "cluster": "loras"
+    },
+    {
+        "host": "host41.myrcella.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "myrcella"
+    },
+    {
+        "host": "host80.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 4,
+        "diskmodel": "FUJITSU_Redwyne-3147",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host100.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "darksister",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Rayder-205",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host32.sansa.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 8,
+        "diskmodel": "TOSHIBA_Mormont-600",
+        "cluster": "sansa"
+    },
+    {
+        "host": "host49.catelyn.jutt.le",
+        "subregion": "vaesdothrak",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "catelyn"
+    },
+    {
+        "host": "host116.joffrey.jutt.le",
+        "subregion": "summerisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "SEAGATE_Lannister-640",
+        "cluster": "joffrey"
+    },
+    {
+        "host": "host118.daario.jutt.le",
+        "subregion": "basiliskisles",
+        "pool": "shortsword",
+        "region": "sothoryos",
+        "diskcount": 12,
+        "diskmodel": "WDC_Seaworth-1000",
+        "cluster": "daario"
+    },
+    {
+        "host": "host51.gregor.jutt.le",
+        "subregion": "lys",
+        "pool": "needle",
+        "region": "essos",
+        "diskcount": 4,
+        "diskmodel": "SEAGATE_Selmy-6855",
+        "cluster": "gregor"
+    },
+    {
+        "host": "host2.rickon.jutt.le",
+        "subregion": "ibben",
+        "pool": "shortsword",
+        "region": "essos",
+        "diskcount": 8,
+        "diskmodel": "SEAGATE_Baratheon-204",
+        "cluster": "rickon"
+    }
+]
