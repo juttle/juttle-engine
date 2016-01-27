@@ -11,7 +11,7 @@ influxdb:
     - PRE_CREATE_DB=cadvisor
 cadvisor:
   image: google/cadvisor-canary:latest
-  command: -storage_driver=influxdb -storage_driver_db=cadvisor -storage_driver_host=influxdb:8086 -logtostderr=true -v=9 -stderrthreshold=9 -storage_driver_buffer_duration=1m
+  command: -storage_driver=influxdb -storage_driver_db=cadvisor -storage_driver_host=influxdb:8086 -logtostderr=true -v=9 -stderrthreshold=9 -storage_driver_buffer_duration=2s
   ports:
     - "8081:8080"
   volumes:
