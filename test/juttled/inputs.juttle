@@ -1,0 +1,3 @@
+input inval: text;
+
+emit -from :0: -limit 1 | put foo=inval | view text;

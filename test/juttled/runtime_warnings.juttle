@@ -1,0 +1,1 @@
+emit -from :0: -limit 1 | sort nobody

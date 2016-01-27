@@ -29,6 +29,54 @@ function run_path(path) {
         });
 }
 
+// The syntax error info object for the file
+// 'has-syntax-error.juttle'. Used in multiple places.
+var has_syntax_error_info_obj = {
+    bundle: {
+        modules: {},
+        program: 'emit -every :0.33s: -limit 5\n    | batch -every :1s:\n    | batch -every :1s:\n    | puty foo="bar"\n    | view table -display.progressive true\n'
+    },
+    err: {
+        code: 'JUTTLE-SYNTAX-ERROR-WITH-EXPECTED',
+        info: {
+            expected: [
+                {
+                    description: '";"',
+                    type: 'literal',
+                    value: ';'
+                },
+                {
+                    description: '"|"',
+                    type: 'literal',
+                    value: '|'
+                },
+                {
+                    description: 'option',
+                    type: 'other'
+                }
+            ],
+            expectedDescription: '";", "|" or option',
+            found: 'f',
+            foundDescription: '"f"',
+            location: {
+                end: {
+                    column: 13,
+                    line: 4,
+                    offset: 89
+                },
+                filename: 'main',
+                start: {
+                    column: 12,
+                    line: 4,
+                    offset: 88
+                }
+            }
+        },
+        message: 'Expected ";", "|" or option but "f" found.'
+    }
+};
+
+
 // Remaining tests to create:
 //   - Bundling with modules
 //   - Running a program error cases. all should return reasonable error
@@ -245,50 +293,7 @@ describe('Juttled Tests', function() {
                 expect(response).to.have.json({
                     code: 'JS-JUTTLE-ERROR',
                     message: 'Error from juttle compiler or runtime',
-                    info: {
-                        bundle: {
-                            modules: {},
-                            program: 'emit -every :0.33s: -limit 5\n    | batch -every :1s:\n    | batch -every :1s:\n    | puty foo="bar"\n    | view table -display.progressive true\n'
-                        },
-                        err: {
-                            code: 'JUTTLE-SYNTAX-ERROR-WITH-EXPECTED',
-                            info: {
-                                expected: [
-                                    {
-                                        description: '";"',
-                                        type: 'literal',
-                                        value: ';'
-                                    },
-                                    {
-                                        description: '"|"',
-                                        type: 'literal',
-                                        value: '|'
-                                    },
-                                    {
-                                        description: 'option',
-                                        type: 'other'
-                                    }
-                                ],
-                                expectedDescription: '";", "|" or option',
-                                found: 'f',
-                                foundDescription: '"f"',
-                                location: {
-                                    end: {
-                                        column: 13,
-                                        line: 4,
-                                        offset: 89
-                                    },
-                                    filename: 'main',
-                                    start: {
-                                        column: 12,
-                                        line: 4,
-                                        offset: 88
-                                    }
-                                }
-                            },
-                            message: 'Expected ";", "|" or option but "f" found.'
-                        }
-                    }
+                    info: has_syntax_error_info_obj
                 });
                 return chakram.wait();
             });
@@ -540,7 +545,7 @@ describe('Juttled Tests', function() {
         });
     });
 
-    describe('Run a Program Tests', function() {
+    describe('Run a Program From a Bundle Tests', function() {
 
         describe('Invalid Cases', function() {
             it('Empty body', function() {
@@ -753,6 +758,200 @@ describe('Juttled Tests', function() {
                 return expect(response).to.have.status(200);
             });
         });
+    });
+
+    describe('Run a Program From a Path Tests', function() {
+
+        describe('Invalid Cases', function() {
+            it('From a path that doesn\'t exist', function() {
+                var response = chakram.post(jd + '/jobs/', {path: 'no-such-path.juttle'});
+                expect(response).to.have.status(404);
+                expect(response).to.have.json({
+                    code: 'JS-FILE-NOT-FOUND-ERROR',
+                    message: 'No such file: no-such-path.juttle',
+                    info: {
+                        path: 'no-such-path.juttle'
+                    }
+                });
+                return chakram.wait();
+            });
+
+            it('From a path that has juttle compile errors', function() {
+                var response = chakram.post(jd + '/jobs/', {path: 'has-syntax-error.juttle'});
+                expect(response).to.have.status(400);
+                expect(response).to.have.json({
+                    code: 'JS-JUTTLE-ERROR',
+                    message: 'Error from juttle compiler or runtime',
+                    info: has_syntax_error_info_obj
+                });
+                return chakram.wait();
+            });
+
+            it('From a path where the timeout triggers', function() {
+                var response = chakram.post(jd + '/jobs/', {path: 'forever.juttle', timeout: 2000});
+                expect(response).to.have.status(408);
+                expect(response).to.have.json({
+                    code: 'JS-TIMEOUT-ERROR',
+                    message: 'Program timed out after 2000 ms',
+                    info: {timeout: 2000}
+                });
+                return chakram.wait();
+            });
+        });
+
+        describe('Valid Cases', function() {
+            it('Simple program', function() {
+                var response = chakram.post(jd + '/jobs/', {path: 'simple.juttle'});
+                expect(response).to.have.status(200);
+                expect(response).to.have.json({
+                    errors: [],
+                    warnings: [],
+                    output: {
+                        sink0: {
+                            data: [{type: 'mark', 'time:date': '1970-01-01T00:00:00.000Z'},
+                                   {type: 'point', point: {'time:date': '1970-01-01T00:00:00.000Z'}},
+                                   {type: 'point', point: {'time:date': '1970-01-01T00:00:01.000Z'}},
+                                   {type: 'mark', 'time:date': '1970-01-01T00:00:02.000Z'},
+                                   {type: 'point', point: {'time:date': '1970-01-01T00:00:02.000Z'}},
+                                   {type: 'mark', 'time:date': '1970-01-01T00:00:04.000Z'}],
+                            options: {
+                                _jut_time_bounds: [],
+                                format: 'raw'
+                            },
+                            type: 'text'
+                        },
+                        sink1: {
+                            data: [{type: 'mark', 'time:date': '1970-01-01T00:00:00.000Z'},
+                                   {type: 'point', point: {'time:date': '1970-01-01T00:00:00.000Z'}},
+                                   {type: 'point', point: {'time:date': '1970-01-01T00:00:01.000Z'}},
+                                   {type: 'mark', 'time:date': '1970-01-01T00:00:02.000Z'},
+                                   {type: 'point', point: {'time:date': '1970-01-01T00:00:02.000Z'}},
+                                   {type: 'mark', 'time:date': '1970-01-01T00:00:04.000Z'}],
+                            options: {
+                                _jut_time_bounds: [],
+                                title: 'My Table'
+                            },
+                            type: 'table'
+                        }
+                    }
+                });
+
+                return chakram.wait();
+            });
+
+            it('Program w/ modules', function() {
+                var response = chakram.post(jd + '/jobs/', {path: 'modules.juttle'});
+                expect(response).to.have.status(200);
+                expect(response).to.have.json({
+                    errors: [],
+                    warnings: [],
+                    output: {
+                        sink0: {
+                            data: [{type: 'point', point: {foo: 'bar', 'time:date': '1970-01-01T00:00:00.000Z'}}],
+                            options: {
+                                _jut_time_bounds: []
+                            },
+                            type: 'text'
+                        }
+                    }
+                });
+
+                return chakram.wait();
+            });
+
+            it('Program w/ inputs', function() {
+                var response = chakram.post(jd + '/jobs/', {
+                    path: 'inputs.juttle',
+                    inputs: JSDP.serialize({
+                        inval: 'baz'
+                    }, {
+                        toObject: true
+                    })
+                });
+                expect(response).to.have.status(200);
+                expect(response).to.have.json({
+                    errors: [],
+                    warnings: [],
+                    output: {
+                        sink0: {
+                            data: [{type: 'point', point: {foo: 'baz', 'time:date': '1970-01-01T00:00:00.000Z'}}],
+                            options: {
+                                _jut_time_bounds: []
+                            },
+                            type: 'text'
+                        }
+                    }
+                });
+
+                return chakram.wait();
+            });
+
+            it('Program with runtime errors', function() {
+                var response = chakram.post(jd + '/jobs/', {path: 'runtime_errors.juttle'});
+                expect(response).to.have.status(200);
+                expect(response).to.have.json({
+                    errors: [{
+                        code: 'RT-INTERNAL-ERROR',
+                        info: {
+                            error: 'Error: ENOENT: no such file or directory, open \'nobody\'',
+                            location: {
+                                end: {column: 1, line: 2, offset: 25},
+                                filename: 'main',
+                                start: {column: 1, line: 1, offset: 0}
+                            },
+                            procName: 'read-file'
+                        },
+                        message: 'Error: internal error Error: ENOENT: no such file or directory, open \'nobody\''
+                    }],
+                    warnings: [],
+                    output: {
+                        sink0: {
+                            data: [],
+                            options: {
+                                _jut_time_bounds: [{from: null, last: null, to: null}]
+                            },
+                            type: 'table'
+                        }
+                    }
+                });
+
+                return chakram.wait();
+
+            });
+
+            it('Program with runtime warnings', function() {
+                var response = chakram.post(jd + '/jobs/', {path: 'runtime_warnings.juttle'});
+                expect(response).to.have.status(200);
+                expect(response).to.have.json({
+                    errors: [],
+                    warnings: [{
+                        code: 'RT-FIELD-NOT-FOUND',
+                        info: {
+                            field: 'nobody',
+                            location: {
+                                end: {column: 1, line: 2, offset: 38},
+                                filename: 'main',
+                                start: {column: 27, line: 1, offset: 26}
+                            },
+                            procName: 'sort'
+                        },
+                        message: 'Warning: field "nobody" does not exist'
+                    }],
+                    output: {
+                        sink0: {
+                            data: [{type: 'point', point: {}}],
+                            options: {
+                                _jut_time_bounds: []
+                            },
+                            type: 'table'
+                        }
+                    }
+                });
+
+                return chakram.wait();
+            });
+        });
+
     });
 
     describe('Observer Tests', function() {

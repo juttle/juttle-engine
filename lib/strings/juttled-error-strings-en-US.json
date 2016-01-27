@@ -8,6 +8,7 @@
         "JS-FILE-ACCESS-ERROR": "Can not read file: {{info.path}}",
         "JS-DIR-NOT-FOUND-ERROR": "No such directory: {{info.path}}",
         "JS-DIR-ACCESS-ERROR": "Can not read directory: {{info.path}}",
-        "JS-INVALID-PATH-ERROR": "'..' only allow at end of path: {{info.path}}"
+        "JS-INVALID-PATH-ERROR": "'..' only allow at end of path: {{info.path}}",
+        "JS-TIMEOUT-ERROR": "Program timed out after {{info.timeout}} ms"
     }
 }

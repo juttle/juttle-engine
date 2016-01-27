@@ -27,6 +27,10 @@ The set of errors is defined in ``lib/errors.js``, and includes:
 |JS-JOB-NOT-FOUND-ERROR  | The specified job id did not map to any currently running program                             | No such job: *jobID*                     |
 |JS-FILE-NOT-FOUND-ERROR | The specified path was not found, or was not a regular file                                   | No such file: *path*                     |
 |JS-FILE-ACCESS-ERROR  | The specified path exists, but could not be read                                              | Can not read file: *path*                | This error should only occur when an underlying error is not normally handled. The info object contains additional information on the underlying error.
+|JS-DIR-NOT-FOUND-ERROR| The specified directory was not found                                                         | No such directory: *dir*                |
+|JS-DIR-ACCESS-ERROR   | The specified directory exists, but its contents could not be read                            | Can not read directory: *dir*            |
+|JS-INVALID-PATH-ERROR | The specified path contained illegal components such as ".."                                  | '..' only allowed at end of path: *path*
+|JS-TIMEOUT-ERROR      | A program was run via the immediate jobs endpoint and reached the configured timeout          | Program timed out after *timeout* ms     |
 
 ###Observers
 The API allows for *observer IDs* that can be used to tie together multiple invocations of a single program. The idea is that a client could subscribe to a long-lived observer ID. When programs are notified by other clients tagged with the same observer ID, subscribers are notified with a new job id. In turn, the client could subscribe to the job and receive the program's output.
@@ -65,7 +69,9 @@ GET /api/v0/jobs HTTP/1.1
 
 ###POST /api/v0/jobs
 
-Returns the jobID of the job created by running the bundle included in the POST body, in conjunction with a set of input values.  This is how outrigger "runs" a program.  If an observer id is specified in the bundle, all websockets listening on the indicated observer id will be notified of the new job invocation.
+Returns the jobID of the job created by running the program included in the POST body, in conjunction with a set of input values.  This is how outrigger "runs" a program.  If an observer id is specified in the bundle, all websockets listening on the indicated observer id will be notified of the new job invocation.
+
+The program can either be a program bundle (i.e. the result from using the `/paths/*path*` endpoint) or it can be a direct pathname. When called with a program bundle, a job is created and the job id is returned immediately:
 
 ```
 POST /api/v0/jobs HTTP/1.1
@@ -84,6 +90,40 @@ POST /api/v0/jobs HTTP/1.1
     "job_id": "8d5542d2-41c4-4c03-abb4-95baa846d843"
 }
 ```
+
+When called with a `path` property in the body, the service waits for the program to fully complete and then sends the program's output, including errors, warnings, marks, and points, as the return value:
+
+```
+$ cat my-juttle.juttle
+
+emit -from :0: -limit 1 | put foo=m1.foo | view table -title "My Table"
+
+POST /api/v0/jobs HTTP/1.1
+{
+    "path": "my-juttle.juttle",
+    "timeout":2000
+}
+```
+
+```
+{
+    "warnings": [],
+    "errors": [],
+    "output": {
+        "sink0": {
+            "data": [{type: 'mark', 'time:date': '1970-01-01T00:00:00.000Z'},
+                     {"type": "point", "point": {"foo": "bar", "time:date": "1970-01-01T00:00:00.000Z"}}],
+            "options": {
+                "_jut_time_bounds": [],
+                "title": "My Table"
+            },
+            "type": "table"
+        }
+    }
+}
+```
+
+Note the `timeout` property in the body. If a program runs for more than *timeout* ms, the program is aborted and an error is returned. If not specified, *timeout* is 60000 (60 seconds).
 
 ###GET /api/v0/jobs/*jobID*
 
