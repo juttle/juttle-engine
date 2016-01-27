@@ -4,22 +4,21 @@ var expect = chakram.expect;
 var JuttledService = require('../../lib/service-juttled');
 var WebSocket = require('ws');
 var Promise = require('bluebird');
+var findFreePort = Promise.promisify(require('find-free-port'));
 var fs = Promise.promisifyAll(require('fs'));
 var fs_extra = Promise.promisifyAll(require('fs-extra'));
-
-var juttled_port = 8080;
-var jd = 'http://localhost:' + juttled_port + '/api/v0';
 
 var JSDP = require('juttle-jsdp');
 var moment = require('moment');
 
+var juttleBaseUrl;
 function run_path(path) {
     var bundle;
-    return chakram.get(jd + '/paths/' + path)
+    return chakram.get(juttleBaseUrl + '/paths/' + path)
         .then(function(bundle_response) {
             expect(bundle_response).to.have.status(200);
             bundle = bundle_response.body;
-            return chakram.post(jd + '/jobs/', bundle);
+            return chakram.post(juttleBaseUrl + '/jobs/', bundle);
         })
         .then(function(run_response) {
             expect(run_response).to.have.status(200);
@@ -40,7 +39,11 @@ describe('Juttled Tests', function() {
     var juttled;
 
     before(function() {
-        juttled = new JuttledService({port: juttled_port, root_directory: __dirname});
+        findFreePort(10000, 20000)
+        .then((freePort) => {
+            juttleBaseUrl = 'http://localhost:' + freePort + '/api/v0';
+            juttled = new JuttledService({port: freePort, root_directory: __dirname});
+        });
     });
 
     after(function() {
@@ -50,7 +53,7 @@ describe('Juttled Tests', function() {
     describe('Job Info Fetch Tests', function() {
 
         it('Fetch job id that doesn\'t exist', function() {
-            var response = chakram.get(jd + '/jobs/no-such-job');
+            var response = chakram.get(juttleBaseUrl + '/jobs/no-such-job');
             expect(response).to.have.status(404);
             expect(response).to.have.json({
                 code: 'JS-JOB-NOT-FOUND-ERROR',
@@ -67,7 +70,7 @@ describe('Juttled Tests', function() {
             return run_path('forever.juttle')
             .then(function(res) {
                 job_id = res.job_id;
-                var response = chakram.get(jd + '/jobs/' + res.job_id);
+                var response = chakram.get(juttleBaseUrl + '/jobs/' + res.job_id);
                 expect(response).to.have.status(200);
 
                 var expected = _.extend({}, res.bundle, {
@@ -79,7 +82,7 @@ describe('Juttled Tests', function() {
                 return chakram.wait();
             })
             .then(function() {
-                var response = chakram.delete(jd + '/jobs/' + job_id);
+                var response = chakram.delete(juttleBaseUrl + '/jobs/' + job_id);
                 return expect(response).to.have.status(200);
             });
         }
@@ -109,14 +112,14 @@ describe('Juttled Tests', function() {
                         job_id: job_id
                     });
                 });
-                var response = chakram.get(jd + '/jobs');
+                var response = chakram.get(juttleBaseUrl + '/jobs');
                 expect(response).to.have.status(200);
                 expect(response).to.have.json(expected);
                 return chakram.wait();
             })
             .then(function() {
                 return chakram.all(_.map(job_ids, function(job_id) {
-                    return chakram.delete(jd + '/jobs/' + job_id);
+                    return chakram.delete(juttleBaseUrl + '/jobs/' + job_id);
                 }));
             });
         });
@@ -131,12 +134,12 @@ describe('Juttled Tests', function() {
             .then(function(res) {
                 job_ids.push(res.job_id);
                 return chakram.all(_.map(job_ids, function(job_id) {
-                    return chakram.delete(jd + '/jobs/' + job_id);
+                    return chakram.delete(juttleBaseUrl + '/jobs/' + job_id);
                 }));
             })
             .then(function() {
                 return chakram.all(_.map(job_ids, function(job_id) {
-                    return chakram.get(jd + '/jobs/' + job_id);
+                    return chakram.get(juttleBaseUrl + '/jobs/' + job_id);
                 }));
             })
             .then(function(responses) {
@@ -149,7 +152,7 @@ describe('Juttled Tests', function() {
                 return chakram.wait();
             })
             .then(function() {
-                var response = chakram.get(jd + '/jobs/');
+                var response = chakram.get(juttleBaseUrl + '/jobs/');
                 expect(response).to.have.status(200);
                 expect(response).to.have.json([]);
                 return chakram.wait();
@@ -185,7 +188,7 @@ describe('Juttled Tests', function() {
 
 
             it('File doesn\'t exist', function() {
-                var response = chakram.get(jd + '/paths/no-such-path.juttle');
+                var response = chakram.get(juttleBaseUrl + '/paths/no-such-path.juttle');
                 expect(response).to.have.status(404);
                 expect(response).to.have.json({
                     code: 'JS-FILE-NOT-FOUND-ERROR',
@@ -198,7 +201,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Is a directory', function() {
-                var response = chakram.get(jd + '/paths/.');
+                var response = chakram.get(juttleBaseUrl + '/paths/.');
                 expect(response).to.have.status(404);
                 expect(response).to.have.json({
                     code: 'JS-FILE-NOT-FOUND-ERROR',
@@ -211,7 +214,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Is a dangling symlink', function() {
-                var response = chakram.get(jd + '/paths/dangling-symlink.juttle');
+                var response = chakram.get(juttleBaseUrl + '/paths/dangling-symlink.juttle');
                 expect(response).to.have.status(404);
                 expect(response).to.have.json({
                     code: 'JS-FILE-NOT-FOUND-ERROR',
@@ -224,7 +227,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Is not readable', function() {
-                var response = chakram.get(jd + '/paths/not-readable.juttle');
+                var response = chakram.get(juttleBaseUrl + '/paths/not-readable.juttle');
                 expect(response).to.have.status(403);
                 expect(response).to.have.json({
                     code: 'JS-FILE-ACCESS-ERROR',
@@ -237,7 +240,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Has a syntax error', function() {
-                var response = chakram.get(jd + '/paths/has-syntax-error.juttle');
+                var response = chakram.get(juttleBaseUrl + '/paths/has-syntax-error.juttle');
                 expect(response).to.have.status(400);
                 expect(response).to.have.json({
                     code: 'JS-JUTTLE-ERROR',
@@ -291,7 +294,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Refers to a module that doesn\'t exist', function() {
-                var response = chakram.get(jd + '/paths/missing-module.juttle');
+                var response = chakram.get(juttleBaseUrl + '/paths/missing-module.juttle');
                 expect(response).to.have.status(400);
                 expect(response).to.have.json({
                     code: 'JS-JUTTLE-ERROR',
@@ -370,7 +373,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Single .juttle file without modules', function() {
-                var response = chakram.get(jd + '/paths/forever.juttle');
+                var response = chakram.get(juttleBaseUrl + '/paths/forever.juttle');
                 expect(response).to.have.status(200);
                 expect(response).to.have.json({
                     bundle: {
@@ -382,7 +385,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Program with modules', function() {
-                var response = chakram.get(jd + '/paths/modules.juttle');
+                var response = chakram.get(juttleBaseUrl + '/paths/modules.juttle');
                 expect(response).to.have.status(200);
                 expect(response).to.have.json({
                     bundle: {
@@ -397,7 +400,7 @@ describe('Juttled Tests', function() {
 
             it('Program with remote modules', function() {
                 this.timeout(30000);
-                var response = chakram.get(jd + '/paths/remote-module.juttle');
+                var response = chakram.get(juttleBaseUrl + '/paths/remote-module.juttle');
                 expect(response).to.have.status(200);
                 expect(response).to.have.json({
                     bundle: {
@@ -411,7 +414,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Program with modules specified relative to root directory', function() {
-                var response = chakram.get(jd + '/paths/subdir/modules-relative-to-root.juttle');
+                var response = chakram.get(juttleBaseUrl + '/paths/subdir/modules-relative-to-root.juttle');
                 expect(response).to.have.status(200);
                 expect(response).to.have.json({
                     bundle: {
@@ -425,7 +428,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Program with modules specified relative to program', function() {
-                var response = chakram.get(jd + '/paths/subdir/modules-relative-to-program.juttle');
+                var response = chakram.get(juttleBaseUrl + '/paths/subdir/modules-relative-to-program.juttle');
                 expect(response).to.have.status(200);
                 expect(response).to.have.json({
                     bundle: {
@@ -444,7 +447,7 @@ describe('Juttled Tests', function() {
         describe('Valid cases', function() {
 
             it('list contents of current directory', function() {
-                return chakram.get(jd + '/directory')
+                return chakram.get(juttleBaseUrl + '/directory')
                 .then(function(response) {
                     expect(response).to.have.status(200);
 
@@ -457,7 +460,7 @@ describe('Juttled Tests', function() {
             });
 
             it('list contents of subdir', function() {
-                return chakram.get(jd + '/directory?path=subdir')
+                return chakram.get(juttleBaseUrl + '/directory?path=subdir')
                 .then(function(response) {
                     expect(response).to.have.status(200);
                     expect(response.body.is_root).to.be.false;
@@ -468,7 +471,7 @@ describe('Juttled Tests', function() {
             });
 
             it('list root using subdir + ..', function() {
-                return chakram.get(jd + '/directory?path=/subdir/..')
+                return chakram.get(juttleBaseUrl + '/directory?path=/subdir/..')
                 .then(function(response) {
                     expect(response).to.have.status(200);
 
@@ -484,7 +487,7 @@ describe('Juttled Tests', function() {
 
         describe('Invalid cases', function() {
             it('non existant path 404s', function() {
-                var response = chakram.get(jd + '/directory?path=non-existent')
+                var response = chakram.get(juttleBaseUrl + '/directory?path=non-existent')
                 expect(response).to.have.status(404);
                 expect(response).to.have.json({
                     code: 'JS-DIR-NOT-FOUND-ERROR',
@@ -497,7 +500,7 @@ describe('Juttled Tests', function() {
             });
 
             it('don\'t allow \'..\' when not at end of path', function() {
-                var response = chakram.get(jd + '/directory?path=/../..');
+                var response = chakram.get(juttleBaseUrl + '/directory?path=/../..');
                 expect(response).to.have.status(400);
                 expect(response).to.have.json({
                     code: 'JS-INVALID-PATH-ERROR',
@@ -510,7 +513,7 @@ describe('Juttled Tests', function() {
             });
 
             it('don\'t allow users to navigate behind root', function() {
-                var response = chakram.get(jd + '/directory?path=/..');
+                var response = chakram.get(juttleBaseUrl + '/directory?path=/..');
                 expect(response).to.have.status(403);
                 expect(response).to.have.json({
                     code: 'JS-DIR-ACCESS-ERROR',
@@ -523,7 +526,7 @@ describe('Juttled Tests', function() {
             });
 
             it('fetching file and not directory throws error', function() {
-                var response = chakram.get(jd + '/directory?path=forever.juttle');
+                var response = chakram.get(juttleBaseUrl + '/directory?path=forever.juttle');
                 expect(response).to.have.status(404);
                 expect(response).to.have.json({
                     code: 'JS-DIR-NOT-FOUND-ERROR',
@@ -541,7 +544,7 @@ describe('Juttled Tests', function() {
 
         describe('Invalid Cases', function() {
             it('Empty body', function() {
-                var response = chakram.post(jd + '/jobs', '');
+                var response = chakram.post(juttleBaseUrl + '/jobs', '');
                 expect(response).to.have.status(400);
                 expect(response).to.have.json({
                     code: 'JS-BUNDLE-ERROR',
@@ -555,7 +558,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Non JSON', function() {
-                var response = chakram.post(jd + '/jobs', 'not json');
+                var response = chakram.post(juttleBaseUrl + '/jobs', 'not json');
                 expect(response).to.have.status(400);
                 expect(response).to.have.json({
                     code: 'JS-BUNDLE-ERROR',
@@ -570,7 +573,7 @@ describe('Juttled Tests', function() {
 
             it('Bundle without program', function() {
                 var bundle = {};
-                var response = chakram.post(jd + '/jobs', {bundle: bundle});
+                var response = chakram.post(juttleBaseUrl + '/jobs', {bundle: bundle});
                 expect(response).to.have.status(400);
                 expect(response).to.have.json({
                     code: 'JS-BUNDLE-ERROR',
@@ -585,7 +588,7 @@ describe('Juttled Tests', function() {
 
             it('Program contains syntax error', function() {
                 var bundle = {program: 'not juuttle'};
-                var response = chakram.post(jd + '/jobs', {bundle: bundle});
+                var response = chakram.post(juttleBaseUrl + '/jobs', {bundle: bundle});
                 expect(response).to.have.status(400);
                 expect(response).to.have.json({
                     code: 'JS-JUTTLE-ERROR',
@@ -643,7 +646,7 @@ describe('Juttled Tests', function() {
                         'errors.juttle': 'not juttle'
                     }
                 };
-                var response = chakram.post(jd + '/jobs', {bundle: bundle});
+                var response = chakram.post(juttleBaseUrl + '/jobs', {bundle: bundle});
                 expect(response).to.have.status(400);
                 expect(response).to.have.json({
                     code: 'JS-JUTTLE-ERROR',
@@ -698,7 +701,7 @@ describe('Juttled Tests', function() {
                 var bundle = {
                     program: 'import "no-such-module.juttle" as j1; emit -limit 1 | put foo=j1.val | view table'
                 };
-                var response = chakram.post(jd + '/jobs', {bundle: bundle});
+                var response = chakram.post(juttleBaseUrl + '/jobs', {bundle: bundle});
                 expect(response).to.have.status(400);
                 expect(response).to.have.json({
                     code: 'JS-JUTTLE-ERROR',
@@ -734,12 +737,12 @@ describe('Juttled Tests', function() {
         describe('Valid Cases', function() {
 
             it('Simple program', function() {
-                var response = chakram.post(jd + '/jobs', {bundle: {program: 'emit -limit 1 | view table'}});
+                var response = chakram.post(juttleBaseUrl + '/jobs', {bundle: {program: 'emit -limit 1 | view table'}});
                 return expect(response).to.have.status(200);
             });
 
             it('Simple program with modules', function() {
-                var response = chakram.post(jd + '/jobs', {
+                var response = chakram.post(juttleBaseUrl + '/jobs', {
                     bundle: {
                         program: 'import \"mod.juttle\" as mod; emit -limit 1 | put key=mod.val | view table',
                         modules: {
@@ -759,9 +762,9 @@ describe('Juttled Tests', function() {
             var observer_b;
 
             beforeEach(function(done) {
-                observer_a = new WebSocket(jd + '/observers/A');
+                observer_a = new WebSocket(juttleBaseUrl + '/observers/A');
                 observer_a.on('open', function() {
-                    observer_b = new WebSocket(jd + '/observers/B');
+                    observer_b = new WebSocket(juttleBaseUrl + '/observers/B');
                     observer_b.on('open', function() {
                         done();
                     });
@@ -769,7 +772,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Can view 2 observers', function() {
-                var response = chakram.get(jd + '/observers');
+                var response = chakram.get(juttleBaseUrl + '/observers');
                 expect(response).to.have.status(200);
                 expect(response).to.have.json([
                     {observer_id: 'A'},
@@ -795,7 +798,7 @@ describe('Juttled Tests', function() {
                         done();
                     }
                 });
-                chakram.post(jd + '/jobs', {
+                chakram.post(juttleBaseUrl + '/jobs', {
                     bundle: {program: 'emit -limit 10000 | view table'},
                     observer: 'A'
                 })
@@ -803,7 +806,7 @@ describe('Juttled Tests', function() {
                     job_id = response.body.job_id;
                 })
                 .then(function() {
-                    var response = chakram.delete(jd + '/jobs/' + job_id);
+                    var response = chakram.delete(juttleBaseUrl + '/jobs/' + job_id);
                     expect(response).to.have.status(200);
                     return chakram.wait();
                 });
@@ -818,7 +821,7 @@ describe('Juttled Tests', function() {
                         done();
                     }
                 });
-                var response = chakram.post(jd + '/jobs', {
+                var response = chakram.post(juttleBaseUrl + '/jobs', {
                     bundle: {program: 'emit -limit 10000 | view table'},
                     observer: 'A',
                     return_pid: true
@@ -843,11 +846,11 @@ describe('Juttled Tests', function() {
         describe('Listing observers', function() {
 
             it('Start and stop 2 observers, checking list observers along the way', function(done) {
-                var observer_a = new WebSocket(jd + '/observers/A');
+                var observer_a = new WebSocket(juttleBaseUrl + '/observers/A');
                 var observer_b;
 
                 observer_a.on('close', function() {
-                    var response = chakram.get(jd + '/observers');
+                    var response = chakram.get(juttleBaseUrl + '/observers');
                     expect(response).to.have.status(200);
                     expect(response).to.have.json([
                         {observer_id: 'B'}
@@ -859,10 +862,10 @@ describe('Juttled Tests', function() {
                 });
 
                 observer_a.on('open', function() {
-                    observer_b = new WebSocket(jd + '/observers/B');
+                    observer_b = new WebSocket(juttleBaseUrl + '/observers/B');
                     observer_b.on('open', function() {
                         observer_b.on('close', function() {
-                            var response = chakram.get(jd + '/observers');
+                            var response = chakram.get(juttleBaseUrl + '/observers');
                             expect(response).to.have.status(200);
                             expect(response).to.have.json([]);
                             chakram.wait()
@@ -883,7 +886,7 @@ describe('Juttled Tests', function() {
         var run_program_with_initial_timeout = function(initial_delay, done) {
             var ws_client;
 
-            chakram.post(jd + '/jobs', {
+            chakram.post(juttleBaseUrl + '/jobs', {
                 bundle: {program: 'import \"module.juttle\" as mod;' +
                          'input my_input: dropdown -label "My Input" -items [10, 20, 30];' +
                          'input my_date_input: date;' +
@@ -910,7 +913,7 @@ describe('Juttled Tests', function() {
                     var num_ticks = 0;
                     var num_marks = 0;
                     var num_sink_ends = 0;
-                    ws_client = new WebSocket(jd + '/jobs/' + job_id);
+                    ws_client = new WebSocket(juttleBaseUrl + '/jobs/' + job_id);
                     ws_client.on('message', function(data) {
                         //console.log("Got Websocket:", data);
                         data = JSDP.deserialize(data);
@@ -1002,14 +1005,14 @@ describe('Juttled Tests', function() {
             });
 
             it('runtime errors', function() {
-                return chakram.post(jd + '/jobs', {
+                return chakram.post(juttleBaseUrl + '/jobs', {
                     bundle: {
                         program: 'read file -file "nobody"'
                     }
                 })
                 .then(function(response) {
                     var job_id = response.body.job_id;
-                    var ws_client = new WebSocket(jd + '/jobs/' + job_id);
+                    var ws_client = new WebSocket(juttleBaseUrl + '/jobs/' + job_id);
                     var got_error = false;
                     return new Promise(function(resolve, reject) {
                         ws_client.on('message', function(data) {
@@ -1032,14 +1035,14 @@ describe('Juttled Tests', function() {
             });
 
             it('runtime warnings', function() {
-                return chakram.post(jd + '/jobs', {
+                return chakram.post(juttleBaseUrl + '/jobs', {
                     bundle: {
                         program: 'emit -from :0: -limit 1 | sort nobody'
                     }
                 })
                 .then(function(response) {
                     var job_id = response.body.job_id;
-                    var ws_client = new WebSocket(jd + '/jobs/' + job_id);
+                    var ws_client = new WebSocket(juttleBaseUrl + '/jobs/' + job_id);
                     var got_warning = false;
                     return new Promise(function(resolve, reject) {
                         ws_client.on('message', function(data) {
@@ -1064,7 +1067,7 @@ describe('Juttled Tests', function() {
 
         describe('Invalid Cases', function() {
             it('Websocket connection to non-existent job, should get reasonable message', function(done) {
-                var ws_client = new WebSocket(jd + '/jobs/no-such-job');
+                var ws_client = new WebSocket(juttleBaseUrl + '/jobs/no-such-job');
                 ws_client.on('message', function(data) {
                     data = JSDP.deserialize(data);
                     expect(data).to.deep.equal({err: 'No such job: no-such-job'});
@@ -1076,17 +1079,17 @@ describe('Juttled Tests', function() {
 
                 var job_id;
 
-                var response = chakram.post(jd + '/jobs', {
+                var response = chakram.post(juttleBaseUrl + '/jobs', {
                     bundle: {program: 'emit -limit 10 | view table'}
                 });
                 return expect(response).to.have.status(200)
                 .then(function(response) {
                     job_id = response.body.job_id;
-                    response = chakram.delete(jd + '/jobs/' + job_id);
+                    response = chakram.delete(juttleBaseUrl + '/jobs/' + job_id);
                     return expect(response).to.have.status(200);
                 })
                 .then(function(response) {
-                    var ws_client = new WebSocket(jd + '/jobs/' + job_id);
+                    var ws_client = new WebSocket(juttleBaseUrl + '/jobs/' + job_id);
                     ws_client.on('message', function(data) {
                         data = JSDP.deserialize(data);
                         expect(data).to.deep.equal({err: 'No such job: ' + job_id});
@@ -1099,7 +1102,7 @@ describe('Juttled Tests', function() {
             it.skip('Don\'t respond to pings with pongs. Will be eventually disconnected', function(done) {
                 this.timeout(90000);
 
-                var observer = new WebSocket(jd + '/observers/A');
+                var observer = new WebSocket(juttleBaseUrl + '/observers/A');
                 observer.on('close', function() {
                     done();
                 });
@@ -1111,7 +1114,7 @@ describe('Juttled Tests', function() {
     describe('Stop a Job Tests', function() {
 
         it('Try to stop non-existent job', function() {
-            var response = chakram.delete(jd + '/jobs/no-such-job');
+            var response = chakram.delete(juttleBaseUrl + '/jobs/no-such-job');
             expect(response).to.have.status(404);
             expect(response).to.have.json({
                 code: 'JS-JOB-NOT-FOUND-ERROR',
@@ -1128,11 +1131,11 @@ describe('Juttled Tests', function() {
             return run_path('forever.juttle')
             .then(function(res) {
                 job_id = res.job_id;
-                var response = chakram.delete(jd + '/jobs/' + job_id);
+                var response = chakram.delete(juttleBaseUrl + '/jobs/' + job_id);
                 return expect(response).to.have.status(200);
             })
             .then(function() {
-                var response = chakram.get(jd + '/jobs/' + job_id);
+                var response = chakram.get(juttleBaseUrl + '/jobs/' + job_id);
                 expect(response).to.have.status(404);
                 expect(response).to.have.json({
                     code: 'JS-JOB-NOT-FOUND-ERROR',
@@ -1150,11 +1153,11 @@ describe('Juttled Tests', function() {
             return run_path('forever.juttle')
             .then(function(res) {
                 job_id = res.job_id;
-                var response = chakram.delete(jd + '/jobs/' + job_id);
+                var response = chakram.delete(juttleBaseUrl + '/jobs/' + job_id);
                 return expect(response).to.have.status(200);
             })
             .then(function() {
-                var response = chakram.delete(jd + '/jobs/' + job_id);
+                var response = chakram.delete(juttleBaseUrl + '/jobs/' + job_id);
                 expect(response).to.have.status(404);
                 expect(response).to.have.json({
                     code: 'JS-JOB-NOT-FOUND-ERROR',
@@ -1171,7 +1174,7 @@ describe('Juttled Tests', function() {
     describe('Prepare Inputs Tests', function() {
         describe('Valid Cases', function() {
             it('Simple program with a single input', function() {
-                var response = chakram.post(jd + '/prepare', {
+                var response = chakram.post(juttleBaseUrl + '/prepare', {
                     bundle: {
                         program: 'input a: dropdown -label "My Input" -items [10, 20, 30]; ' +
                             'emit -limit 1 | put myval=a | view table'
@@ -1193,7 +1196,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Program with multiple inputs', function() {
-                var response = chakram.post(jd + '/prepare', {
+                var response = chakram.post(juttleBaseUrl + '/prepare', {
                     bundle: {
                         program: 'input a: dropdown -label "My Input" -items [10, 20, 30]; ' +
                             'input b: combobox -label "My Combobox" -items [20, 30, 40] -default 40 -description "Here is a combobox"; ' +
@@ -1250,7 +1253,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Program with a value overriding a default', function() {
-                var response = chakram.post(jd + '/prepare', {
+                var response = chakram.post(juttleBaseUrl + '/prepare', {
                     bundle: {
                         program: 'input a: dropdown -label "My Input" -items [10, 20, 30] -default 10; ' +
                             'input b: date -default :2010-01-01T00:00:00.000Z:;' +
@@ -1300,7 +1303,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Program with multiple inputs where one input depends on the value of another', function() {
-                var response = chakram.post(jd + '/prepare', {
+                var response = chakram.post(juttleBaseUrl + '/prepare', {
                     bundle: {
                         program: 'input a: dropdown -label "My Input" -items [10, 20, 30]; ' +
                             'input b: combobox -label "My Combobox" -items [a, 30, 40] -default 40 -description "Here is a combobox"; ' +
@@ -1338,7 +1341,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Program with -juttle inputs', function() {
-                var response = chakram.post(jd + '/prepare', {
+                var response = chakram.post(juttleBaseUrl + '/prepare', {
                     bundle: {
                         program: 'input a: dropdown -label "My Input" -juttle "emit -limit 10"; ' +
                             'emit -limit 1 | put myval=a | view table'
@@ -1360,7 +1363,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Program with inputs defined in a sub', function() {
-                var response = chakram.post(jd + '/prepare', {
+                var response = chakram.post(juttleBaseUrl + '/prepare', {
                     bundle: {
                         program: 'input x: number; ' +
                             'sub y() { input x: text -default "foo"; input y: dropdown -items [1, 2, 3] ; pass } ' +
@@ -1398,7 +1401,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Program with inputs defined in a module', function() {
-                var response = chakram.post(jd + '/prepare', {
+                var response = chakram.post(juttleBaseUrl + '/prepare', {
                     bundle: {
                         program: 'import \"input.juttle\" as inp; ' +
                             'sub y() { input x: text -default "foo"; input y: dropdown -items [1, 2, 3] ; pass } ' +
@@ -1444,7 +1447,7 @@ describe('Juttled Tests', function() {
                 var bundle = {
                     program: ''
                 };
-                var response = chakram.post(jd + '/prepare', {bundle: bundle});
+                var response = chakram.post(juttleBaseUrl + '/prepare', {bundle: bundle});
                 expect(response).to.have.status(400);
                 expect(response).to.have.json({
                     code: 'JS-JUTTLE-ERROR',
@@ -1477,7 +1480,7 @@ describe('Juttled Tests', function() {
 
             it('Not juttle', function() {
                 var bundle = {program: 'not juttle'};
-                var response = chakram.post(jd + '/prepare', {bundle: bundle});
+                var response = chakram.post(juttleBaseUrl + '/prepare', {bundle: bundle});
                 expect(response).to.have.status(400);
                 expect(response).to.have.json({
                     code: 'JS-JUTTLE-ERROR',
