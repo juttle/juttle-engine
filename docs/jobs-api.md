@@ -71,7 +71,7 @@ GET /api/v0/jobs HTTP/1.1
 
 Returns the jobID of the job created by running the program included in the POST body, in conjunction with a set of input values.  This is how outrigger "runs" a program.  If an observer id is specified in the bundle, all websockets listening on the indicated observer id will be notified of the new job invocation.
 
-The program can either be a program bundle (i.e. the result from using the `/paths/*path*` endpoint) or it can be a direct pathname. When called with a program bundle, a job is created and the job id is returned immediately:
+The program can either be provided as a program bundle (i.e. the result from using the `/paths/*path*` endpoint) or it can be a direct pathname:
 
 ```
 POST /api/v0/jobs HTTP/1.1
@@ -83,29 +83,47 @@ POST /api/v0/jobs HTTP/1.1
         }
     }
 }
-```
+
+$ cat my-juttle.juttle
+
+emit -from :0: -limit 1 | put foo='bar' | view table -title "My Table"
+
+POST /api/v0/jobs HTTP/1.1
+{
+    "path": "my-juttle.juttle",
+}
 
 ```
+
+The `wait` and `timeout` properties in the body control how the job is started. With `wait=false` (the default), the program starts and the job id is returned immediately:
+
+```
+POST /api/v0/jobs HTTP/1.1
+{
+    "bundle": {
+        "program": "import \"mod.juttle\" as mod; emit -limit 1 | put key=mod.val | view table",
+        "modules": {
+            "mod.juttle": "export const val=3;"
+        }
+    },
+    "wait": false
+}
+
 {
     "job_id": "8d5542d2-41c4-4c03-abb4-95baa846d843"
 }
 ```
 
-When called with a `path` property in the body, the service waits for the program to fully complete and then sends the program's output, including errors, warnings, marks, and points, as the return value:
+If the body contains a property `wait` set to `true`, the service waits for the program to fully complete and then sends the program's output, including errors, warnings, marks, and points, as the return value:
 
 ```
-$ cat my-juttle.juttle
-
-emit -from :0: -limit 1 | put foo=m1.foo | view table -title "My Table"
-
 POST /api/v0/jobs HTTP/1.1
 {
     "path": "my-juttle.juttle",
+    "wait: true,
     "timeout":2000
 }
-```
 
-```
 {
     "warnings": [],
     "errors": [],
@@ -114,7 +132,6 @@ POST /api/v0/jobs HTTP/1.1
             "data": [{type: 'mark', 'time:date': '1970-01-01T00:00:00.000Z'},
                      {"type": "point", "point": {"foo": "bar", "time:date": "1970-01-01T00:00:00.000Z"}}],
             "options": {
-                "_jut_time_bounds": [],
                 "title": "My Table"
             },
             "type": "table"
