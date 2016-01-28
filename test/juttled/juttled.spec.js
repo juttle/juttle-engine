@@ -762,7 +762,7 @@ describe('Juttled Tests', function() {
             });
 
             it('With wait=true', function() {
-                var response = chakram.post(jd + '/jobs/', {
+                var response = chakram.post(juttleBaseUrl + '/jobs/', {
                     bundle: {
                         program: 'emit -from :0: -limit 1 | put foo=\'bar\' | view text'
                     },
@@ -792,7 +792,7 @@ describe('Juttled Tests', function() {
 
         describe('Invalid Cases', function() {
             it('From a path that doesn\'t exist', function() {
-                var response = chakram.post(jd + '/jobs/', {path: 'no-such-path.juttle', wait: true});
+                var response = chakram.post(juttleBaseUrl + '/jobs/', {path: 'no-such-path.juttle', wait: true});
                 expect(response).to.have.status(404);
                 expect(response).to.have.json({
                     code: 'JS-FILE-NOT-FOUND-ERROR',
@@ -805,7 +805,7 @@ describe('Juttled Tests', function() {
             });
 
             it('From a path that has juttle compile errors', function() {
-                var response = chakram.post(jd + '/jobs/', {path: 'has-syntax-error.juttle', wait: true});
+                var response = chakram.post(juttleBaseUrl + '/jobs/', {path: 'has-syntax-error.juttle', wait: true});
                 expect(response).to.have.status(400);
                 expect(response).to.have.json({
                     code: 'JS-JUTTLE-ERROR',
@@ -816,7 +816,7 @@ describe('Juttled Tests', function() {
             });
 
             it('From a path where the timeout triggers', function() {
-                var response = chakram.post(jd + '/jobs/', {path: 'forever.juttle', timeout: 2000, wait: true});
+                var response = chakram.post(juttleBaseUrl + '/jobs/', {path: 'forever.juttle', timeout: 2000, wait: true});
                 expect(response).to.have.status(408);
                 expect(response).to.have.json({
                     code: 'JS-TIMEOUT-ERROR',
@@ -829,7 +829,7 @@ describe('Juttled Tests', function() {
 
         describe('Valid Cases', function() {
             it('Simple program', function() {
-                var response = chakram.post(jd + '/jobs/', {path: 'simple.juttle', wait: true});
+                var response = chakram.post(juttleBaseUrl + '/jobs/', {path: 'simple.juttle', wait: true});
                 expect(response).to.have.status(200);
                 expect(response).to.have.json({
                     errors: [],
@@ -868,7 +868,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Program w/ modules', function() {
-                var response = chakram.post(jd + '/jobs/', {path: 'modules.juttle', wait: true});
+                var response = chakram.post(juttleBaseUrl + '/jobs/', {path: 'modules.juttle', wait: true});
                 expect(response).to.have.status(200);
                 expect(response).to.have.json({
                     errors: [],
@@ -888,7 +888,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Program w/ inputs', function() {
-                var response = chakram.post(jd + '/jobs/', {
+                var response = chakram.post(juttleBaseUrl + '/jobs/', {
                     path: 'inputs.juttle',
                     inputs: JSDP.serialize({
                         inval: 'baz'
@@ -916,7 +916,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Program with runtime errors', function() {
-                var response = chakram.post(jd + '/jobs/', {path: 'runtime_errors.juttle', wait: true});
+                var response = chakram.post(juttleBaseUrl + '/jobs/', {path: 'runtime_errors.juttle', wait: true});
                 expect(response).to.have.status(200);
                 expect(response).to.have.json({
                     errors: [{
@@ -949,7 +949,7 @@ describe('Juttled Tests', function() {
             });
 
             it('Program with runtime warnings', function() {
-                var response = chakram.post(jd + '/jobs/', {path: 'runtime_warnings.juttle', wait: true});
+                var response = chakram.post(juttleBaseUrl + '/jobs/', {path: 'runtime_warnings.juttle', wait: true});
                 expect(response).to.have.status(200);
                 expect(response).to.have.json({
                     errors: [],
@@ -981,7 +981,7 @@ describe('Juttled Tests', function() {
             });
 
             it('With wait=false', function() {
-                return chakram.post(jd + '/jobs/', {path: 'modules.juttle', wait: false})
+                return chakram.post(juttleBaseUrl + '/jobs/', {path: 'modules.juttle', wait: false})
                 .then(function(response) {
                     expect(response).to.have.status(200);
                     expect(response.body).to.include.keys('job_id');
