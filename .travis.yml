@@ -1,0 +1,22 @@
+language: node_js
+
+addons:
+  apt:
+    sources:
+        - ubuntu-toolchain-r-test
+    packages:
+        - g++-4.8
+
+services:
+    - docker
+
+before_install:
+    - export CXX="g++-4.8"
+    - npm install juttle@^0.3.0
+
+node_js:
+    - '4.2'
+    - '5.0'
+
+script:
+    - npm test
