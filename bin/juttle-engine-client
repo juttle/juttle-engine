@@ -16,14 +16,14 @@ var fs = require('fs');
 var crypto = require('crypto');
 
 var defaults = {
-    'outriggerd': 'localhost:8080',
+    'juttle-engine': 'localhost:8080',
     'topic': 'default'
 };
 
 var opts = minimist(process.argv.slice(2));
 
 function usage() {
-    console.log('usage: [--outriggerd <hostname:port>] [--help] [COMMAND] [OPTIONS]');
+    console.log('usage: [--juttle-engine <hostname:port>] [--help] [COMMAND] [OPTIONS]');
     console.log('   [COMMAND]: one of the following, with the following options:');
     console.log('         subscribe (--job <job-id>|--observer <observer-id>)');
     console.log('         list_jobs [--job <job-id>]');
@@ -45,7 +45,7 @@ function usage() {
     console.log('                                              Used by "subscribe", "run"');
     console.log('       --topic <rendezvous-topic>:            Rendezvous topic');
     console.log('                                              Used by "push", "watch".');
-    console.log('       --outriggerd <hostname:port>:          Hostname/port of outrigger juttle server');
+    console.log('       --juttle-engine <hostname:port>:       Hostname/port of juttle-engine juttle server');
     console.log('       --help:                                Print this help and exit');
     process.exit(1);
 }
@@ -152,13 +152,13 @@ if (opts.help ||
     usage();
 }
 
-opts.outriggerd = opts['outriggerd'];
+opts.juttle-engine = opts['juttle-engine'];
 
 var API_PREFIX = '/api/v0';
 
-var juttled_ws_url = 'ws://' + opts.outriggerd + API_PREFIX;
-var juttled_noapi_ws_url = 'ws://' + opts.outriggerd;
-var juttled_http_url = 'http://' + opts.outriggerd + API_PREFIX;
+var juttled_ws_url = 'ws://' + opts.juttle-engine + API_PREFIX;
+var juttled_noapi_ws_url = 'ws://' + opts.juttle-engine;
+var juttled_http_url = 'http://' + opts.juttle-engine + API_PREFIX;
 
 var command = opts._[0];
 
@@ -284,7 +284,7 @@ switch (command) {
         if (opts.path !== undefined) {
             push_file(path.resolve(opts.path), opts.topic)
             .then(function() {
-                console.log('==> View program at: http://' + opts['outriggerd'] + '/run?rendezvous=' + opts.topic);
+                console.log('==> View program at: http://' + opts['juttle-engine'] + '/run?rendezvous=' + opts.topic);
             });
         } else {
             usage();
@@ -300,7 +300,7 @@ switch (command) {
 
             push_file(watchPath, opts.topic)
             .then(function() {
-                console.log('==> View program at: http://' + opts['outriggerd'] + '/run?rendezvous=' + opts.topic);
+                console.log('==> View program at: http://' + opts['juttle-engine'] + '/run?rendezvous=' + opts.topic);
             });
 
             console.log('Watching file ' + opts.path + ' for changes:');
@@ -355,7 +355,7 @@ switch (command) {
     case 'browser':
         if (opts.path) {
             var absPath = path.resolve(opts.path);
-            open('http://' + opts['outriggerd'] + '/run?path=' + absPath);
+            open('http://' + opts['juttle-engine'] + '/run?path=' + absPath);
 
         } else {
             usage();

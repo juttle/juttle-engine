@@ -15,7 +15,7 @@ module.exports.init = function(opts) {
         // If daemonizing and if no output file was specified, use a
         // default.
         if (opts.daemonize && !_.has(opts, 'output')) {
-            opts.output = '/var/log/outriggerd.log';
+            opts.output = '/var/log/juttle-engine.log';
         }
 
         if (_.has(opts, 'output')) {

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 //
-// Simple helper script to expose the juttle CLI as part of an
-// outrigger installation.
+// Simple helper script to expose the juttle CLI as part of a
+// juttle-engine installation.
 //
 var path = require('path');
 var juttle = path.resolve(__dirname, '../node_modules/juttle/bin/juttle');

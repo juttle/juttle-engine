@@ -1,6 +1,6 @@
-# Outrigger API
+# Juttle Engine API
 
-This document describes the API implemented by outrigger to start, stop, and manage juttle programs and jobs. A client uses this API to run Juttle programs, resolve input controls, kill running jobs, introspect running jobs, and so forth.
+This document describes the API implemented by juttle-engine to start, stop, and manage juttle programs and jobs. A client uses this API to run Juttle programs, resolve input controls, kill running jobs, introspect running jobs, and so forth.
 
 The API is mostly RESTful, mapping GETs to information fetches, POSTs to item creation, etc. The API also includes websocket endpoints that upgrade connections to a websocket protocol.
 
@@ -69,7 +69,7 @@ GET /api/v0/jobs HTTP/1.1
 
 ###POST /api/v0/jobs
 
-Returns the jobID of the job created by running the program included in the POST body, in conjunction with a set of input values.  This is how outrigger "runs" a program.  If an observer id is specified in the bundle, all websockets listening on the indicated observer id will be notified of the new job invocation.
+Returns the jobID of the job created by running the program included in the POST body, in conjunction with a set of input values.  This is how juttle-engine "runs" a program.  If an observer id is specified in the bundle, all websockets listening on the indicated observer id will be notified of the new job invocation.
 
 The program can either be provided as a program bundle (i.e. the result from using the `/paths/*path*` endpoint) or it can be a direct pathname:
 
