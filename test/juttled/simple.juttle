@@ -1,0 +1,8 @@
+emit -from :0: -every :1s: -limit 3
+    | batch :2s:
+    | (
+        view text -format 'raw';
+        view table -title 'My Table'
+    );
+
+

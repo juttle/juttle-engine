@@ -1,0 +1,5 @@
+emit -every :0.33s: -limit 5
+    | batch -every :1s:
+    | batch -every :1s:
+    | puty foo="bar"
+    | view table -display.progressive true
