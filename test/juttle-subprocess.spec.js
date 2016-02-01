@@ -46,7 +46,7 @@ describe('juttle-subprocess', function() {
             sentData.push(data);
         };
 
-        require('../../lib/juttle-subprocess.js');
+        require('../lib/juttle-subprocess.js');
     });
 
     afterEach(function() {
