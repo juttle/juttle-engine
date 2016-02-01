@@ -4,7 +4,7 @@
 var _ = require('underscore');
 var logSetup = require('./log-setup');
 var minimist = require('minimist');
-var JuttledService = require('../lib/service-juttled');
+var JuttleEngine = require('../lib/juttle-engine');
 var daemonize = require('daemon');
 
 var defaults = {
@@ -77,4 +77,4 @@ if (_.has(opts, 'config')) {
     service_opts.config_path = opts['config'];
 }
 
-new JuttledService(service_opts);
+new JuttleEngine(service_opts);
