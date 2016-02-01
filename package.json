@@ -13,7 +13,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "gulp test"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
