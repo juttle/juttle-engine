@@ -2,13 +2,13 @@
 
 /* eslint no-console: 0 */
 var _ = require('underscore');
-var logSetup = require('./log-setup');
+var logSetup = require('../lib/log-setup');
 var minimist = require('minimist');
-var JuttledService = require('../lib/service-juttled');
+var JuttleEngine = require('../lib/juttle-engine');
 var daemonize = require('daemon');
 
 var defaults = {
-    'port': 8080,
+    'port': 2000,
     'root': '/',
     'log-level': 'info'
 };
@@ -29,10 +29,10 @@ function usage() {
     console.log('       [--config <juttle-config-path>] [--daemonize]');
     console.log('       [--output <logfile>] [--log-config <log4js-config-path>]');
     console.log('       [--log-level <level] [--help]');
-    console.log('       -p, --port <port>:                     Run outriggerd on specified port');
+    console.log('       -p, --port <port>:                     Run juttle-engine on specified port');
     console.log('       -r, --root <path>:                     Use <path> as the root directory for juttle programs');
     console.log('       -c, --config <juttle-config-path>:     Read juttle config from <juttle-config-path>');
-    console.log('       -d, --daemonize:                       Daemonize outriggerd and log to configured log file');
+    console.log('       -d, --daemonize:                       Daemonize juttle-engine and log to configured log file');
     console.log('       -o, --output <logfile>:                Log to specififed file when daemonized');
     console.log('       -L, --log-config <log4js-config-path>: Configure logging from <log4js-config-path>. Overrides any value of -o');
     console.log('       -l, --log-level <level>:               Use a default log level of <level>. Overridden by any log level specified in -L');
@@ -77,4 +77,4 @@ if (_.has(opts, 'config')) {
     service_opts.config_path = opts['config'];
 }
 
-new JuttledService(service_opts);
+new JuttleEngine(service_opts);

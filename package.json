@@ -1,0 +1,62 @@
+{
+  "name": "juttle-engine",
+  "version": "0.1.0",
+  "description": "API-based execution engine for juttle programs",
+  "main": "bin/juttle-engine",
+  "bin": {
+    "juttle-engine": "bin/juttle-engine",
+    "juttle-engine-client": "bin/juttle-engine-client",
+    "juttle": "bin/juttle"
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juttle/juttle-engine.git"
+  },
+  "keywords": [
+    "juttle",
+    "api",
+    "express",
+    "subprocess"
+  ],
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/juttle/juttle-engine/issues"
+  },
+  "homepage": "https://github.com/juttle/juttle-engine#readme",
+  "dependencies": {
+    "CBuffer": "^1.1.1",
+    "bluebird": "^3.2.1",
+    "body-parser": "^1.14.2",
+    "daemon": "^1.1.0",
+    "double-ended-queue": "^0.9.7",
+    "express": "^4.13.4",
+    "express-ws": "^1.0.0-rc.2",
+    "extendable-base": "^0.3.1",
+    "fs-extra": "^0.26.5",
+    "juttle-jsdp": "^0.1.1",
+    "log4js": "^0.6.30",
+    "minimist": "^1.2.0",
+    "moment": "^2.11.1",
+    "underscore": "^1.8.3",
+    "uuid": "^2.0.1",
+    "ws": "^0.4.31"
+  },
+  "peerDependencies": {
+    "juttle": "^0.3.0"
+  },
+  "devDependencies": {
+    "bluebird-retry": "^0.5.3",
+    "chai": "^3.5.0",
+    "chakram": "^1.2.2",
+    "find-free-port": "^1.0.2",
+    "mocha": "^2.4.5"
+  }
+}

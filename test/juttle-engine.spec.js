@@ -1,7 +1,8 @@
 var _ = require('underscore');
 var chakram = require('chakram');
 var expect = chakram.expect;
-var JuttledService = require('../../lib/service-juttled');
+var logSetup = require('../lib/log-setup');
+var JuttleEngine = require('../lib/juttle-engine');
 var WebSocket = require('ws');
 var Promise = require('bluebird');
 var findFreePort = Promise.promisify(require('find-free-port'));
@@ -10,6 +11,9 @@ var fs_extra = Promise.promisifyAll(require('fs-extra'));
 
 var JSDP = require('juttle-jsdp');
 var moment = require('moment');
+
+var juttleRoot = __dirname + '/juttle-root';
+logSetup.init({'log-level': process.env.DEBUG ? 'debug' : 'info'});
 
 var juttleBaseUrl;
 function run_path(path) {
@@ -83,14 +87,14 @@ var has_syntax_error_info_obj = {
 //     - juttle program has syntax error
 //     - specifies inputs that don't actually map to anything in the program
 
-describe('Juttled Tests', function() {
+describe('Juttle Engine Tests', function() {
     var juttled;
 
     before(function() {
         findFreePort(10000, 20000)
         .then((freePort) => {
             juttleBaseUrl = 'http://localhost:' + freePort + '/api/v0';
-            juttled = new JuttledService({port: freePort, root_directory: __dirname});
+            juttled = new JuttleEngine({port: freePort, root_directory: juttleRoot});
         });
     });
 
@@ -210,8 +214,8 @@ describe('Juttled Tests', function() {
 
     describe('Bundling Tests', function() {
         describe('Invalid cases', function() {
-            var dangling_symlink = __dirname + '/dangling-symlink.juttle';
-            var not_readable = __dirname + '/not-readable.juttle';
+            var dangling_symlink = juttleRoot + '/dangling-symlink.juttle';
+            var not_readable = juttleRoot + '/not-readable.juttle';
 
             before(function() {
                 fs_extra.removeAsync(dangling_symlink)
@@ -224,7 +228,7 @@ describe('Juttled Tests', function() {
                 })
                 .then(function() {
                     // Copy forever.juttle to a file and make it not readable.
-                    return fs_extra.copyAsync(__dirname + '/forever.juttle', not_readable);
+                    return fs_extra.copyAsync(juttleRoot + '/forever.juttle', not_readable);
                 })
                 .then(function() {
                     return fs.chmodAsync(not_readable, '300');
@@ -364,7 +368,7 @@ describe('Juttled Tests', function() {
                                           'subdir/modules-relative-to-root.juttle',
                                           'subdir/modules-relative-to-program.juttle'
                                          ], function(filename) {
-                    return fs.readFileAsync(__dirname + '/' + filename, 'utf8');
+                    return fs.readFileAsync(juttleRoot + '/' + filename, 'utf8');
                 }))
                 .then(function(files) {
                     forever_program = files[0];
@@ -550,15 +554,15 @@ describe('Juttled Tests', function() {
         describe('Invalid Cases', function() {
             it('Empty body', function() {
                 var response = chakram.post(juttleBaseUrl + '/jobs', '');
-                expect(response).to.have.status(400);
                 expect(response).to.have.json({
                     code: 'JS-BUNDLE-ERROR',
-                    message: 'Malformed bundle: invalid json',
+                    message: 'Malformed bundle: Unexpected token \"',
                     info: {
                         bundle: '\"\"',
-                        reason: 'invalid json'
+                        reason: 'Unexpected token \"'
                     }
                 });
+                expect(response).to.have.status(400);
                 return chakram.wait();
             });
 
@@ -567,10 +571,10 @@ describe('Juttled Tests', function() {
                 expect(response).to.have.status(400);
                 expect(response).to.have.json({
                     code: 'JS-BUNDLE-ERROR',
-                    message: 'Malformed bundle: invalid json',
+                    message: 'Malformed bundle: Unexpected token \"',
                     info: {
                         bundle: '\"not json\"',
-                        reason: 'invalid json'
+                        reason: 'Unexpected token \"'
                     }
                 });
                 return chakram.wait();
