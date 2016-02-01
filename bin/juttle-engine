@@ -2,7 +2,7 @@
 
 /* eslint no-console: 0 */
 var _ = require('underscore');
-var logSetup = require('./log-setup');
+var logSetup = require('../lib/log-setup');
 var minimist = require('minimist');
 var JuttleEngine = require('../lib/juttle-engine');
 var daemonize = require('daemon');
