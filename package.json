@@ -5,8 +5,7 @@
   "main": "bin/juttle-engine",
   "bin": {
     "juttle-engine": "bin/juttle-engine",
-    "juttle-engine-client": "bin/juttle-engine-client",
-    "juttle": "bin/juttle"
+    "juttle-engine-client": "bin/juttle-engine-client"
   },
   "directories": {
     "doc": "docs",
