@@ -8,7 +8,7 @@ var JuttledService = require('../lib/service-juttled');
 var daemonize = require('daemon');
 
 var defaults = {
-    'port': 8080,
+    'port': 2000,
     'root': '/',
     'log-level': 'info'
 };

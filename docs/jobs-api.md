@@ -150,8 +150,8 @@ If specified with a websocket upgrade header, GET upgrades the http connection t
 GET /api/v0/jobs/53941d4a-3630-4218-b889-2ba86cd76ea2 HTTP/1.1
 Connection: Upgrade
 Upgrade: websocket
-Host: localhost:8080
-Origin: localhost:8080
+Host: localhost:2000
+Origin: localhost:2000
 Sec-WebSocket-Version: 13
 Sec-WebSocket-Key: MTMtMTQ1MDMwMjQ2ODY3MA==
 ```
