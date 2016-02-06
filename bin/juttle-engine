@@ -1,0 +1,65 @@
+#!/usr/bin/env node
+
+/* eslint no-console: 0 */
+var _ = require('underscore');
+var minimist = require('minimist');
+var engine = require('..');
+
+var defaults = {
+    'port': 8080,
+    'root': '/',
+    'log-level': 'info'
+};
+
+var possible_opts = {
+    p: 'port',
+    r: 'root',
+    c: 'config',
+    d: 'daemonize',
+    o: 'output',
+    L: 'log-config',
+    l: 'log-level',
+    h: 'help'
+};
+
+function usage() {
+    console.log('usage: [--port <port>] [--root <path>]');
+    console.log('       [--config <juttle-config-path>] [--daemonize]');
+    console.log('       [--output <logfile>] [--log-config <log4js-config-path>]');
+    console.log('       [--log-level <level] [--help]');
+    console.log('       -p, --port <port>:                     Run juttle-service on the specified port');
+    console.log('       -r, --root <path>:                     Use <path> as the root directory for juttle programs');
+    console.log('       -c, --config <juttle-config-path>:     Read juttle config from <juttle-config-path>');
+    console.log('       -d, --daemonize:                       Daemonize juttle-service and log to configured log file');
+    console.log('       -o, --output <logfile>:                Log to specififed file when daemonized');
+    console.log('       -L, --log-config <log4js-config-path>: Configure logging from <log4js-config-path>. Overrides any value of -o');
+    console.log('       -l, --log-level <level>:               Use a default log level of <level>. Overridden by any log level specified in -L');
+    console.log('       -h, --help:                            Print this help and exit');
+    process.exit(1);
+}
+
+var opts = minimist(process.argv.slice(2));
+
+_.defaults(opts, defaults);
+
+// Expand any single-letter option to its full-length equalivent.
+_.each(possible_opts, function(opt, short) {
+    if (_.has(opts, short)) {
+        opts[opt] = opts[short];
+        delete opts[short];
+    }
+});
+
+var extra = _.difference(_.keys(opts), _.values(possible_opts));
+extra = _.without(extra, '_');
+
+if (opts.help) {
+    usage();
+}
+
+if (extra.length > 0) {
+    console.error('Unknown argument(s): ' + extra.join(','));
+    usage();
+}
+
+engine.run(opts);
