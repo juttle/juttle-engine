@@ -1,0 +1,9 @@
+read elastic -from :2009-04-01: -to :2009-05-01: linkout != null tag != 'rollup_linkout'
+| batch :1 day:
+| reduce count() by linkout
+| sort count -desc
+| head 100
+| put tag = 'rollup_linkout'
+| put time = time - :1 day:
+| (write elastic -index 'logstash-*' -indexInterval 'day';
+   reduce count() | view table)

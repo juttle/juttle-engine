@@ -1,0 +1,11 @@
+{
+    "adapters": {
+        "juttle-elastic-adapter": [
+            {
+                "id": "local",
+                "address": "elasticsearch",
+                "port": 9200
+            }
+        ]
+    }
+}

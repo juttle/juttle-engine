@@ -1,0 +1,64 @@
+/*
+ * Reading stock quote data from Yahoo Finance via built-in http adapter
+ *
+ * $ juttle stock_prices.juttle --input symbol=goog
+ */
+
+input symbol: text -default 'IBM' -label 'Stock Ticker';
+
+const start = :1 year ago:;
+const end   = :now:;
+
+// Calculate the time span parameters
+const a = Date.get(start, 'month') - 1;
+const b = Date.get(start, 'day') - 1;
+const c = Date.get(start, 'year');
+const d = Date.get(end, 'month') - 1;
+const e = Date.get(end, 'day') - 1;
+const f = Date.get(end, 'year');
+
+// Fetch either data (d) or dividends (v)
+sub fetch(what) {
+  const url = 'http://real-chart.finance.yahoo.com/table.csv?s=${symbol}&a=${a}&b=${b}&c=${c}&d=${d}&e=${d}&f=${f}&g=${what}&ignore=.csv';
+  read http -url url
+  | put #Symbol = symbol
+  | put date = Date.new(#Date)
+  | sort date
+  | put time = date
+}
+
+sub prices() {
+  fetch -what 'd'
+  | keep time, Close, Volume
+  | split
+  | reduce -forget false -every :d: value=last(value) by name
+  | (
+      filter name = 'Volume'
+      | put value = Number.fromString(value ?? "0");
+
+      filter name = 'Close'
+      | filter value != null
+      | put value = Number.fromString(value);
+    )
+  | view timechart
+      -title '${symbol} closing price' -id 'chart'
+      -display.dataDensity 0
+      -keyField 'name'
+      -valueField 'value'
+      -series [
+        {name: 'Close', geom: 'line', yScale: 'primary'},
+        {name: 'Volume', geom: 'bars', yScale: 'secondary'}
+    ];
+}
+
+sub dividends() {
+  fetch -what 'v'
+  | put message = "Dividend of $${Dividends} per share"
+  |(
+    view table -title "Dividends paid";
+    view events -on 'chart' -messageField 'message'
+  )
+}
+
+prices;
+dividends;

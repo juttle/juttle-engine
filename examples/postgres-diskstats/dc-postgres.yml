@@ -1,0 +1,30 @@
+postgres_data:
+  image: juttle/postgres_diskstats_data
+
+postgres:
+  container_name: examples_postgres_1
+  image: postgres
+  ports:
+    - 5432:5432
+
+outrigger_loader:
+# this container will load data into postgres via juttle, and exit.
+  image: juttle/outrigger:latest
+  links:
+    - postgres
+  volumes_from:
+    - postgres_data
+  volumes:
+    - ${PWD}/juttle-config.json:/opt/outrigger/.juttle-config.json
+    - ${PWD}/postgres-diskstats/loadfromscratch.sh:/config/loadfromscratch.sh
+  command: bash /config/loadfromscratch.sh
+
+outrigger:
+# this outrigger container will keep running to serve juttles.
+  links:
+    - postgres
+  external_links:
+    - examples_postgres_1
+  volumes_from:
+    - postgres_data
+

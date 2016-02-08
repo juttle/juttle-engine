@@ -1,0 +1,10 @@
+sub add_juttle(name, description) {
+    put program="[" + name + "](/run?path=/examples/gmail/" + name + ".juttle)", description=description
+}
+
+emit |
+    ( add_juttle -name "messages_by_sender" -description 'Categorize gmail emails by sender';
+      add_juttle -name "messages_by_time" -description 'Categorize gmail emails by time';
+      add_juttle -name "write_results" -description 'Write program results by sending emails')
+    | keep program, description
+    | view table -title "Demo Juttle Programs" -markdownFields ['program']

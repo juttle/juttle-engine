@@ -1,0 +1,19 @@
+{
+    "adapters": {
+        "elastic": [
+            {
+                "id": "local",
+                "address": "examples_elasticsearch_1",
+                "port": 9200
+            }
+        ],
+        "influx": {
+            "url": "http://examples_influxdb_1:8086",
+            "user": "root",
+            "password": "root"
+        },
+        "postgres": {
+            "connection": "postgres://postgres@postgres/postgres"
+        }
+    }
+}

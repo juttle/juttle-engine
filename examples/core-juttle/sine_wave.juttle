@@ -1,0 +1,14 @@
+input period: number -default 5 -label 'Sine Wave period (seconds)';
+input amplitude: number -default 10 -label 'Sine Wave amplitude';
+input threshold: number -default 9 -label 'Alert threshold';
+
+emit -from :-30s: -every :.1 seconds: -limit 10000
+| put value =  amplitude * Math.sin(Math.PI * count() / 10 / (period / 2))
+| (
+    view timechart -title "Sine Wave" -id "chart";
+
+    reduce -every :.5s: -over :.5s: value=avg(value)
+    | filter value > threshold
+    | put message="average value ${Math.floor(value * 1000) / 1000} > threshold ${threshold}"
+    | view events -on 'chart'
+  )

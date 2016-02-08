@@ -1,0 +1,24 @@
+elasticsearch:
+  image: elasticsearch:2.1.1
+# These lines are only necessary if you want to use a separate volume
+# container to hold the data outside of the elasticsearch
+# container. Useful when building a docker image of the pre-loaded
+# elasticsearch data.
+#  volumes_from:
+#    - elastic_news_data
+  ports:
+    - 9200:9200
+
+logstash:
+  image: logstash:2.1.1
+  links:
+    -  elasticsearch
+  volumes:
+    - ${PWD}/elastic-newstracker/news_data_small.zip:/incoming/news_data_small.zip
+    - ${PWD}/elastic-newstracker/logstash.conf:/config/logstash.conf
+  command: bash -c 'unzip -c -q /incoming/news_data_small.zip | logstash -f /config/logstash.conf -w 4'
+
+outrigger:
+  links:
+    - elasticsearch
+

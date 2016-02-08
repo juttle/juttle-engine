@@ -1,0 +1,6 @@
+input npm_package: text -default "juttle";
+
+read http -url 'https://api.npmjs.org/downloads/range/last-month/${npm_package}' -timeField "day" -rootPath "downloads"
+    | put package=npm_package
+    | view timechart -keyField "package" -series [{name: npm_package, geom: 'bars'}] -yScales.primary.label "Number of NPM Downloads"
+

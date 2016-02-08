@@ -1,0 +1,46 @@
+function round(number, precision) {
+  // works with max precision of 15
+  var aux = Math.pow(10, precision);
+  return Math.round(number * aux) / aux;
+}
+
+(
+  read postgres -table 'kb_out'
+    -timeField 'time'
+  | reduce -every :1h: value=sum(value) by host
+  | put value = round(value / 1024 / 1024, 2); // now in GB
+
+  read file -file '/incoming/disks.json'
+)
+| join host
+|(
+  reduce -every :1h: sum(value) by region
+  |(
+    view timechart -title 'Throughput by region, GB' -row 0 -col 0;
+
+    reduce sum(sum) by region
+    | put sum = round(sum, 2)
+    | sort sum -desc
+    | view table -title 'Daily throughput by region, GB' -row 0 -col 1
+  );
+
+  reduce -every :1h: sum(value) by pool
+  |(
+    view timechart -title 'Throughput by pool, GB' -row 1 -col 0;
+
+    reduce sum(sum) by pool
+    | put sum = round(sum, 2)
+    | sort sum -desc
+    | view table -title 'Daily throughput by pool, GB' -row 1 -col 1
+  );
+
+  reduce -every :1h: sum(value) by subregion
+  |(
+    view timechart -title 'Throughput by subregion, GB' -seriesLimit 25 -row 2 -col 0;
+
+    reduce sum(sum) by subregion
+    | put sum = round(sum, 2)
+    | sort sum -desc
+    | view table -title 'Daily throughput by subregion, GB' -row 2 -col 1
+  );
+)

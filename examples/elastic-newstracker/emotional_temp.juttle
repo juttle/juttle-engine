@@ -1,0 +1,29 @@
+sub emotional_temperature(emotion, temp) {
+  read elastic -from :2009-04-01: -to :2009-05-01: emotion
+    | reduce -every :day: value=count() * temp
+    | put #emotion = emotion
+}
+
+sub get_temperature(i, defaultEmotion, defaultTemp) {
+    input emotion: text -label 'Emotion ${i}' -default defaultEmotion;
+    input _temp: text -label 'Temp ${i}' -default defaultTemp;
+    const temp = Number.fromString(_temp);
+    emotional_temperature -emotion emotion -temp temp
+}
+
+(
+  get_temperature -i 1 -defaultEmotion "euphoria" -defaultTemp "50";
+  get_temperature -i 2 -defaultEmotion "happy" -defaultTemp "10";
+  get_temperature -i 3 -defaultEmotion "sad" -defaultTemp "-10";
+  get_temperature -i 4 -defaultEmotion "morbid" -defaultTemp "-50";
+)
+|(
+  view timechart -title 'Emotional Temperatures';
+
+  reduce -every :day: value = sum(value)
+  | put emotion='overall'
+  | view timechart -title 'Net Emotional Temperature';
+
+  reduce -every :day: emotions = pluck(emotion), temps = pluck(value)
+  | view table -title 'Daily Values'
+)
