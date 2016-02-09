@@ -1,0 +1,4 @@
+emit -from :0: -limit 3 -every :100ms:
+| pace
+| put value = 10
+| view text -format 'json' -title 'output'

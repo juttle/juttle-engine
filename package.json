@@ -34,7 +34,7 @@
     "juttle-mysql-adapter": "^0.3.0",
     "juttle-opentsdb-adapter": "^0.1.1",
     "juttle-postgres-adapter": "^0.3.1",
-    "juttle-service": "^0.1.0",
+    "juttle-service": "juttle/juttle-service",
     "juttle-sqlite-adapter": "^0.3.1",
     "juttle-twitter-adapter": "^0.2.2",
     "juttle-viewer": "^0.1.0",
@@ -42,8 +42,20 @@
     "minimist": "^1.2.0"
   },
   "devDependencies": {
+    "bluebird": "^3.2.2",
+    "bluebird-retry": "^0.5.3",
+    "chai": "^3.5.0",
+    "chromedriver": "^2.21.2",
     "eslint": "^1.10.3",
+    "find-free-port": "^1.0.2",
     "gulp": "^3.9.0",
-    "gulp-eslint": "^1.1.1"
+    "gulp-eslint": "^1.1.1",
+    "gulp-istanbul": "^0.10.3",
+    "gulp-mocha": "^2.2.0",
+    "isparta": "^4.0.0",
+    "mocha-logger": "^1.0.2",
+    "nconf": "^0.8.4",
+    "selenium-webdriver": "^2.48.2",
+    "underscore": "^1.8.3"
   }
 }
