@@ -30,7 +30,7 @@ To obtain these credentials, set up a [Twitter App](https://apps.twitter.com/) u
 ## Juttle programs
 
 To execute the included Juttle program, visit
-``http://(localhost|docker machine ip):8080/run?path=/examples/twitter-race/twitter.juttle``.
+``http://(localhost|docker machine ip):8080/?path=/examples/twitter-race/twitter.juttle``.
 
 The output will be rendered in your browser. Enter two search terms and click "Run" to see the live charts.
 

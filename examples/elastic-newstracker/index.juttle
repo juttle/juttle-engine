@@ -1,6 +1,6 @@
 // Output a table with clickable links to the actual demo programs, for navigation.
 sub add_juttle(name, description) {
-    put program="[" + name + "](/run?path=/examples/elastic-newstracker/" + name + ".juttle)", description=description
+    put program="[" + name + "](/?path=/examples/elastic-newstracker/" + name + ".juttle)", description=description
 }
 
 emit

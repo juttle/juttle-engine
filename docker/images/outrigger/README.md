@@ -25,7 +25,7 @@ for demo purposes so you can then use the following link to run the
 "Hello World" juttle program:
 
 ```
-http://<docker_machine_ip>:8080/run?path=/examples/core-juttle/hello_world.juttle
+http://<docker_machine_ip>:8080/?path=/examples/core-juttle/hello_world.juttle
 ```
 
 **docker_machine_ip** on mac/windows is the ip of the virtual machine running
@@ -48,7 +48,7 @@ If you want to run a custom set of juttle programs, mount them in to a directory
 docker run -d -p 8080:8080 -v ./my-juttles:/opt/outrigger/juttles/my-juttles --name outrigger juttle/outrigger:latest
 ```
 
-The juttle programs below ./my-juttles will be accesible via urls of the form ``http://localhost:8080/run?path=/my-juttles/...``.
+The juttle programs below ./my-juttles will be accesible via urls of the form ``http://localhost:8080/?path=/my-juttles/...``.
 
 # Check Container Logs
 

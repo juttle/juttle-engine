@@ -44,7 +44,7 @@ The full set of steps to generate these credentials is [on the README](https://g
 ## Juttle Programs
 
 To run any of these programs, just visit
-``http://(localhost|docker machine ip):8080/run?path=/examples/gmail/index.juttle``
+``http://(localhost|docker machine ip):8080/?path=/examples/gmail/index.juttle``
 and follow the links.
 
 ### Categorizing messages by recipient

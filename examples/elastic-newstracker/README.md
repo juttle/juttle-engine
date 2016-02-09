@@ -24,7 +24,7 @@ docker-compose environment is started.
 ## Juttle Programs
 
 To run any of these programs, just visit
-``http://(localhost|docker machine ip):8080/run?path=/examples/elastic-newstracker/index.juttle``, which will output a
+``http://(localhost|docker machine ip):8080/?path=/examples/elastic-newstracker/index.juttle``, which will output a
 table with links in your browser. Click the links to run the example
 programs.
 

@@ -16,7 +16,7 @@ docker-compose -f dc-outrigger.yml -f cadvisor-influx/dc-cadvisor-influx.yml up
 
 Then visit this link to see the Juttle dashboard in your browser:
 
-``http://(localhost|docker machine ip):8080/run?path=/examples/cadvisor-influx/cadvisor-dashboard.juttle``
+``http://(localhost|docker machine ip):8080/?path=/examples/cadvisor-influx/cadvisor-dashboard.juttle``
 
 ## Additional docker-compose configuration
 
@@ -33,7 +33,7 @@ Then visit this link to see the Juttle dashboard in your browser:
 
 We will use Juttle to visualize cpu, memory and network activity of the running docker containers. The Juttle program will read recent metrics from InfluxDB storage.
 
-To run the program, visit ``http://(localhost|docker machine ip):8080/run?path=/examples/cadvisor-influx/cadvisor-dashboard.juttle``
+To run the program, visit ``http://(localhost|docker machine ip):8080/?path=/examples/cadvisor-influx/cadvisor-dashboard.juttle``
 
 The browser window will render this program's output: a table listing of the monitored docker containers, timecharts of their CPU utilization and network activity, and a barchart of memory usage.
 

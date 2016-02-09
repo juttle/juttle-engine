@@ -17,7 +17,7 @@ None needed.
 ## Juttle Programs
 
 To run any of these program, just visit
-``http://(localhost|docker machine ip):8080/run?path=/examples/core-juttle/index.juttle``
+``http://(localhost|docker machine ip):8080/?path=/examples/core-juttle/index.juttle``
 and follow the links.
 
 ### Hello World!
