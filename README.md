@@ -74,16 +74,31 @@ usage: [--port <port>] [--root <path>]
 
 ```
 usage: [--juttle-engine <hostname:port>] [--help] [COMMAND] [OPTIONS]
-   [COMMAND]: one of the following, with the following options:
-         list_jobs [--job <job-id>]
-         browser --path <path>
-   [OPTIONS]: one of the following:
-       --path <path-to-juttle-file>:          Path to file relative to configured root directory.
-                                              Used by "browser".
-       --job <job-id>:                        Job id.
-                                              Used by "list_jobs".
-       --juttle-engine <hostname:port>:       Hostname/port of the juttle-engine server
-       --help:                                Print this help and exit
+     [COMMAND]: one of the following, with the following options:
+          subscribe (--job <job-id> | --observer <observer-id>)
+          list_jobs [--job <job-id>]
+          list_observers
+          run --path <path-to-juttle-file> [--wait] [--observer <observer-id>]
+          delete --job <job-id>
+          get_inputs --path <path-to-juttle-file> --input name=val [--input name=val ...]
+          push --path <path-to-juttle-file> [--topic <rendezvous-topic>]
+          watch --path <path-to-juttle-file> [--topic <rendezvous-topic>]
+          browser --path <path-to-juttle-file>
+     [OPTIONS]: one of the following:
+          --path <path-to-juttle-file>                 Path to file relative to configured root directory.
+                                                       used by: run,get_inputs,push,watch,browser
+          --wait                                       If true, wait for program to finish, otherwise run in background
+                                                       used by: run
+          --input name=val                             One or more input values.
+                                                       used by: get_inputs
+          --job <job-id>                               Job id.
+                                                       used by: subscribe,list_jobs,delete
+          --observer <observer-id>                     Observer id.
+                                                       used by: subscribe,run
+          --juttle-engine <hostname:port>              Hostname/port of server
+          --help                                       Print this help and exit
+          --topic <rendezvous-topic>                   Rendezvous topic
+                                                       used by: push,watch
 ```
 
 ### Juttle config file
