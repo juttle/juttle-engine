@@ -3,13 +3,13 @@
 /* eslint no-console: 0 */
 var _ = require('underscore');
 var minimist = require('minimist');
-var JuttleServiceClient = require('juttle-service/lib/juttle-service-client');
+var JuttleBundler = require('juttle-service').JuttleBundler;
+var client = require('juttle-service').client;
 var Promise = require('bluebird');
 var WebSocket = require('ws');
 var path = require('path');
 var cli_errors = require('juttle/lib/cli/errors');
 var open = require('open');
-var JuttleBundler = require('juttle-service/lib/bundler');
 var chokidar = require('chokidar');
 var fs = require('fs');
 var crypto = require('crypto');
@@ -18,9 +18,9 @@ function push_file(filename, topic) {
 
     return new Promise(function (resolve, reject) {
 
-        console.log('Bundling program ' + filename + ' and pushing to rendezvous topic ' + topic + '...');
+        console.log(`Bundling program ${filename} and pushing to rendezvous topic ${topic}...`);
         // Open a websocket connection over the rendezvous channel
-        var ws = new WebSocket('ws://' + opts['juttle-engine'] + '/rendezvous/' + topic);
+        var ws = new WebSocket(`ws://${opts['juttle-engine']}/rendezvous/${topic}`);
         ws.on('open', function() {
             // Bundle the program locally and push the bundle over the websocket.
             var bundler = new JuttleBundler();
@@ -61,10 +61,10 @@ function push_path(opts) {
     if (opts.path !== undefined) {
         push_file(path.resolve(opts.path), opts.topic)
             .then(function() {
-                console.log('==> View program at: http://' + opts['juttle-engine'] + '/?rendezvous=' + opts.topic);
+                console.log(`==> View program at: http://${opts['juttle-engine']}/?rendezvous=${opts.topic}`);
             });
     } else {
-        JuttleServiceClient.usage();
+        client.usage();
     }
 }
 
@@ -75,10 +75,10 @@ function watch_path(opts) {
 
         push_file(watchPath, opts.topic)
             .then(function() {
-                console.log('==> View program at: http://' + opts['juttle-engine'] + '/?rendezvous=' + opts.topic);
+                console.log(`==> View program at: http://${opts['juttle-engine']}/?rendezvous=${opts.topic}`);
             });
 
-        console.log('Watching file ' + opts.path + ' for changes:');
+        console.log(`Watching file ${opts.path} for changes:`);
 
         chokidar.watch(watchPath).on('change', function(path) {
             var hash = get_file_hash(watchPath);
@@ -90,17 +90,17 @@ function watch_path(opts) {
             last_hash = hash;
         });
     } else {
-        JuttleServiceClient.usage();
+        client.usage();
     }
 }
 
 function browser(opts) {
     if (opts.path) {
         var absPath = path.resolve(opts.path);
-        open('http://' + opts['juttle-engine'] + '/?path=' + absPath);
+        open(`http://${opts['juttle-engine']}/?path=${absPath}`);
 
     } else {
-        JuttleServiceClient.usage();
+        client.usage();
     }
 }
 
@@ -130,7 +130,7 @@ var cmdargs = {
     }
 };
 
-JuttleServiceClient.init({
+client.init({
     write_output: console.log,
     write_error: console.error,
     client_exit: process.exit,
@@ -152,7 +152,7 @@ _.defaults(opts, defaults);
 
 if (opts.help ||
     opts._.length !== 1) {
-    JuttleServiceClient.usage();
+    client.usage();
 }
 
-JuttleServiceClient.command(opts['juttle-engine'], opts, command);
+client.command(opts['juttle-engine'], opts, command);
