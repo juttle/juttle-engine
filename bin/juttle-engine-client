@@ -1,0 +1,158 @@
+#!/usr/bin/env node
+
+/* eslint no-console: 0 */
+var _ = require('underscore');
+var minimist = require('minimist');
+var JuttleServiceClient = require('juttle-service/lib/juttle-service-client');
+var Promise = require('bluebird');
+var WebSocket = require('ws');
+var path = require('path');
+var cli_errors = require('juttle/lib/cli/errors');
+var open = require('open');
+var JuttleBundler = require('juttle-service/lib/bundler');
+var chokidar = require('chokidar');
+var fs = require('fs');
+var crypto = require('crypto');
+
+function push_file(filename, topic) {
+
+    return new Promise(function (resolve, reject) {
+
+        console.log('Bundling program ' + filename + ' and pushing to rendezvous topic ' + topic + '...');
+        // Open a websocket connection over the rendezvous channel
+        var ws = new WebSocket('ws://' + opts['juttle-engine'] + '/rendezvous/' + topic);
+        ws.on('open', function() {
+            // Bundle the program locally and push the bundle over the websocket.
+            var bundler = new JuttleBundler();
+            bundler.bundle(filename)
+                .then(function(bundle) {
+                    return new Promise(function (resolve, reject) {
+                        ws.send(JSON.stringify(bundle), resolve);
+                    });
+                })
+                .catch(function(err) {
+                    // If it's a juttle error containing a program
+                    // location, print the error in context.
+                    if (err.code === 'JS-JUTTLE-ERROR') {
+                        console.error(cli_errors.show_in_context({err: err.info.err,
+                                                                  program: err.info.bundle.program,
+                                                                  modules: err.info.bundle.modules,
+                                                                  filename: filename}));
+                    } else {
+                        console.error('ERROR', err.message);
+                    }
+                })
+                .finally(function() {
+                    ws.close();
+                    resolve();
+                });
+        });
+    });
+}
+
+function get_file_hash(path) {
+    var data = fs.readFileSync(path);
+    var shasum = crypto.createHash('sha256');
+    shasum.update(data);
+    return shasum.digest('hex');
+}
+
+function push_path(opts) {
+    if (opts.path !== undefined) {
+        push_file(path.resolve(opts.path), opts.topic)
+            .then(function() {
+                console.log('==> View program at: http://' + opts['juttle-engine'] + '/?rendezvous=' + opts.topic);
+            });
+    } else {
+        JuttleServiceClient.usage();
+    }
+}
+
+function watch_path(opts) {
+    if (opts.path !== undefined) {
+        var watchPath = path.resolve(opts.path);
+        var last_hash = get_file_hash(watchPath);
+
+        push_file(watchPath, opts.topic)
+            .then(function() {
+                console.log('==> View program at: http://' + opts['juttle-engine'] + '/?rendezvous=' + opts.topic);
+            });
+
+        console.log('Watching file ' + opts.path + ' for changes:');
+
+        chokidar.watch(watchPath).on('change', function(path) {
+            var hash = get_file_hash(watchPath);
+
+            if (hash !== last_hash) {
+                push_file(watchPath, opts.topic);
+            }
+
+            last_hash = hash;
+        });
+    } else {
+        JuttleServiceClient.usage();
+    }
+}
+
+function browser(opts) {
+    if (opts.path) {
+        var absPath = path.resolve(opts.path);
+        open('http://' + opts['juttle-engine'] + '/?path=' + absPath);
+
+    } else {
+        JuttleServiceClient.usage();
+    }
+}
+
+var commands = {
+    push: {
+        usage: '{path} [{topic}]',
+        perform: push_path
+    },
+    watch: {
+        usage: '{path} [{topic}]',
+        perform: watch_path
+    },
+    browser: {
+        usage: '{path}',
+        perform: browser
+    }
+};
+
+var cmdargs = {
+    server: {
+        usage: '--juttle-engine <hostname:port>',
+        desc: 'Hostname/port of server'
+    },
+    topic: {
+        usage: '--topic <rendezvous-topic>',
+        desc: 'Rendezvous topic'
+    }
+};
+
+JuttleServiceClient.init({
+    write_output: console.log,
+    write_error: console.error,
+    client_exit: process.exit,
+    commands: commands,
+    cmdargs: cmdargs
+});
+
+var defaults = {
+    'juttle-engine': 'localhost:8080',
+    'topic': 'default',
+    'wait': false
+};
+
+var opts = minimist(process.argv.slice(2));
+
+var command = opts._[0];
+
+_.defaults(opts, defaults);
+
+if (opts.help ||
+    opts._.length !== 1) {
+    JuttleServiceClient.usage();
+}
+
+JuttleServiceClient.command(opts['juttle-engine'], opts, command);
