@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/juttle/juttle-engine#readme",
   "dependencies": {
+    "bluebird": "^3.2.1",
+    "chokidar": "^1.4.2",
     "daemon": "^1.1.0",
     "express": "^4.13.4",
     "juttle": "^0.4.0",
@@ -38,7 +40,10 @@
     "juttle-sqlite-adapter": "^0.3.1",
     "juttle-twitter-adapter": "^0.2.2",
     "juttle-viewer": "^0.1.0",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "open": "^0.0.5",
+    "underscore": "^1.8.3",
+    "ws": "^0.4.31"
   },
   "devDependencies": {
     "bluebird": "^3.2.2",

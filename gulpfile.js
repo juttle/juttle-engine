@@ -58,7 +58,7 @@ gulp.task('test-coverage', ['instrument'], function() {
         thresholds: {
             global: {
                 statements: 95,
-                branches: 75,
+                branches: 70,
                 functions: 100,
                 lines: 95
             }
