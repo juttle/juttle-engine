@@ -15,18 +15,13 @@ let until = webdriver.until;
 let nconf = require('nconf');
 nconf.argv().env();
 
-/*let logSetup = require('../../../bin/log-setup');
-logSetup.init({
-    // set LOGLEVEL=OFF to quiet all logging
-    'log-level': nconf.get('LOGLEVEL') || 'INFO'
-});*/
-
 if (!nconf.get('SELENIUM_BROWSER')) {
     // default to chrome
     process.env['SELENIUM_BROWSER'] = 'chrome';
 }
 
 let JuttleEngine = require('../../../lib/juttle-engine');
+let logger = require('juttle-service').getLogger('juttle-engine-tester');
 
 class JuttleEngineTester {
     start(cb) {
@@ -147,6 +142,7 @@ class JuttleEngineTester {
         return retry(() => {
             return self.getErrorMessage()
             .then((value) => {
+                logger.debug('waitForJuttleErrorToContain got', value);
                 expect(value).to.contain(message);
             });
         }, options);
@@ -163,6 +159,7 @@ class JuttleEngineTester {
         return retry(() => {
             return self.getErrorMessage()
             .then((value) => {
+                logger.debug('waitForJuttleErrorToEqual got', value);
                 expect(value).to.equal(message);
             });
         }, options);
