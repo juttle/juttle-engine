@@ -26,7 +26,7 @@ docker-compose -f dc-outrigger.yml -f elastic-newstracker/dc-elastic.yml -f cadv
 If that worked correctly, you should be able to visit this URL in your browser (if running via docker-machine, replace ``localhost`` with IP of the machine):
 
 ```
-http://localhost:8080/run?path=/examples/index.juttle
+http://localhost:8080/?path=/examples/index.juttle
 ```
 
 Click the links in the rendered table to run juttle programs. The Juttle code is provided in subdirectories in ``*.juttle`` files.
@@ -98,7 +98,7 @@ sudo PWD=$PWD docker-compose -f dc-outrigger.yml up
 
 This starts outrigger with all the example .juttle programs below this
 directory pre-loaded. Start by visiting
-``http://localhost:8080/run?path=/examples/index.juttle``, which will output a
+``http://localhost:8080/?path=/examples/index.juttle``, which will output a
 table with links in your browser. Click the links to view the various sets
 of example programs.
 
@@ -159,7 +159,7 @@ outrigger:
 The programs would then be available at:
 
 ```
-http://(localhost|docker machine ip):8080/run?path=/my-juttles/<file>.juttle
+http://(localhost|docker machine ip):8080/?path=/my-juttles/<file>.juttle
 ```
 
 If you want to completely override the built-in set of example juttle

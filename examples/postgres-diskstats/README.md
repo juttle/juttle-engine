@@ -31,7 +31,7 @@ examples_outrigger_loader_1 exited with code 0
 
 Then visit this link to see the Juttle dashboard in your browser:
 
-``http://(localhost|docker machine ip):8080/run?path=/examples/postgres-diskstats/throughput.juttle``
+``http://(localhost|docker machine ip):8080/?path=/examples/postgres-diskstats/throughput.juttle``
 
 ## Additional docker-compose configuration
 
@@ -53,7 +53,7 @@ joins the two data streams on matching `host` field, then aggregates the disk th
 regions, subregion, pool. The same data is plotted on a timechart at hourly intervals, and shown in a table as sum totals.
 
 To run this juttle, visit
-`http://(localhost|docker machine ip):8080/run?path=/examples/postgres-diskstats/throughput.juttle`.
+`http://(localhost|docker machine ip):8080/?path=/examples/postgres-diskstats/throughput.juttle`.
 
 ## Experimenting with Juttle
 
