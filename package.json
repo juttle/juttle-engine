@@ -38,7 +38,6 @@
     "juttle-sqlite-adapter": "^0.3.1",
     "juttle-twitter-adapter": "^0.2.2",
     "juttle-viewer": "^0.1.0",
-    "log4js": "^0.6.31",
     "minimist": "^1.2.0"
   },
   "devDependencies": {
