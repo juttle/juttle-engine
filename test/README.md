@@ -8,15 +8,6 @@ To run the built in unit tests simply run:
 gulp test
 ```
 
-## Running App Tests
-
-To run the unit tests and app tests that uses your local `google-chrome` browser
-to run the tests:
-
-```
-gulp test --app
-```
-
 The above relies on you having the right version of chrome. To avoid version
 problems with chrome you can use docker for testing like so:
 
@@ -37,7 +28,7 @@ docker network inspect bridge | grep Gateway
 That `Gateway` is your host ip that should be used with the following command:
 
 ```
-OUTRIGGER_HOST=172.17.42.1 SELENIUM_REMOTE_URL='http://localhost:4444/wd/hub' gulp test --app
+JUTTLE_ENGINE_HOST=172.17.42.1 SELENIUM_REMOTE_URL='http://localhost:4444/wd/hub' gulp test
 ```
 
 That will run the same app tests through the docker selenium setup and verify
