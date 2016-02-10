@@ -1,0 +1,1 @@
+emit -limit 1 | put value = 0 + :2014-01-01:

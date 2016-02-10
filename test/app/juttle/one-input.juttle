@@ -1,0 +1,6 @@
+input a: text -label 'a';
+
+emit -from :0: -limit 3 -every :100ms:
+| pace
+| put value = a
+| view text -format 'json' -title 'output'
