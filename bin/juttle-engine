@@ -62,4 +62,5 @@ if (extra.length > 0) {
     usage();
 }
 
+opts.host = 'localhost';
 engine.run(opts);
