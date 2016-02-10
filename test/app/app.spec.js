@@ -18,16 +18,16 @@ describe('app tests', function() {
         juttleEngineTester.stop();
     });
 
-    it.skip('shows errors for a program that produces an error', () => {
+    it('shows errors for a program that produces an error', () => {
         return juttleEngineTester.run({
             path: path.join(__dirname, 'juttle', 'no-such-sub.juttle')
         })
         .then(() => {
-            return juttleEngineTester.waitForJuttleErrorToEqual('At line 1, column 1: Error: no such sub: kaboom');
+            return juttleEngineTester.waitForJuttleErrorToEqual('At line 1, column 1: no such sub: kaboom');
         });
     });
 
-    it.skip('shows warnings for program that produces a warning', () => {
+    it('shows warnings for program that produces a warning', () => {
         return juttleEngineTester.run({
             path: path.join(__dirname, 'juttle', 'warning.juttle')
         })
