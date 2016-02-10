@@ -1,3 +1,5 @@
+'use strict';
+
 var eslint = require('gulp-eslint');
 var gulp = require('gulp');
 

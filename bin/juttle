@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+'use strict';
+
 //
 // Simple helper script to expose the juttle CLI as part of an
 // outrigger installation.
