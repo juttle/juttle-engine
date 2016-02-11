@@ -63,5 +63,4 @@ if (extra.length > 0) {
     usage();
 }
 
-opts.host = '0.0.0.0';
 engine.run(opts);
