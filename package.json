@@ -1,12 +1,12 @@
 {
   "name": "juttle-engine",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "juttle execution engine",
   "main": "lib/juttle-engine",
   "bin": {
-      "juttle": "bin/juttle",
-      "juttle-engine": "bin/juttle-engine",
-      "juttle-engine-client": "bin/juttle-engine-client"
+    "juttle": "bin/juttle",
+    "juttle-engine": "bin/juttle-engine",
+    "juttle-engine-client": "bin/juttle-engine-client"
   },
   "scripts": {
     "test": "gulp test"
