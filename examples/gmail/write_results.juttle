@@ -1,4 +1,4 @@
 emit -limit 10
-    | (write gmail -subject "Example outrigger + gmail + write output";
+    | (write gmail -subject "Example juttle-engine + gmail + write output";
        view table);
 

@@ -21,7 +21,7 @@ cadvisor:
     - /var/lib/docker/:/var/lib/docker:ro
   links:
     - influxdb
-outrigger:
+juttle-engine:
   links:
     - influxdb
   external_links:

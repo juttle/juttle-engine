@@ -18,7 +18,7 @@ logstash:
     - ${PWD}/elastic-newstracker/logstash.conf:/config/logstash.conf
   command: bash -c 'unzip -c -q /incoming/news_data_small.zip | logstash -f /config/logstash.conf -w 4'
 
-outrigger:
+juttle-engine:
   links:
     - elasticsearch
 

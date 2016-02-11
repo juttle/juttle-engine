@@ -7,20 +7,20 @@ postgres:
   ports:
     - 5432:5432
 
-outrigger_loader:
+juttle-engine_loader:
 # this container will load data into postgres via juttle, and exit.
-  image: juttle/outrigger:latest
+  image: juttle/juttle-engine:latest
   links:
     - postgres
   volumes_from:
     - postgres_data
   volumes:
-    - ${PWD}/juttle-config.json:/opt/outrigger/.juttle-config.json
+    - ${PWD}/juttle-config.json:/opt/juttle-engine/.juttle-config.json
     - ${PWD}/postgres-diskstats/loadfromscratch.sh:/config/loadfromscratch.sh
   command: bash /config/loadfromscratch.sh
 
-outrigger:
-# this outrigger container will keep running to serve juttles.
+juttle-engine:
+# this juttle-engine container will keep running to serve juttles.
   links:
     - postgres
   external_links:

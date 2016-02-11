@@ -1,0 +1,6 @@
+juttle-engine:
+  image: juttle/juttle-engine:latest
+  volumes:
+    - ${PWD}/juttle-config.json:/opt/juttle-engine/.juttle-config.json
+  ports:
+    - "8080:8080"

@@ -3,8 +3,8 @@
 ## Setup
 
 These examples use only built-in Juttle processors and adapters.  All
-you need to run these examples is to install outrigger and run
-outriggerd, as described in the parent directory.
+you need to run these examples is to install juttle-engine and run
+juttle-engine, as described in the parent directory.
 
 ## Additional docker-compose configuration
 
@@ -16,7 +16,7 @@ None needed.
 
 ## Juttle Programs
 
-To run any of these program, just visit
+To run any of these programs, just visit
 ``http://(localhost|docker machine ip):8080/?path=/examples/core-juttle/index.juttle``
 and follow the links.
 
