@@ -1,6 +1,6 @@
 {
   "name": "juttle-engine",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "juttle execution engine",
   "main": "lib/juttle-engine",
   "bin": {
