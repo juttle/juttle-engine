@@ -12,7 +12,7 @@ const cpu_ticks_per_second = 10000000;
 // reads exclude occasionally appearing ephemeral container with name '/'
 //
 sub read_stat(stat, from) {
-  read influx -from from -db 'cadvisor' -measurements stat
+  read influx -from from -db 'cadvisor' name=stat
     NOT container_name ~ /\/.*/  // exclude ephemeral containers
 }
 
@@ -51,7 +51,7 @@ sub network() {
 }
 
 sub containers() {
-  read influx -from start -db 'cadvisor' -measurements 'cpu_usage_total'
+  read influx -from start -db 'cadvisor' name='cpu_usage_total'
   | reduce by container_name
   | filter NOT container_name ~ /\/.*/  // exclude ephemeral containers
   |(
