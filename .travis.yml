@@ -26,5 +26,8 @@ script:
     - export SELENIUM_REMOTE_URL='http://localhost:4444/wd/hub'
     - gulp test-coverage
 
+after_failure:
+    - docker logs selenium-node-chrome
+
 after_script:
     - ./test/scripts/stop_selenium_setup.sh
