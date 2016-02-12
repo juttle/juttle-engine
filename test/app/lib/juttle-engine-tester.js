@@ -24,6 +24,7 @@ let JuttleEngine = require('../../../lib/juttle-engine');
 let logger = require('juttle-service').getLogger('juttle-engine-tester');
 
 class JuttleEngineTester {
+
     start(cb) {
         findFreePort(10000, 20000)
         .then((port) => {
@@ -32,17 +33,16 @@ class JuttleEngineTester {
             JuttleEngine.run({
                 host: host,
                 port: port,
-                root: '/'
+                root: '/',
+                'log-level': 'debug'
             }, cb);
 
             // Make sure that the node_modules version of chromedriver
             // is first in the path.
             process.env.PATH = path.resolve(__dirname, '../../../node_modules/.bin') +
                                path.delimiter + process.env.PATH;
-            this.driver = new webdriver.Builder()
-                .build();
+            this.driver = new webdriver.Builder().build();
         });
-        this.counter = 0;
     }
 
     stop() {
