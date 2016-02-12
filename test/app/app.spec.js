@@ -3,10 +3,7 @@
 let JuttleEngineTester = require('./lib/juttle-engine-tester');
 let path = require('path');
 
-const TEST_TIMEOUT = 10000;
-
 describe('app tests', function() {
-    this.timeout(TEST_TIMEOUT);
     let juttleEngineTester;
 
     before((done) => {
@@ -14,8 +11,13 @@ describe('app tests', function() {
         juttleEngineTester.start(done);
     });
 
-    after(() => {
-        juttleEngineTester.stop();
+    after((done) => {
+        juttleEngineTester.stop({
+            dumpContainerLogs: process.env['DEBUG']
+        })
+        .then(() => {
+            done();
+        });
     });
 
     it('shows errors for a program that produces an error', () => {
