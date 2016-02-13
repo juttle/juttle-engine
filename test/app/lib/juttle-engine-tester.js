@@ -1,9 +1,12 @@
 'use strict';
 
 let _ = require('underscore');
-let expect = require('chai').expect;
 let Promise = require('bluebird');
+let execAsync = Promise.promisify(require('child_process').exec);
+let expect = require('chai').expect;
 let findFreePort = Promise.promisify(require('find-free-port'));
+let grid = Promise.promisifyAll(require('selenium-grid-status'));
+let logger = require('juttle-service').getLogger('juttle-engine-tester');
 let path = require('path');
 let retry = require('bluebird-retry');
 let url = require('url');
@@ -12,22 +15,69 @@ let webdriver = require('selenium-webdriver');
 let By = webdriver.By;
 let until = webdriver.until;
 
-let nconf = require('nconf');
-nconf.argv().env();
-
-if (!nconf.get('SELENIUM_BROWSER')) {
+if (!process.env['SELENIUM_BROWSER']) {
     // default to chrome
     process.env['SELENIUM_BROWSER'] = 'chrome';
 }
 
+let startedDocker = false;
 let JuttleEngine = require('../../../lib/juttle-engine');
-let logger = require('juttle-service').getLogger('juttle-engine-tester');
+
+function debug(output) {
+    _.each(output.split('\n'), (line) => {
+        logger.debug(line);
+    });
+}
 
 class JuttleEngineTester {
     start(cb) {
-        findFreePort(10000, 20000)
+        var chain;
+
+        if (process.env['TEST_MODE'] === 'docker' && !startedDocker) {
+            logger.info('starting docker containers');
+            chain = execAsync('./test/scripts/start-docker-containers.sh')
+            .then((stdout) => {
+                debug(stdout);
+                return retry(() => {
+                    return grid.availableAsync({
+                        host: 'localhost',
+                        port: 4444
+                    })
+                    .then((status) => {
+                        if (status.length == 0) {
+                            throw Error('Waiting for selenium nodes: ' +
+                                        JSON.stringify(status, null, 4));
+                        }
+                    });
+                })
+            })
+            .then(() => {
+                // figure out the gateway address so we can communicate from
+                // the browser in the selenium-chrome-node container back to
+                // the juttle-engine running on the docker host
+                return execAsync('docker exec selenium-hub networkctl status | grep Gateway');
+            })
+            .then((stdout) => {
+                // output from previous command looks like so:
+                // '        Gateway: 172.16.0.1 on eth0'
+                var gateway = stdout.trim().split(' ')[1];
+                process.env['JUTTLE_ENGINE_HOST'] = gateway;
+                logger.info('docker host at', gateway);
+
+                startedDocker = true;
+                logger.info('docker containers started');
+                process.env['SELENIUM_REMOTE_URL'] = 'http://localhost:4444/wd/hub';
+            });
+        } else {
+            chain = Promise.resolve();
+        }
+
+        chain
+        .then(() => {
+            return findFreePort(10000, 20000);
+        })
         .then((port) => {
-            var host = nconf.get('JUTTLE_ENGINE_HOST') || 'localhost';
+            var host = process.env['JUTTLE_ENGINE_HOST'] || 'localhost';
             this.port = port;
             JuttleEngine.run({
                 host: host,
@@ -39,18 +89,49 @@ class JuttleEngineTester {
             // is first in the path.
             process.env.PATH = path.resolve(__dirname, '../../../node_modules/.bin') +
                                path.delimiter + process.env.PATH;
-            this.driver = new webdriver.Builder()
-                .build();
+            this.driver = new webdriver.Builder().build();
         });
-        this.counter = 0;
+
+        return chain;
     }
 
-    stop() {
-        if (!nconf.get('KEEP_BROWSER')) {
-            this.driver.quit();
+    stop(options) {
+        var chain = Promise.resolve();
+        options = options || {};
+
+        if (!process.env['KEEP_BROWSER']) {
+            chain = chain.then(() => {
+                if (this.driver) {
+                    return this.driver.quit();
+                }
+            });
         }
 
-        JuttleEngine.stop();
+        chain = chain.then(() => {
+            JuttleEngine.stop();
+        });
+
+        if (startedDocker) {
+            logger.info('stopping docker containers');
+            if (options.dumpContainerLogs) {
+                chain = chain.then(() => {
+                    return execAsync('./test/scripts/dump-docker-container-logs.sh')
+                    .then((stdout) => {
+                        debug(stdout);
+                    });
+                });
+            }
+
+            chain = chain.then(() => {
+                return execAsync('./test/scripts/stop-docker-containers.sh');
+            })
+            .then((stdout) => {
+                debug(stdout);
+                logger.info('docker containers stopped');
+            });
+        }
+
+        return chain;
     }
 
     _findElement(locator) {
@@ -304,7 +385,7 @@ class JuttleEngineTester {
     }
 
     run(options) {
-        var host = nconf.get('JUTTLE_ENGINE_HOST') || 'localhost';
+        var host = process.env['JUTTLE_ENGINE_HOST'] || 'localhost';
         var urlPath = url.format({
             protocol: 'http',
             hostname: host,

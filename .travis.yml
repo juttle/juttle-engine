@@ -17,14 +17,6 @@ node_js:
     - '4.2'
     - '5.0'
 
-before_script:
-    - ./test/scripts/start_selenium_setup.sh
-
 script:
     - gulp lint
-    - export JUTTLE_ENGINE_HOST=`/sbin/ifconfig docker0 | grep 'Mask:' | cut -d':' -f2 | awk '{print $1}'`
-    - export SELENIUM_REMOTE_URL='http://localhost:4444/wd/hub'
-    - gulp test-coverage
-
-after_script:
-    - ./test/scripts/stop_selenium_setup.sh
+    - DEBUG=juttle-engine-tester TEST_MODE=docker gulp test-coverage
