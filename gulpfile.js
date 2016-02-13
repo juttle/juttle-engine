@@ -11,7 +11,7 @@ gulp.task('lint', function() {
         'gulpfile.js',
         'bin/*',
         'lib/**/*.js',
-        'test/**/*.spec.js'
+        'test/**/*.js'
     ])
     .pipe(eslint())
     .pipe(eslint.format())
