@@ -4,14 +4,14 @@
 
 This example demonstrates using Juttle with an InfluxDB backend via the [influx adapter](https://github.com/juttle/juttle-influx-adapter). We will run docker containers, collect cpu, memory and network activity metrics using the [cAdvisor](https://github.com/google/cadvisor) monitoring daemon, and point cAdvisor at InfluxDB for stats storage.
 
-Our Juttle program will then read the stats from InfluxDB backend and render visualizations of the container activity in the outrigger environment. Since this demo will have 3 docker containers running (influxdb, cadvisor and outrigger), we will monitor statistics from these three, as well as any other containers that happen to be running on the system.
+Our Juttle program will then read the stats from InfluxDB backend and render visualizations of the container activity in the juttle-engine environment. Since this demo will have 3 docker containers running (influxdb, cadvisor and juttle-engine), we will monitor statistics from these three, as well as any other containers that happen to be running on the system.
 
 ## tl;dr
 
 Run this from the parent `examples` dir (details in the parent [README.md](../README.md)):
 
 ```
-docker-compose -f dc-outrigger.yml -f cadvisor-influx/dc-cadvisor-influx.yml up
+docker-compose -f dc-juttle-engine.yml -f cadvisor-influx/dc-cadvisor-influx.yml up
 ```
 
 Then visit this link to see the Juttle dashboard in your browser:

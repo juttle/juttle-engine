@@ -9,7 +9,7 @@ docker create -v /usr/share/elasticsearch/data --name elastic_news_data busybox
 - Run everything in docker-compose:
 
 ```
-docker-compose -f dc-outrigger.yml -f elastic-newstracker/dc-elastic-loadfromscratch.yml up
+docker-compose -f dc-juttle-engine.yml -f elastic-newstracker/dc-elastic-loadfromscratch.yml up
 ```
 
 - Wait for logstash to fully populate the file into elasticsearch.
@@ -17,7 +17,7 @@ docker-compose -f dc-outrigger.yml -f elastic-newstracker/dc-elastic-loadfromscr
 - Stop everything in docker-compose:
 
 ```
-docker-compose -f dc-outrigger.yml -f elastic-newstracker/dc-elastic-loadfromscratch.yml rm -v
+docker-compose -f dc-juttle-engine.yml -f elastic-newstracker/dc-elastic-loadfromscratch.yml rm -v
 ```
 
 (Note: this will not remove the elastic_news_data container you created as it is not included directly in the docker-compose files).

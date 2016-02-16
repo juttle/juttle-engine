@@ -1,6 +1,0 @@
-outrigger:
-  image: juttle/outrigger:latest
-  volumes:
-    - ${PWD}/juttle-config.json:/opt/outrigger/.juttle-config.json
-  ports:
-    - "8080:8080"

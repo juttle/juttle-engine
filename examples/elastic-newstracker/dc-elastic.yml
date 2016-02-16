@@ -9,7 +9,7 @@ elasticsearch:
   ports:
     - 9200:9200
 
-outrigger:
+juttle-engine:
   links:
     - elasticsearch
   external_links:

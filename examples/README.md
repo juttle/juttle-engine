@@ -1,10 +1,10 @@
-# Juttle Example Programs Using Outrigger
+# Juttle Example Programs Using juttle-engine
 
 # Introduction
 
 The README files and juttle programs below this directory show different examples of how you can use Juttle to read from a variety of data sources (backends), process that data, write back to data sources, and visualize data in the browser.
 
-To make it easy to download and run these programs, the instructions rely on docker and docker compose to create an outrigger instance linked to a variety of dependent backends. The linkage is done via juttle adapters.
+To make it easy to download and run these programs, the instructions rely on docker and docker compose to create a juttle-engine instance linked to a variety of dependent backends. The linkage is done via juttle adapters.
 
 # tl;dr
 
@@ -20,7 +20,7 @@ Examples                               | Special instructions
 If you wish to run all available examples, this command will start all necessary docker containers:
 
 ```
-docker-compose -f dc-outrigger.yml -f elastic-newstracker/dc-elastic.yml -f cadvisor-influx/dc-cadvisor-influx.yml -f postgres-diskstats/dc-postgres.yml up
+docker-compose -f dc-juttle-engine.yml -f elastic-newstracker/dc-elastic.yml -f cadvisor-influx/dc-cadvisor-influx.yml -f postgres-diskstats/dc-postgres.yml up
 ```
 
 If that worked correctly, you should be able to visit this URL in your browser (if running via docker-machine, replace ``localhost`` with IP of the machine):
@@ -43,26 +43,27 @@ remotely from a mac.
 
 ## Architecture
 
-The [dc-outrigger.yml](./dc-outrigger.yml) file in this directory defines the base
-configuration for outriggerd. It contains the outrigger software and
-provides a volume mapping from ``$PWD/juttle-config.json`` to
-``/opt/outrigger/.juttle-config.json`` within the outrigger container.
+The [dc-juttle-engine.yml](./dc-juttle-engine.yml) file in this
+directory defines the base configuration for juttle-engine. It
+contains the juttle-engine software and provides a volume mapping from
+``$PWD/juttle-config.json`` to ``/opt/juttle-engine/.juttle-config.json``
+within the juttle-engine container.
 
 The various subdirectories include additional
 ``dc-<backend>.yml`` files that add additional containers
 and configuration. They can be combined with this main docker compose
-file to link together outrigger and one or more backends.
+file to link together juttle-engine and one or more backends.
 
 ## How to run these examples
 
-### (Optional) Get the latest ``juttle/outrigger:latest`` image
+### (Optional) Get the latest ``juttle/juttle-engine:latest`` image
 
 If you have run this example in the past, you might have an old
-juttle/outrigger:latest image. Ensure you have the latest image by
+juttle/juttle-engine:latest image. Ensure you have the latest image by
 running:
 
 ```
-docker pull juttle/outrigger:latest
+docker pull juttle/juttle-engine:latest
 ```
 
 ### (Optional) Clean up from a prior session
@@ -71,19 +72,19 @@ If you have previously run this example, you probably want to start from
 scratch including an empty set of elasticsearch data. To do this, run:
 
 ```
-docker-compose -f dc-outrigger.yml [-f additional .yml files, see below] stop
-docker-compose -f dc-outrigger.yml [-f additional .yml files, see below] rm -v
+docker-compose -f dc-juttle-engine.yml [-f additional .yml files, see below] stop
+docker-compose -f dc-juttle-engine.yml [-f additional .yml files, see below] rm -v
 ```
 
 ### Run docker-compose with basic .yml file
 
 If you only want to run core juttle programs that do not use any
-adapters or backends, the ``docker-compose.yml`` in this directory
+adapters or backends, the ``dc-juttle-engine.yml`` in this directory
 contains the necessary configuration. Assuming you are in the
 directory where this README is located, simply run:
 
 ```
-docker-compose -f dc-outrigger.yml up
+docker-compose -f dc-juttle-engine.yml up
 ```
 
 This should always be run from the ``examples/`` directory to ensure
@@ -93,10 +94,10 @@ If you're running docker via sudo, you also need to ensure that the
 environment variable PWD is the current directory:
 
 ```
-sudo PWD=$PWD docker-compose -f dc-outrigger.yml up
+sudo PWD=$PWD docker-compose -f dc-juttle-engine.yml up
 ```
 
-This starts outrigger with all the example .juttle programs below this
+This starts juttle-engine with all the example .juttle programs below this
 directory pre-loaded. Start by visiting
 ``http://localhost:8080/?path=/examples/index.juttle``, which will output a
 table with links in your browser. Click the links to view the various sets
@@ -114,7 +115,7 @@ below this directory. For example, to extend the base configuration to
 add an elasticsearch, influx and postgres backends, run:
 
 ```
-docker-compose -f dc-outrigger.yml -f elastic-newstracker/dc-elastic.yml -f cadvisor-influx/dc-cadvisor-influx.yml -f postgres-diskstats/dc-postgres.yml up
+docker-compose -f dc-juttle-engine.yml -f elastic-newstracker/dc-elastic.yml -f cadvisor-influx/dc-cadvisor-influx.yml -f postgres-diskstats/dc-postgres.yml up
 ```
 
 Not every adapter requires additional containers (for example,
@@ -130,7 +131,7 @@ instructions on the necessary configuration to add to the juttle
 config file.
 
 Additionally, in this directory
-[juttle-config.json](./juttle-config.json.example) contains a
+[juttle-config.json](./juttle-config.json) contains a
 reference configuration file with a combination of the
 ``juttle-config.json`` snippets from each subdirectory. Some backends,
 like twitter, require custom information such as OAuth tokens, and as
@@ -143,17 +144,18 @@ files, ``juttle-config.json`` will be sufficient.
 ### Using volume mapping to override built-in juttle programs
 
 If you want to provide your own set of juttle programs to run, modify
-[dc-outrigger.yml](./dc-outrigger.yml) to add an entry to the outrigger container's
-``volumes`` list. For example, if you have a directory of juttle
-programs in ``/home/user/my-juttles`` that you wish to run in outrigger, modify
-[dc-outrigger.yml](./dc-outrigger.yml) as follows:
+[dc-juttle-engine.yml](./dc-juttle-engine.yml) to add an entry to the
+juttle-engine container's ``volumes`` list. For example, if you have a
+directory of juttle programs in ``/home/user/my-juttles`` that you
+wish to run in juttle-engine, modify
+[dc-juttle-engine.yml](./dc-juttle-engine.yml) as follows:
 
 ```
-outrigger:
+juttle-engine:
 ...
   volumes:
-    - ${PWD}/juttle-config.json:/opt/outrigger/.juttle-config.json
-    - /home/user/my-juttles:/opt/outrigger/juttles/my-juttles
+    - ${PWD}/juttle-config.json:/opt/juttle-engine/.juttle-config.json
+    - /home/user/my-juttles:/opt/juttle-engine/juttles/my-juttles
 ```
 
 The programs would then be available at:
@@ -163,28 +165,28 @@ http://(localhost|docker machine ip):8080/?path=/my-juttles/<file>.juttle
 ```
 
 If you want to completely override the built-in set of example juttle
-programs with a copy from a git checkout, modify ``outrigger.yml`` as
-follows. Assuming you've checked out outrigger to ``/home/user/src/outrigger``:
+programs with a copy from a git checkout, modify ``dc-juttle-engine.yml`` as
+follows. Assuming you've checked out juttle-engine to ``/home/user/src/juttle-engine``:
 
 ```
-outrigger:
+juttle-engine:
 ...
   volumes:
-    - ${PWD}/juttle-config.json:/opt/outrigger/.juttle-config.json
-    - /home/user/src/outrigger/examples:/opt/outrigger/juttles/examples
+    - ${PWD}/juttle-config.json:/opt/juttle-engine/.juttle-config.json
+    - /home/user/src/juttle-engine/examples:/opt/juttle-engine/juttles/examples
 ```
 
 ## Additional Information
 
 ### Known Problems
 
-#### Can not restart outrigger via docker-compose
+#### Can not restart juttle-engine via docker-compose
 
-Occasionally, when restarting outrigger via docker-compose and docker-machine, after changing the set of mounted volumes, you may see this error:
+Occasionally, when restarting juttle-engine via docker-compose and docker-machine, after changing the set of mounted volumes, you may see this error:
 
 ```
-$ docker-compose -f dc-outrigger.yml up
-Creating examples_outrigger_1
+$ docker-compose -f dc-juttle-engine.yml up
+Creating examples_juttle-engine_1
 ERROR: Cannot start container bdef23b0ad98d959ac2fba061488471732ba085c11cd3c74d20839341c710919: [8] System error: not a directory
 ```
 

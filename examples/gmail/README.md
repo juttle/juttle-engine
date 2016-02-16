@@ -61,7 +61,7 @@ View this program: [messages_by_time.juttle](./messages_by_time.juttle)
 
 ### Writing results by sending messages
 
-This program emits a small set of artificial data and writes the result by sending an email. The email contains the data as a JSON attachment to the email. (The output is also written to a table so it can be viewed in outrigger).
+This program emits a small set of artificial data and writes the result by sending an email. The email contains the data as a JSON attachment to the email. (The output is also written to a table so it can be viewed in juttle-engine).
 
 View this program: [write_results.juttle](./write_results.juttle)
 

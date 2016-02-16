@@ -1,5 +1,5 @@
 /* This Juttle program helps us keep the office kitchen clean!
- * 
+ *
  * It randomly picks two people to serve kitchen duty every day
  * and sends a notification to our slack channel #food.
  * We run it as a cron job on an AWS micro instance.
@@ -19,7 +19,7 @@ sub people() {
     { "name":"rodney" }
   ];
 
-  emit -points names -from :0:
+  emit -points names
   | remove time
 }
 
@@ -59,6 +59,6 @@ people
 | put text = "Today's kitchen duty: ${names[0]} and ${names[1]}"
 | remove names
 |(
-  view table; 
+  view table;
 //  slack    // UNCOMMENT ME
 )

@@ -15,18 +15,18 @@ to showcase joining data from different sources in a Juttle program.
 Run this from the parent `examples` dir (details in the parent [README.md](../README.md)):
 
 ```
-docker-compose -f dc-outrigger.yml -f postgres-diskstats/dc-postgres.yml up
+docker-compose -f dc-juttle-engine.yml -f postgres-diskstats/dc-postgres.yml up
 ```
 
 Data is loaded when docker container log shows this:
 
 ```
-outrigger_loader_1 | ┌──────────┐
-outrigger_loader_1 | │ count    │
-outrigger_loader_1 | ├──────────┤
-outrigger_loader_1 | │ 251573   │
-outrigger_loader_1 | └──────────┘
-examples_outrigger_loader_1 exited with code 0
+juttle-engine_loader_1 | ┌──────────┐
+juttle-engine_loader_1 | │ count    │
+juttle-engine_loader_1 | ├──────────┤
+juttle-engine_loader_1 | │ 251573   │
+juttle-engine_loader_1 | └──────────┘
+examples_juttle-engine_loader_1 exited with code 0
 ```
 
 Then visit this link to see the Juttle dashboard in your browser:
@@ -38,9 +38,9 @@ Then visit this link to see the Juttle dashboard in your browser:
 [dc-postgres.yml](./dc-postgres.yml) in the current directory adds the following containers:
 
 - postgres_diskstats_data, a container with data volume exposing the JSON input files, see [image README](../../docker/images/postgres_diskstats/README.md)
-- outrigger_loader, an outrigger container that briefly runs to read the input file and write to Postgres, then exits
+- juttle-engine_loader, an juttle-engine container that briefly runs to read the input file and write to Postgres, then exits
 
-The parent [dc-elastic.yml](../dc-elastic.yml) defines the main outrigger container that will keep running to serve juttle programs.
+The parent [dc-elastic.yml](../dc-elastic.yml) defines the main juttle-engine container that will keep running to serve juttle programs.
 
 ## `juttle-config.json` configuration
 
@@ -60,10 +60,8 @@ To run this juttle, visit
 To try different aggregations of this data, run the Juttle CLI against the docker container like this:
 
 ```
-docker exec -it examples_outrigger_1 juttle
+docker exec -it examples_juttle-engine_1 juttle
 ```
-
-Note: once [this issue](https://github.com/juttle/outrigger/issues/30) is implemented, you will be able to type programs directly in the outrigger browser environment.
 
 In the CLI, you will want to use multiline mode, type `<` to enter it, and `.` to run the multiline program.
 
@@ -82,7 +80,7 @@ This program would show most performant disk models by average throughput:
 | head 10
 ```
 
-Change `head 10` to `tail 10` to see the slowest disks instead. 
+Change `head 10` to `tail 10` to see the slowest disks instead.
 
 In place of `diskmodel`, try:
 * region
@@ -92,7 +90,7 @@ In place of `diskmodel`, try:
 
 ## Data Set
 
-The docker containers take care of copying and ingesting the input files. If you are curious about the data, 
+The docker containers take care of copying and ingesting the input files. If you are curious about the data,
 see [disks.json](./disks.json) metadata file, which is a JSON array with entries like this:
 
 ```

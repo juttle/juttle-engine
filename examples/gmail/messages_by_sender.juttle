@@ -1,6 +1,7 @@
 input gmail_search: text -default "to:me" -label 'Gmail Filter';
+input timerange: duration -default :12 hours: -label 'Time Range';
 
-read gmail -from :12 hours ago: -to :now: -raw gmail_search
+read gmail -last timerange -raw gmail_search
     | reduce count() by from
     | sort count -desc
     | ( view table -title "Who sends the most mail?";
