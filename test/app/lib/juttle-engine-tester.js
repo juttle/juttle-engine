@@ -33,7 +33,7 @@ class JuttleEngineTester {
     start(cb) {
         var chain;
 
-        if (process.env['TEST_MODE'] === 'docker' && !startedDocker) {
+        if (process.env['TEST_MODE'] !== 'local' && !startedDocker) {
             logger.info('starting docker containers');
             chain = execAsync('./test/scripts/start-docker-containers.sh')
             .then((stdout) => {
