@@ -1,0 +1,22 @@
+// This subgraph can be used to guide decisions on capacity planning
+// for any AWS Product that has a CloudWatch metric called
+// 'CPUUtilization' (e.g. EC2, RDS, ElastiCache). It shows the average
+// CPU Utilization for all items (EC2 instances/RDS
+// databases/ElastiCache clusters) over a recent timeframe as well as
+// the idle time for the same set of items.
+//
+// If the CPU Utilization is close to 100%, you may want to consider
+// adding more instances/databases/etc to spread the work across more
+// items.
+
+export sub cpu_piechart(cw_product) {
+
+    read cloudwatch -period 3600 -last :1h: product=cw_product
+        | filter name='CPUUtilization'
+        | reduce used_cpu=avg(value) by item
+        | reduce avg_used_cpu=avg(used_cpu)
+        | put CPU_Used=avg_used_cpu, CPU_Headroom=100-avg_used_cpu
+        | keep CPU_Used, CPU_Headroom
+        | split
+        | view piechart -title "AWS Capacity Planning (CPU Usage) for ${cw_product}";
+}

@@ -1,0 +1,14 @@
+sub add_juttle(juttle, description) {
+    put program="[" + juttle + "](/?path=/examples/aws-cloudwatch/capacity_planning/" + juttle + ".juttle)", description=description
+}
+
+emit
+|(
+    add_juttle -juttle "autoscaling" -description "Capacity Planning for Autoscaling";
+    add_juttle -juttle "ebs" -description "Capacity Planning for EBS";
+    add_juttle -juttle "ec2" -description "Capacity Planning for EC2";
+    add_juttle -juttle "elasticache" -description "Capacity Planning for ElastiCache";
+    add_juttle -juttle "rds" -description "Capacity Planning for RDS"
+)
+| keep program, description
+| view table -title 'Example Juttle Programs' -markdownFields [ 'program' ]

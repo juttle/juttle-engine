@@ -1,0 +1,65 @@
+// This program can be used to guide decisions on capacity planning
+// for RDS databases. It generates three piecharts:
+//   1. Comparing total Iops to configured Iops.
+//   2. Showing storage space used to configured storage space.
+//   3. Showing average CPU Utilization across all DB instances.
+//
+// The first pie chart shows the average IO ops/second for all DB
+// instances (combined) and compares that to the configured total Iops
+// capacity of the entire collection of DB instances.
+//
+// If the total IO acticity is close to the Iops capacity, you may
+// want to consider adding more databases or faster databases to
+// spread the work across more items.
+//
+// IMPORTANT NOTE: In some cases, a RDS DB Instance will not have a
+// value for provisioned Iops, in which case the Iops_Headroom value
+// will incorrectly show a lower value than the actual headroom.
+//
+// The second pie chart shows the total space used across all DB
+// insttances and compares that to the total allocated storage for all
+// DB instances.
+//
+// If the total space used is close to capacity, you may want to
+// consider adding more storage to your DB instances.
+//
+// The third pie chart uses the common subgraph in
+// common/capacity_planning_cpu.juttle to show the average CPU
+// utilization for all DB intances.
+//
+// If the CPU utilization is very low or very high, you may want to
+// change DB classes of your instances.
+
+import "examples/aws-cloudwatch/common/capacity_planning_cpu.juttle" as capacity_cpu;
+
+(read cloudwatch -period 3600 -last :1h: product='RDS'
+ | filter (name='ReadIOPS' OR name='WriteIOPS')
+ | reduce avg_iops=avg(value) by item, name
+ | reduce Iops_Used=sum(avg_iops)
+ | keep Iops_Used;
+read mysql -table 'aws_aggregation' -from :1 hour ago: -to :now: product='RDS'
+ | filter aggregate='RDS DB Total Iops'
+ | reduce Iops_Total=last(value)
+)
+ | join
+ | put Iops_Headroom=Iops_Total-Iops_Used
+ | keep Iops_Used, Iops_Headroom
+ | split
+ | view piechart -title "AWS Capacity Planning (Iops) for RDS";
+
+(read cloudwatch -period 3600 -last :1h: product='RDS'
+ | filter name='FreeStorageSpace'
+ | reduce avg_freespace=avg(value)/(1024*1024*1024) by item
+ | reduce Storage_Headroom=sum(avg_freespace);
+read mysql -table 'aws_aggregation' -from :1 hour ago: -to :now: product='RDS'
+ | filter aggregate='RDS DB Total Allocated Storage'
+ | reduce Storage_Allocated=last(value)
+)
+ | join
+ | put Storage_Used=Storage_Allocated-Storage_Headroom
+ | keep Storage_Used, Storage_Headroom
+ | split
+ | view piechart -title "AWS Capacity Planning (Storage) for RDS";
+
+capacity_cpu.cpu_piechart -cw_product 'RDS';
+

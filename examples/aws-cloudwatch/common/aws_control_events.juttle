@@ -1,0 +1,7 @@
+// This juttle program contains common controls used by the other AWS
+// juttle programs. It is not meant to be run by itself.
+
+export input show_events_in: select
+    -label 'Show Events'
+    -items [{label: 'Yes', value: "*"}, {label: 'No', value: "Impossible"} ]
+    -default '*';

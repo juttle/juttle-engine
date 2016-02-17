@@ -1,0 +1,46 @@
+// This program demonstrates ways to use the aggregate and demographic
+// information from the aws adapter as well as ways to use the
+// cloudwatch adapter to identify problems.
+//
+// The program shows sample of aggregate and demographic information
+// from AWS:
+// - The number of EC2 instances
+// - The total amount of RDS allocated storage
+// - The total EBS volume capacity.
+//
+// This program also identifies "problem" items and shows the number
+//   of items as a count and details as a table.
+// For this program, "problem" items are:
+// - EC2: Any instances with failed status checks.
+// - ELB: Any load balancers where UnHealthyHostCount is > 0
+// - Lambda: Any function with errors > 0
+
+read mysql -table 'aws_aggregation' -from :0: -to :end: product='EC2' OR product='EBS' OR product='RDS'
+    | (filter product='EC2' AND metric_type='AWS Aggregate' AND aggregate='EC2 Instance Count'
+       | view tile -title "Number of EC2 Instances";
+       filter product='RDS' AND metric_type='AWS Aggregate' AND aggregate='RDS DB Total Allocated Storage'
+       | view tile -title "Total DB Allocated Storage (GB)";
+       filter product='EBS' AND metric_type='AWS Aggregate' AND aggregate='EBS Volume Total Iops'
+       | view tile -title "Total EBS Volume Capacity (Iops)";
+      );
+read cloudwatch -from :1 hour ago: -to :now: -period 3600 -statistics ['Maximum'] product='EC2' OR product='ELB' OR product='Lambda'
+  | (filter
+     // EC2: Any instances with failed status checks.
+     (product='EC2' AND (name='StatusCheckFailed_Instance' OR name='StatusCheckFailed_System') AND value=1) OR
+     // ELB: Any load balancers where UnHealthyHostCount is > 0
+     (product='ELB' AND name='UnHealthyHostCount' AND value > 0) OR
+     // Lambda: Any function with errors > 0
+     (product='Lambda' AND name='Errors' AND value > 0))
+  | put oldtime=time
+  | sort time by item
+  | uniq item
+  | put time=oldtime
+  | keep time, product, name, value, item
+  | ( reduce cnt=count()
+      | put level=(cnt == 0 ? 'success' : 'error')
+      | view tile -valueField "cnt" -title "Number of Problem Items (EC2, ELB, Lambda)" -levelField "level";
+      view table -title "Items with problems" -columnOrder ["time", "product", "item", "name", "value"]
+    );
+
+
+
