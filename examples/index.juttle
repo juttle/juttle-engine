@@ -1,5 +1,5 @@
 sub add_subdir_juttle(subdir, juttle, description) {
-    put program="[" + subdir + "](/?path=/examples/" + subdir + "/" + juttle + ".juttle)", description=description
+    put program="[${subdir}](/?path=/examples/${subdir}/${juttle}.juttle)", description=description
 }
 
 emit
@@ -10,6 +10,7 @@ emit
     add_subdir_juttle -subdir "gmail" -juttle "index" -description "Examples using gmail adapter";
     add_subdir_juttle -subdir "cadvisor-influx" -juttle "cadvisor-dashboard" -description "Monitor docker containers using cAdvisor and InfluxDB";
     add_subdir_juttle -subdir "postgres-diskstats" -juttle "throughput" -description "Examples joining data from PostgreSQL and file sources";
+    add_subdir_juttle -subdir "aws-cloudwatch" -juttle "index" -description "Examples using AWS/Cloudwatch adapters";
 )
 | keep program, description
 | view table -title 'Example Juttle Programs' -markdownFields [ 'program' ]

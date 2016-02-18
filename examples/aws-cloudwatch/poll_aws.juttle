@@ -1,0 +1,8 @@
+// This juttle program does periodic reads of aws information and writes the results to a mysql database.
+
+import 'https://github.com/juttle/juttle-aws-adapter/raw/master/aws_module.juttle' as Adapter_aws;
+
+read aws -from :now: -to :end: -every :10s:
+     | Adapter_aws.aggregate_all
+     | write mysql -table 'aws_aggregation';
+

@@ -1,0 +1,45 @@
+# The aws adapter by itself does not need any additional
+# docker-compose configuration. However, to allow the aws adapter,
+# which only supports live real-time reads of aws metrics, to also
+# have a source for historical information, we also set up a mysql
+# database and a juttle program that polls from the aws adapter and
+# writes to the mysql database.
+
+mysql:
+  container_name: examples_mysql_1
+  image: mysql:latest
+  environment:
+    - MYSQL_ROOT_PASSWORD=my-juttle-password
+  command:
+    - mysqld
+
+juttle-engine:
+  links:
+    - mysql
+  external_links:
+    - examples_mysql_1
+
+# Once docker-compose 1.6 is ready, we should modify this to use
+# docker-compose events. It should allow adding hooks to automatically
+# create the mysql db/table once the mysql container starts, as well
+# as run poll_aws.juttle once the juttle-engine container starts and
+# the mysql db has been created.
+
+mysql-createdb:
+  image: mysql:latest
+  links:
+    - mysql
+    - juttle-engine
+  volumes:
+    - ${PWD}/aws-cloudwatch/create_aws_db.sql:/opt/incoming/create_aws_db.sql
+  command: bash -c "sleep 10 && mysql -u root -h examples_mysql_1 --password=my-juttle-password < /opt/incoming/create_aws_db.sql && tail -f /dev/null"
+
+juttle-aws-poller:
+  container_name: examples_juttle-aws-poller_1
+  image: juttle/juttle-engine:latest
+  links:
+     - mysql
+  volumes:
+     - ${PWD}/juttle-config.json:/opt/juttle-engine/.juttle-config.json
+     - ${PWD}/aws-cloudwatch/poll_aws.juttle:/opt/juttle-engine/poll_aws.juttle
+  command: bash -c "sleep 20 && echo 'Polling from AWS and Writing to Mysql...' && juttle /opt/juttle-engine/poll_aws.juttle"

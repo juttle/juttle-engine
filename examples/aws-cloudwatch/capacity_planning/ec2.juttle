@@ -1,0 +1,32 @@
+import "examples/aws-cloudwatch/common/capacity_planning_cpu.juttle" as capacity_cpu;
+
+capacity_cpu.cpu_piechart -cw_product 'EC2';
+
+// Also display a pie chart of EC2 instance types scaled by hourly
+// cost. These costs are accurate as of 2016-02-17.
+const instance_prices = {
+    'm3.medium': 0.0087,
+    'm1.small': 0.0081,
+    'm3.large': 0.133,
+    'm1.medium': 0.0133,
+    't1.micro': 0.0031,
+    'c3.xlarge': 0.02,
+    't2.micro': 0.013,
+    'c3.8xlarge': 1.68,
+    'm4.4xlarge': 0.958,
+    'm3.2xlarge': 0.532,
+    'c3.large': 0.105,
+    'c4.2xlarge': 0.419,
+    'm3.xlarge': 0.266,
+    't2.small': 0.026,
+    't2.medium': 0.05,
+};
+
+read mysql -table 'aws_aggregation' -from :0: -to :end:
+    product='EC2' AND demographic='EC2 Instance Type'
+    | put cost=value*instance_prices[name]
+    | view piechart -valueField "cost" -title "EC2 Instances Scaled by Hourly Cost" -categoryField "name";
+
+
+
+

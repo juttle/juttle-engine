@@ -1,0 +1,50 @@
+// This program displays AWS aggregate metrics (e.g. Number of EC2
+// instances, # EBS volumes, etc.) and demographic metrics (breakdown
+// by EC2 instance type, EBS volume type, etc) for a given product.
+
+// Input controls let you choose the product, aggregate metric, and
+// demographic metric, and display timecharts and piecharts with the
+// values of the metric for the given product.
+
+// Optionally, the timecharts also overlay events such as
+// additions/removals/changes to the set of items (i.e. EC2 instances,
+// etc).
+
+
+import "examples/aws-cloudwatch/common/aws_control_product.juttle" as control_product;
+import "examples/aws-cloudwatch/common/aws_control_aggregate.juttle" as control_agg;
+import "examples/aws-cloudwatch/common/aws_control_demographic.juttle" as control_demo;
+import "examples/aws-cloudwatch/common/aws_control_events.juttle" as control_events;
+
+read mysql -table 'aws_aggregation' -from :1 hour ago: -to :end:
+    | ( filter metric_type='AWS Aggregate' and aggregate=control_agg.agg_in
+        | view timechart -keyField "aggregate"
+                         -valueField "value"
+                         -title "AWS Totals (${control_product.product_in})"
+                         -yScales.primary.label "Total"
+                         -markerSize 2
+                         -id 'agg_timechart';
+        filter event_type =~ control_events.show_events_in
+        | put icon='fa-cloud'
+        | view events -on 'agg_timechart'
+                      -nameField "event_type"
+                      -messageField "item"
+                      -typeField "icon";
+       filter metric_type='AWS Demographic' AND demographic=control_demo.demo_in
+       | view piechart -categoryField "name"
+                       -valueField "value"
+                       -title "AWS Demographics (${control_demo.demo_in})";
+       filter metric_type='AWS Demographic' AND demographic=control_demo.demo_in
+       | view timechart -keyField "name"
+                        -valueField "value"
+                        -title "AWS Demographics (${control_demo.demo_in})"
+                        -yScales.primary.label "Count"
+                        -markerSize 2
+                        -id 'demo_timechart';
+       filter event_type =~ control_events.show_events_in
+       | put icon='fa-cloud'
+       | view events -on 'demo_timechart'
+                     -nameField "event_type"
+                     -messageField "item"
+                     -typeField "icon";
+      );

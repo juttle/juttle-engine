@@ -1,0 +1,23 @@
+// This program can be used to guide decisions on capacity planning
+// for EBS volumes. It shows the average IO ops/second for all volumes
+// (combined) and compares that to the configured total Iops capacity
+// of the entire collection of volumes.
+//
+// If the total IO activity is close to the Iops capacity, you may
+// want to consider adding more volumes or faster volumes to spread
+// the work across more items.
+
+(read cloudwatch -period 3600 -last :1h: product='EBS'
+ | filter name='VolumeReadOps' OR name='VolumeWriteOps'
+ | reduce Iops_Used=sum(value)/(3600.0);
+ read mysql -table 'aws_aggregation' -last :1h:
+   product='EBS' AND aggregate='EBS Volume Total Iops'
+ | reduce Iops_Total=last(value)
+)
+    | join
+    | put Iops_Headroom=Iops_Total-Iops_Used
+    | keep Iops_Used, Iops_Headroom
+    | split
+    | view piechart -title "AWS Capacity Planning (Iops) for EBS";
+
+

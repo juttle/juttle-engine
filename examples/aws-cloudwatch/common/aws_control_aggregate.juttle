@@ -1,0 +1,28 @@
+// This juttle program contains common controls used by the other AWS
+// juttle programs. It is not meant to be run by itself.
+
+import "examples/aws-cloudwatch/common/aws_control_product.juttle" as control_product;
+
+const all_aggregates = {
+    'EC2': [{label: 'EC2 Instance Count', value: 'EC2 Instance Count'}],
+    'EBS': [{label: 'EBS Volume Count', value: 'EBS Volume Count'},
+            {label: 'EBS Volume Total Size', value: 'EBS Volume Total Size'},
+            {label: 'EBS Volume Total iops', value: 'EBS Volume Total iops'}],
+    'ELB': [{label: 'ELB Load Balancer Count', value: 'ELB Load Balancer Count'}],
+    'RDS': [{label: 'RDS DB Count', value: 'RDS DB Count'},
+            {label: 'RDS DB Total Allocated Storage', value: 'RDS DB Total Allocated Storage'},
+            {label: 'RDS DB Total Iops', value: 'RDS DB Total Iops'}],
+    'CloudFront': [{label: 'CF Distribution Count', value: 'CF Distribution Count'}],
+    'AutoScaling': [{label: 'AutoScaling Group Count', value: 'AutoScaling Group Count'},
+                    {label: 'AutoScaling Group Total Size', value: 'AutoScaling Group Total Size'},
+                    {label: 'AutoScaling Group Total Desired Capacity', value: 'AutoScaling Group Total Desired Capacity'}],
+    'ElastiCache': [{label: 'ElastiCache Cluster Count', value: 'ElastiCache Cluster Count'},
+                    {label: 'ElastiCache Total Cache Nodes', value: 'ElastiCache Total Cache Nodes'}],
+    'Lambda': [{label: 'Lambda Function Count', value: 'Lambda Function Count'},
+               {label: 'Lambda Total Memory Size', value: 'Lambda Total Memory Size'}]
+};
+
+export input agg_in: select
+    -label 'Aggregate'
+    -items all_aggregates[control_product.product_in]
+    -default '(null)';

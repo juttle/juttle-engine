@@ -1,0 +1,46 @@
+// This juttle program contains common controls used by the other AWS
+// juttle programs. It is not meant to be run by itself.
+
+import "examples/aws-cloudwatch/common/aws_control_product.juttle" as control_product;
+
+const all_demographics = {
+    'EC2': [{label: 'EC2 Instance Type', value: 'EC2 Instance Type'},
+            {label: 'EC2 Root Device Type', value: 'EC2 Root Device Type'},
+            {label: 'EC2 State', value: 'EC2 State'}],
+    'EBS': [{label: 'EBS Volume Type', value: 'EBS Volume Type'},
+            {label: 'EBS State', value: 'EBS State'},
+            {label: 'EBS Status', value: 'EBS Status'}],
+    'ELB': [{label: 'ELB Scheme', value: 'ELB Scheme'},
+            {label: 'ELB Health Check Target', value: 'ELB Health Check Target'}],
+    'RDS': [{label: 'RDS DB Class', value: 'RDS DB Class'},
+            {label: 'RDS DB Engine', value: 'RDS DB Engine'},
+            {label: 'RDS DB Engine Version', value: 'RDS DB Engine Version'},
+            {label: 'RDS DB License Model', value: 'RDS DB License Model'},
+            {label: 'RDS DB Retention Period', value: 'RDS DB Retention Period'},
+            {label: 'RDS DB PubliclyAccessible', value: 'RDS DB PubliclyAccessible'},
+            {label: 'RDS DB Storage Type', value: 'RDS DB Storage Type'},
+            {label: 'RDS DB Status', value: 'RDS DB Status'},
+            {label: 'RDS DB Read Replica Status', value: 'RDS DB Read Replica Status'}],
+    'CloudFront': [{label: 'CF Status', value: 'CF Status'},
+                   {label: 'CF Price Class', value: 'CF Price Class'},
+                   {label: 'CF Enabled', value: 'CF Enabled'}],
+    'AutoScaling': [{label: 'AutoScaling Desired Capacity', value: 'AutoScaling Desired Capacity'},
+                    {label: 'AutoScaling Current Group Size', value: 'AutoScaling Current Group Size'},
+                    {label: 'AutoScaling Health Check Type', value: 'AutoScaling Health Check Type'}],
+    'ElastiCache': [{label: 'ElastiCache Cache Node Type', value: 'ElastiCache Cache Node Type'},
+                    {label: 'ElastiCache Engine', value: 'ElastiCache Engine'},
+                    {label: 'ElastiCache Engine Version', value: 'ElastiCache Engine Version'},
+                    {label: 'ElastiCache Cluster Status', value: 'ElastiCache Cluster Status'},
+                    {label: 'ElastiCache Num Cache Nodes', value: 'ElastiCache Num Cache Nodes'}],
+    'Lambda': [{label: 'Lambda Runtime', value: 'Lambda Runtime'},
+               {label: 'Lambda Role', value: 'Lambda Role'},
+               {label: 'Lambda Timeout', value: 'Lambda Timeout'},
+               {label: 'Lambda Memory Size', value: 'Lambda Memory Size'},
+               {label: 'Lambda Version', value: 'Lambda Version'},
+               {label: 'Lambda Handler', value: 'Lambda Handler'}]
+};
+
+export input demo_in: select
+    -label 'Demographic'
+    -items all_demographics[control_product.product_in]
+    -default '(null)';

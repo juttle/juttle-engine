@@ -1,0 +1,14 @@
+// This juttle program contains common controls used by the other AWS
+// juttle programs. It is not meant to be run by itself.
+
+export input product_in: select
+    -label 'AWS Product'
+    -items [{value: 'EC2', label: 'EC2'},
+            {value: 'EBS', label: 'EBS'},
+            {value: 'ELB', label: 'ELB'},
+            {value: 'RDS', label: 'RDS'},
+            {value: 'CloudFront', label: 'CloudFront'},
+            {value: 'AutoScaling', label: 'AutoScaling'},
+            {value: 'ElastiCache', label: 'ElastiCache'},
+            {value: 'Lambda', label: 'Lambda'}]
+    -default 'EC2';

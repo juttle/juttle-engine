@@ -1,0 +1,20 @@
+// This program can be used to guide decisions on capacity planning
+// for AutoScaling groups. It shows a timechart of the actual total
+// number of instances in all AutoScaling groups along with the total
+// desired capacity of all AutoScaling groups.
+//
+// If the actual group size is consistently higher or lower than the
+// desired capacity, you may want to change the desired capacity to
+// more properly match the actual group size.
+//
+
+read mysql -table 'aws_aggregation' -from :1 hour ago: -to :end:
+    product='AutoScaling' AND metric_type='AWS Aggregate' AND
+             (aggregate='AutoScaling Group Total Size' OR aggregate='AutoScaling Group Total Desired Capacity')
+    | view timechart -keyField "aggregate"
+                     -valueField "value"
+                     -title "AWS Capacity Planning (AutoScaling)"
+                     -yScales.primary.label "Value"
+                     -markerSize 2;
+
+
