@@ -7,18 +7,13 @@ let expect = require('chai').expect;
 describe('timechart', function() {
     let juttleEngineTester;
 
-    before((done) => {
+    before(() => {
         juttleEngineTester = new JuttleEngineTester();
-        juttleEngineTester.start(done);
+        return juttleEngineTester.start();
     });
 
-    after((done) => {
-        juttleEngineTester.stop({
-            dumpContainerLogs: process.env['DEBUG']
-        })
-        .then(() => {
-            done();
-        });
+    after(() => {
+        return juttleEngineTester.stop();
     });
 
     it('can render a simple timechart', () => {

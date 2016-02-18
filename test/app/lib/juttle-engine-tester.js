@@ -20,7 +20,6 @@ if (!process.env['SELENIUM_BROWSER']) {
     process.env['SELENIUM_BROWSER'] = 'chrome';
 }
 
-let startedDocker = false;
 let JuttleEngine = require('../../../lib/juttle-engine');
 
 function debug(output) {
@@ -30,10 +29,10 @@ function debug(output) {
 }
 
 class JuttleEngineTester {
-    start(cb) {
+    start() {
         var chain;
 
-        if (process.env['TEST_MODE'] === 'docker' && !startedDocker) {
+        if (process.env['TEST_MODE'] === 'docker') {
             logger.info('starting docker containers');
             chain = execAsync('./test/scripts/start-docker-containers.sh')
             .then((stdout) => {
@@ -64,7 +63,6 @@ class JuttleEngineTester {
                 process.env['JUTTLE_ENGINE_HOST'] = gateway;
                 logger.info('docker host at', gateway);
 
-                startedDocker = true;
                 logger.info('docker containers started');
                 process.env['SELENIUM_REMOTE_URL'] = 'http://localhost:4444/wd/hub';
             });
@@ -77,27 +75,30 @@ class JuttleEngineTester {
             return findFreePort(10000, 20000);
         })
         .then((port) => {
-            var host = process.env['JUTTLE_ENGINE_HOST'] || 'localhost';
-            this.port = port;
-            JuttleEngine.run({
-                host: host,
-                port: port,
-                root: '/'
-            }, cb);
+            return new Promise((resolve) => {
+                return Promise.try(() => {
+                    var host = process.env['JUTTLE_ENGINE_HOST'] || 'localhost';
+                    this.port = port;
+                    JuttleEngine.run({
+                        host: host,
+                        port: port,
+                        root: '/'
+                    }, resolve);
 
-            // Make sure that the node_modules version of chromedriver
-            // is first in the path.
-            process.env.PATH = path.resolve(__dirname, '../../../node_modules/.bin') +
-                               path.delimiter + process.env.PATH;
-            this.driver = new webdriver.Builder().build();
+                    // Make sure that the node_modules version of chromedriver
+                    // is first in the path.
+                    process.env.PATH = path.resolve(__dirname, '../../../node_modules/.bin') +
+                                    path.delimiter + process.env.PATH;
+                    this.driver = new webdriver.Builder().build();
+                });
+            });
         });
 
         return chain;
     }
 
-    stop(options) {
+    stop() {
         var chain = Promise.resolve();
-        options = options || {};
 
         if (!process.env['KEEP_BROWSER']) {
             chain = chain.then(() => {
@@ -111,9 +112,9 @@ class JuttleEngineTester {
             JuttleEngine.stop();
         });
 
-        if (startedDocker) {
+        if (process.env['TEST_MODE'] === 'docker') {
             logger.info('stopping docker containers');
-            if (options.dumpContainerLogs) {
+            if (process.env['DEBUG']) {
                 chain = chain.then(() => {
                     return execAsync('./test/scripts/dump-docker-container-logs.sh')
                     .then((stdout) => {
