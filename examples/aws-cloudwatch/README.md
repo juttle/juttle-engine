@@ -85,7 +85,7 @@ etc).
 
 View this program: [demographic.juttle](./demographic.juttle)
 
-### Capactity Planning
+### Capacity Planning
 
 This is a collection of individual juttle programs that can be used to guide capacity planning decisions for several AWS products.
 
@@ -106,9 +106,9 @@ View this program: [capacity_planning/autoscaling.juttle](./capacity_planning/au
 
 This program can be used to guide decisions on capacity planning
 for EBS volumes. It shows the average IO ops/second for all volumes
-combined) and compares that to the configured total Iops capacity
+(combined) and compares that to the configured total Iops capacity
 of the entire collection of volumes.
-If the total IO acticity is close to the Iops capacity, you may
+If the total IO activity is close to the Iops capacity, you may
 want to consider adding more volumes or faster volumes to spread
 the work across more items.
 
@@ -116,7 +116,7 @@ View this program: [capacity_planning/ebs.juttle](./capacity_planning/ebs.juttle
 
 #### EC2
 
-This program relies on a common subgraraph
+This program relies on a common subgraph
 [capacity_planning_cpu.juttle](./common/capacity_planning_cpu.juttle)
 that can be used to guide decisions on capacity planning for any AWS
 Product that has a CloudWatch metric called 'CPUUtilization'

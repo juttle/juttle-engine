@@ -1,9 +1,9 @@
 sub add_subdir(subdir, juttle, description) {
-    put program="[" + subdir + "](/?path=/examples/aws-cloudwatch/" + subdir + "/" + juttle + ".juttle)", description=description
+    put program="[${subdir}](/?path=/examples/aws-cloudwatch/${subdir}/${juttle}.juttle)", description=description
 }
 
 sub add_juttle(juttle, description) {
-    put program="[" + juttle + "](/?path=/examples/aws-cloudwatch/" + juttle + ".juttle)", description=description
+    put program="[${juttle}](/?path=/examples/aws-cloudwatch/${juttle}.juttle)", description=description
 }
 
 emit

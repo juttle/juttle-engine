@@ -3,15 +3,15 @@
 // (combined) and compares that to the configured total Iops capacity
 // of the entire collection of volumes.
 //
-// If the total IO acticity is close to the Iops capacity, you may
+// If the total IO activity is close to the Iops capacity, you may
 // want to consider adding more volumes or faster volumes to spread
 // the work across more items.
 
 (read cloudwatch -period 3600 -last :1h: product='EBS'
  | filter name='VolumeReadOps' OR name='VolumeWriteOps'
  | reduce Iops_Used=sum(value)/(3600.0);
-read mysql -table 'aws_aggregation' -from :1 hour ago: -to :now: product='EBS'
- | filter aggregate='EBS Volume Total Iops'
+ read mysql -table 'aws_aggregation' -last :1h:
+   product='EBS' AND aggregate='EBS Volume Total Iops'
  | reduce Iops_Total=last(value)
 )
     | join

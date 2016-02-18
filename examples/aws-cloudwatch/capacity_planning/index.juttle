@@ -1,5 +1,5 @@
 sub add_juttle(juttle, description) {
-    put program="[" + juttle + "](/?path=/examples/aws-cloudwatch/capacity_planning/" + juttle + ".juttle)", description=description
+    put program="[${juttle}](/?path=/examples/aws-cloudwatch/capacity_planning/${juttle}.juttle)", description=description
 }
 
 emit

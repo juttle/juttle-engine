@@ -1,5 +1,5 @@
 sub add_juttle(name, description) {
-    put program="[" + name + "](/?path=/examples/gmail/" + name + ".juttle)", description=description
+    put program="[${name}](/?path=/examples/gmail/${name}.juttle)", description=description
 }
 
 emit |

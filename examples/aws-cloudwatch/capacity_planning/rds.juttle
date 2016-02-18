@@ -37,8 +37,8 @@ import "examples/aws-cloudwatch/common/capacity_planning_cpu.juttle" as capacity
  | reduce avg_iops=avg(value) by item, name
  | reduce Iops_Used=sum(avg_iops)
  | keep Iops_Used;
-read mysql -table 'aws_aggregation' -from :1 hour ago: -to :now: product='RDS'
- | filter aggregate='RDS DB Total Iops'
+ read mysql -table 'aws_aggregation' -last :1h:
+   product='RDS' AND aggregate='RDS DB Total Iops'
  | reduce Iops_Total=last(value)
 )
  | join
@@ -51,9 +51,9 @@ read mysql -table 'aws_aggregation' -from :1 hour ago: -to :now: product='RDS'
  | filter name='FreeStorageSpace'
  | reduce avg_freespace=avg(value)/(1024*1024*1024) by item
  | reduce Storage_Headroom=sum(avg_freespace);
-read mysql -table 'aws_aggregation' -from :1 hour ago: -to :now: product='RDS'
- | filter aggregate='RDS DB Total Allocated Storage'
- | reduce Storage_Allocated=last(value)
+ read mysql -table 'aws_aggregation' -last :1h:
+   product='RDS' AND aggregate='RDS DB Total Allocated Storage'
+ | tail 1 | keep value | put Storage_Allocated=value
 )
  | join
  | put Storage_Used=Storage_Allocated-Storage_Headroom

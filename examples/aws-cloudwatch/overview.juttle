@@ -23,7 +23,7 @@ read mysql -table 'aws_aggregation' -from :0: -to :end: product='EC2' OR product
        filter product='EBS' AND metric_type='AWS Aggregate' AND aggregate='EBS Volume Total Iops'
        | view tile -title "Total EBS Volume Capacity (Iops)";
       );
-read cloudwatch -from :1 hour ago: -to :now: -period 3600 -statistics ['Maximum'] product='EC2' OR product='ELB' OR product='Lambda'
+read cloudwatch -last :1h: -period 3600 -statistics ['Maximum'] product='EC2' OR product='ELB' OR product='Lambda'
   | (filter
      // EC2: Any instances with failed status checks.
      (product='EC2' AND (name='StatusCheckFailed_Instance' OR name='StatusCheckFailed_System') AND value=1) OR
@@ -31,10 +31,7 @@ read cloudwatch -from :1 hour ago: -to :now: -period 3600 -statistics ['Maximum'
      (product='ELB' AND name='UnHealthyHostCount' AND value > 0) OR
      // Lambda: Any function with errors > 0
      (product='Lambda' AND name='Errors' AND value > 0))
-  | put oldtime=time
-  | sort time by item
-  | uniq item
-  | put time=oldtime
+  | head 1 by item
   | keep time, product, name, value, item
   | ( reduce cnt=count()
       | put level=(cnt == 0 ? 'success' : 'error')

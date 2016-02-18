@@ -13,9 +13,8 @@ export sub cpu_piechart(cw_product) {
 
     read cloudwatch -period 3600 -last :1h: product=cw_product
         | filter name='CPUUtilization'
-        | reduce used_cpu=avg(value) by item
-        | reduce avg_used_cpu=avg(used_cpu)
-        | put CPU_Used=avg_used_cpu, CPU_Headroom=100-avg_used_cpu
+        | reduce used_cpu=avg(value)
+        | put CPU_Used=used_cpu, CPU_Headroom=100-used_cpu
         | keep CPU_Used, CPU_Headroom
         | split
         | view piechart -title "AWS Capacity Planning (CPU Usage) for ${cw_product}";
