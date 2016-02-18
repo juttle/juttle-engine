@@ -384,6 +384,98 @@ class JuttleEngineTester {
         return this.driver.executeScript(script, element, styleName);
     }
 
+    waitForNEventsOnViewWithTitle(title, howmany, options) {
+        var defaults = {
+            interval: 1000,
+            timeout: 10000
+        };
+        options = _.extend(defaults, options);
+
+        return this.findViewByTitle(title)
+        .then((view) => {
+            return this.driver.wait(until.elementLocated(By.css('.juttle-view .jut-chart-wrapper')))
+            .then(() => {
+                return view.findElement(By.css('.juttle-view .jut-chart-wrapper'));
+            })
+            .then((chartWrapper) => {
+                return retry(() => {
+                    return chartWrapper.findElements(By.css('.event-marker'))
+                    .then((events) => {
+                        expect(events.length).to.equal(howmany);
+                    });
+                }, options);
+            });
+        });
+    }
+
+    getEventsOnViewWithTitle(title) {
+        return this.findViewByTitle(title)
+        .then((view) => {
+            return this.driver.wait(until.elementLocated(By.css('.juttle-view .jut-chart-wrapper')))
+            .then(() => {
+                return view.findElement(By.css('.juttle-view .jut-chart-wrapper'));
+            })
+            .then((chartWrapper) => {
+                return chartWrapper.findElements(By.css('.event-marker'));
+            })
+            .then((elements) => {
+                var self = this;
+                return Promise.each(elements, function(element) {
+                    return self.driver.wait(until.elementIsVisible(element));
+                })
+                .then(() => {
+                    return elements;
+                });
+            });
+        });
+    }
+
+    waitForNSeriesOnViewWithTitle(title, howmany, options) {
+        var defaults = {
+            interval: 1000,
+            timeout: 10000
+        };
+        options = _.extend(defaults, options);
+
+        return this.findViewByTitle(title)
+        .then((view) => {
+            return this.driver.wait(until.elementLocated(By.css('.juttle-view .jut-chart-wrapper')))
+            .then(() => {
+                return view.findElement(By.css('.juttle-view .jut-chart-wrapper'));
+            })
+            .then((chartWrapper) => {
+                return retry(() => {
+                    return chartWrapper.findElements(By.css('g.series'))
+                    .then((series) => {
+                        expect(series.length).to.equal(howmany);
+                    });
+                }, options);
+            });
+        });
+    }
+
+    getSeriesOnViewWithTitle(title) {
+        return this.findViewByTitle(title)
+        .then((view) => {
+            return this.driver.wait(until.elementLocated(By.css('.juttle-view .jut-chart-wrapper')))
+            .then(() => {
+                return view.findElement(By.css('.juttle-view .jut-chart-wrapper'));
+            })
+            .then((chartWrapper) => {
+                return chartWrapper.findElements(By.css('g.series'));
+            })
+            .then((elements) => {
+                var self = this;
+                return Promise.each(elements, function(element) {
+                    return self.driver.wait(until.elementIsVisible(element));
+                })
+                .then(() => {
+                    return elements;
+                });
+            });
+        });
+    }
+
     run(options) {
         var host = process.env['JUTTLE_ENGINE_HOST'] || 'localhost';
         var urlPath = url.format({
