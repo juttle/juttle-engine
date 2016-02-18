@@ -48,7 +48,7 @@ class JuttleEngineTester {
                                         JSON.stringify(status, null, 4));
                         }
                     });
-                })
+                }, { interval: 1000, timeout: 10000 })
             })
             .then(() => {
                 // figure out the gateway address so we can communicate from
