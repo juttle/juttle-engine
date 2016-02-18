@@ -1,0 +1,19 @@
+read stochastic
+    -source 'cdn'
+    -nhosts 4
+    -from :10 minutes before 2014-01-01:
+    -to :2014-01-01:
+    -source_type 'metrics'
+    -daily 1.8
+    name = 'response_ms'
+| filter name = 'response_ms'
+| reduce value = avg(value) by host
+| put value = 100 - value // target average response_ms is 100ms 
+| view barchart -o {
+    categoryField: 'host',
+    valueField: 'value',
+    title: 'Target average response time comparison',
+    color: '#008000',
+    negativeColor: '#800000'
+  }
+

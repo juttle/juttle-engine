@@ -1,0 +1,23 @@
+read stochastic -source 'cdn' -nhosts 10 -from :10 minutes before 2014-01-01: -to :2014-01-01: -source_type 'metrics' name = 'cpu'
+| filter name = 'cpu'
+| reduce value = avg(value) by host
+| sort value -desc
+| view barchart -o {
+    categoryField: 'host',
+    valueField: 'value',
+    title: 'Average CPU % per host for last 10 minutes',
+    yScales: {
+      primary: {
+        label: 'CPU %',
+        tickFormat: '%'
+      }
+    },
+    xScale: {
+        label: 'hostname',
+    },
+    tooltip: {
+      valueFormat: '%'
+    },
+    orientation: 'horizontal'
+  }
+
