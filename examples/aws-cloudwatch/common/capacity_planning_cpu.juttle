@@ -11,8 +11,7 @@
 
 export sub cpu_piechart(cw_product) {
 
-    read cloudwatch -period 3600 -last :1h: product=cw_product
-        | filter name='CPUUtilization'
+    read cloudwatch -period 3600 -last :1h: product=cw_product AND metric='CPUUtilization'
         | reduce used_cpu=avg(value)
         | put CPU_Used=used_cpu, CPU_Headroom=100-used_cpu
         | keep CPU_Used, CPU_Headroom

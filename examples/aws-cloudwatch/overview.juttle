@@ -15,7 +15,7 @@
 // - ELB: Any load balancers where UnHealthyHostCount is > 0
 // - Lambda: Any function with errors > 0
 
-read mysql -table 'aws_aggregation' -from :0: -to :end: product='EC2' OR product='EBS' OR product='RDS'
+read mysql -table 'aws_aggregation' -from :0: -to :end: -lag :20s: product='EC2' OR product='EBS' OR product='RDS'
     | (filter product='EC2' AND metric_type='AWS Aggregate' AND aggregate='EC2 Instance Count'
        | view tile -title "Number of EC2 Instances";
        filter product='RDS' AND metric_type='AWS Aggregate' AND aggregate='RDS DB Total Allocated Storage'
@@ -23,14 +23,17 @@ read mysql -table 'aws_aggregation' -from :0: -to :end: product='EC2' OR product
        filter product='EBS' AND metric_type='AWS Aggregate' AND aggregate='EBS Volume Total Iops'
        | view tile -title "Total EBS Volume Capacity (Iops)";
       );
-read cloudwatch -last :1h: -period 3600 -statistics ['Maximum'] product='EC2' OR product='ELB' OR product='Lambda'
+read cloudwatch -last :1h: -period 3600 -statistics ['Maximum'] metric='EC2:StatusCheckFailed_Instance' OR
+                                                                metric='EC2:StatusCheckFailed_System' OR
+                                                                metric='ELB:UnHealthyHostCount' OR
+                                                                metric='Lambda:Errors'
   | (filter
      // EC2: Any instances with failed status checks.
-     (product='EC2' AND (name='StatusCheckFailed_Instance' OR name='StatusCheckFailed_System') AND value=1) OR
+     (product='EC2' AND value=1) OR
      // ELB: Any load balancers where UnHealthyHostCount is > 0
-     (product='ELB' AND name='UnHealthyHostCount' AND value > 0) OR
+     (product='ELB' AND value > 0) OR
      // Lambda: Any function with errors > 0
-     (product='Lambda' AND name='Errors' AND value > 0))
+     (product='Lambda' AND value > 0))
   | head 1 by item
   | keep time, product, name, value, item
   | ( reduce cnt=count()

@@ -7,8 +7,7 @@
 // want to consider adding more volumes or faster volumes to spread
 // the work across more items.
 
-(read cloudwatch -period 3600 -last :1h: product='EBS'
- | filter name='VolumeReadOps' OR name='VolumeWriteOps'
+(read cloudwatch -period 3600 -last :1h: metric="EBS:VolumeReadOps" OR metric="EBS:VolumeWriteOps"
  | reduce Iops_Used=sum(value)/(3600.0);
  read mysql -table 'aws_aggregation' -last :1h:
    product='EBS' AND aggregate='EBS Volume Total Iops'
