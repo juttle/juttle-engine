@@ -32,8 +32,7 @@
 
 import "examples/aws-cloudwatch/common/capacity_planning_cpu.juttle" as capacity_cpu;
 
-(read cloudwatch -period 3600 -last :1h: product='RDS'
- | filter (name='ReadIOPS' OR name='WriteIOPS')
+(read cloudwatch -period 3600 -last :1h: metric="RDS:ReadIOPS" OR metric="RDS:WriteIOPS"
  | reduce avg_iops=avg(value) by item, name
  | reduce Iops_Used=sum(avg_iops)
  | keep Iops_Used;
@@ -47,8 +46,7 @@ import "examples/aws-cloudwatch/common/capacity_planning_cpu.juttle" as capacity
  | split
  | view piechart -title "AWS Capacity Planning (Iops) for RDS";
 
-(read cloudwatch -period 3600 -last :1h: product='RDS'
- | filter name='FreeStorageSpace'
+(read cloudwatch -period 3600 -last :1h: metric="RDS:FreeStorageSpace"
  | reduce avg_freespace=avg(value)/(1024*1024*1024) by item
  | reduce Storage_Headroom=sum(avg_freespace);
  read mysql -table 'aws_aggregation' -last :1h:

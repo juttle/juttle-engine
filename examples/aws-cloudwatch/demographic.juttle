@@ -16,7 +16,7 @@ import "examples/aws-cloudwatch/common/aws_control_aggregate.juttle" as control_
 import "examples/aws-cloudwatch/common/aws_control_demographic.juttle" as control_demo;
 import "examples/aws-cloudwatch/common/aws_control_events.juttle" as control_events;
 
-read mysql -table 'aws_aggregation' -from :1 hour ago: -to :end:
+read mysql -table 'aws_aggregation' -from :1 hour ago: -to :end: -lag :20s:
     | ( filter metric_type='AWS Aggregate' and aggregate=control_agg.agg_in
         | view timechart -keyField "aggregate"
                          -valueField "value"

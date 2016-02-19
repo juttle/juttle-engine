@@ -22,7 +22,7 @@ const instance_prices = {
     't2.medium': 0.05,
 };
 
-read mysql -table 'aws_aggregation' -from :0: -to :end:
+read mysql -table 'aws_aggregation' -last :1h:
     product='EC2' AND demographic='EC2 Instance Type'
     | put cost=value*instance_prices[name]
     | view piechart -valueField "cost" -title "EC2 Instances Scaled by Hourly Cost" -categoryField "name";

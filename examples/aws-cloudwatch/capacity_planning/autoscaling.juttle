@@ -8,7 +8,7 @@
 // more properly match the actual group size.
 //
 
-read mysql -table 'aws_aggregation' -from :1 hour ago: -to :end:
+read mysql -table 'aws_aggregation' -from :1 hour ago: -to :end: -lag :20s:
     product='AutoScaling' AND metric_type='AWS Aggregate' AND
              (aggregate='AutoScaling Group Total Size' OR aggregate='AutoScaling Group Total Desired Capacity')
     | view timechart -keyField "aggregate"
