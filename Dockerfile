@@ -10,11 +10,7 @@ COPY . .
 RUN mkdir -p /opt/juttle-engine/juttles
 COPY examples /opt/juttle-engine/juttles/examples
 
-# Also symlink juttle and juttle-engine so they can be run directly
-# without specifying a path.
-RUN ln -s /opt/juttle-engine/bin/juttle /usr/local/bin/juttle
-RUN ln -s /opt/juttle-engine/bin/juttle-engine /usr/local/bin/juttle-engine
-
+RUN npm link
 
 EXPOSE 8080
 
