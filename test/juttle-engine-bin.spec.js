@@ -22,7 +22,7 @@ describe('juttle-engine-client binary', function() {
     });
 
     after(function() {
-        engine.stop();
+        return engine.stop();
     });
 
     it('can be run with --help', function() {
