@@ -25,6 +25,18 @@ describe('Juttle Engine Tests', function() {
     });
 
     describe('Rendezvous tests', function() {
+        let listener, sender;
+
+        afterEach(() => {
+            if (listener) {
+                listener.close();
+            }
+
+            if (sender) {
+                sender.close();
+            }
+        });
+
         it('Listen to a topic, can receive messages sent by other clients ', function(done) {
             const validMsg = {
                 type: 'bundle',
@@ -35,7 +47,7 @@ describe('Juttle Engine Tests', function() {
                 }
             };
 
-            let listener = new WebSocket(juttleHostPort + '/rendezvous/my-topic');
+            listener = new WebSocket(juttleHostPort + '/rendezvous/my-topic');
             listener.on('message', function(data) {
                 data = JSON.parse(data);
                 expect(data).to.deep.equal(validMsg);
@@ -44,7 +56,7 @@ describe('Juttle Engine Tests', function() {
             });
 
             listener.on('open', function() {
-                let sender = new WebSocket(juttleHostPort + '/rendezvous/my-topic');
+                sender = new WebSocket(juttleHostPort + '/rendezvous/my-topic');
 
                 sender.on('open', function() {
                     sender.send(JSON.stringify(validMsg));
@@ -61,9 +73,9 @@ describe('Juttle Engine Tests', function() {
                 }
             };
 
-            let listener = new WebSocket(juttleHostPort + '/rendezvous/my-topic');
+            listener = new WebSocket(juttleHostPort + '/rendezvous/my-topic');
             listener.on('open', () => {
-                let sender = new WebSocket(juttleHostPort + '/rendezvous/my-topic');
+                sender = new WebSocket(juttleHostPort + '/rendezvous/my-topic');
 
                 sender.on('open', () => {
                     sender.send(JSON.stringify(invalidMsg));
