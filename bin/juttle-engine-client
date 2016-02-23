@@ -28,7 +28,21 @@ function push_file(filename, topic) {
             bundler.bundle(filename)
                 .then(function(bundle) {
                     return new Promise(function (resolve, reject) {
-                        ws.send(JSON.stringify(bundle), resolve);
+                        ws.on('message', (data) => {
+                            data = JSON.parse(data);
+
+                            if (data.type === 'error') {
+                                reject(data.error);
+                            } else {
+                                resolve();
+                            }
+                        })
+
+                        ws.send(JSON.stringify({
+                            type: 'bundle',
+                            bundle_id: filename,
+                            bundle
+                        }));
                     });
                 })
                 .catch(function(err) {
