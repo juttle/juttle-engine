@@ -1,0 +1,12 @@
+// This juttle program contains common controls used by the other AWS
+// juttle programs. It is not meant to be run by itself.
+
+import "examples/aws-cloudwatch/common/aws_control_product.juttle" as control_product;
+import "examples/aws-cloudwatch/common/aws_defined_metrics.juttle" as defined_metrics;
+
+export input metric_in: select
+    -label 'CloudWatch Metric'
+    -items defined_metrics.all_metrics[control_product.product_in]
+    -default '(null)';
+
+

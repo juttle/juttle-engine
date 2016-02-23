@@ -7,8 +7,10 @@
 // - The number of EC2 instances
 // - The total amount of RDS allocated storage
 // - The total EBS volume capacity.
-//
-// This program also identifies "problem" items and shows the number
+
+// The program also shows a sample of information from CloudWatch. The
+// first barchart is the the top EC2 instances by CPU Utilization.
+// The second subgraph identifies "problem" items and shows the number
 //   of items as a count and details as a table.
 // For this program, "problem" items are:
 // - EC2: Any instances with failed status checks.
@@ -23,6 +25,14 @@ read mysql -table 'aws_aggregation' -from :1 hour ago: -to :end: -lag :20s: prod
        filter product='EBS' AND metric_type='AWS Aggregate' AND aggregate='EBS Volume Total Iops'
        | view tile -title "Total EBS Volume Capacity (Iops)";
       );
+
+read cloudwatch -last :1h: -period 3600 product="EC2" AND metric="CPUUtilization"
+       | sort value -desc
+       | head -10
+       | view barchart -categoryField "item"
+                       -yScales.primary.label "CPUUtilization"
+                       -title 'AWS Top EC2 Instances by CPUUtilization';
+
 read cloudwatch -last :1h: -period 3600 -statistics ['Maximum'] metric='EC2:StatusCheckFailed_Instance' OR
                                                                 metric='EC2:StatusCheckFailed_System' OR
                                                                 metric='ELB:UnHealthyHostCount' OR

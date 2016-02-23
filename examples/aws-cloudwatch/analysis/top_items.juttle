@@ -1,0 +1,20 @@
+// This program can be used to show the top 10 items (EC2 instances,
+// EBS volumes, etc) by any CloudWatch metric.
+//
+// This is useful if you want to find the EC2 intances using the most
+// CPU, the EBS volumes with the most I/O activity, etc.
+//
+// Input controls allow you to choose an AWS product and CloudWatch
+// metric and displays a barchart of the top 10 items by that metric.
+//
+
+import "examples/aws-cloudwatch/common/aws_control_product.juttle" as control_product;
+import "examples/aws-cloudwatch/common/aws_control_metric.juttle" as control_metric;
+
+read cloudwatch -last :1h: -period 3600 product=control_product.product_in AND metric=control_metric.metric_in
+       | sort value -desc
+       | head -10
+       | view barchart -categoryField "item"
+                       -yScales.primary.label "${control_metric.metric_in}"
+                       -title 'AWS Top ${control_product.product_in} Items by ${control_metric.metric_in}';
+

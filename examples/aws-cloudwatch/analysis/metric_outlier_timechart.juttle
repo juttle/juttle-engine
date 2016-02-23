@@ -1,0 +1,46 @@
+// This program can be used to identify outliers amongst a set of
+// items for a given AWS product (EC2 instances, ELB load balancers,
+// RDS databases, Lambda Programs, etc.). For example, you may want to
+// identify EC2 instances with a higher CPU Utilization than most
+// other instances.
+//
+// The program graphs the difference between actual value of a given
+// metric and the median value of that metric for the entire group of
+// items. For example, for product EC2 and metric CPUUtilization, it
+// computes the median CPU Utilization over 5 minute windows and then
+// graphs the difference between an item's actual CPU Utilization and
+// the median.
+//
+// This approach eliminates groupwide shifts in the metric's value
+// over time. Outliers tend to have values much higher or lower than
+// the median value.
+//
+// You can optionally add events for the given AWS product that
+// indicate when items were added, removed, or changed.
+//
+
+import "examples/aws-cloudwatch/common/aws_control_product.juttle" as control_product;
+import "examples/aws-cloudwatch/common/aws_control_metric.juttle" as control_metric;
+import "examples/aws-cloudwatch/common/aws_control_events.juttle" as control_events;
+
+input timerange: duration -default :6 hours: -label 'Time Range';
+
+read cloudwatch -last timerange -period 60 product=control_product.product_in AND metric=control_metric.metric_in
+    | batch -every :5m:
+    | (put oldtime=time; reduce median=percentile(value, 0.5), time=first(time))
+    | join
+    | put time=oldtime, demedian=value-median
+    | view timechart -keyField "item"
+                     -valueField "demedian"
+                     -title "AWS Metrics (${control_metric.metric_in}, Highlighting Outliers)"
+                     -yScales.primary.label "Difference from Median (${control_metric.metric_in})"
+                     -markerSize 2
+                     -id 'cw_timechart';
+
+read mysql -table 'aws_aggregation' -last timerange  product=control_product.product_in
+    | filter event_type =~ control_events.show_events_in
+    | put icon='fa-cloud'
+    | view events -on 'cw_timechart'
+                  -nameField "event_type"
+                  -messageField "item"
+                  -typeField "icon";
