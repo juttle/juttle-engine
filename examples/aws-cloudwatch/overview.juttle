@@ -15,7 +15,7 @@
 // - ELB: Any load balancers where UnHealthyHostCount is > 0
 // - Lambda: Any function with errors > 0
 
-read mysql -table 'aws_aggregation' -from :0: -to :end: -lag :20s: product='EC2' OR product='EBS' OR product='RDS'
+read mysql -table 'aws_aggregation' -from :1 hour ago: -to :end: -lag :20s: product='EC2' OR product='EBS' OR product='RDS'
     | (filter product='EC2' AND metric_type='AWS Aggregate' AND aggregate='EC2 Instance Count'
        | view tile -title "Number of EC2 Instances";
        filter product='RDS' AND metric_type='AWS Aggregate' AND aggregate='RDS DB Total Allocated Storage'

@@ -1,5 +1,5 @@
-input gmail_search: text -default "to:me" -label 'Gmail Filter';
-input timerange: duration -default :12 hours: -label 'Time Range';
+input gmail_search: text -default "*" -label 'Gmail Filter';
+input timerange: duration -default :1 day: -label 'Time Range';
 
 read gmail -last timerange -raw gmail_search
     | reduce count() by from

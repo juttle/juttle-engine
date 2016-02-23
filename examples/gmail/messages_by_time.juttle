@@ -1,6 +1,6 @@
-input timerange: duration -default :12 hours: -label 'Time Range';
+input timerange: duration -default :1 day: -label 'Time Range';
 
-read gmail -last timerange to=~ "me"
+read gmail -last timerange to=~ "*"
     | batch -every :30 minutes:
     | reduce count()
     | view timechart -title "When during the day do I get mail?" -yScales.primary.label "Number of Messages"

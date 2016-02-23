@@ -16,12 +16,10 @@
             "connection": "postgres://postgres@postgres/postgres"
         },
         "mysql": {
-            "connection": {
-                "user": "root",
-                "password": "my-juttle-password",
-                "host": "examples_mysql_1",
-                "database": "aws"
-            }
+            "user": "root",
+            "password": "my-juttle-password",
+            "host": "examples_mysql_1",
+            "db": "aws"
         }
     }
 }
