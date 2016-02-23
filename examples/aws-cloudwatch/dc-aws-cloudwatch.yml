@@ -32,7 +32,7 @@ mysql-createdb:
     - juttle-engine
   volumes:
     - ${PWD}/aws-cloudwatch/create_aws_db.sql:/opt/incoming/create_aws_db.sql
-  command: bash -c "sleep 10 && mysql -u root -h examples_mysql_1 --password=my-juttle-password < /opt/incoming/create_aws_db.sql && tail -f /dev/null"
+  command: bash -c "sleep 20 && mysql -u root -h examples_mysql_1 --password=my-juttle-password < /opt/incoming/create_aws_db.sql && tail -f /dev/null"
 
 juttle-aws-poller:
   container_name: examples_juttle-aws-poller_1
@@ -41,5 +41,5 @@ juttle-aws-poller:
      - mysql
   volumes:
      - ${PWD}/juttle-config.json:/opt/juttle-engine/.juttle-config.json
-     - ${PWD}/aws-cloudwatch/poll_aws.juttle:/opt/juttle-engine/poll_aws.juttle
-  command: bash -c "sleep 20 && echo 'Polling from AWS and Writing to Mysql...' && juttle /opt/juttle-engine/poll_aws.juttle"
+     - ${PWD}/aws-cloudwatch/poll_aws.juttle.skip:/opt/juttle-engine/poll_aws.juttle
+  command: bash -c "sleep 40 && echo 'Polling from AWS and Writing to Mysql...' && juttle /opt/juttle-engine/poll_aws.juttle"
