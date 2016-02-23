@@ -20,7 +20,6 @@ if (!process.env['SELENIUM_BROWSER']) {
     process.env['SELENIUM_BROWSER'] = 'chrome';
 }
 
-let startedDocker = false;
 let JuttleEngine = require('../../../lib/juttle-engine');
 
 function debug(output) {
@@ -30,10 +29,10 @@ function debug(output) {
 }
 
 class JuttleEngineTester {
-    start(cb) {
+    start() {
         var chain;
 
-        if (process.env['TEST_MODE'] === 'docker' && !startedDocker) {
+        if (process.env['TEST_MODE'] === 'docker') {
             logger.info('starting docker containers');
             chain = execAsync('./test/scripts/start-docker-containers.sh')
             .then((stdout) => {
@@ -49,7 +48,7 @@ class JuttleEngineTester {
                                         JSON.stringify(status, null, 4));
                         }
                     });
-                })
+                }, { interval: 1000, timeout: 10000 })
             })
             .then(() => {
                 // figure out the gateway address so we can communicate from
@@ -64,7 +63,6 @@ class JuttleEngineTester {
                 process.env['JUTTLE_ENGINE_HOST'] = gateway;
                 logger.info('docker host at', gateway);
 
-                startedDocker = true;
                 logger.info('docker containers started');
                 process.env['SELENIUM_REMOTE_URL'] = 'http://localhost:4444/wd/hub';
             });
@@ -77,27 +75,30 @@ class JuttleEngineTester {
             return findFreePort(10000, 20000);
         })
         .then((port) => {
-            var host = process.env['JUTTLE_ENGINE_HOST'] || 'localhost';
-            this.port = port;
-            JuttleEngine.run({
-                host: host,
-                port: port,
-                root: '/'
-            }, cb);
+            return new Promise((resolve) => {
+                return Promise.try(() => {
+                    var host = process.env['JUTTLE_ENGINE_HOST'] || 'localhost';
+                    this.port = port;
+                    JuttleEngine.run({
+                        host: host,
+                        port: port,
+                        root: '/'
+                    }, resolve);
 
-            // Make sure that the node_modules version of chromedriver
-            // is first in the path.
-            process.env.PATH = path.resolve(__dirname, '../../../node_modules/.bin') +
-                               path.delimiter + process.env.PATH;
-            this.driver = new webdriver.Builder().build();
+                    // Make sure that the node_modules version of chromedriver
+                    // is first in the path.
+                    process.env.PATH = path.resolve(__dirname, '../../../node_modules/.bin') +
+                                    path.delimiter + process.env.PATH;
+                    this.driver = new webdriver.Builder().build();
+                });
+            });
         });
 
         return chain;
     }
 
-    stop(options) {
+    stop() {
         var chain = Promise.resolve();
-        options = options || {};
 
         if (!process.env['KEEP_BROWSER']) {
             chain = chain.then(() => {
@@ -111,9 +112,9 @@ class JuttleEngineTester {
             JuttleEngine.stop();
         });
 
-        if (startedDocker) {
+        if (process.env['TEST_MODE'] === 'docker') {
             logger.info('stopping docker containers');
-            if (options.dumpContainerLogs) {
+            if (process.env['DEBUG']) {
                 chain = chain.then(() => {
                     return execAsync('./test/scripts/dump-docker-container-logs.sh')
                     .then((stdout) => {
@@ -382,6 +383,98 @@ class JuttleEngineTester {
         var script = 'return window.getComputedStyle(arguments[0])' +
                      ' .getPropertyValue(arguments[1]);';
         return this.driver.executeScript(script, element, styleName);
+    }
+
+    waitForNEventsOnViewWithTitle(title, howmany, options) {
+        var defaults = {
+            interval: 1000,
+            timeout: 10000
+        };
+        options = _.extend(defaults, options);
+
+        return this.findViewByTitle(title)
+        .then((view) => {
+            return this.driver.wait(until.elementLocated(By.css('.juttle-view .jut-chart-wrapper')))
+            .then(() => {
+                return view.findElement(By.css('.juttle-view .jut-chart-wrapper'));
+            })
+            .then((chartWrapper) => {
+                return retry(() => {
+                    return chartWrapper.findElements(By.css('.event-marker'))
+                    .then((events) => {
+                        expect(events.length).to.equal(howmany);
+                    });
+                }, options);
+            });
+        });
+    }
+
+    getEventsOnViewWithTitle(title) {
+        return this.findViewByTitle(title)
+        .then((view) => {
+            return this.driver.wait(until.elementLocated(By.css('.juttle-view .jut-chart-wrapper')))
+            .then(() => {
+                return view.findElement(By.css('.juttle-view .jut-chart-wrapper'));
+            })
+            .then((chartWrapper) => {
+                return chartWrapper.findElements(By.css('.event-marker'));
+            })
+            .then((elements) => {
+                var self = this;
+                return Promise.each(elements, function(element) {
+                    return self.driver.wait(until.elementIsVisible(element));
+                })
+                .then(() => {
+                    return elements;
+                });
+            });
+        });
+    }
+
+    waitForNSeriesOnViewWithTitle(title, howmany, options) {
+        var defaults = {
+            interval: 1000,
+            timeout: 10000
+        };
+        options = _.extend(defaults, options);
+
+        return this.findViewByTitle(title)
+        .then((view) => {
+            return this.driver.wait(until.elementLocated(By.css('.juttle-view .jut-chart-wrapper')))
+            .then(() => {
+                return view.findElement(By.css('.juttle-view .jut-chart-wrapper'));
+            })
+            .then((chartWrapper) => {
+                return retry(() => {
+                    return chartWrapper.findElements(By.css('g.series'))
+                    .then((series) => {
+                        expect(series.length).to.equal(howmany);
+                    });
+                }, options);
+            });
+        });
+    }
+
+    getSeriesOnViewWithTitle(title) {
+        return this.findViewByTitle(title)
+        .then((view) => {
+            return this.driver.wait(until.elementLocated(By.css('.juttle-view .jut-chart-wrapper')))
+            .then(() => {
+                return view.findElement(By.css('.juttle-view .jut-chart-wrapper'));
+            })
+            .then((chartWrapper) => {
+                return chartWrapper.findElements(By.css('g.series'));
+            })
+            .then((elements) => {
+                var self = this;
+                return Promise.each(elements, function(element) {
+                    return self.driver.wait(until.elementIsVisible(element));
+                })
+                .then(() => {
+                    return elements;
+                });
+            });
+        });
     }
 
     run(options) {

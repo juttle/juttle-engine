@@ -1,0 +1,17 @@
+read stochastic -source 'cdn' -from :3 days before 2014-01-01: -to :2014-01-01: -nhosts 3 -source_type 'metric' name='cpu'
+| view timechart 
+    -o {
+        title: '% CPU usage per host' ,
+        keyField: 'host',
+        duration: :1 day:,
+        overlayTime: true,
+        yScales: {
+            primary: {
+                label: '% CPU busy',
+                tickFormat: '%'
+            }
+        },
+        xScale: {
+            label: 'hostname',
+        }
+    }
