@@ -26,7 +26,7 @@ function push_file(filename, topic) {
             // Bundle the program locally and push the bundle over the websocket.
             var bundler = new JuttleBundler();
             bundler.bundle(filename)
-                .then(function(bundle) {
+                .then(function(res) {
                     return new Promise(function (resolve, reject) {
                         ws.on('message', (data) => {
                             data = JSON.parse(data);
@@ -41,7 +41,7 @@ function push_file(filename, topic) {
                         ws.send(JSON.stringify({
                             type: 'bundle',
                             bundle_id: filename,
-                            bundle
+                            bundle: res.bundle
                         }));
                     });
                 })
