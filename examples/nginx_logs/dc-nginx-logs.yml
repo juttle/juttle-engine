@@ -1,0 +1,20 @@
+elasticsearch-nginx:
+  container_name: examples_elasticsearch-nginx_1
+  image: elasticsearch:2.1.1
+
+logstash-nginx:
+  image: logstash:2.1.1
+  links:
+    -  elasticsearch-nginx
+  volumes:
+    - /var/log/nginx/access.log:/incoming/nginx-access.log:ro
+    - ${PWD}/nginx_logs/logstash.conf:/config/logstash.conf
+  command: bash -c "adduser logstash adm && logstash -f /config/logstash.conf"
+
+juttle-engine:
+  links:
+    - elasticsearch-nginx
+  external_links:
+    - examples_elasticsearch-nginx_1
+
+
