@@ -9,7 +9,7 @@ read elastic -from :1 day ago: -to :now: -id 'nginx' |
 
 //    view table -limit 10;
 
-    // Requests by Browser Name
+    // Requests by examples request area
     filter request ~ /^\/api\/v0\/path/ | put request = String.replace(request, '/api/v0/paths', '') | reduce count=count() by request | sort count -desc | view barchart -title "Breakdown by Request";
 
     // Requests by Browser Name
