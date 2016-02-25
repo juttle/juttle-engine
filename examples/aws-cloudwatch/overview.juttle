@@ -27,13 +27,13 @@ read cloudwatch -last :1h: -period 3600 -statistics ['Maximum'] metric='EC2:Stat
                                                                 metric='EC2:StatusCheckFailed_System' OR
                                                                 metric='ELB:UnHealthyHostCount' OR
                                                                 metric='Lambda:Errors'
-  | (filter
+  | filter
      // EC2: Any instances with failed status checks.
      (product='EC2' AND value=1) OR
      // ELB: Any load balancers where UnHealthyHostCount is > 0
      (product='ELB' AND value > 0) OR
      // Lambda: Any function with errors > 0
-     (product='Lambda' AND value > 0))
+     (product='Lambda' AND value > 0)
   | head 1 by item
   | keep time, product, name, value, item
   | ( reduce cnt=count()
