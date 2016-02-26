@@ -3,8 +3,8 @@
 
 //
 // Simple helper script to expose the juttle CLI as part of an
-// outrigger installation.
+// juttle-engine installation.
 //
 var path = require('path');
-var juttle = path.resolve(__dirname, '../node_modules/juttle/bin/juttle');
+var juttle = path.resolve(__dirname, '../node_modules/juttle-service/bin/juttle');
 require(juttle)
