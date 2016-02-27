@@ -23,10 +23,10 @@ import "examples/aws-cloudwatch/common/aws_control_product.juttle" as control_pr
 import "examples/aws-cloudwatch/common/aws_control_metric.juttle" as control_metric;
 import "examples/aws-cloudwatch/common/aws_control_events.juttle" as control_events;
 
-input timerange: duration -default :6 hours: -label 'Time Range';
+input timerange: duration -default :12 hours: -label 'Time Range';
 
-read cloudwatch -last timerange -period 60 product=control_product.product_in AND metric=control_metric.metric_in
-    | batch -every :5m:
+read cloudwatch -last timerange -period 300 product=control_product.product_in AND metric=control_metric.metric_in
+    | batch -every :30m:
     | (put oldtime=time; reduce median=percentile(value, 0.5), time=first(time))
     | join
     | put time=oldtime, demedian=value-median
