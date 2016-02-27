@@ -13,7 +13,12 @@
             "password": "root"
         },
         "postgres": {
-            "connection": "postgres://postgres@postgres/postgres"
+            "hostname": "postgres",
+            "port": 5432,
+            "user": "postgres",
+            "pw": "postgres",
+            "db": "postgres",
+            "id": "default"
         },
         "mysql": {
             "user": "root",
