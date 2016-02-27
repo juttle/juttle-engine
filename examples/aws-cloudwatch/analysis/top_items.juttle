@@ -13,7 +13,7 @@ import "examples/aws-cloudwatch/common/aws_control_metric.juttle" as control_met
 
 read cloudwatch -last :1h: -period 3600 product=control_product.product_in AND metric=control_metric.metric_in
        | sort value -desc
-       | head -10
+       | head 10
        | view barchart -categoryField "item"
                        -yScales.primary.label "${control_metric.metric_in}"
                        -title 'AWS Top ${control_product.product_in} Items by ${control_metric.metric_in}';
