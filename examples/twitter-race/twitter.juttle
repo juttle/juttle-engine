@@ -3,11 +3,11 @@
 input A: text -default 'trump' -label "Search Term 1";
 input B: text -default 'clinton' -label "Serch Term 2";
 
-// Read the tweets, with 2-second delay to tolerate arrival jitter, 
+// Read the tweets, with 2-second delay to tolerate arrival jitter,
 // and merge in empty fake points to keep the charts full of data.
 sub tweets(what) {
   (
-    read twitter -stream true -delay :2s: what;
+    read twitter -to :end: -lag :2s: what;
     emit -limit 10000 | put message="FAKE TWEET", fake=true
   )
   | put #what=what
