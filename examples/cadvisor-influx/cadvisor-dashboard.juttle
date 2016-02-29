@@ -6,7 +6,7 @@
 
 const duration = :10m:;
 const start = :now: - duration;
-const interval = :5s:; // works well with cadvisor stat frequency
+const interval = :10s:; // works well with cadvisor stat frequency
 const cpu_ticks_per_second = 10000000;
 
 // reads exclude occasionally appearing ephemeral container with name '/'
@@ -21,7 +21,7 @@ sub read_stat(stat, from) {
 //
 sub delta_stat(group) {
   reduce -forget false -every interval value=last(value) by group
-  | put value = delta(value) by group
+  | put -reset false value = delta(value) by group
     // can get negative delta after container restart, zero them out
   | put value = (value > 0) ? value : 0 by group
   | put value = value / Duration.seconds(interval) by group
@@ -43,7 +43,7 @@ sub memory() {
 sub network() {
   read_stat -stat 'tx_bytes' -from start
   | delta_stat -group 'container_name'
-  | view timechart -title 'Network TX' -0;
+  | view timechart -title 'Network TX' -downsample false;
 
   read_stat -stat 'rx_bytes' -from start
   | delta_stat -group 'container_name'
