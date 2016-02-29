@@ -1,0 +1,13 @@
+sub add_juttle(juttle, description) {
+    put program="[${juttle}](/?path=/examples/aws-cloudwatch/analysis/${juttle}.juttle)", description=description
+}
+
+emit
+|(
+    add_juttle -juttle "top_items" -description "Show top items by any CloudWatch metric";
+    add_juttle -juttle "metric_correlation_scatterchart" -description "Compare any two CloudWatch Metrics on a Scatter Chart";
+    add_juttle -juttle "metric_outlier_timechart" -description "Identify outlier instances on a timechart";
+    add_juttle -juttle "metric_timechart" -description "Show CloudWatch metrics on a timechart";
+)
+| keep program, description
+| view table -title 'Example Juttle Programs' -markdownFields [ 'program' ]
