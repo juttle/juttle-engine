@@ -31,7 +31,7 @@ sub cpu() {
   read_stat -stat 'cpu_usage_total' -from start
   | delta_stat -group 'container_name'
   | put value = value / cpu_ticks_per_second
-  | view timechart -title 'CPU Usage' -display.dataDensity 0;
+  | view timechart -title 'CPU Usage' -downsample false;
 }
 
 sub memory() {
@@ -43,11 +43,11 @@ sub memory() {
 sub network() {
   read_stat -stat 'tx_bytes' -from start
   | delta_stat -group 'container_name'
-  | view timechart -title 'Network TX' -display.dataDensity 0;
+  | view timechart -title 'Network TX' -0;
 
   read_stat -stat 'rx_bytes' -from start
   | delta_stat -group 'container_name'
-  | view timechart -title 'Network RX' -display.dataDensity 0;
+  | view timechart -title 'Network RX' -downsample false;
 }
 
 sub containers() {
