@@ -8,15 +8,17 @@ To run the built in unit tests simply run:
 gulp test
 ```
 
-The above relies on you having the right version of chrome. To avoid figuring
-out which exactly which chrome version to use and if you have
-[docker](https://www.docker.com/) installed then you can simply tell the tests
-to use `TEST_MODE=docker` like so:
+To run the built in system tests simply run:
 
 ```
-TEST_MODE=docker gulp test
+gulp test --sys
 ```
 
-and the underlying testware will handle using the correct docker images to run
-the through which is exactly how we run the tests in
-[travis](https://travis-ci.org/juttle/juttle-engine).
+The system tests rely on having docker to bring up the selenium containers and
+other supporting [docker](https://www.docker.com/) containers. If you happen to
+want to run the selenium tests locally by using your own available chrome
+browser then simply run with:
+
+```
+TEST_MODE=local gulp test --sys
+```

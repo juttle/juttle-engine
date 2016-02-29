@@ -32,14 +32,34 @@ gulp.task('instrument', function () {
 });
 
 function gulp_test() {
+    var timeout;
+    var slow;
+    var argv = require('minimist')(process.argv.slice(2));
+
     var tests = [
         'test/**/*.spec.js'
     ];
 
+    // by passing the argument `--sys` you can also run the app tests
+    // which require spinning up a browser, by default we do not run
+    // the app tests
+    if (!argv.sys) {
+        tests.push('!test/app/**/*.spec.js');
+        tests.push('!test/npm/**/*.spec.js');
+        timeout = 20000; // 20s, test timeout
+        slow = 15000;    // 15s, slow warning
+    } else { 
+        // downloading and running docker containers can take a bit the first
+        // time around
+        timeout = 300000; // 5min, test timeout
+        slow = 240000;    // 4min, slow warning
+    }
+
     return gulp.src(tests)
     .pipe(mocha({
         log: true,
-        timeout: 60000,
+        timeout: timeout,
+        slow: slow,
         reporter: 'spec',
         ui: 'bdd',
         ignoreLeaks: true,
@@ -52,18 +72,32 @@ gulp.task('test', function() {
 });
 
 gulp.task('test-coverage', ['instrument'], function() {
+    var argv = require('minimist')(process.argv.slice(2));
+    var thresholds;
+
+    if (argv.sys) {
+        thresholds = {
+            global: {
+                statements: 97,
+                branches: 82,
+                functions: 100,
+                lines: 97
+            }
+        };
+    } else {
+        thresholds = {
+            global: {
+                statements: 96,
+                branches: 73,
+                functions: 100,
+                lines: 96
+            }
+        };
+    }
+
     return gulp_test()
     .pipe(istanbul.writeReports())
-    .pipe(istanbul.enforceThresholds({
-        thresholds: {
-            global: {
-                statements: 95,
-                branches: 70,
-                functions: 100,
-                lines: 95
-            }
-        }
-    }));
+    .pipe(istanbul.enforceThresholds({ thresholds: thresholds }));
 });
 
 gulp.task('default', ['lint']);

@@ -4,9 +4,9 @@ services:
     - docker
 
 node_js:
-    - '4.2'
-    - '5.0'
+    - '4'
+    - '5'
 
 script:
     - gulp lint
-    - DEBUG=juttle-engine-tester TEST_MODE=docker gulp test-coverage
+    - DEBUG=juttle-engine-tester TEST_MODE=docker gulp test-coverage --sys
