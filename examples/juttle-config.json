@@ -5,6 +5,11 @@
                 "id": "local",
                 "address": "examples_elasticsearch_1",
                 "port": 9200
+            },
+            {
+                "id": "nginx",
+                "address": "examples_elasticsearch-nginx_1",
+                "port": 9200
             }
         ],
         "influx": {

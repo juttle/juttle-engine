@@ -1,0 +1,31 @@
+export input show_local_in: select
+    -label 'Show Local Traffic'
+    -items [{label: 'Yes', value: "*"}, {label: 'No', value: "Impossible"} ]
+    -default '*';
+
+read elastic -from :1 day ago: -to :now: -id 'nginx' |
+    filter clientip !~ /regus/ OR clientip ~ show_local_in |
+(
+
+//    view table -limit 10;
+
+    // Requests by examples request area
+    filter request ~ /^\/api\/v0\/path/ | put request = String.replace(request, '/api/v0/paths', '') | reduce count=count() by request | sort count -desc | view barchart -title "Breakdown by Request";
+
+    // Requests by Browser Name
+    reduce count=count() by name | sort count -desc | view barchart -title "Breakdown by Browser";
+
+    // Requests by OS
+    reduce count=count() by os_name | sort count -desc | view barchart -title "Breakdown by OS";
+
+    // Requests by IP
+    reduce count=count() by clientip | sort count -desc | view barchart -title "Breakdown by IP";
+
+    // Requests by City
+    put city=geoip['city_name'] | filter city != null | reduce count=count() by city | sort count -desc | view barchart -title 'Breakdown by City' -categoryField 'city' -valueField 'count';
+
+    // Requests by response code
+    reduce count=count() by response | sort count -desc | view barchart -title "Breakdown by HTTP Response Code" -categoryField 'response' -valueField 'count';
+)
+
+
