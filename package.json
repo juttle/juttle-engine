@@ -42,7 +42,7 @@
     "juttle-mysql-adapter": "^0.5.0",
     "juttle-opentsdb-adapter": "^0.2.0",
     "juttle-postgres-adapter": "^0.5.0",
-    "juttle-service": "^0.3.0-rc.3",
+    "juttle-service": "^0.3.0",
     "juttle-sqlite-adapter": "^0.5.0",
     "juttle-twitter-adapter": "^0.3.0",
     "juttle-viewer": "^0.2.0",
