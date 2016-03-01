@@ -42,7 +42,7 @@ sub prices() {
     )
   | view timechart
       -title '${symbol} closing price' -id 'chart'
-      -display.dataDensity 0
+      -downsample false
       -keyField 'name'
       -valueField 'value'
       -series [
