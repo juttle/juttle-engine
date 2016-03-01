@@ -11,12 +11,13 @@ Released 2016-02-29
   - Changed the JSDP wire format to replace all remaining references to 'sink' in JSDP messages to 'view'.
   - Added a /version endpoint that returns version information on the juttle and adapter modules in use.
 - Updated all adapters to their latest releases, including compatibility with Juttle 0.5.0 and additional features / changes.
+- Added automatic "canary" docker image builds for all changes on all branches. [[#47](https://github.com/juttle/juttle-engine/issues/47)]
 
 ### Minor Changes
 - Updated juttle-viz to the [0.5.0 release](https://github.com/juttle/juttle-viz/releases/tag/v0.5.0). This included the following major changes:
   - timechart: improve downsampling by changing option name from -display.dataDensity to -downsample and making it a boolean.
-- Improved automated testing and test coverage. [#31] [#34] [#36] [#37] [#46]
-- Added additional example programs for AWS, cloudwatch, and nginx, and updated other example programs. [#32] [#33] [#40] [#41] [#56] [#57] [#59]
+- Improved automated testing and test coverage. [[#31](https://github.com/juttle/juttle-engine/issues/31)] [[#34](https://github.com/juttle/juttle-engine/issues/34)] [[#36](https://github.com/juttle/juttle-engine/issues/36)] [[#37](https://github.com/juttle/juttle-engine/issues/37)] [[#46](https://github.com/juttle/juttle-engine/issues/46)]
+- Added additional example programs for AWS, cloudwatch, and nginx, and updated other example programs. [[#32](https://github.com/juttle/juttle-engine/issues/32)] [[#33](https://github.com/juttle/juttle-engine/issues/33)] [[#40](https://github.com/juttle/juttle-engine/issues/40)] [[#41](https://github.com/juttle/juttle-engine/issues/41)] [[#56](https://github.com/juttle/juttle-engine/issues/56)] [[#57](https://github.com/juttle/juttle-engine/issues/57)] [[#59](https://github.com/juttle/juttle-engine/issues/59)]
 
 ## 0.2.2
 Released 2016-02-11
