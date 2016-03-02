@@ -55,6 +55,7 @@
     "bluebird": "^3.2.2",
     "bluebird-retry": "^0.5.3",
     "chai": "^3.5.0",
+    "chakram": "^1.2.2",
     "chromedriver": "^2.21.2",
     "eslint": "^1.10.3",
     "find-free-port": "^1.0.2",

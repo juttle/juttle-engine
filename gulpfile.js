@@ -46,6 +46,7 @@ function gulp_test() {
     if (!argv.sys) {
         tests.push('!test/app/**/*.spec.js');
         tests.push('!test/npm/**/*.spec.js');
+        tests.push('!test/examples/**/*.spec.js');
         timeout = 20000; // 20s, test timeout
         slow = 15000;    // 15s, slow warning
     } else { 
