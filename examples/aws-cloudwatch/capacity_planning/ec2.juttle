@@ -22,9 +22,22 @@ const instance_prices = {
     't2.medium': 0.05,
 };
 
-read mysql -table 'aws_aggregation' -last :1h:
+// Take categories contributing less than x percent to the total and
+// group them together in an "Other" category.
+sub threshold(thresh) {
+    (reduce total=sum(cost); pass)
+    | join
+    | put pct = 100.0*cost/total
+    | put name=(pct >= thresh ? name : 'other')
+    | reduce cost=sum(cost), time=last(time) by name
+    | sort name
+}
+
+read mysql -table 'aws_aggregation' -last :10m:
     product='EC2' AND demographic='EC2 Instance Type'
     | put cost=value*instance_prices[name]
+    | batch -every :1s:
+    | threshold -thresh 2
     | view piechart -valueField "cost" -title "EC2 Instances Scaled by Hourly Cost" -categoryField "name";
 
 

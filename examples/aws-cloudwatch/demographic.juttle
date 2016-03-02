@@ -16,6 +16,17 @@ import "examples/aws-cloudwatch/common/aws_control_aggregate.juttle" as control_
 import "examples/aws-cloudwatch/common/aws_control_demographic.juttle" as control_demo;
 import "examples/aws-cloudwatch/common/aws_control_events.juttle" as control_events;
 
+// Take categories contributing less than x percent to the total and
+// group them together in an "Other" category.
+sub threshold(thresh) {
+    (reduce total=sum(value); pass)
+    | join
+    | put pct = 100.0*value/total
+    | put name=(pct >= thresh ? name : 'other')
+    | reduce value=sum(value), time=last(time) by name
+    | sort name
+}
+
 read mysql -table 'aws_aggregation' -from :1 hour ago: -to :end: -lag :20s:
     | ( filter metric_type='AWS Aggregate' and aggregate=control_agg.agg_in
         | view timechart -keyField "aggregate"
@@ -31,6 +42,8 @@ read mysql -table 'aws_aggregation' -from :1 hour ago: -to :end: -lag :20s:
                       -messageField "item"
                       -typeField "icon";
        filter metric_type='AWS Demographic' AND demographic=control_demo.demo_in
+       | batch -every :1s:
+       | threshold -thresh 2
        | view piechart -categoryField "name"
                        -valueField "value"
                        -title "AWS Demographics (${control_demo.demo_in})";
