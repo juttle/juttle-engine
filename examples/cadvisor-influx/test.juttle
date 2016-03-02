@@ -1,1 +1,0 @@
-read influx -from :1m ago: -to :now: -last :1m: -db 'cadvisor' -measurements 'cpu_usage_per_cpu'
