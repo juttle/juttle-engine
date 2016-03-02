@@ -10,6 +10,16 @@ programs.
 
 ![](docs/screenshots/stock_prices_example.png)
 
+To make it easy to interconnect analytics with visualization,
+Juttle promotes a tight coupling between the language and the client-side
+visualization library.  Rather than
+having to tie together by hand a data processing layer with a separate
+visualization layer, Juttle enables you to integrate these two layers
+so you don't have to worry about the details
+of wiring Juttle dataflow computation to your browser-based views.
+Juttle Engine is the development and execution environment in which you can
+explore your data using Juttle and deploy rich visualizations into production.
+
 Under the covers, Juttle Engine integrates
 [juttle-service](https://github.com/juttle/juttle-service), a node.js API server
 that enables execution of Juttle programs using a REST API with the ability to
