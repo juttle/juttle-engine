@@ -23,7 +23,7 @@ sub threshold(thresh) {
     | join
     | put pct = 100.0*value/total
     | put name=(pct >= thresh ? name : 'other')
-    | reduce value=sum(value), time=last(time) by name
+    | reduce value=sum(value) by name
     | sort name
 }
 
