@@ -14,4 +14,6 @@ read aws -from :now: -to :end: -every :10s:
      | AWS.aggregate_all
      | write mysql -table 'aws_aggregation';
 
-" && tail -f /dev/null
+";
+
+tail -f /dev/null
