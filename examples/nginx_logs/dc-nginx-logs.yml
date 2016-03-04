@@ -1,6 +1,8 @@
 elasticsearch-nginx:
   container_name: examples_elasticsearch-nginx_1
   image: elasticsearch:2.1.1
+  ports:
+    - 9200
 
 logstash-nginx:
   image: logstash:2.1.1
@@ -16,5 +18,3 @@ juttle-engine:
     - elasticsearch-nginx
   external_links:
     - examples_elasticsearch-nginx_1
-
-

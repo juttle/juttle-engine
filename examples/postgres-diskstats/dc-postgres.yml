@@ -5,7 +5,7 @@ postgres:
   container_name: examples_postgres_1
   image: postgres
   ports:
-    - 5432:5432
+    - 5432
 
 juttle-engine_loader:
 # this container will load data into postgres via juttle, and exit.

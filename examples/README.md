@@ -201,3 +201,34 @@ mounts of paths below /tmp will refer to the VM and not your Mac/etc
 host. See
 [this github page](https://github.com/docker/compose/issues/1039) for
 more details.
+
+### Development & Debugging
+
+By default the `docker-compose` files expose the underlying data source
+ports by choosing a random host port. You may want to connect directly to
+the exposed port to diagnose problems and debug juttle programs. To see which
+ports are exposed, you can use `docker-compose` like so:
+
+```
+> docker-compose -f dc-juttle-engine.yml -f aws-cloudwatch/dc-aws-cloudwatch.yml -f cadvisor-influx/dc-cadvisor-influx.yml -f elastic-newstracker/dc-elastic-loadfromscratch.yml -f nginx_logs/dc-nginx-logs.yml -f postgres-diskstats/dc-postgres.yml ps
+Name                            Command               State                                   Ports
+------------------------------------------------------------------------------------------------------------------------------------------------
+examples_cadvisor_1               /usr/bin/cadvisor -logtost ...   Up       0.0.0.0:32776->8080/tcp
+examples_elasticsearch-nginx_1    /docker-entrypoint.sh elas ...   Up       0.0.0.0:32777->9200/tcp, 9300/tcp
+examples_elasticsearch_1          /docker-entrypoint.sh elas ...   Up       0.0.0.0:32778->9200/tcp, 9300/tcp
+examples_influxdb_1               /run.sh                          Up       0.0.0.0:32775->8083/tcp, 0.0.0.0:32774->8086/tcp, 8090/tcp, 8099/tcp
+examples_juttle-aws-poller_1      bash -c sleep 40 && echo ' ...   Up       8080/tcp
+examples_juttle-engine_1          /bin/sh -c /opt/juttle-eng ...   Up       0.0.0.0:8080->8080/tcp
+examples_juttle-engine_loader_1   bash /config/loadfromscrat ...   Up       8080/tcp
+examples_logstash-nginx_1         /docker-entrypoint.sh bash ...   Up
+examples_logstash_1               /docker-entrypoint.sh bash ...   Exit 0
+examples_mysql-createdb_1         /entrypoint.sh bash -c sle ...   Up       3306/tcp
+examples_mysql_1                  /entrypoint.sh mysqld            Up       0.0.0.0:32779->3306/tcp
+examples_postgres_1               /docker-entrypoint.sh postgres   Up       0.0.0.0:32780->5432/tcp
+examples_postgres_data_1          /bin/sh -c tail -f /dev/null     Up
+```
+
+As you can see above the instance for the `postgres-diskstats` example has the
+**postgres** database listening on the host at port `32780` which means you can
+connect to that **postgres** instance listening on that port to see what is
+actually stored int that **postgres** instance.

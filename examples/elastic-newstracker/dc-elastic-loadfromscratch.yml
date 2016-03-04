@@ -7,7 +7,7 @@ elasticsearch:
 #  volumes_from:
 #    - elastic_news_data
   ports:
-    - 9200:9200
+    - 9200
 
 logstash:
   image: logstash:2.1.1
@@ -21,4 +21,3 @@ logstash:
 juttle-engine:
   links:
     - elasticsearch
-
