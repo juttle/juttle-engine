@@ -92,7 +92,8 @@ describe('examples', () => {
 
     _.each({
         'core-juttle': 'examples/core-juttle',
-        'cadvisor-influx': 'examples/cadvisor-influx/'
+        'cadvisor-influx': 'examples/cadvisor-influx/',
+        'postgres-diskstats': 'examples/postgres-diskstats/'
     }, (directory, name) => {
         let juttles = fs.readdirSync(directory);
         juttles = juttles.filter((file) => {
