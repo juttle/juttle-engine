@@ -16,4 +16,6 @@ read aws -from :now: -to :end: -every :10s:
 
 ";
 
+echo 'juttle poller unexpectedly exited';
+
 tail -f /dev/null
