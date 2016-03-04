@@ -57,6 +57,12 @@ $ juttle-engine-client browser --path examples/core-juttle/hello_world.juttle
 ```
 This will open a browser window and display the output of the program. You can make edits to your juttle, save the file, and reload the browser window to get the updated output.
 
+## Ecosystem
+
+Here's how the juttle-engine module fits into the overall [Juttle Ecosystem](https://github.com/juttle/juttle/blob/master/docs/juttle_ecosystem.md):
+
+[![Juttle Ecosystem](https://github.com/juttle/juttle/raw/master/docs/images/JuttleEcosystemDiagram.png)](https://github.com/juttle/juttle/blob/master/docs/juttle_ecosystem.md)
+
 ## Options and Configuration
 
 Here are the full command line options supported by the daemon and client programs:
