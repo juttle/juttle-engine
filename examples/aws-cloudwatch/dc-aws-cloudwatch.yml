@@ -43,5 +43,6 @@ juttle-aws-poller:
      - mysql
   volumes:
      - ${PWD}/juttle-config.json:/opt/juttle-engine/.juttle-config.json
-     - ${PWD}/aws-cloudwatch/poll_aws.juttle.skip:/opt/juttle-engine/poll_aws.juttle
-  command: bash -c "sleep 40 && echo 'Polling from AWS and Writing to Mysql...' && juttle /opt/juttle-engine/poll_aws.juttle"
+     - ${PWD}/aws-cloudwatch/poll_aws.sh:/opt/juttle-engine/poll_aws.sh
+  command: bash /opt/juttle-engine/poll_aws.sh
+
