@@ -12,6 +12,8 @@ mysql:
     - MYSQL_ROOT_PASSWORD=my-juttle-password
   command:
     - mysqld
+  ports:
+    - 3306
 
 juttle-engine:
   links:
