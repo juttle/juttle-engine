@@ -20,6 +20,7 @@ var possible_opts = {
     o: 'output',
     L: 'log-config',
     l: 'log-level',
+    i: 'index-path',
     h: 'help'
 };
 
@@ -35,6 +36,7 @@ function usage() {
     console.log('       -o, --output <logfile>:                Log to specififed file when daemonized');
     console.log('       -L, --log-config <log4js-config-path>: Configure logging from <log4js-config-path>. Overrides any value of -o');
     console.log('       -l, --log-level <level>:               Use a default log level of <level>. Overridden by any log level specified in -L');
+    console.log('       -i, --index-path <path>:               Serve the given file as the main application page instead of the juttle-viewer default');
     console.log('       -h, --help:                            Print this help and exit');
     process.exit(1);
 }
