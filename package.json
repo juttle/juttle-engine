@@ -48,6 +48,7 @@
     "juttle-viewer": "^0.2.0",
     "minimist": "^1.2.0",
     "open": "^0.0.5",
+    "request-promise": "^2.0.0",
     "underscore": "^1.8.3",
     "ws": "^0.4.31"
   },

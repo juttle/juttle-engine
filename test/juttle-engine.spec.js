@@ -15,7 +15,8 @@ describe('Juttle Engine Tests', function() {
 
                 engine.run({
                     port: freePort,
-                    root: __dirname
+                    root: __dirname,
+                    host: 'localhost'
                 });
             });
     });
