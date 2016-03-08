@@ -3,47 +3,40 @@
 let _ = require('underscore');
 let Promise = require('bluebird');
 let chakram = require('chakram');
+let docker = require('../lib/docker');
 var expect = chakram.expect;
-let execAsync = Promise.promisify(require('child_process').exec);
 let fs = require('fs');
 let http = require('http');
-let logger = require('mocha-logger');
 let path = require('path');
+let cmd = require('../lib/cmd');
 let retry = require('bluebird-retry');
-let spawn = require('child_process').spawn;
 let WebSocket = require('ws');
 
-function spawnify(command, args, options) {
-    return new Promise((resolve, reject) => {
-        args = args || [];
-        logger.log('spawning "' + command + ' ' + args.join(' '));
-        options = _.extend( {
-            detached: true,
-            stdio: ['ignore', 'pipe', 'pipe']
-        }, options);
+const YMLS = [
+    'dc-juttle-engine.yml',
+    'cadvisor-influx/dc-cadvisor-influx.yml',
+    'postgres-diskstats/dc-postgres.yml'
+]
 
-        var spawned = spawn(command, args, options);
-        var stdout = '';
-        var stderr = '';
+function dockerCompose(ymls, command, commandArgs) {
+    commandArgs = commandArgs || [];
+    var args = [];
 
-        spawned.stdout.on('data', (data) => {
-            logger.log('STDOUT:', data);
-            stdout += data;
-        });
+    _.each(ymls, (yml) => {
+        args.push('-f');
+        args.push(yml);
+    });
 
-        spawned.stderr.on('data', (data) => {
-            logger.log('STDERR:', data);
-            stderr += data;
-        });
+    args.push(command);
+    args = args.concat(commandArgs);
 
-        spawned.on('close', (code) => {
-            if (code === 0) {
-                resolve(stdout, stderr);
-            } else {
-                reject(Error('command: "' + command + ' ' + args.join(' ') +
-                             '", failed with ' + code));
-            }
-        });
+    var env = Object.create(process.env);
+    // we need to set the PWD used by those yml files to . otherwise we inherit
+    // from the current process running at the root of the  source code
+    env.PWD = '.';
+    return cmd.spawnAsync('docker-compose', args, {
+        cwd: 'examples',
+        env: env
     });
 }
 
@@ -56,38 +49,54 @@ describe('examples', () => {
     let retryHTTPOptions = {
         interval: 500,
         timeout: 10000
-    }
+    };
 
     before(() => {
-        return execAsync('docker run ubuntu route | grep default | awk \'{print $2}\'')
-        .then((stdout) => {
-            hostAddress = stdout.trim();
-            return spawnify('docker', ['build', '-q', '-t', 'juttle/juttle-engine:latest', '.']);
+        return docker.getHostAddress()
+        .then((address) => {
+            hostAddress = address;
+            return docker.checkJuttleEngineLocalExists();
         })
         .then(() => {
-            return spawnify('test/examples/start-example-containers.sh');
+            return dockerCompose(YMLS, 'stop');
         })
         .then(() => {
-            return retry(() => {
-                return new Promise((resolve, reject) => {
-                    http.get(baseUrl, (resp) => {
-                        if (resp.statusCode !== 200) {
-                            reject(Error(`juttle-engine not responding on ${baseUrl}`));
-                        } else {
-                            resolve();
-                        }
-                    })
-                    .on('error', (err) => {
-                        reject(err);
+            return dockerCompose(YMLS, 'rm', ['--force']);
+        })
+        .then(() => {
+            return dockerCompose(YMLS, 'up', ['-d']);
+        })
+        .then(() => {
+            // wait for various underlying storages to be up and running
+            return Promise.all([
+                docker.waitForSuccess('examples_postgres_1',
+                                      ['pgrep', 'postgres']),
+                docker.waitForSuccess('examples_influxdb_1',
+                                      ['influx', '-execute', 'show databases']),
+                retry(() => {
+                    return new Promise((resolve, reject) => {
+                        http.get(baseUrl, (resp) => {
+                            if (resp.statusCode !== 200) {
+                                reject(Error(`juttle-engine not responding on ${baseUrl}`));
+                            } else {
+                                resolve();
+                            }
+                        })
+                        .on('error', (err) => {
+                            reject(err);
+                        });
                     });
-                });
-            }, retryHTTPOptions);
+                }, retryHTTPOptions)
+            ]);
         });
     });
 
     after(() => {
         // shutdown and remove containers
-        return spawnify('test/examples/stop-example-containers.sh');
+        return dockerCompose(YMLS, 'stop')
+        .then(() => {
+            return dockerCompose(YMLS, 'rm', ['--force']);
+        });
     });
 
     _.each({
