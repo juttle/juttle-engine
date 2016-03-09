@@ -15,33 +15,19 @@ function round(number, precision) {
 )
 | join host
 |(
+  reduce value = avg(value) by diskmodel
+  | sort value -desc
+  | filter value != 0
+  | view barchart -title 'Average hourly throughput by disk model, GB' -categoryField 'diskmodel' -row 0;
+
   reduce -every :1h: sum(value) by region
   |(
-    view timechart -title 'Throughput by region, GB' -row 0 -col 0;
+    view timechart -title 'Hourly throughput by region, GB' -row 1 -col 0;
 
     reduce sum(sum) by region
     | put sum = round(sum, 2)
     | sort sum -desc
-    | view table -title 'Daily throughput by region, GB' -row 0 -col 1
-  );
-
-  reduce -every :1h: sum(value) by pool
-  |(
-    view timechart -title 'Throughput by pool, GB' -row 1 -col 0;
-
-    reduce sum(sum) by pool
-    | put sum = round(sum, 2)
-    | sort sum -desc
-    | view table -title 'Daily throughput by pool, GB' -row 1 -col 1
-  );
-
-  reduce -every :1h: sum(value) by subregion
-  |(
-    view timechart -title 'Throughput by subregion, GB' -seriesLimit 25 -row 2 -col 0;
-
-    reduce sum(sum) by subregion
-    | put sum = round(sum, 2)
-    | sort sum -desc
-    | view table -title 'Daily throughput by subregion, GB' -row 2 -col 1
+    | view table -title 'Total GB by region' -row 1 -col 1
   );
 )
+
