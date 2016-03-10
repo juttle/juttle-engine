@@ -6,12 +6,6 @@ var _ = require('underscore');
 var minimist = require('minimist');
 var engine = require('..');
 
-var defaults = {
-    'port': 8080,
-    'root': '/',
-    'log-level': 'info'
-};
-
 var possible_opts = {
     p: 'port',
     r: 'root',
@@ -42,8 +36,6 @@ function usage() {
 }
 
 var opts = minimist(process.argv.slice(2));
-
-_.defaults(opts, defaults);
 
 // Expand any single-letter option to its full-length equalivent.
 _.each(possible_opts, function(opt, short) {

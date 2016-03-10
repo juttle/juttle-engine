@@ -14,6 +14,7 @@ var open = require('open');
 var chokidar = require('chokidar');
 var fs = require('fs');
 var crypto = require('crypto');
+var rp = require('request-promise');
 
 function push_file(filename, topic) {
 
@@ -74,7 +75,7 @@ function get_file_hash(path) {
 
 function push_path(opts) {
     if (opts.path !== undefined) {
-        push_file(path.resolve(opts.path), opts.topic)
+        push_file(opts.path, opts.topic)
             .then(function() {
                 console.log(`==> View program at: http://${opts['juttle-engine']}/?rendezvous=${opts.topic}`);
             });
@@ -85,21 +86,20 @@ function push_path(opts) {
 
 function watch_path(opts) {
     if (opts.path !== undefined) {
-        var watchPath = path.resolve(opts.path);
-        var last_hash = get_file_hash(watchPath);
+        var last_hash = get_file_hash(opts.path);
 
-        push_file(watchPath, opts.topic)
+        push_file(opts.path, opts.topic)
             .then(function() {
                 console.log(`==> View program at: http://${opts['juttle-engine']}/?rendezvous=${opts.topic}`);
             });
 
         console.log(`Watching file ${opts.path} for changes:`);
 
-        chokidar.watch(watchPath).on('change', function(path) {
-            var hash = get_file_hash(watchPath);
+        chokidar.watch(opts.path).on('change', function(path) {
+            var hash = get_file_hash(opts.path);
 
             if (hash !== last_hash) {
-                push_file(watchPath, opts.topic);
+                push_file(opts.path, opts.topic);
             }
 
             last_hash = hash;
@@ -109,11 +109,39 @@ function watch_path(opts) {
     }
 }
 
+// Given a complete path, which reflects a path on the local
+// filesystem, figure out the right path suffix to use relative to the
+// juttle-service's root path. Returns a promise that resolves with
+// the correct path suffix on or rejects if the local path and the
+// service's root path don't share a prefix.
+function reconcile_path(juttle_engine, local_path) {
+    let idx;
+
+    return rp(`http://${juttle_engine}/api/v0/config-info/`)
+    .then(function(body) {
+        return JSON.parse(body);
+    })
+    .then(function(config) {
+        if (!_.has(config, 'root')) {
+            throw new Error('Server has no configured root directory');
+        }
+        // The root directory must be a prefix of the local path.
+        idx = local_path.indexOf(config.root);
+        if (idx !== 0) {
+            throw new Error(`Local path (${local_path}) is not a path below server root path (${config.root})`);
+        } else {
+            let relative_to_root = local_path.substring(config.root.length);
+            return relative_to_root;
+        }
+    });
+}
+
 function browser(opts) {
     if (opts.path) {
-        var absPath = path.resolve(opts.path);
-        open(`http://${opts['juttle-engine']}/?path=${absPath}`);
-
+        reconcile_path(opts['juttle-engine'], opts.path)
+        .then(function(rec_path) {
+            open(`http://${opts['juttle-engine']}/?path=${rec_path}`);
+        });
     } else {
         client.usage();
     }
@@ -168,6 +196,11 @@ _.defaults(opts, defaults);
 if (opts.help ||
     opts._.length !== 1) {
     client.usage();
+}
+
+// Resolve any path argument now so it doesn't have to be resolved later
+if (_.has(opts, 'path')) {
+    opts.path = path.resolve(opts.path);
 }
 
 client.command(opts['juttle-engine'], opts, command);
