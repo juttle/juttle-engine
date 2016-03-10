@@ -49,7 +49,7 @@ function gulp_test() {
         tests.push('!test/examples/**/*.spec.js');
         timeout = 20000; // 20s, test timeout
         slow = 15000;    // 15s, slow warning
-    } else { 
+    } else {
         // downloading and running docker containers can take a bit the first
         // time around
         timeout = 300000; // 5min, test timeout
@@ -79,10 +79,10 @@ gulp.task('test-coverage', ['instrument'], function() {
     if (argv.sys) {
         thresholds = {
             global: {
-                statements: 97,
-                branches: 82,
-                functions: 100,
-                lines: 97
+                statements: 95,
+                branches: 78,
+                functions: 97,
+                lines: 95
             }
         };
     } else {
