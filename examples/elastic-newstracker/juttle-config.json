@@ -2,7 +2,7 @@
     "adapters": {
         "juttle-elastic-adapter": [
             {
-                "id": "local",
+                "id": "news",
                 "address": "elasticsearch",
                 "port": 9200
             }

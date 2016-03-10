@@ -2,8 +2,13 @@
     "adapters": {
         "elastic": [
             {
-                "id": "local",
-                "address": "examples_elasticsearch_1",
+                "id": "tutorial",
+                "address": "examples_elasticsearch-github_1",
+                "port": 9200
+            },
+            {
+                "id": "news",
+                "address": "examples_elasticsearch-news_1",
                 "port": 9200
             },
             {

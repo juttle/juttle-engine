@@ -1,0 +1,3 @@
+emit
+| put message = "Hello World!"
+| view table

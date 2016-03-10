@@ -1,0 +1,28 @@
+elasticsearch:
+  container_name: examples_elasticsearch-github_1
+  image: elasticsearch:2.1.1
+  volumes_from:
+    - elastic_github_data
+  ports:
+    - 9200
+
+juttle-engine_loader:
+# this container will load data from s3 into elasticsearch via juttle, and exit.
+  image: juttle/juttle-engine:latest
+  links:
+    - elasticsearch
+  volumes:
+    - ${PWD}/juttle-config.json:/opt/juttle-engine/.juttle-config.json
+    - ${PWD}/github-tutorial/write_from_s3_to_elastic.juttle:/config/write.juttle
+    - ${PWD}/github-tutorial/loadfromscratch.sh:/config/loadfromscratch.sh
+  command: bash /config/loadfromscratch.sh
+
+juttle-engine:
+# this juttle-engine container will keep running to serve up juttles.
+  links:
+    - elasticsearch
+  external_links:
+    - examples_elasticsearch-github_1
+  volumes:
+    - ${PWD}/github-tutorial/github_data.json:/tmp/data.json
+    - ${PWD}/github-tutorial/github_metadata.csv:/tmp/metadata.csv

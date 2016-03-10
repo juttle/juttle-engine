@@ -1,0 +1,5 @@
+read elastic -from :0: -to :now:
+| head 1 | keep time;
+
+read elastic -from :0: -to :now:
+| tail 1 | keep time

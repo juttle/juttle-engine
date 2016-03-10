@@ -1,2 +1,4 @@
-read elastic -from :2009-04-01: -to :2009-05-01: | reduce count() | put completion_pct=Math.floor(100.0*count/120060) | view table
-
+read elastic -id 'news' -from :2009-04-01: -to :2009-05-01:
+| reduce count()
+| put completion_pct=Math.floor(100.0*count/120060)
+| view table
