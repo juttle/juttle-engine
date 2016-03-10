@@ -51,7 +51,8 @@ describe('app tests', function() {
         });
     });
 
-    it('can open juttle program with an input, fill it out, and run', () => {
+    // https://github.com/juttle/juttle-engine/issues/83
+    it.skip('can open juttle program with an input, fill it out, and run', () => {
         return juttleEngineTester.run({
             path: path.join(__dirname, 'juttle', 'one-input.juttle')
         })
