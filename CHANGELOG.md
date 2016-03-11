@@ -1,6 +1,12 @@
 # Change Log
 This file documents all notable changes to juttle-engine. The release numbering uses [semantic versioning](http://semver.org).
 
+## Unreleased Changes
+
+### Minor Changes
+- Updated juttle-viewer to the [0.3.0 release](https://github.com/juttle/juttle-viewer/releases/tag/v0.3.0).
+This includes a total reorg of the app layout.
+
 ## 0.3.0
 Released 2016-02-29
 

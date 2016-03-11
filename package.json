@@ -45,7 +45,7 @@
     "juttle-service": "^0.4.0-rc.0",
     "juttle-sqlite-adapter": "^0.5.0",
     "juttle-twitter-adapter": "^0.3.0",
-    "juttle-viewer": "^0.2.0",
+    "juttle-viewer": "^0.3.0",
     "minimist": "^1.2.0",
     "open": "^0.0.5",
     "request-promise": "^2.0.0",
