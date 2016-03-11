@@ -11,7 +11,7 @@ This includes a total reorg of the app layout.
 - Make the top level index.html page served by juttle-engine configurable [[#74](https://github.com/juttle/juttle-engine/pull/74)]
 - Minor changes to README to aid in understanding the overall ecosystem [[#64](https://github.com/juttle/juttle-engine/pull/64)] [[#72](https://github.com/juttle/juttle-engine/pull/72)]
 - Minor changes to example programs [[#65](https://github.com/juttle/juttle-engine/pull/65)] [[#63](https://github.com/juttle/juttle-engine/pull/63)] [[#70](https://github.com/juttle/juttle-engine/pull/70)] [[#71](https://github.com/juttle/juttle-engine/pull/71)] [[#78](https://github.com/juttle/juttle-engine/pull/78)]
-- Added automated tests to verify example programs work with latest released versions of dependent modules and adapters [[#58](https://github.com/juttle/juttle-engine/pull/58)] [[#68](https://github.com/juttle/juttle-engine/pull/68)]
+- Added automated tests to verify example programs work with latest released versions of dependent modules and adapters [[#58](https://github.com/juttle/juttle-engine/pull/58)] [[#68](https://github.com/juttle/juttle-engine/pull/68)] [[#76](https://github.com/juttle/juttle-engine/pull/76)]
 
 ## 0.3.0
 Released 2016-02-29
