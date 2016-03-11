@@ -37,7 +37,7 @@
     "juttle-cloudwatch-adapter": "^0.3.0",
     "juttle-elastic-adapter": "^0.5.0",
     "juttle-gmail-adapter": "^0.5.0",
-    "juttle-graphite-adapter": "^0.4.0",
+    "juttle-graphite-adapter": "^0.4.2",
     "juttle-influx-adapter": "^0.5.0",
     "juttle-mysql-adapter": "^0.5.0",
     "juttle-opentsdb-adapter": "^0.2.0",
@@ -70,6 +70,7 @@
     "selenium-grid-status": "^0.2.0",
     "selenium-webdriver": "^2.48.2",
     "tmp": "0.0.28",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "uuid": "^2.0.1"
   }
 }
