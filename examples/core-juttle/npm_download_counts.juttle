@@ -1,6 +1,56 @@
-input npm_package: text -default "juttle";
+input npm_package: text -default "juttle" -label "NPM Package";
+input start: date -default :2016-01-01: -label "Start Date";
+input end:   date -default :today: -label "End Date";
 
-read http -url 'https://api.npmjs.org/downloads/range/last-month/${npm_package}' -timeField "day" -rootPath "downloads"
-    | put package=npm_package
-    | view timechart -keyField "package" -series [{name: npm_package, geom: 'bars'}] -yScales.primary.label "Number of NPM Downloads"
+function dayof(date) {
+    return Date.format(date, "YYYY-MM-DD");
+}
 
+// fetch the data
+sub fetch() {
+    read http -url 'https://api.npmjs.org/downloads/range/${dayof(start)}:${dayof(end)}/${npm_package}' -timeField "day" -rootPath "downloads"
+}
+
+// add a simple title using markdown
+sub title() {
+    emit -points [{title: '# Download Counts for ${npm_package}'}]
+    | view markdown -row 0
+}
+
+// Sum up the data by the given interval
+sub rollup(interval) {
+    reduce -every interval value=sum(downloads) | put name='downloads'
+}
+
+// Add a rolling average series
+sub trend(window, label) {
+    (pass; reduce -every :1d: -over window value=Math.floor(avg(value)), name=label)
+}
+
+sub chart(interval, label, row, col, color) {
+    view timechart
+        -keyField 'name'
+        -series [{name: 'downloads', color: color, geom: 'bars'},
+                 {color: '#909552'} ]
+        -title 'NPM Downloads per ${label} for ${npm_package}'
+        -yScales.primary.label "Download Count"
+        -downsample false
+        -interval interval
+        -row row -col col
+}
+
+title;
+fetch
+| (
+    rollup -interval :1d: | trend -window :28d: -label '28 day trend'
+      | chart -interval :1d: -label 'day' -row 1 -col 0 -color '#A4B946';
+
+    rollup -interval :1w: | trend -window :10w: -label '10 week trend'
+      | chart -interval :1d: -label 'week' -row 1 -col 1 -color '#79E0CB';
+
+    rollup -interval :1M:
+      | chart -interval :1d: -label 'month' -row 2 -col 0 -color '#666E4C';
+
+    rollup -interval :1y:
+      | chart -interval :1d: -label 'year' -row 2 -col 1 -color '#4E8DB8';
+  )
