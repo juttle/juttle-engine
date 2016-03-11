@@ -23,8 +23,8 @@ sub rollup(interval) {
 }
 
 // Add a rolling average series
-sub trend(window, label) {
-    (pass; reduce -every :1d: -over window value=Math.floor(avg(value)), name=label)
+sub trend(interval, window, label) {
+    (pass; reduce -every interval -over window value=Math.floor(avg(value)), name=label)
 }
 
 sub chart(interval, label, row, col, color) {
@@ -42,11 +42,11 @@ sub chart(interval, label, row, col, color) {
 title;
 fetch
 | (
-    rollup -interval :1d: | trend -window :28d: -label '28 day trend'
+    rollup -interval :1d: | trend -interval :1d: -window :28d: -label '28 day trend'
       | chart -interval :1d: -label 'day' -row 1 -col 0 -color '#A4B946';
 
-    rollup -interval :1w: | trend -window :10w: -label '10 week trend'
-      | chart -interval :1d: -label 'week' -row 1 -col 1 -color '#79E0CB';
+    rollup -interval :1w: | trend -interval :1w: -window :10w: -label '10 week trend'
+      | chart -interval :1w: -label 'week' -row 1 -col 1 -color '#79E0CB';
 
     rollup -interval :1M:
       | chart -interval :1d: -label 'month' -row 2 -col 0 -color '#666E4C';
