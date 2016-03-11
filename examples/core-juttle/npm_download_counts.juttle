@@ -49,8 +49,8 @@ fetch
       | chart -interval :1w: -label 'week' -row 1 -col 1 -color '#79E0CB';
 
     rollup -interval :1M:
-      | chart -interval :1d: -label 'month' -row 2 -col 0 -color '#666E4C';
+      | chart -interval :1M: -label 'month' -row 2 -col 0 -color '#666E4C';
 
     rollup -interval :1y:
-      | chart -interval :1d: -label 'year' -row 2 -col 1 -color '#4E8DB8';
+      | chart -interval :1y: -label 'year' -row 2 -col 1 -color '#4E8DB8';
   )
