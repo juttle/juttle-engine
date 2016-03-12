@@ -17,11 +17,12 @@ Examples                               | Special instructions
 [postgres-diskstats](postgres-diskstats/README.md) | Supply the yml file to ``docker-compose`` to start additional containers to read from PostgreSQL
 [cadvisor-influx](cadvisor-influx/README.md) | Supply the yml file to ``docker-compose`` to start additional containers to read from InfluxDB
 [aws-cloudwatch](aws-cloudwatch/README.md) | To read from AWS/Cloudwatch, you need to configure credentials in ``juttle-config.json``, see [README](aws-cloudwatch/README.md)
+[github-tutorial](github-tutorial/README.md) | To read from elasticsearch, the tutorial needs to start additional docker container, supply its yml file to ``docker-compose``
 
 If you wish to run all available examples, this command will start all necessary docker containers:
 
 ```
-docker-compose -f dc-juttle-engine.yml -f elastic-newstracker/dc-elastic.yml -f cadvisor-influx/dc-cadvisor-influx.yml -f postgres-diskstats/dc-postgres.yml up
+docker-compose -f dc-juttle-engine.yml -f elastic-newstracker/dc-elastic.yml -f cadvisor-influx/dc-cadvisor-influx.yml -f postgres-diskstats/dc-postgres.yml -f github-tutorial/dc-elastic.yml up
 ```
 
 If that worked correctly, you should be able to visit this URL in your browser (if running via docker-machine, replace ``localhost`` with IP of the machine):
@@ -138,6 +139,11 @@ reference configuration file with a combination of the
 like twitter, require custom information such as OAuth tokens, and as
 a result are not included in this directory's juttle-config.json.
 
+Note that multiple instances of elastic adapter are used,
+referencing different containers that run Elasticsearch.
+Keep the `github` instance at the top of the list, so it will be the
+default, and Juttle Tutorial programs can `read elastic` without `-id`.
+
 If you want to simply use the core juttle programs or the adapters
 whose config is limited to specifying backends from the docker compose
 files, ``juttle-config.json`` will be sufficient.
@@ -215,7 +221,7 @@ Name                            Command               State                     
 ------------------------------------------------------------------------------------------------------------------------------------------------
 examples_cadvisor_1               /usr/bin/cadvisor -logtost ...   Up       0.0.0.0:32776->8080/tcp
 examples_elasticsearch-nginx_1    /docker-entrypoint.sh elas ...   Up       0.0.0.0:32777->9200/tcp, 9300/tcp
-examples_elasticsearch_1          /docker-entrypoint.sh elas ...   Up       0.0.0.0:32778->9200/tcp, 9300/tcp
+examples_elasticsearch-news_1          /docker-entrypoint.sh elas ...   Up       0.0.0.0:32778->9200/tcp, 9300/tcp
 examples_influxdb_1               /run.sh                          Up       0.0.0.0:32775->8083/tcp, 0.0.0.0:32774->8086/tcp, 8090/tcp, 8099/tcp
 examples_juttle-aws-poller_1      bash -c sleep 40 && echo ' ...   Up       8080/tcp
 examples_juttle-engine_1          /bin/sh -c /opt/juttle-eng ...   Up       0.0.0.0:8080->8080/tcp

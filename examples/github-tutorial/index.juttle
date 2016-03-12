@@ -1,0 +1,49 @@
+// Output a table with clickable links to the actual demo programs, for navigation.
+sub add_juttle(name) {
+    put program="[" + name + "](/?path=/examples/github-tutorial/" + name + ".juttle)"
+}
+
+emit
+|(
+  add_juttle -name "00_hello_world";
+  add_juttle -name "01_view_data_head";
+  add_juttle -name "02_view_data_tail";
+  add_juttle -name "03_view_data_head_tail";
+  add_juttle -name "04_view_with_time_filter";
+  add_juttle -name "05_count_points";
+  add_juttle -name "06_count_and_first_point";
+  add_juttle -name "07_list_fields";
+  add_juttle -name "08_count_types";
+  add_juttle -name "09_list_types";
+  add_juttle -name "10_count_unique_repos";
+  add_juttle -name "11_count_multiple";
+  add_juttle -name "12_put_avg_actors";
+  add_juttle -name "13_count_actors_by_repo";
+  add_juttle -name "14_top_ten_repos";
+  add_juttle -name "15_activity_per_actor";
+  add_juttle -name "16_top_three_actors_per_repo";
+  add_juttle -name "17_view_metadata";
+  add_juttle -name "18_view_joined_data";
+)
+| keep program
+| view table -title 'Tutorial Programs (CLI-Friendly, Small Data)' -markdownFields [ 'program' ] -height 800 -row 0 -col 0;
+
+emit
+|(
+  add_juttle -name "19_count_es_points";
+  add_juttle -name "20_reduce_by_two_fields_elastic";
+  add_juttle -name "21_reduce_from_elastic";
+  add_juttle -name "22_barchart_repos";
+  add_juttle -name "23_barchart_top_repos";
+  add_juttle -name "24_time_range_of_data";
+  add_juttle -name "25_timechart_event_count";
+  add_juttle -name "26_timechart_series_by_type";
+  add_juttle -name "27_timechart_moving_window";
+  add_juttle -name "28_timechart_joined_data_subcategory";
+  add_juttle -name "29_timechart_joined_data_filtered";
+  add_juttle -name "30_input_controls";
+  add_juttle -name "31_timechart_with_input_subcategory";
+  add_juttle -name "32_final_dashboard";
+)
+| keep program
+| view table -title 'Tutorial Programs (Browser Viz, Big Data)' -markdownFields [ 'program' ] -height 800 -row 0 -col 1;

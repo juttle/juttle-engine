@@ -57,6 +57,12 @@ $ juttle-engine-client browser --path examples/core-juttle/hello_world.juttle
 ```
 This will open a browser window and display the output of the program. You can make edits to your juttle, save the file, and reload the browser window to get the updated output.
 
+### Examples
+
+Several demo-style examples of Juttle programs with sample data sets are available in this repo under [examples](./examples/README.md). The same examples are deployed on a demo system [demo.juttle.io](http://demo.juttle.io/index.html).
+
+We also offer a [tutorial](http://juttle.github.io/juttle/concepts/juttle_tutorial) for developers new to Juttle.
+
 ## Ecosystem
 
 Here's how the juttle-engine module fits into the overall [Juttle Ecosystem](https://github.com/juttle/juttle/blob/master/docs/juttle_ecosystem.md):

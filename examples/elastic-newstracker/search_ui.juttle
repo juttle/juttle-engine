@@ -12,7 +12,7 @@ sub search_hits_table() {
   | view table -title "Logs";
 }
 
-read elastic -from :2009-04-01: -to :2009-05-01: search
+read elastic -id 'news' -from :2009-04-01: -to :2009-05-01: search
 |(
   log_count_timechart;
   search_hits_table;

@@ -1,0 +1,5 @@
+read elastic -from :2015-01-01: -to :2015-07-01:
+| reduce actors = count_unique('actor_login') by repo_name
+| sort actors -desc
+| head 20
+| view barchart
