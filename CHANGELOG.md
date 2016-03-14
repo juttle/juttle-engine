@@ -1,6 +1,15 @@
 # Change Log
 This file documents all notable changes to juttle-engine. The release numbering uses [semantic versioning](http://semver.org).
 
+## 0.5.0
+Released 2016-03-14
+
+### Major Changes
+- Added set of examples for Juttle tutorial, using github data set [[#85](https://github.com/juttle/juttle-engine/pull/85)]
+
+### Minor Changes
+- Bug fixes to examples [[#87](https://github.com/juttle/juttle-engine/pull/87)
+
 ## 0.4.0
 Released 2016-03-10
 
