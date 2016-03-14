@@ -22,7 +22,7 @@ Examples                               | Special instructions
 If you wish to run all available examples, this command will start all necessary docker containers:
 
 ```
-docker-compose -f dc-juttle-engine.yml -f elastic-newstracker/dc-elastic.yml -f cadvisor-influx/dc-cadvisor-influx.yml -f postgres-diskstats/dc-postgres.yml -f github-tutorial/dc-elastic.yml up
+docker-compose -f dc-juttle-engine.yml -f elastic-newstracker/dc-elastic.yml -f cadvisor-influx/dc-cadvisor-influx.yml -f github-tutorial/dc-elastic.yml -f postgres-diskstats/dc-postgres.yml up
 ```
 
 If that worked correctly, you should be able to visit this URL in your browser (if running via docker-machine, replace ``localhost`` with IP of the machine):

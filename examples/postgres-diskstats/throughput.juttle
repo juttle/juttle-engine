@@ -15,7 +15,8 @@ function round(number, precision) {
 )
 | join host
 |(
-  reduce value = avg(value) by diskmodel
+  unbatch // to make the downstream reduce apply in aggregate instead of per hour
+  | reduce value = avg(value) by diskmodel
   | sort value -desc
   | filter value != 0
   | view barchart -title 'Average hourly throughput by disk model, GB' -categoryField 'diskmodel' -row 0;

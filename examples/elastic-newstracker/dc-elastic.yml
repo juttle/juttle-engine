@@ -1,7 +1,7 @@
 elastic_news_data:
    image: juttle/elastic_news_data
 
-elasticsearch:
+elasticsearch-news:
   container_name: examples_elasticsearch-news_1
   image: elasticsearch:2.1.1
   volumes_from:
@@ -11,6 +11,6 @@ elasticsearch:
 
 juttle-engine:
   links:
-    - elasticsearch
+    - elasticsearch-news
   external_links:
     - examples_elasticsearch-news_1
