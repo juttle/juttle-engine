@@ -1,7 +1,7 @@
 elastic_github_data:
   image: juttle/elastic_github_data
 
-elasticsearch:
+elasticsearch-github:
   container_name: examples_elasticsearch-github_1
   image: elasticsearch:2.1.1
   volumes_from:
@@ -11,7 +11,7 @@ elasticsearch:
 
 juttle-engine:
   links:
-    - elasticsearch
+    - elasticsearch-github
   external_links:
     - examples_elasticsearch-github_1
   volumes:

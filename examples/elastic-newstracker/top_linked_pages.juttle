@@ -1,5 +1,7 @@
-read elastic -id 'news' -from :2009-04-01: -to :2009-05-01: linkout != null tag != 'rollup_linkout'
-| reduce count() by 'linkout.raw'
+read elastic -id 'news' -from :2009-04-01: -to :2009-05-01:
+// temporarily unoptimized due to https://github.com/juttle/juttle-elastic-adapter/issues/126
+| filter linkout != null AND tag != 'rollup_linkout'
+| reduce count() by linkout
 | sort count -desc
 | head 10
 | view table -title 'Most popular pages, sample from April 2009'
