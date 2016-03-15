@@ -4,6 +4,8 @@
 
 This example loads a data set of Internet news snippets from April 2009, collected by Memetracker (see [data source](#data-source)), into ElasticSearch, then uses Juttle with the elasticsearch adapter to read this data, search the news, compute aggregations, and visualize in the browser.
 
+You can view this example on the demo system [demo.juttle.io](http://demo.juttle.io/?path=/examples/elastic-newstracker/index.juttle), or run it on your own using docker (see the parent [README](../README.md)).
+
 ## Additional docker-compose configuration
 
 [dc-elastic.yml](./dc-elastic.yml) in the current directory adds the following containers:

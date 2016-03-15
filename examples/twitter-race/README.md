@@ -4,6 +4,8 @@ This example shows reading from a live stream of tweets using the [twitter adapt
 The user inputs 2 search terms, juttle parses the incoming tweets to find matches, and displays match count as live-updating tiles and a timechart,
 to visually compare popularity of the requested terms.
 
+You can view this example on the demo system [demo.juttle.io](http://demo.juttle.io/?path=/examples/twitter-race/twitter.juttle), or run it on your own using docker (see the parent [README](../README.md)).
+
 ## Additional docker-compose configuration
 
 None needed.

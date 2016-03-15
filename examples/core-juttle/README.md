@@ -6,6 +6,8 @@ These examples use only built-in Juttle processors and adapters.  All
 you need to run these examples is to install juttle-engine and run
 juttle-engine, as described in the parent directory.
 
+You can view these examples on the demo system [demo.juttle.io](http://demo.juttle.io/?path=/examples/core-juttle/index.juttle), or run them on your own using docker (see the parent [README](../README.md)).
+
 ## Additional docker-compose configuration
 
 None needed.

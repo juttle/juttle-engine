@@ -10,6 +10,8 @@ this metadata has no timestamps and simply maps hosts to regions, subregions, po
 While we could ingest this data into another Posgres table, in this example we leave it in a file,
 to showcase joining data from different sources in a Juttle program.
 
+You can view this example on the demo system [demo.juttle.io](http://demo.juttle.io/?path=/examples/postgres-diskstats/throughput.juttle), or run it on your own using docker (see the parent [README](../README.md)).
+
 ## tl;dr
 
 Run this from the parent `examples` dir (details in the parent [README.md](../README.md)):

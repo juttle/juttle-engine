@@ -4,6 +4,8 @@
 
 This set of example Juttle programs goes with the [Juttle Tutorial](http://juttle.github.io/juttle/concepts/juttle_tutorial/) targeting new developers. Second part of the tutorial uses a 6-month GitHub repo activity dataset loaded into Elasticsearch (size 29MB, 216158 records). This docker container provides ES with preloaded data.
 
+You can view these tutorial examples on the demo system [demo.juttle.io](http://demo.juttle.io/?path=/examples/github-tutorial/index.juttle), or run them on your own using docker (see the parent [README](../README.md)).
+
 ## Additional docker-compose configuration
 
 [dc-elastic.yml](./dc-elastic.yml) in the current directory adds the following containers:

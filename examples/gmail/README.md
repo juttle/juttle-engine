@@ -2,6 +2,8 @@
 
 These examples show ways to read messages from a gmail account and categorize the messages as well as writing the results of programs back to gmail by sending messages.
 
+You can view these examples on the demo system [demo.juttle.io](http://demo.juttle.io/?path=/examples/gmail/index.juttle), or run them on your own using docker (see the parent [README](../README.md)).
+
 A [detailed walkthrough](https://github.com/juttle/juttle-gmail-adapter/blob/master/docs/adapter_impl_notes.md) of the adapter implementation is available if you want to use it as a basis for writing your own adapters.
 
 ## Additional docker-compose configuration
