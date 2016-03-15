@@ -1,10 +1,13 @@
 # Example programs using nginx and elasticsearch
 
 ## Description
+
 The programs below this directory are mostly for internal use and
 can't be used on their own in an isolated docker-compose environment,
 so they're aren't described in the overall examples README. However,
 here's a quick description of how they work.
+
+You can view these examples on the demo system (link) [demo.juttle.io](http://demo.juttle.io/?path=/examples/nginx_logs/nginx-elastic.juttle).
 
 ## Additional docker-compose configuration
 

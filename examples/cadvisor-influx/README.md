@@ -6,6 +6,8 @@ This example demonstrates using Juttle with an InfluxDB backend via the [influx 
 
 Our Juttle program will then read the stats from InfluxDB backend and render visualizations of the container activity in the juttle-engine environment. Since this demo will have 3 docker containers running (influxdb, cadvisor and juttle-engine), we will monitor statistics from these three, as well as any other containers that happen to be running on the system.
 
+You can view this example on the demo system [demo.juttle.io](http://demo.juttle.io/?path=/examples/cadvisor-influx/cadvisor-dashboard.juttle), or run it on your own using docker (see the parent [README](../README.md)).
+
 ## tl;dr
 
 Run this from the parent `examples` dir (details in the parent [README.md](../README.md)):

@@ -1,5 +1,11 @@
 # AWS/Cloudwatch
 
+# Setup
+
+This set of Juttle programs provides a dashboard of analytics from AWS and Cloudwatch data (which require configuring juttle adapters with your AWS credentials).
+
+You can view this example on the demo system [demo.juttle.io](http://demo.juttle.io/?path=/examples/aws-cloudwatch/index.juttle), or run it on your own using docker (see the parent [README](../README.md)).
+
 ## Additional docker-compose configuration
 
 The aws adapter by itself does not need any additional docker-compose

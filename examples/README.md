@@ -6,18 +6,20 @@ The README files and juttle programs below this directory show different example
 
 To make it easy to download and run these programs, the instructions rely on docker and docker compose to create a juttle-engine instance linked to a variety of dependent backends. The linkage is done via juttle adapters.
 
+The same examples are deployed on the demo system [demo.juttle.io](http://demo.juttle.io/index.html).
+
 # tl;dr
 
-Examples                               | Special instructions
--------------------------------------- | --------------------
-[core-juttle](core-juttle/README.md)   | No special configuration; examples using http will need network connectivity
-[twitter-race](twitter-race/README.md) | To read from a twitter stream, you need to configure credentials in ``juttle-config.json`` file, see [README](twitter-race/README.md)
-[elastic-newstracker](elastic-newstracker/README.md) | To read from elasticsearch, this example needs to start additional docker containers, supply its yml file to ``docker-compose``
-[gmail](gmail/README.md) | To read from/write to gmail, you need to configure credentials in ``juttle-config.json`` file, see [README](gmail/README.md)
-[postgres-diskstats](postgres-diskstats/README.md) | Supply the yml file to ``docker-compose`` to start additional containers to read from PostgreSQL
-[cadvisor-influx](cadvisor-influx/README.md) | Supply the yml file to ``docker-compose`` to start additional containers to read from InfluxDB
-[aws-cloudwatch](aws-cloudwatch/README.md) | To read from AWS/Cloudwatch, you need to configure credentials in ``juttle-config.json``, see [README](aws-cloudwatch/README.md)
-[github-tutorial](github-tutorial/README.md) | To read from elasticsearch, the tutorial needs to start additional docker container, supply its yml file to ``docker-compose``
+Examples                               | Demo | Special instructions
+-------------------------------------- | ---- | --------------------
+[core-juttle](core-juttle/README.md)   | [demo-1](http://demo.juttle.io/?path=/examples/core-juttle/index.juttle) | No special configuration; examples using http will need network connectivity
+[twitter-race](twitter-race/README.md) | [demo-2](http://demo.juttle.io/?path=/examples/twitter-race/twitter.juttle) | To read from a twitter stream, you need to configure credentials in ``juttle-config.json`` file, see [README](twitter-race/README.md)
+[elastic-newstracker](elastic-newstracker/README.md) | [demo-3](http://demo.juttle.io/?path=/examples/elastic-newstracker/index.juttle) | To read from elasticsearch, this example needs to start additional docker containers, supply its yml file to ``docker-compose``
+[gmail](gmail/README.md) | [demo-4](http://demo.juttle.io/?path=/examples/gmail/index.juttle) | To read from/write to gmail, you need to configure credentials in ``juttle-config.json`` file, see [README](gmail/README.md)
+[postgres-diskstats](postgres-diskstats/README.md) | [demo-5](http://demo.juttle.io/?path=/examples/postgres-diskstats/throughput.juttle) | Supply the yml file to ``docker-compose`` to start additional containers to read from PostgreSQL
+[cadvisor-influx](cadvisor-influx/README.md) | [demo-6](http://demo.juttle.io/?path=/examples/cadvisor-influx/cadvisor-dashboard.juttle) | Supply the yml file to ``docker-compose`` to start additional containers to read from InfluxDB
+[aws-cloudwatch](aws-cloudwatch/README.md) | [demo-7](http://demo.juttle.io/?path=/examples/aws-cloudwatch/index.juttle) | To read from AWS/Cloudwatch, you need to configure credentials in ``juttle-config.json``, see [README](aws-cloudwatch/README.md)
+[github-tutorial](github-tutorial/README.md) | [demo-8](http://demo.juttle.io/?path=/examples/github-tutorial/index.juttle) | To read from elasticsearch, the tutorial needs to start additional docker container, supply its yml file to ``docker-compose``
 
 If you wish to run all available examples, this command will start all necessary docker containers:
 
