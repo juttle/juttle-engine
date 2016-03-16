@@ -67,6 +67,11 @@ module.exports = {
             args.push('--workdir');
             args.push(options.workdir);
         }
+        
+        _.each(options.env, (env) => {
+            args.push('-e');
+            args.push(env);
+        });
 
         if (options.detach) {
             args.push('-d');
@@ -138,7 +143,7 @@ module.exports = {
         logger.log(`${containerName}: "${args.join(' ')}" waiting for success`);
         return retry(() => {
             return this.exec(containerName, args, options);
-        }, { interval: 1000, max_tries: 10 })
+        }, { interval: 1000, max_tries: 20 })
         .then(() => {
             logger.log(`${containerName}: "${args.join(' ')}" succeeded`);
         })

@@ -1,5 +1,6 @@
 'use strict';
 
+let _ = require('underscore');
 let Promise = require('bluebird');
 let docker = require('../lib/docker');
 let expect = require('chai').expect;
@@ -10,22 +11,30 @@ let retry = require('bluebird-retry');
 let tmp = require('tmp');
 let uuid = require('uuid');
 
-function juttleBin(juttle) {
+function juttleBin(juttle, options) {
+    options = _.defaults(options, {
+        quiet: true
+    });
     logger.log(`juttle -e "${juttle}"`);
     return docker.exec('juttle-engine-local',
                        ['/opt/juttle-engine/bin/juttle',
                         '-e',
-                        juttle], { quiet: true });
+                        juttle], options);
 }
 
 describe('adapters', () => {
 
+    let tmpdir;
+
     before(() => {
-        var tmpdir = tmp.dirSync().name;
+        tmpdir = tmp.dirSync().name;
+
         return Promise.all([
             docker.destroy('elasticsearch-adapter-test'),
             docker.destroy('influxdb-adapter-test'),
             docker.destroy('graphite-adapter-test'),
+            docker.destroy('mysql-adapter-test'),
+            docker.destroy('postgres-adapter-test'),
             docker.destroy('juttle-engine-local')
         ])
         .then(() => {
@@ -46,6 +55,27 @@ describe('adapters', () => {
                 docker.run({
                     name: 'graphite-adapter-test',
                     image: 'sitespeedio/graphite:0.9.14',
+                    detach: true
+                }),
+                docker.run({
+                    name: 'mysql-adapter-test',
+                    image: 'mysql:5.7',
+                    env: [
+                        'MYSQL_ROOT_PASSWORD=password',
+                        'MYSQL_DATABASE=testdb',
+                        'MYSQL_USER=user',
+                        'MYSQL_PASSWORD=password'
+                    ],
+                    detach: true
+                }),
+                docker.run({
+                    name: 'postgres-adapter-test',
+                    image: 'postgres:9.5',
+                    env: [
+                        'POSTGRES_PASSWORD=',
+                        'POSTGRES_USER=postgres',
+                        'POSTGRES_DB=testdb'
+                    ],
                     detach: true
                 })
             ]);
@@ -71,6 +101,24 @@ describe('adapters', () => {
                             username: 'guest',
                             password: 'guest'
                         }
+                    },
+                    mysql: {
+                        user: 'user',
+                        password: 'password',
+                        host: 'mysqldb',
+                        db: 'testdb'
+                    },
+                    postgres: [{
+                        hostname: 'postgresdb',
+                        port: 5432,
+                        user: 'postgres',
+                        pw: '',
+                        db: 'testdb',
+                        id: 'default'
+                    }],
+                    sqlite: {
+                        // sqlite db within the juttle-engine-local container
+                        filename: '/tmp/sqlite.db'
                     }
                 }
             });
@@ -86,7 +134,9 @@ describe('adapters', () => {
                 links: [
                     'elasticsearch-adapter-test:elasticsearch',
                     'influxdb-adapter-test:influxdb',
-                    'graphite-adapter-test:graphite'
+                    'graphite-adapter-test:graphite',
+                    'mysql-adapter-test:mysqldb',
+                    'postgres-adapter-test:postgresdb'
                 ],
                 volumes: [`${tmpdir}:/tmp`],
                 workdir: '/tmp',
@@ -100,7 +150,11 @@ describe('adapters', () => {
                 docker.waitForSuccess('influxdb-adapter-test',
                                       ['influx', '-execute', 'show databases']),
                 docker.waitForSuccess('graphite-adapter-test',
-                                      ['curl', '-u', 'guest:guest', 'http://localhost:80'])
+                                      ['curl', '-u', 'guest:guest', 'http://localhost:80']),
+                docker.waitForSuccess('mysql-adapter-test',
+                                      ['mysql', '-ppassword', '-uroot']),
+                docker.waitForSuccess('postgres-adapter-test',
+                                      ['psql', '-Upostgres', '-w', '-d', 'testdb'])
             ]);
         });
     });
@@ -110,6 +164,8 @@ describe('adapters', () => {
             docker.destroy('elasticsearch-adapter-test'),
             docker.destroy('influxdb-adapter-test'),
             docker.destroy('graphite-adapter-test'),
+            docker.destroy('mysql-adapter-test'),
+            docker.destroy('postgres-adapter-test'),
             docker.destroy('juttle-engine-local')
         ]);
     });
@@ -193,4 +249,37 @@ describe('adapters', () => {
         });
     });
 
+    _.each([
+        'mysql',
+        'postgres',
+        'sqlite'
+    ], (adapterName) => {
+        describe(`juttle-${adapterName}-adapter`, () => {
+            it('can write data and read back data using the juttle CLI', () => {
+                var id = uuid.v1().slice(0, 8);
+                var table = `test_${id}`;
+
+                // create a new table each time
+                return juttleBin(`read ${adapterName} -db 'testdb' -raw "CREATE TABLE ${table}(time TIMESTAMP, name VARCHAR(32), value INTEGER);"`, { quiet: false })
+                .then((output) => {
+                    return juttleBin(`emit -limit 5 -from :2014-01-01: | put name="test-${id}", value=count() | write ${adapterName} -db 'testdb' -table '${table}'`);
+                })
+                .then(() => {
+                    return retry(() => {
+                        return juttleBin(`read ${adapterName} -db 'testdb' -table '${table}' -timeField 'time' -from :0: name="test-${id}" | view text`)
+                        .then((output) => {
+                            var data = JSON.parse(output);
+                            expect(data).to.deep.equal([
+                                { time: '2014-01-01T00:00:00.000Z', name: `test-${id}`, value: 1 },
+                                { time: '2014-01-01T00:00:01.000Z', name: `test-${id}`, value: 2 },
+                                { time: '2014-01-01T00:00:02.000Z', name: `test-${id}`, value: 3 },
+                                { time: '2014-01-01T00:00:03.000Z', name: `test-${id}`, value: 4 },
+                                { time: '2014-01-01T00:00:04.000Z', name: `test-${id}`, value: 5 }
+                            ]);
+                        });
+                    }, { timeout: 5000 });
+                });
+            });
+        });
+    });
 });
