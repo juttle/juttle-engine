@@ -40,6 +40,7 @@
     "juttle-graphite-adapter": "^0.5.0",
     "juttle-influx-adapter": "^0.6.0",
     "juttle-mysql-adapter": "^0.5.0",
+    "juttle-splunk-adapter": "^0.1.2",
     "juttle-opentsdb-adapter": "^0.2.0",
     "juttle-postgres-adapter": "^0.5.0",
     "juttle-service": "^0.4.0",

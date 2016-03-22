@@ -1,0 +1,13 @@
+splunk-nginx:
+  image: juttle/splunk:6.3.3
+  ports:
+    - 8000
+    - 8089
+  volumes:
+    - /var/log/nginx/access.log:/data/nginx-access.log:ro
+  environment:
+    - SPLUNK_ADD='monitor /data/'
+
+juttle-engine:
+  links:
+    - splunk-nginx
