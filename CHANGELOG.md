@@ -1,6 +1,22 @@
 # Change Log
 This file documents all notable changes to juttle-engine. The release numbering uses [semantic versioning](http://semver.org).
 
+## 0.6.0
+Released 2016-03-25
+
+### Major Changes
+- Add a new [adapter](https://github.com/juttle/juttle-googleanalytics-adapter) for [Google Analytics](http://www.google.com/analytics/).
+
+### Minor Changes
+- Update to juttle version 0.7.0 [[#76](https://github.com/juttle/juttle-engine/pull/97)]
+- Additional automated tests for sql adapters. [[#86](https://github.com/juttle/juttle-engine/pull/86)]
+- Reduce verbosity of `npm install` step when building docker images. [[#102](https://github.com/juttle/juttle-engine/pull/102)]
+- Change how modules are resolved to reflect changes in Juttle 0.7.0. Juttle programs should import modules using relative pathnames which are resolved relative to the file doing the import. [[#513](https://github.com/juttle/juttle/issues/513)]
+
+### Bug Fixes
+- Ensure that in unit tests juttle-engine is completely started before running any tests. [[#98](https://github.com/juttle/juttle-engine/pull/98)]
+- Properly test that the `juttle-engine` binary can be run successfully. [[#97](https://github.com/juttle/juttle-engine/pull/97)]
+
 ## 0.5.0
 Released 2016-03-14
 
