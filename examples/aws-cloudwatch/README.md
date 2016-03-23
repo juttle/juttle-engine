@@ -50,7 +50,7 @@ and follow the links.
 
 ### Polling script and `aggregate_all` subgraph
 
-The polling script [poll_aws.juttle](./poll_aws.juttle) uses the `aggregate_all` subgraph implemented in the file [aws_module.juttle](https://github.com/juttle/juttle-aws-adapter/blob/master/aws_module.juttle) to transform the raw points returned from the various AWS APIs into aggregate and demographic summaries of your AWS infrastructure.
+The polling script [poll_aws.juttle](./poll_aws.juttle) uses the `aggregate_all` subgraph which is exported by the AWS [adapter module](https://github.com/juttle/juttle/blob/master/docs/adapters/adapter_api.md)  to transform the raw points returned from the various AWS APIs into aggregate and demographic summaries of your AWS infrastructure.
 
 It then writes the resulting points to the table `aws_aggregation` in the mysql database. This allows for a source of historical aws information that is persistent across invocations of individual juttle programs.
 

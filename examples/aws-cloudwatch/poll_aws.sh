@@ -8,7 +8,7 @@ echo 'Polling from AWS and Writing to Mysql...';
 
 juttle -e "
 
-import 'https://github.com/juttle/juttle-aws-adapter/raw/master/aws_module.juttle' as AWS;
+import 'adapters/aws' as AWS;
 
 read aws -from :now: -to :end: -every :10s:
      | AWS.aggregate_all
