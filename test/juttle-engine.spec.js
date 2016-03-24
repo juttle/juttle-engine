@@ -4,6 +4,9 @@ var engine = require('../lib/juttle-engine');
 var WebSocket = require('ws');
 var Promise = require('bluebird');
 var findFreePort = Promise.promisify(require('find-free-port'));
+var retry = require('bluebird-retry');
+var chakram = require('chakram');
+var ckexpect = chakram.expect;
 
 describe('Juttle Engine Tests', function() {
     var juttleHostPort;
@@ -17,6 +20,11 @@ describe('Juttle Engine Tests', function() {
                     port: freePort,
                     root: __dirname,
                     host: 'localhost'
+                });
+            }).then(() => {
+                return retry(function() {
+                    var response = chakram.get(juttleHostPort + '/api/v0/version-info');
+                    ckexpect(response).to.have.status(200);
                 });
             });
     });
