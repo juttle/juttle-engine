@@ -29,13 +29,10 @@ describe('juttle-engine-client binary', function() {
     });
 
     it('can be run with --help', function() {
-        try {
-            child_process.spawnSync(juttle_engine_client_cmd, ['--help']);
-        } catch (err) {
-            // The status is 1, but we can also check the output for 'usage:'
-            expect(err.status).to.equal(1);
-            expect(err.stdout.toString()).to.match(/^usage: /);
-        }
+        var ret = child_process.spawnSync(juttle_engine_client_cmd, ['--help']);
+        // The status is 1, but we can also check the output for 'usage:'
+        expect(ret.status).to.equal(1);
+        expect(ret.stdout.toString()).to.match(/^usage: /);
     });
 
     it('can be run with list_jobs', function(done) {
@@ -65,25 +62,25 @@ describe('juttle-engine-client binary', function() {
 describe('juttle-engine binary', function() {
 
     it('can be run with --help', function() {
-        try {
-            child_process.spawn(juttle_engine_cmd, ['--help']);
-        } catch (err) {
-            // The status is 1, but we can also check the output for 'usage:'
-            expect(err.status).to.equal(1);
-            expect(err.stdout.toString()).to.match(/^usage: /);
-        }
+        var ret = child_process.spawnSync(juttle_engine_cmd, ['--help']);
+        // The status is 1, but we can also check the output for 'usage:'
+        expect(ret.status).to.equal(1);
+        expect(ret.stdout.toString()).to.match(/^usage: /);
     });
 
     it('can be run and can see startup line', function(done) {
+        var got_output = false;
         findFreePort(10000, 20000)
         .then((freePort) => {
             let child = child_process.spawn(juttle_engine_cmd, ['--port', freePort]);
             child.stdout.on('data', (data) => {
                 if (data.toString().match(/Juttle engine listening at/)) {
+                    got_output = true;
                     child.kill('SIGKILL');
                 }
             });
             child.on('close', (code) => {
+                expect(got_output).to.equal(true);
                 done();
             });
             child.on('error', (msg) => {
