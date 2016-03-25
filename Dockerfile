@@ -4,7 +4,7 @@ MAINTAINER Mark Stemm (mstemm@jut.io)
 RUN mkdir -p /opt/juttle-engine
 WORKDIR /opt/juttle-engine
 ADD package.json package.json
-RUN npm install
+RUN npm install --quiet
 COPY . .
 
 RUN mkdir -p /opt/juttle-engine/juttles
