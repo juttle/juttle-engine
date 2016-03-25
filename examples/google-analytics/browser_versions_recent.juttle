@@ -1,0 +1,85 @@
+// Read, process, visualize pageviews data from Google Analytics
+// Breakdown by browser type is displayed in piecharts / tables
+
+import './browser_helper.juttle' as h;
+
+const intervals = {
+  '1 day': :1 day:,
+  '1 week': :1 week:,
+  '2 weeks': :2 weeks:,
+  '1 month': :1 month:,
+  '6 months': :6 months:
+};
+input i: select -label 'Choose time period for pageviews: '
+  -items Object.keys(intervals) -default '1 week';
+
+const start = :today: - intervals[i];
+const site = 'www.jut.io';
+const label = 'on ${site} over the last ${intervals[i]}';
+
+// Show pageviews % by browserVersion for a given browser
+// in a piechart and a table.
+// Uncommon versions get combined into 'Other' category.
+sub browser_version_usage(browser_name, row_num) {
+  put majorVersion = String.split(browserVersion, '.')[0]
+  | reduce value = sum(pageviews) by browser, majorVersion, deviceCategory
+  |(
+    put name = browser+'-'+majorVersion+'.'+deviceCategory
+    | h.threshold -thresh 3
+    | h.percentages -scale 1.00
+    | view piechart -title "Common versions of ${browser_name} ${label}"
+      -radiusInner 42 -sliceLabels.valueFormat '%'
+      -row row_num -col 0;
+
+    h.percentages -scale 100
+    | filter value > 1
+    | sort browser, majorVersion -desc, deviceCategory
+    | view table -title "Pageview % by version of ${browser_name}"
+      -columnOrder 'browser', 'majorVersion', 'deviceCategory', 'value'
+      -row row_num -col 1  -height 1000;
+  )
+}
+
+// Show pageviews % by browser type in a piechart and a table.
+// Uncommon browsers get combined into 'Other' category.
+sub browser_usage(row_num) {
+  put majorVersion = String.split(browserVersion, '.')[0]
+  | reduce value = sum(pageviews) by browser, deviceCategory
+  |(
+    put name = browser+'-'+deviceCategory
+    | h.threshold -thresh 2
+    | h.percentages -scale 1.00
+    | view piechart -title "Common browser types ${label}"
+      -radiusInner 42 -sliceLabels.valueFormat '%'
+      -row row_num -col 0;
+
+    h.percentages -scale 100
+    | filter value > 1
+    | sort browser, deviceCategory
+    | view table -title "Pageview % by browser type"
+      -columnOrder 'browser', 'deviceCategory', 'value'
+      -row row_num -col 1;
+  )
+}
+
+
+emit | put description = '# Pageviews ${label}'
+| view markdown -row 0;
+
+emit | put description = '## Breakdown of pageviews per browser ${label}'
+| view markdown -row 2;
+
+read googleanalytics -from start -to :now: -webProperty site
+| reduce pageviews=sum(pageviews) by browser, browserVersion, deviceCategory
+|(
+  browser_usage -row_num 1;
+
+  filter browser = 'Chrome'
+  | browser_version_usage -browser_name 'Chrome' -row_num 3;
+  filter browser = 'Firefox'
+  | browser_version_usage -browser_name 'Firefox' -row_num 4;
+  filter browser = 'Safari'
+  | browser_version_usage -browser_name 'Safari' -row_num 5;
+  filter browser = 'Internet Explorer'
+  | browser_version_usage -browser_name 'Internet Explorer' -row_num 6;
+)
