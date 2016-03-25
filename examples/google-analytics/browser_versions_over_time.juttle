@@ -1,0 +1,63 @@
+// Read, process, visualize pageviews data from Google Analytics
+// Breakdown by browser version over time is displayed as timechart,
+// more recent data on piechart and in a table.
+
+import './browser_helper.juttle' as h;
+
+// Define deviceCategory and browser type inputs
+//
+const devices = {
+  'desktop': ['desktop'],
+  'mobile or tablet': ['mobile', 'tablet'],
+  'all': ['desktop', 'mobile', 'tablet']
+};
+input bro: select -label 'Which browser:' -default 'Chrome'
+  -items [ 'Chrome', 'Safari', 'Firefox', 'Internet Explorer' ];
+input dev: select -label 'Desktop or mobile:' -default 'all'
+  -items Object.keys(devices);
+
+// No point in defining an input for website
+// since juttle config must contain the Google Analytics account
+// that is tied to this specific website anyway.
+//
+const site = 'www.jut.io';
+
+// read weekly pageviews for last year, visualize on timechart
+// Note: reading a year's worth of data from GA takes many seconds!
+// Repeated runs are faster due to caching on GA side.
+//
+read googleanalytics -from :today:-:1 year: -to :now: -webProperty site
+| reduce -every :week: views = sum(pageviews) by browser, browserVersion, deviceCategory
+| filter browser = bro AND deviceCategory in devices[dev]
+| put majorVersion = String.split(browserVersion, '.')[0]
+| put name = majorVersion, value = views
+| h.threshold -thresh 5 -every :week:
+| h.percentages -every :week:
+| view timechart
+  -title "Rise and fall of ${bro} versions over time (devices: ${dev}, last 1 year)"
+  -series [{ name: 'other', color: 'white' }] -seriesLimit 50
+  -keyField 'name' -markerSize 5 -interval :2w:
+  -yScales.primary.label '% pageviews' -row 0 -col 0;
+
+// read last month's pageviews, visualize as piechart and table
+//
+read googleanalytics -from :today:-:1 month: -to :now: -webProperty site
+| reduce views = sum(pageviews) by browser, browserVersion, deviceCategory
+| filter browser = bro AND deviceCategory in devices[dev]
+| put majorVersion = String.split(browserVersion, '.')[0]
+| put name = "v${majorVersion}", value = views
+|(
+  h.threshold -thresh 5
+  | h.percentages -scale 1
+  | view piechart -title "Common versions of ${bro} (devices: ${dev}, last 1 month)"
+    -radiusInner 42 -sliceLabels.valueFormat '%'
+    -row 1 -col 0;
+
+  h.percentages -scale 100
+  | filter value > 1
+  | sort majorVersion -desc
+  | keep majorVersion, value
+  | view table -title "Pageview % by ${bro} version (last 1 month)"
+    -columnOrder 'majorVersion', 'value'
+    -row 1 -col 1;
+  )

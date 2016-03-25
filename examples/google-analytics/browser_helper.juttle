@@ -1,0 +1,26 @@
+// Helper module with common subs
+
+// In addition to supplying the website name as an input,
+// a matching Google Analytics account must be defined in juttle config.
+//
+export input site: text -label 'Website tied to your Google Analytics account:' -default 'www.jut.io';
+
+// Take categories contributing less than x percent to the total and
+// group them together in an "Other" category.
+//
+export sub threshold(thresh, every=null) {
+  (reduce -every every total=sum(value); pass)
+  | join
+  | put pct = 100.0*value/total
+  | put name=(pct >= thresh ? name : 'other')
+  | reduce -every every value=sum(value) by name
+}
+
+// Convert raw values to percentages of the total.
+//
+export sub percentages(scale=100, every=null) {
+  ( reduce -every every total = sum(value); pass)
+  | join
+  | put value = Math.round(value * scale / total, 2)
+  | remove total
+}

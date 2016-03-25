@@ -1,0 +1,11 @@
+sub add_juttle(name, description) {
+    put program="[${name}](/?path=/examples/google-analytics/${name}.juttle)", description=description
+}
+
+emit 
+|( 
+  add_juttle -name "browser_versions_recent" -description 'Show site pageviews by version for common browsers';
+  add_juttle -name "browser_versions_over_time" -description 'Show site pageviews by version over time for a given browser';
+)
+| keep program, description
+| view table -title "Demo Juttle Programs" -markdownFields ['program']
