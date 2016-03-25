@@ -2,6 +2,7 @@
 
 let _ = require('underscore');
 let Promise = require('bluebird');
+let docker = require('../../lib/docker');
 let execAsync = Promise.promisify(require('child_process').exec);
 let expect = require('chai').expect;
 let findFreePort = Promise.promisify(require('find-free-port'));
@@ -38,9 +39,14 @@ class JuttleEngineTester {
             chain = execAsync('./test/scripts/start-docker-containers.sh')
             .then((stdout) => {
                 debug(stdout);
+                return docker.getContainerIPAddress('selenium-hub');
+            })
+            .then((seleniumHubAddress) => {
+                logger.info(`selenium-hub listening at ${seleniumHubAddress}`);
+                process.env['SELENIUM_REMOTE_URL'] = `http://${seleniumHubAddress}:4444/wd/hub`;
                 return retry(() => {
                     return grid.availableAsync({
-                        host: 'localhost',
+                        host: seleniumHubAddress,
                         port: 4444
                     })
                     .then((status) => {
@@ -52,21 +58,13 @@ class JuttleEngineTester {
                 })
             })
             .then(() => {
-                // figure out the gateway address so we can communicate from
-                // the browser in the selenium-chrome-node container back to
-                // the juttle-engine running on the docker host
-                return execAsync('docker exec selenium-hub networkctl status | grep Gateway');
+                return docker.getHostAddress();
             })
-            .then((stdout) => {
-                // output from previous command looks like so:
-                // '        Gateway: 172.16.0.1 on eth0'
-                var gateway = stdout.trim().split(' ')[1];
-                process.env['JUTTLE_ENGINE_HOST'] = gateway;
-                logger.info('docker host at', gateway);
-
-                startedDocker = true;
+            .then((hostAddress) => {
                 logger.info('docker containers started');
-                process.env['SELENIUM_REMOTE_URL'] = 'http://localhost:4444/wd/hub';
+                process.env['JUTTLE_ENGINE_HOST'] = hostAddress;
+                logger.info(`juttle-engine listening at ${hostAddress}`);
+                startedDocker = true;
             });
         } else {
             chain = Promise.resolve();
@@ -77,7 +75,7 @@ class JuttleEngineTester {
             return findFreePort(10000, 20000);
         })
         .then((port) => {
-            var host = process.env['JUTTLE_ENGINE_HOST'] || 'localhost';
+            var host = process.env['JUTTLE_ENGINE_HOST'];
             this.port = port;
             JuttleEngine.run({
                 host: host,
@@ -385,7 +383,7 @@ class JuttleEngineTester {
     }
 
     run(options) {
-        var host = process.env['JUTTLE_ENGINE_HOST'] || 'localhost';
+        var host = process.env['JUTTLE_ENGINE_HOST'];
         var urlPath = url.format({
             protocol: 'http',
             hostname: host,
