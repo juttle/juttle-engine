@@ -25,7 +25,7 @@ describe('app tests', function() {
             path: path.join(__dirname, 'juttle', 'no-such-sub.juttle')
         })
         .then(() => {
-            return juttleEngineTester.waitForJuttleErrorToEqual('At line 1, column 1: no such sub: kaboom');
+            return juttleEngineTester.waitForJuttleErrorToEqual('At line 1, column 1: kaboom is not defined');
         });
     });
 

@@ -129,10 +129,7 @@ The Juttle compiler and runtime within juttle-engine are also configured via the
 
 ### Module resolution
 
-When juttle-engine resolves module references in juttle programs while creating program bundles, it searches the following locations:
-* The configured root directory.
-* The same location as the current juttle program. For example, if a program is at ``/home/user/program.juttle`` and refers to a module ``module.juttle``, juttle-engine looks in ``/home/user`` for ``module.juttle``.
-* Any locations in the environment variable JUTTLE_MODULE_PATH (colon-separated list of directories).
+For information on how modules are resolved, see the "Importing Modules" section in the general [juttle documentation](https://github.com/juttle/juttle/blob/master/docs/concepts/programming_constructs.md#importing-modules) on programming constructs.
 
 ## Testing
 
