@@ -11,4 +11,6 @@ COPY example-docker-files /opt/juttle-engine/juttles/examples/
 
 EXPOSE 8080
 
+ENV JUTTLE_MODULE_PATH /opt/juttle-engine/juttles:/opt/juttle-engine/examples:/opt/juttle-engine/examples/aws-cloudwatch
+
 CMD juttle-engine --root /opt/juttle-engine/juttles
