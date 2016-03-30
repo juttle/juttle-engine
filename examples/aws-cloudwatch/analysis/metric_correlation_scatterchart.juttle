@@ -5,9 +5,9 @@
 // items.
 //
 
-import "examples/aws-cloudwatch/common/aws_control_product.juttle" as control_product;
-import "examples/aws-cloudwatch/common/aws_control_metric1.juttle" as control_metric1;
-import "examples/aws-cloudwatch/common/aws_control_metric2.juttle" as control_metric2;
+import "../common/aws_control_product.juttle" as control_product;
+import "../common/aws_control_metric1.juttle" as control_metric1;
+import "../common/aws_control_metric2.juttle" as control_metric2;
 
 input timerange: duration -default :1 hour: -label 'Time Range';
 

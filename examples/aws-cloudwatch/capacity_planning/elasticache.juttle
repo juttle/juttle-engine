@@ -1,3 +1,3 @@
-import "examples/aws-cloudwatch/common/capacity_planning_cpu.juttle" as capacity_cpu;
+import "../common/capacity_planning_cpu.juttle" as capacity_cpu;
 
 capacity_cpu.cpu_piechart -cw_product 'ElastiCache';

@@ -11,10 +11,10 @@
 // etc).
 
 
-import "examples/aws-cloudwatch/common/aws_control_product.juttle" as control_product;
-import "examples/aws-cloudwatch/common/aws_control_aggregate.juttle" as control_agg;
-import "examples/aws-cloudwatch/common/aws_control_demographic.juttle" as control_demo;
-import "examples/aws-cloudwatch/common/aws_control_events.juttle" as control_events;
+import "./common/aws_control_product.juttle" as control_product;
+import "./common/aws_control_aggregate.juttle" as control_agg;
+import "./common/aws_control_demographic.juttle" as control_demo;
+import "./common/aws_control_events.juttle" as control_events;
 
 // Take categories contributing less than x percent to the total and
 // group them together in an "Other" category.

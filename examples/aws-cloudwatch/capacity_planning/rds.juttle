@@ -30,7 +30,7 @@
 // If the CPU utilization is very low or very high, you may want to
 // change DB classes of your instances.
 
-import "examples/aws-cloudwatch/common/capacity_planning_cpu.juttle" as capacity_cpu;
+import "../common/capacity_planning_cpu.juttle" as capacity_cpu;
 
 (read cloudwatch -period 3600 -last :1h: metric="RDS:ReadIOPS" OR metric="RDS:WriteIOPS"
  | reduce avg_iops=avg(value) by item, name

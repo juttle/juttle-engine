@@ -8,8 +8,8 @@
 // metric and displays a barchart of the top 10 items by that metric.
 //
 
-import "examples/aws-cloudwatch/common/aws_control_product.juttle" as control_product;
-import "examples/aws-cloudwatch/common/aws_control_metric.juttle" as control_metric;
+import "../common/aws_control_product.juttle" as control_product;
+import "../common/aws_control_metric.juttle" as control_metric;
 
 read cloudwatch -last :1h: -period 3600 product=control_product.product_in AND metric=control_metric.metric_in
        | sort value -desc

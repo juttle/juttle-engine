@@ -19,9 +19,9 @@
 // indicate when items were added, removed, or changed.
 //
 
-import "examples/aws-cloudwatch/common/aws_control_product.juttle" as control_product;
-import "examples/aws-cloudwatch/common/aws_control_metric.juttle" as control_metric;
-import "examples/aws-cloudwatch/common/aws_control_events.juttle" as control_events;
+import "../common/aws_control_product.juttle" as control_product;
+import "../common/aws_control_metric.juttle" as control_metric;
+import "../common/aws_control_events.juttle" as control_events;
 
 input timerange: duration -default :12 hours: -label 'Time Range';
 
